@@ -15,7 +15,17 @@ Set `SKU2SCENE_QA_EVALUATORS=off` too (the repository MCP configs already do).
 ## Recorded QA outcomes
 
 All eight cached clips are authentic Foundry renders. Scores are AI screening judgments, not ground truth.
-Thresholds: logo 0.80, label 0.70, product 0.85, prompt 0.75.
+Thresholds differ by brand. The current definitions are in [catalog/brands.json](../catalog/brands.json),
+versioned with the repository. For a cached clip's recorded verdict, use that clip's `qa.thresholds` in
+[demo-cache/manifest.json](../demo-cache/manifest.json), not a later catalog revision.
+
+| Brand | Logo | Label | Product | Prompt |
+| --- | ---: | ---: | ---: | ---: |
+| Northwind Coffee | 0.80 | 0.70 | 0.80 | 0.70 |
+| Contoso Pro | 0.80 | 0.70 | 0.85 | 0.75 |
+| Fabrikam | 0.70 | 0.50 | 0.85 | 0.70 |
+| Woodgrove Wellness | 0.80 | 0.80 | 0.85 | 0.70 |
+| Litware | 0.80 | 0.60 | 0.80 | 0.75 |
 
 | Clip | Model | Verdict | Failed checks | What a human should check |
 | --- | --- | --- | --- | --- |

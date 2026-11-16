@@ -7,12 +7,19 @@
   <meta name="description" content="Replay of an agent-orchestrated retail video supply chain using fal video models on Microsoft Foundry. Recorded renders only; no live generation in the browser.">
   <script>
     (() => {
-      let stored = null;
-      try { stored = localStorage.getItem("s2s-theme"); } catch (_) { /* storage unavailable */ }
       const param = new URLSearchParams(window.location.search).get("scoutTheme");
-      const theme = param || stored ||
-        (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+      const theme =
+        param || (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
       document.documentElement.setAttribute("data-theme", theme);
+    })();
+  </script>
+  <script>
+    (() => {
+      if (new URLSearchParams(window.location.search).get("scoutTheme")) return;
+      try {
+        const stored = localStorage.getItem("s2s-theme");
+        if (stored) document.documentElement.setAttribute("data-theme", stored);
+      } catch (_) { /* storage unavailable */ }
     })();
   </script>
   <link rel="icon" type="image/png" href="brand/favicon-light-48.png" media="(prefers-color-scheme: light)">

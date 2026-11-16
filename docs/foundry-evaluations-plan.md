@@ -54,14 +54,17 @@ Score with a deterministic code evaluator (exact model/mode match, cost within b
 
 **`sku2scene-media` (frames).** One row per clip from existing evidence only: clip ID, request ID, model, mode,
 SKU, PIM reference frame, two to four extracted frames (extracted offline; **no ffmpeg or rendering inside a
-scoring request**), scene prompt and brand rules. Seed with the 8 cached clips and include the **negative
-control** (cold-brew clip vs drill reference) labelled `expected: fail`. Keep historical scores as a read-only
-baseline column, not as labels.
+scoring request**), scene prompt, brand ID, catalog revision and brand rules. Seed with the 8 cached clips and
+include the **negative control** (cold-brew clip vs drill reference) labelled `expected: fail`. Keep historical
+scores and each clip's recorded `qa.thresholds` as read-only baseline evidence, not as labels.
 
 ## Phase 2 — custom multimodal brand rubric
 
 A versioned rubric (`rubric_version`) mirroring today's four checks — logo integrity, label legibility, product
-fidelity, prompt adherence — with the same thresholds (0.80 / 0.70 / 0.85 / 0.75) as a **floor**.
+fidelity, prompt adherence — with each brand's thresholds from the pinned revision of
+[catalog/brands.json](../catalog/brands.json) as that brand's **floor**, not a universal threshold.
+Use each historical clip's recorded `qa.thresholds` in [demo-cache/manifest.json](../demo-cache/manifest.json)
+when comparing its original verdict; later catalog revisions must not reinterpret it.
 Add an explicit `applicable` flag per check so cases such as the unbranded patio set are scored "not applicable"
 by rule rather than failing. That is a rubric change recorded under a new version, re-calibrated against humans,
 and **never** applied retroactively to the historic manifest.
@@ -81,13 +84,13 @@ IDs and errors. Content Safety stays a separate check with severities reported a
 
 ## Repeatability and invariants
 
-- Pin dataset version, rubric version, evaluator model/deployment version, prompt template hash and frame
-  extraction settings in every run record.
+- Pin dataset version, rubric version, brand ID, catalog revision and per-brand thresholds, evaluator
+  model/deployment version, prompt template hash and frame extraction settings in every run record.
 - Run each media row at least three times (temperature 0) to measure score variance; flag checks whose variance
   crosses a threshold boundary.
-- Invariants enforced in tests: thresholds never decrease without a reviewed change; the negative control must
-  fail; missing or errored scores are `manual_review`, never pass; `publish_approved` is never set by an
-  evaluator.
+- Invariants enforced in tests: a brand's thresholds never decrease without a reviewed change; the negative
+  control must fail; missing or errored scores are `manual_review`, never pass; `publish_approved` is never
+  set by an evaluator.
 
 ## CI integration
 
