@@ -144,6 +144,28 @@ def test_disqualified_account_attempts_remain_evidence_not_previews(tmp_path):
                 assert c["original_file"]
 
 
+def test_account_brief_uses_selected_recording_not_original_plan(tmp_path, monkeypatch):
+    builder = _load_builder()
+    shutil.copytree(REPO / "catalog", tmp_path / "catalog")
+    shutil.copytree(REPO / "briefs", tmp_path / "briefs")
+    (tmp_path / "demo-cache").mkdir()
+    manifest = json.loads((REPO / "demo-cache" / "manifest.json").read_text())
+    account = next(a for a in json.loads((tmp_path / "catalog" / "accounts.json").read_text())["accounts"]
+                   if a["id"] == "proseware")
+    chosen = next(c for c in manifest["clips"] if c["id"] == account["replacement_clip"])
+    chosen.update(model="ltx-2.5-pro", prompt="The effective stationary replacement, not the original cart.",
+                  estimate={"estimate_usd": 0.72, "price_key": "720p", "usd_per_second": 0.12})
+    (tmp_path / "demo-cache" / "manifest.json").write_text(json.dumps(manifest), encoding="utf-8")
+    monkeypatch.setattr(builder, "REPO", tmp_path)
+    data = builder.build_data()
+    shown = next(a for a in data["accounts"] if a["id"] == "proseware")
+    assert shown["brief"] == chosen["prompt"]
+    assert shown["model"] == chosen["model"] and shown["model_name"] == "LTX-2.5 Pro"
+    assert shown["tier"] == "720p" and shown["estimate_usd"] == 0.72
+    assert "LTX-2.5 Pro" in shown["why"]
+    assert shown["recorded_clip"] == chosen["id"]
+
+
 def test_generated_asset_versions_follow_published_content(tmp_path, monkeypatch):
     builder = _load_builder()
     original = builder.build(tmp_path / "original")

@@ -32,8 +32,8 @@ The gallery lists every account in its area. The sun/moon control explicitly cho
 | Apparel · Wide World Wholesale | Costco | Club-pack private-label value on member media. Screening passed; reviewer note flags carton/shelf markings; re-roll withheld. |
 | Home · Alpine Pro Supply | The Home Depot | The existing Contoso Pro drill render explores professional product context; show its prompt-adherence failure. |
 | Home · Zava DIY | Lowe's | The existing Fabrikam Home patio preview tests layout constraints, not approved PIM fidelity. |
-| Home · Southridge Electronics | Best Buy | Litware Ultrabook 14 on H3 Max for strict placement. Screening passed; reviewer note: items appear out of order. |
-| Home · Proseware Workplace Supply | Staples | Strict four-item layout on H3 Max. The selected attempt still fails fidelity (0.72); the final neutral-studio retry also failed and is a learning example. Three attempts withheld. A human decides. |
+| Home · Southridge Electronics | Best Buy | Original studio clip retained, with the item-order disclosure. The photographic home-office attempts demonstrate why visual review matters: one failed layout screening; the other passed but put the mouse upright on its end. |
+| Home · Proseware Workplace Supply | Staples | Real office, natural light and ordinary materials. s7 passed four-frame screening and agent inspection; the same rubric failed the s5 control. Point to the retained failed/withheld attempts and human sign-off requirement. |
 | Grocery · Woodgrove Wellness | Walgreens | An existing wellness-bundle screen is calm and educational, with no medical claims; show its missing-product findings. |
 | Grocery · Best For You Market | Kroger | Private-label holiday meal prep on Turbo. The re-roll passed; the first attempt is withheld (Content Safety flag). Reviewer note: utensils. |
 | Grocery · Munson's Markets | Albertsons | Localized weekly deal; no identity or loyalty data. Simplified basket passed; the tinted-bottle re-roll is a learning example. |
@@ -43,6 +43,11 @@ Sources, publication/access dates, briefs, model choices and list-price estimate
 examples are silent exploratory drafts: preview-only, **Awaiting human review — not approved**, and **Not yet
 evaluated** by Foundry Evaluations. Say so, and point to the QA learning examples as the gate working, not as
 content. Withheld attempts are evidence only ([verification](verification.md#account-drafts)). The original **2/8 screening pass rate**, coffee-hero sound mismatch
+
+**Realism talk track:** "Real rooms, photographic lighting and credible materials help, but prompting alone
+cannot guarantee correct products or physics. Approved real product photography into Kling image-to-video
+is our strongest realism lever. Busier backgrounds also bring accidental text, logos and trade dress.
+We inspect those details and retain failed attempts rather than calling plausible-looking video approved." The original **2/8 screening pass rate**, coffee-hero sound mismatch
 and silent concept #2 remain visible.
 
 Fictional brands and products. Real company names identify representative retail segments and cite public

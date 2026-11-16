@@ -4423,6 +4423,1722 @@
         "status": "not_yet_evaluated",
         "reason": "No new Foundry Evaluations run; original v1 evidence is immutable."
       }
+    },
+    {
+      "id": "account-proseware-draft-s5",
+      "sku": "PWS-KIT-01",
+      "vertical": "home-improvement",
+      "model": "ltx-2.5-pro",
+      "mode": "text-to-video",
+      "aspect_ratio": "16:9",
+      "duration": 6,
+      "file": "account-proseware-draft-s5.mp4",
+      "provenance": "foundry",
+      "audio": "not requested; silent draft",
+      "media": {
+        "duration_s": 6.0,
+        "width": 1280,
+        "height": 720,
+        "has_audio": false,
+        "size_bytes": 190425
+      },
+      "elapsed_s": 48.2,
+      "accepted_to_completed_s": 44.83,
+      "processing": "H.264 display rendition; longest edge <=1280; CRF 28; metadata stripped",
+      "source_media": {
+        "duration_s": 6.0,
+        "width": 1280,
+        "height": 720,
+        "has_audio": false,
+        "size_bytes": 868271
+      },
+      "source_sha256": "1e240ee9bcedf14595e3627105ec51e1d180f1b76187174b733ed060ada7afc7",
+      "source_image": null,
+      "prompt": "A six-second silent product-catalog video, landscape 16:9, locked-off front-facing wide camera. One small-office supply kit arranged in exactly FOUR separated product GROUPS in a straight left-to-right row. There are exactly SIX product props in total, supported by THREE plain closed rectangular packaging boxes. Group 1 at far left: one stainless-steel French coffee press and one plain ivory ceramic mug, together on one matte muted indigo box. Group 2 at center left: one transparent unlabelled cleaning spray bottle and one folded ivory cleaning cloth, together on one matte ivory box. Group 3 at center right: one generic charcoal task chair with a simple padded rectangular back, padded seat and basic five-wheel base, standing on the floor, no box beneath it. Group 4 at far right: one stack of loose blank white printer paper with clearly visible fine sheet edges, resting on one matte muted indigo box. The mug and cloth belong to the kit; the three boxes are its packaging. All six product props and all three boxes remain fully visible, separated and stationary from first frame to last. Boxes are completely blank: muted dark indigo (#44416F) and warm ivory (#F6F4EF), with no bright blue or saturated violet. Seamless neutral light-grey floor and background, soft neutral daylight, realistic materials, no coloured lighting. No camera movement, cuts, opening boxes, transformations or added objects. No other furniture, electronics, plants or decor. No text, letters, numbers, labels, barcodes, logos, symbols, markings, signage, real brands or recognizable designer furniture. No people, hands or soundtrack.",
+      "request_id": "897d8919-220f-41af-859d-98d7619c1592",
+      "original_file": null,
+      "presentation_audio_removed": false,
+      "presentation_trimmed_to_s": null,
+      "deployment": "ltx-2.5-pro",
+      "rendered_at": "2026-11-16T23:09:19.050224+00:00",
+      "estimate": {
+        "model": "ltx-2.5-pro",
+        "seconds": 6.0,
+        "resolution": "720p",
+        "price_key": "720p",
+        "usd_per_second": 0.12,
+        "estimate_usd": 0.72,
+        "estimate_high_usd": 0.72,
+        "caveats": [
+          "preview list price per generated second; not a billing guarantee"
+        ]
+      },
+      "qa": {
+        "evaluator": "azure-openai-vision",
+        "measured": true,
+        "scores": {
+          "logo_integrity": 0.98,
+          "label_legibility": 1.0,
+          "product_fidelity": 0.72,
+          "prompt_adherence": 0.68
+        },
+        "thresholds": {
+          "logo_integrity": 0.8,
+          "label_legibility": 0.7,
+          "product_fidelity": 0.8,
+          "prompt_adherence": 0.7
+        },
+        "findings": [
+          "No visible logos, signage, price numbers, slogans, or on-screen text.",
+          "Visible arrangement is left-to-right and includes coffee press/mug, cleaning spray/cloth, chair, and paper stack.",
+          "Packaging boxes appear plain and unbranded, but the visible colors do not fully match the prompt's specified muted indigo and warm ivory exactly.",
+          "The chair is present and generic, but the scene shows only three apparent boxes and the leftmost mug/coffee press sit on a dark box; overall grouping is close but not exact to the prompt's four separated groups and three-box packaging structure.",
+          "All objects appear stationary in a locked-off product shot; however, the composition is not a perfect match to the exact catalog layout requested."
+        ],
+        "hallucinated_objects": [
+          "none"
+        ],
+        "content_safety": [
+          {
+            "frame": "frame_01.png",
+            "categories": [
+              {
+                "category": "Hate",
+                "severity": 0
+              },
+              {
+                "category": "SelfHarm",
+                "severity": 0
+              },
+              {
+                "category": "Sexual",
+                "severity": 0
+              },
+              {
+                "category": "Violence",
+                "severity": 0
+              }
+            ]
+          },
+          {
+            "frame": "frame_02.png",
+            "categories": [
+              {
+                "category": "Hate",
+                "severity": 0
+              },
+              {
+                "category": "SelfHarm",
+                "severity": 0
+              },
+              {
+                "category": "Sexual",
+                "severity": 0
+              },
+              {
+                "category": "Violence",
+                "severity": 0
+              }
+            ]
+          },
+          {
+            "frame": "frame_03.png",
+            "categories": [
+              {
+                "category": "Hate",
+                "severity": 0
+              },
+              {
+                "category": "SelfHarm",
+                "severity": 0
+              },
+              {
+                "category": "Sexual",
+                "severity": 0
+              },
+              {
+                "category": "Violence",
+                "severity": 0
+              }
+            ]
+          },
+          {
+            "frame": "frame_04.png",
+            "categories": [
+              {
+                "category": "Hate",
+                "severity": 0
+              },
+              {
+                "category": "SelfHarm",
+                "severity": 0
+              },
+              {
+                "category": "Sexual",
+                "severity": 0
+              },
+              {
+                "category": "Violence",
+                "severity": 0
+              }
+            ]
+          }
+        ],
+        "verdict": "fail",
+        "failed_checks": [
+          "product_fidelity",
+          "prompt_adherence"
+        ],
+        "publish_approved": false,
+        "reroll": {
+          "model": "kling-v3-pro",
+          "mode": "text-to-video",
+          "reason": "quality threshold failed; re-roll on the higher-fidelity tier"
+        },
+        "automated_checks_passed": false,
+        "human_signoff_required": true,
+        "sampled_frame_count": 4
+      },
+      "qa_evaluated_at": "2026-11-16T23:09:19.050224+00:00",
+      "account": "proseware",
+      "stage": "draft",
+      "hero_eligible": false,
+      "human_signoff_required": true,
+      "replacement_for": "account-proseware-draft-s4",
+      "reroll_reason": "simplified-brief",
+      "brief_version": 7,
+      "evaluations": {
+        "status": "not_yet_evaluated",
+        "reason": "No new Foundry Evaluations run; original v1 evidence is immutable."
+      },
+      "completion_usage": {
+        "qa_allowance_reserved_usd": 0.5,
+        "qa_call_limits": {
+          "vision": 1,
+          "content_safety": 4
+        },
+        "calls": [
+          {
+            "kind": "vision",
+            "status": 200,
+            "request_id": "97579797-3d8e-4821-b8fd-dbbb5e82fb64",
+            "usage": {
+              "completion_tokens": 198,
+              "completion_tokens_details": {
+                "accepted_prediction_tokens": 0,
+                "audio_tokens": 0,
+                "reasoning_tokens": 0,
+                "rejected_prediction_tokens": 0
+              },
+              "latency_checkpoint": {
+                "engine_tbt_ms": 5,
+                "engine_ttft_ms": 292,
+                "engine_ttlt_ms": 1332,
+                "pre_inference_ms": 624,
+                "service_tbt_ms": 5,
+                "service_ttft_ms": 1027,
+                "service_ttlt_ms": 2062,
+                "user_visible_ttft_ms": 402
+              },
+              "prompt_tokens": 4952,
+              "prompt_tokens_details": {
+                "audio_tokens": 0,
+                "cached_tokens": 0
+              },
+              "total_tokens": 5150
+            }
+          },
+          {
+            "kind": "content_safety",
+            "status": 200,
+            "request_id": "97f5d30f-2d06-4566-9de6-d116cddf9ecd"
+          },
+          {
+            "kind": "content_safety",
+            "status": 200,
+            "request_id": "612d73bf-1e11-4830-8c5c-c0386c54b120"
+          },
+          {
+            "kind": "content_safety",
+            "status": 200,
+            "request_id": "34ea239b-b091-4806-adf6-9143bd164b3c"
+          },
+          {
+            "kind": "content_safety",
+            "status": 200,
+            "request_id": "da8b1283-2859-49d5-a045-362256e95cbd"
+          }
+        ],
+        "billed_qa_usd": null,
+        "note": "Reservation, not a quoted price. APIs do not report billed USD; no Foundry Evaluations run."
+      },
+      "qa_sampled_from": "final silent presentation",
+      "qa_provenance": {
+        "qa_source_sha256": "597ca81b1a7f7825042f82802f7d95d0cb70baa34168fc56bf66aa2a67fdfa33",
+        "brand_rules_sha256": "33bb5bfe63f63affccc642eeab3833f89917e96beefee85b5cd4a9cdede6e0bb",
+        "sample_timestamps_s": [
+          0.75,
+          2.25,
+          3.75,
+          5.25
+        ],
+        "max_completion_tokens": 3000,
+        "rubric_changed": false
+      }
+    },
+    {
+      "id": "account-proseware-draft-s6",
+      "sku": "PWS-KIT-01",
+      "vertical": "home-improvement",
+      "model": "minimax-h3-max",
+      "mode": "text-to-video",
+      "aspect_ratio": "16:9",
+      "duration": 6,
+      "file": "account-proseware-draft-s6.mp4",
+      "provenance": "foundry",
+      "audio": "not requested; silent draft",
+      "media": {
+        "duration_s": 6.0,
+        "width": 1280,
+        "height": 732,
+        "has_audio": false,
+        "size_bytes": 584148
+      },
+      "elapsed_s": 21.95,
+      "accepted_to_completed_s": 18.64,
+      "processing": "H.264 display rendition; longest edge <=1280; CRF 28; metadata stripped; unexpected model audio removed for silent presentation; original-audio rendition retained; presentation trimmed to requested 6 seconds; re-encoded H.264 at 25 fps / CRF 20",
+      "source_media": {
+        "duration_s": 6.59,
+        "width": 1344,
+        "height": 768,
+        "has_audio": true,
+        "size_bytes": 5678302
+      },
+      "source_sha256": "1d64b4f4fa25462cdbc9208012fbb86921595a916ef8d093e4d3071896a5e0e0",
+      "source_image": null,
+      "prompt": "Silent fictional small-office supply kit, six seconds, wide 16:9. Photographic live-action appearance in a real small office: subtly textured pale-grey painted wall, light natural oak floor with fine wood grain, soft window daylight from outside the shot, natural shadows and realistic material detail. Exactly four product groups stand in one straight row from left to right with clear gaps: (1) a cylindrical stainless French coffee press with a visible plunger lid and a plain ivory ceramic mug together on a plain box; (2) a clear unlabelled spray bottle with a folded fabric cleaning cloth on a plain ivory box; (3) one generic ergonomic charcoal mesh office task chair with adjustable lumbar back, armrests and a five-spoke star base on casters, on the floor; (4) a neat stack of loose blank white printer paper with visible sheet edges on a plain box. The boxes under groups 1 and 4 are matte, muted, dark dusty grey-indigo (#44416F), desaturated, not royal blue or saturated violet. The middle box and mug are warm ivory (#F6F4EF). All packaging is blank. Locked-off static camera: no pan, orbit, push-in or cuts. Wide framing with generous empty margin on both sides; every prop and every chair wheel remains fully in frame throughout. The objects stay stationary at realistic scale. No other furniture, electronics, plants, windows or wall art in view. No writing, letters, numbers, stickers, labels, barcodes, logos, symbols, signage, prices, UI, mascots, slogans or real trade dress. No people, hands or faces. No soundtrack.",
+      "request_id": "0f18fb1c-2362-4286-bbae-84391e1b0114",
+      "original_file": "account-proseware-draft-s6-original-audio.mp4",
+      "presentation_audio_removed": true,
+      "presentation_trimmed_to_s": 6,
+      "deployment": "minimax-h3-max",
+      "rendered_at": "2026-11-16T23:21:01.894057+00:00",
+      "estimate": {
+        "model": "minimax-h3-max",
+        "seconds": 6.0,
+        "resolution": "768P",
+        "price_key": "768P",
+        "usd_per_second": 0.08,
+        "estimate_usd": 0.48,
+        "estimate_high_usd": 0.536,
+        "caveats": [
+          "MiniMax output can run ~0.7 s longer than requested (high estimate includes it)",
+          "preview list price per generated second; not a billing guarantee"
+        ]
+      },
+      "qa": {
+        "evaluator": "azure-openai-vision",
+        "measured": true,
+        "scores": {
+          "logo_integrity": 1,
+          "label_legibility": 1,
+          "product_fidelity": 0.86,
+          "prompt_adherence": 0.78
+        },
+        "thresholds": {
+          "logo_integrity": 0.8,
+          "label_legibility": 0.7,
+          "product_fidelity": 0.8,
+          "prompt_adherence": 0.7
+        },
+        "findings": [
+          "No visible logos, signage, prices, or on-screen text.",
+          "Four product groups are arranged left to right with clear gaps, and the chair is present.",
+          "The scene is a real small office-like interior with daylight, pale wall, and wood floor.",
+          "Some prompt details are off: the chair is centered and large, the boxes appear more blue/grey than the specified dusty grey-indigo, and the overall composition is not as wide/empty as requested."
+        ],
+        "hallucinated_objects": [
+          "small plant on the windowsill",
+          "window"
+        ],
+        "content_safety": [
+          {
+            "frame": "frame_01.png",
+            "categories": [
+              {
+                "category": "Hate",
+                "severity": 0
+              },
+              {
+                "category": "SelfHarm",
+                "severity": 0
+              },
+              {
+                "category": "Sexual",
+                "severity": 0
+              },
+              {
+                "category": "Violence",
+                "severity": 0
+              }
+            ]
+          },
+          {
+            "frame": "frame_02.png",
+            "categories": [
+              {
+                "category": "Hate",
+                "severity": 0
+              },
+              {
+                "category": "SelfHarm",
+                "severity": 0
+              },
+              {
+                "category": "Sexual",
+                "severity": 0
+              },
+              {
+                "category": "Violence",
+                "severity": 0
+              }
+            ]
+          },
+          {
+            "frame": "frame_03.png",
+            "categories": [
+              {
+                "category": "Hate",
+                "severity": 0
+              },
+              {
+                "category": "SelfHarm",
+                "severity": 0
+              },
+              {
+                "category": "Sexual",
+                "severity": 0
+              },
+              {
+                "category": "Violence",
+                "severity": 0
+              }
+            ]
+          },
+          {
+            "frame": "frame_04.png",
+            "categories": [
+              {
+                "category": "Hate",
+                "severity": 0
+              },
+              {
+                "category": "SelfHarm",
+                "severity": 0
+              },
+              {
+                "category": "Sexual",
+                "severity": 0
+              },
+              {
+                "category": "Violence",
+                "severity": 0
+              }
+            ]
+          }
+        ],
+        "verdict": "pass",
+        "failed_checks": [],
+        "publish_approved": false,
+        "automated_checks_passed": true,
+        "human_signoff_required": true,
+        "sampled_frame_count": 4,
+        "evaluator_version": "brand-qa-vision-v1",
+        "check_evidence": null
+      },
+      "qa_evaluated_at": "2026-11-16T23:21:01.894057+00:00",
+      "account": "proseware",
+      "stage": "draft",
+      "hero_eligible": false,
+      "human_signoff_required": true,
+      "replacement_for": "account-proseware-draft-s5",
+      "reroll_reason": "simplified-brief",
+      "brief_version": 8,
+      "evaluations": {
+        "status": "not_yet_evaluated",
+        "reason": "No new Foundry Evaluations run; original v1 evidence is immutable."
+      },
+      "completion_usage": {
+        "qa_allowance_usd": 0.5,
+        "calls": [
+          {
+            "kind": "vision",
+            "status": 200,
+            "request_id": "9e9ac671-4d7d-455e-9f3b-83381034c836",
+            "usage": {
+              "prompt_tokens": 4951,
+              "completion_tokens": 146,
+              "total_tokens": 5097
+            }
+          },
+          {
+            "kind": "content_safety",
+            "status": 200,
+            "request_id": "cde7f14b-e4ca-4a29-947b-da645b4c7728"
+          },
+          {
+            "kind": "content_safety",
+            "status": 200,
+            "request_id": "cd9b753e-d8d9-4bea-bddc-74e243ae8024"
+          },
+          {
+            "kind": "content_safety",
+            "status": 200,
+            "request_id": "4f7d918f-b1e1-4099-8340-c6b85634b89b"
+          },
+          {
+            "kind": "content_safety",
+            "status": 200,
+            "request_id": "5de02196-e356-40ca-bfb0-f358a49fc71c"
+          }
+        ],
+        "billed_qa_usd": null,
+        "note": "Bounded QA calls; allowance is not a quoted or billed price."
+      },
+      "qa_sampled_from": "final silent presentation",
+      "v1_qa": {
+        "evaluator": "azure-openai-vision",
+        "measured": true,
+        "scores": {
+          "logo_integrity": 1,
+          "label_legibility": 1,
+          "product_fidelity": 0.86,
+          "prompt_adherence": 0.78
+        },
+        "thresholds": {
+          "logo_integrity": 0.8,
+          "label_legibility": 0.7,
+          "product_fidelity": 0.8,
+          "prompt_adherence": 0.7
+        },
+        "findings": [
+          "No visible logos, signage, prices, or on-screen text.",
+          "Four product groups are arranged left to right with clear gaps, and the chair is present.",
+          "The scene is a real small office-like interior with daylight, pale wall, and wood floor.",
+          "Some prompt details are off: the chair is centered and large, the boxes appear more blue/grey than the specified dusty grey-indigo, and the overall composition is not as wide/empty as requested."
+        ],
+        "hallucinated_objects": [
+          "small plant on the windowsill",
+          "window"
+        ],
+        "content_safety": [
+          {
+            "frame": "frame_01.png",
+            "categories": [
+              {
+                "category": "Hate",
+                "severity": 0
+              },
+              {
+                "category": "SelfHarm",
+                "severity": 0
+              },
+              {
+                "category": "Sexual",
+                "severity": 0
+              },
+              {
+                "category": "Violence",
+                "severity": 0
+              }
+            ]
+          },
+          {
+            "frame": "frame_02.png",
+            "categories": [
+              {
+                "category": "Hate",
+                "severity": 0
+              },
+              {
+                "category": "SelfHarm",
+                "severity": 0
+              },
+              {
+                "category": "Sexual",
+                "severity": 0
+              },
+              {
+                "category": "Violence",
+                "severity": 0
+              }
+            ]
+          },
+          {
+            "frame": "frame_03.png",
+            "categories": [
+              {
+                "category": "Hate",
+                "severity": 0
+              },
+              {
+                "category": "SelfHarm",
+                "severity": 0
+              },
+              {
+                "category": "Sexual",
+                "severity": 0
+              },
+              {
+                "category": "Violence",
+                "severity": 0
+              }
+            ]
+          },
+          {
+            "frame": "frame_04.png",
+            "categories": [
+              {
+                "category": "Hate",
+                "severity": 0
+              },
+              {
+                "category": "SelfHarm",
+                "severity": 0
+              },
+              {
+                "category": "Sexual",
+                "severity": 0
+              },
+              {
+                "category": "Violence",
+                "severity": 0
+              }
+            ]
+          }
+        ],
+        "verdict": "pass",
+        "failed_checks": [],
+        "publish_approved": false,
+        "automated_checks_passed": true,
+        "human_signoff_required": true,
+        "sampled_frame_count": 4,
+        "evaluator_version": "brand-qa-vision-v1",
+        "check_evidence": null
+      },
+      "gating_control": {
+        "clip": "account-proseware-draft-s5",
+        "evidence": "manifest.json",
+        "rubric": "brand-qa-vision-v1"
+      },
+      "qa_provenance": {
+        "qa_source_sha256": "e5f502b34c0c936c2d879e120481f1dd57586a3bbbec75d1ad4ef26e9b298a6f",
+        "sample_timestamps_s": [
+          0.75,
+          2.25,
+          3.75,
+          5.25
+        ]
+      }
+    },
+    {
+      "id": "account-proseware-draft-s7",
+      "sku": "PWS-KIT-01",
+      "vertical": "home-improvement",
+      "model": "minimax-h3-max",
+      "mode": "text-to-video",
+      "aspect_ratio": "16:9",
+      "duration": 6,
+      "file": "account-proseware-draft-s7.mp4",
+      "provenance": "foundry",
+      "audio": "not requested; silent draft",
+      "media": {
+        "duration_s": 6.0,
+        "width": 1280,
+        "height": 732,
+        "has_audio": false,
+        "size_bytes": 597993
+      },
+      "elapsed_s": 21.65,
+      "accepted_to_completed_s": 18.61,
+      "processing": "H.264 display rendition; longest edge <=1280; CRF 28; metadata stripped; unexpected model audio removed for silent presentation; original-audio rendition retained; presentation trimmed to requested 6 seconds; re-encoded H.264 at 25 fps / CRF 20",
+      "source_media": {
+        "duration_s": 6.59,
+        "width": 1344,
+        "height": 768,
+        "has_audio": true,
+        "size_bytes": 6364265
+      },
+      "source_sha256": "5062d713142e3667c907fbfeb14044c57a806b799a872a21836f2dcceac45b75",
+      "source_image": null,
+      "prompt": "Silent fictional small-office supply kit, six seconds, wide 16:9. Photographic live-action appearance in a real small office: subtly textured pale-grey painted wall, light natural oak floor with fine wood grain, soft window daylight from outside the shot, natural shadows and realistic material detail. Exactly four product groups stand in one straight row from left to right with clear gaps: (1) a cylindrical stainless French coffee press with a visible plunger lid and a plain ivory ceramic mug together on a plain box; (2) a clear unlabelled spray bottle with a folded fabric cleaning cloth on a plain ivory box; (3) one ordinary unbranded ergonomic task chair with a simple RECTANGULAR charcoal mesh back, a small adjustable horizontal lumbar pad, a thick rectangular fabric-padded seat, two straight adjustable armrests and a plain five-spoke star base on casters, on the floor; (4) a neat stack of loose blank white printer paper with visible sheet edges on a plain box. The chair has conventional straight rectangular forms, not a rounded oval mesh shell or a sculpted designer frame. The boxes under groups 1 and 4 are matte, muted, dark dusty grey-indigo (#44416F), desaturated, not royal blue or saturated violet. The middle box and mug are warm ivory (#F6F4EF). All packaging is blank. Locked-off static camera: no pan, orbit, push-in or cuts. Wide framing with generous empty margin on both sides; every prop and every chair wheel remains fully in frame throughout. The objects stay stationary at realistic scale. No other furniture, electronics, plants, windows or wall art in view. No writing, letters, numbers, stickers, labels, barcodes, logos, symbols, signage, prices, UI, mascots, slogans or real trade dress. No people, hands or faces. No soundtrack.",
+      "request_id": "c7f3a745-2490-498b-936b-398ac6721e00",
+      "original_file": "account-proseware-draft-s7-original-audio.mp4",
+      "presentation_audio_removed": true,
+      "presentation_trimmed_to_s": 6,
+      "deployment": "minimax-h3-max",
+      "rendered_at": "2026-11-16T23:23:04.546468+00:00",
+      "estimate": {
+        "model": "minimax-h3-max",
+        "seconds": 6.0,
+        "resolution": "768P",
+        "price_key": "768P",
+        "usd_per_second": 0.08,
+        "estimate_usd": 0.48,
+        "estimate_high_usd": 0.536,
+        "caveats": [
+          "MiniMax output can run ~0.7 s longer than requested (high estimate includes it)",
+          "preview list price per generated second; not a billing guarantee"
+        ]
+      },
+      "qa": {
+        "evaluator": "azure-openai-vision",
+        "measured": true,
+        "scores": {
+          "logo_integrity": 1,
+          "label_legibility": 1,
+          "product_fidelity": 0.86,
+          "prompt_adherence": 0.78
+        },
+        "thresholds": {
+          "logo_integrity": 0.8,
+          "label_legibility": 0.7,
+          "product_fidelity": 0.8,
+          "prompt_adherence": 0.7
+        },
+        "findings": [
+          "No visible logos, signage, price numbers, or on-screen text.",
+          "Four product groups are arranged left to right with clear gaps: coffee press/mug, spray bottle/cloth, chair, paper stack.",
+          "Packaging appears blank and mostly plain indigo/ivory as requested.",
+          "Chair is present and generally matches the required task-chair concept, but the back shape and proportions are not a perfect match to the specified rectangular mesh-back design.",
+          "The scene is a real small office-like interior with pale wall, wood floor, and daylight.",
+          "Minor prompt mismatch: the chair is centered prominently and the overall composition is not a strict wide-margin product row; the paper stack and chair placement feel slightly off from the exact staged layout."
+        ],
+        "hallucinated_objects": [
+          "window frame",
+          "brick wall texture"
+        ],
+        "content_safety": [
+          {
+            "frame": "frame_01.png",
+            "categories": [
+              {
+                "category": "Hate",
+                "severity": 0
+              },
+              {
+                "category": "SelfHarm",
+                "severity": 0
+              },
+              {
+                "category": "Sexual",
+                "severity": 0
+              },
+              {
+                "category": "Violence",
+                "severity": 0
+              }
+            ]
+          },
+          {
+            "frame": "frame_02.png",
+            "categories": [
+              {
+                "category": "Hate",
+                "severity": 0
+              },
+              {
+                "category": "SelfHarm",
+                "severity": 0
+              },
+              {
+                "category": "Sexual",
+                "severity": 0
+              },
+              {
+                "category": "Violence",
+                "severity": 0
+              }
+            ]
+          },
+          {
+            "frame": "frame_03.png",
+            "categories": [
+              {
+                "category": "Hate",
+                "severity": 0
+              },
+              {
+                "category": "SelfHarm",
+                "severity": 0
+              },
+              {
+                "category": "Sexual",
+                "severity": 0
+              },
+              {
+                "category": "Violence",
+                "severity": 0
+              }
+            ]
+          },
+          {
+            "frame": "frame_04.png",
+            "categories": [
+              {
+                "category": "Hate",
+                "severity": 0
+              },
+              {
+                "category": "SelfHarm",
+                "severity": 0
+              },
+              {
+                "category": "Sexual",
+                "severity": 0
+              },
+              {
+                "category": "Violence",
+                "severity": 0
+              }
+            ]
+          }
+        ],
+        "verdict": "pass",
+        "failed_checks": [],
+        "publish_approved": false,
+        "automated_checks_passed": true,
+        "human_signoff_required": true,
+        "sampled_frame_count": 4,
+        "evaluator_version": "brand-qa-vision-v1",
+        "check_evidence": null
+      },
+      "qa_evaluated_at": "2026-11-16T23:23:04.546468+00:00",
+      "account": "proseware",
+      "stage": "draft",
+      "hero_eligible": false,
+      "human_signoff_required": true,
+      "replacement_for": "account-proseware-draft-s6",
+      "reroll_reason": "simplified-brief",
+      "brief_version": 9,
+      "evaluations": {
+        "status": "not_yet_evaluated",
+        "reason": "No new Foundry Evaluations run; original v1 evidence is immutable."
+      },
+      "completion_usage": {
+        "qa_allowance_usd": 0.5,
+        "calls": [
+          {
+            "kind": "vision",
+            "status": 200,
+            "request_id": "81079788-6724-4d51-81b7-93eaa82dda6c",
+            "usage": {
+              "prompt_tokens": 4996,
+              "completion_tokens": 202,
+              "total_tokens": 5198
+            }
+          },
+          {
+            "kind": "content_safety",
+            "status": 200,
+            "request_id": "498c0215-817c-40e2-934e-6db95804eec6"
+          },
+          {
+            "kind": "content_safety",
+            "status": 200,
+            "request_id": "a7bad13e-04c4-484c-9e79-046b36c8b09b"
+          },
+          {
+            "kind": "content_safety",
+            "status": 200,
+            "request_id": "b59fc935-6735-4c37-915d-e70e8354badf"
+          },
+          {
+            "kind": "content_safety",
+            "status": 200,
+            "request_id": "e8e6d2fa-b99e-4f54-bd71-3522aa74ee51"
+          }
+        ],
+        "billed_qa_usd": null,
+        "note": "Bounded QA calls; allowance is not a quoted or billed price."
+      },
+      "qa_sampled_from": "final silent presentation",
+      "v1_qa": {
+        "evaluator": "azure-openai-vision",
+        "measured": true,
+        "scores": {
+          "logo_integrity": 1,
+          "label_legibility": 1,
+          "product_fidelity": 0.86,
+          "prompt_adherence": 0.78
+        },
+        "thresholds": {
+          "logo_integrity": 0.8,
+          "label_legibility": 0.7,
+          "product_fidelity": 0.8,
+          "prompt_adherence": 0.7
+        },
+        "findings": [
+          "No visible logos, signage, price numbers, or on-screen text.",
+          "Four product groups are arranged left to right with clear gaps: coffee press/mug, spray bottle/cloth, chair, paper stack.",
+          "Packaging appears blank and mostly plain indigo/ivory as requested.",
+          "Chair is present and generally matches the required task-chair concept, but the back shape and proportions are not a perfect match to the specified rectangular mesh-back design.",
+          "The scene is a real small office-like interior with pale wall, wood floor, and daylight.",
+          "Minor prompt mismatch: the chair is centered prominently and the overall composition is not a strict wide-margin product row; the paper stack and chair placement feel slightly off from the exact staged layout."
+        ],
+        "hallucinated_objects": [
+          "window frame",
+          "brick wall texture"
+        ],
+        "content_safety": [
+          {
+            "frame": "frame_01.png",
+            "categories": [
+              {
+                "category": "Hate",
+                "severity": 0
+              },
+              {
+                "category": "SelfHarm",
+                "severity": 0
+              },
+              {
+                "category": "Sexual",
+                "severity": 0
+              },
+              {
+                "category": "Violence",
+                "severity": 0
+              }
+            ]
+          },
+          {
+            "frame": "frame_02.png",
+            "categories": [
+              {
+                "category": "Hate",
+                "severity": 0
+              },
+              {
+                "category": "SelfHarm",
+                "severity": 0
+              },
+              {
+                "category": "Sexual",
+                "severity": 0
+              },
+              {
+                "category": "Violence",
+                "severity": 0
+              }
+            ]
+          },
+          {
+            "frame": "frame_03.png",
+            "categories": [
+              {
+                "category": "Hate",
+                "severity": 0
+              },
+              {
+                "category": "SelfHarm",
+                "severity": 0
+              },
+              {
+                "category": "Sexual",
+                "severity": 0
+              },
+              {
+                "category": "Violence",
+                "severity": 0
+              }
+            ]
+          },
+          {
+            "frame": "frame_04.png",
+            "categories": [
+              {
+                "category": "Hate",
+                "severity": 0
+              },
+              {
+                "category": "SelfHarm",
+                "severity": 0
+              },
+              {
+                "category": "Sexual",
+                "severity": 0
+              },
+              {
+                "category": "Violence",
+                "severity": 0
+              }
+            ]
+          }
+        ],
+        "verdict": "pass",
+        "failed_checks": [],
+        "publish_approved": false,
+        "automated_checks_passed": true,
+        "human_signoff_required": true,
+        "sampled_frame_count": 4,
+        "evaluator_version": "brand-qa-vision-v1",
+        "check_evidence": null
+      },
+      "gating_control": {
+        "clip": "account-proseware-draft-s5",
+        "evidence": "manifest.json",
+        "rubric": "brand-qa-vision-v1"
+      },
+      "qa_provenance": {
+        "qa_source_sha256": "e5f502b34c0c936c2d879e120481f1dd57586a3bbbec75d1ad4ef26e9b298a6f",
+        "sample_timestamps_s": [
+          0.75,
+          2.25,
+          3.75,
+          5.25
+        ]
+      }
+    },
+    {
+      "id": "account-southridge-draft-s1",
+      "sku": "LTW-LT14-SLV",
+      "vertical": "electronics",
+      "model": "minimax-h3-max",
+      "mode": "text-to-video",
+      "aspect_ratio": "16:9",
+      "duration": 6,
+      "file": "account-southridge-draft-s1.mp4",
+      "provenance": "foundry",
+      "audio": "not requested; silent draft",
+      "media": {
+        "duration_s": 6.0,
+        "width": 1280,
+        "height": 732,
+        "has_audio": false,
+        "size_bytes": 300118
+      },
+      "elapsed_s": 16.53,
+      "accepted_to_completed_s": 13.46,
+      "processing": "H.264 display rendition; longest edge <=1280; CRF 28; metadata stripped; unexpected model audio removed for silent presentation; original-audio rendition retained; presentation trimmed to requested 6 seconds; re-encoded H.264 at 25 fps / CRF 20",
+      "source_media": {
+        "duration_s": 6.59,
+        "width": 1344,
+        "height": 768,
+        "has_audio": true,
+        "size_bytes": 3905905
+      },
+      "source_sha256": "eecce236136e451a8beab6dc16bbeb00cab7af603e852db62f97b72d173049ab",
+      "source_image": null,
+      "prompt": "Six-second silent photographic product video, landscape 16:9. A realistic lived-in home office with a natural oak desk, visible fine wood grain, soft window daylight, subtle shadows and gently out-of-focus plain bookshelves and a small green plant in the background. Three separate unbranded devices form a single clear row on the desk, exactly LEFT TO RIGHT: a silver 14-inch aluminum ultrabook at the left, charcoal over-ear headphones standing upright in the middle, a small charcoal computer mouse at the right. The laptop is already open at 110 degrees and stays still. Its screen contains ONLY a soft neutral grey-to-teal gradient, with absolutely no interface, text, icons, menus, taskbar or symbols. The silver laptop lid is blank. The headphones and mouse are blank. A plain ivory coffee mug sits farther back and to the left of the laptop, separate from the three-device row. Keep every device and the mug completely visible with generous margins and no overlap. Locked-off static camera, natural perspective and realistic product proportions; no cuts, opening animation, orbit or push-in. No hands, people or faces. No visible writing on books, packaging or surfaces; book spines face away from the camera. No logos, signage, labels, numbers, branding, recognizable product trade dress or soundtrack.",
+      "request_id": "ecae61a5-ebbd-4ec2-9d62-d2f7e4ff0bdc",
+      "original_file": "account-southridge-draft-s1-original-audio.mp4",
+      "presentation_audio_removed": true,
+      "presentation_trimmed_to_s": 6,
+      "deployment": "minimax-h3-max",
+      "rendered_at": "2026-11-16T23:23:51.396793+00:00",
+      "estimate": {
+        "model": "minimax-h3-max",
+        "seconds": 6.0,
+        "resolution": "768P",
+        "price_key": "768P",
+        "usd_per_second": 0.08,
+        "estimate_usd": 0.48,
+        "estimate_high_usd": 0.536,
+        "caveats": [
+          "MiniMax output can run ~0.7 s longer than requested (high estimate includes it)",
+          "preview list price per generated second; not a billing guarantee"
+        ]
+      },
+      "qa": {
+        "evaluator": "azure-openai-vision",
+        "measured": true,
+        "scores": {
+          "logo_integrity": 1,
+          "label_legibility": 1,
+          "product_fidelity": 0.72,
+          "prompt_adherence": 0.18
+        },
+        "thresholds": {
+          "logo_integrity": 0.8,
+          "label_legibility": 0.7,
+          "product_fidelity": 0.8,
+          "prompt_adherence": 0.7
+        },
+        "findings": [
+          "No visible logos, signage, price numbers, or on-screen text.",
+          "Laptop screen appears to show a plain gradient with no interface or symbols.",
+          "The three devices are not arranged in a clear left-to-right row as requested; the headphones are centered but the mouse is far right and the laptop is angled, making the row less exact.",
+          "The laptop is open and silver, and the headphones and mouse appear unbranded.",
+          "Background includes a mug, bookshelves, and plant consistent with the scene brief."
+        ],
+        "hallucinated_objects": [
+          "coffee mug",
+          "bookshelves",
+          "plant",
+          "window"
+        ],
+        "content_safety": [
+          {
+            "frame": "frame_01.png",
+            "categories": [
+              {
+                "category": "Hate",
+                "severity": 0
+              },
+              {
+                "category": "SelfHarm",
+                "severity": 0
+              },
+              {
+                "category": "Sexual",
+                "severity": 0
+              },
+              {
+                "category": "Violence",
+                "severity": 0
+              }
+            ]
+          },
+          {
+            "frame": "frame_02.png",
+            "categories": [
+              {
+                "category": "Hate",
+                "severity": 0
+              },
+              {
+                "category": "SelfHarm",
+                "severity": 0
+              },
+              {
+                "category": "Sexual",
+                "severity": 0
+              },
+              {
+                "category": "Violence",
+                "severity": 0
+              }
+            ]
+          },
+          {
+            "frame": "frame_03.png",
+            "categories": [
+              {
+                "category": "Hate",
+                "severity": 0
+              },
+              {
+                "category": "SelfHarm",
+                "severity": 0
+              },
+              {
+                "category": "Sexual",
+                "severity": 0
+              },
+              {
+                "category": "Violence",
+                "severity": 0
+              }
+            ]
+          },
+          {
+            "frame": "frame_04.png",
+            "categories": [
+              {
+                "category": "Hate",
+                "severity": 0
+              },
+              {
+                "category": "SelfHarm",
+                "severity": 0
+              },
+              {
+                "category": "Sexual",
+                "severity": 0
+              },
+              {
+                "category": "Violence",
+                "severity": 0
+              }
+            ]
+          }
+        ],
+        "verdict": "fail",
+        "failed_checks": [
+          "product_fidelity",
+          "prompt_adherence"
+        ],
+        "publish_approved": false,
+        "reroll": {
+          "model": "ltx-2.5-pro",
+          "mode": "text-to-video",
+          "reason": "quality threshold failed; re-roll on the higher-fidelity tier"
+        },
+        "automated_checks_passed": false,
+        "human_signoff_required": true,
+        "sampled_frame_count": 4,
+        "evaluator_version": "brand-qa-vision-v1",
+        "check_evidence": null
+      },
+      "qa_evaluated_at": "2026-11-16T23:23:51.396793+00:00",
+      "account": "southridge",
+      "stage": "draft",
+      "hero_eligible": false,
+      "human_signoff_required": true,
+      "replacement_for": "account-southridge-draft",
+      "reroll_reason": "simplified-brief",
+      "brief_version": 2,
+      "evaluations": {
+        "status": "not_yet_evaluated",
+        "reason": "No new Foundry Evaluations run; original v1 evidence is immutable."
+      },
+      "completion_usage": {
+        "qa_allowance_usd": 0.5,
+        "calls": [
+          {
+            "kind": "vision",
+            "status": 200,
+            "request_id": "32d893dc-1ae4-4624-b3da-12ab63a1fe10",
+            "usage": {
+              "prompt_tokens": 4893,
+              "completion_tokens": 156,
+              "total_tokens": 5049
+            }
+          },
+          {
+            "kind": "content_safety",
+            "status": 200,
+            "request_id": "1a381ca1-513d-434f-9e36-c7f82f891c5f"
+          },
+          {
+            "kind": "content_safety",
+            "status": 200,
+            "request_id": "21c864d5-c54e-4bbf-a986-b1eda4532a0b"
+          },
+          {
+            "kind": "content_safety",
+            "status": 200,
+            "request_id": "47b2547c-da79-4d92-873f-3403a28f91a4"
+          },
+          {
+            "kind": "content_safety",
+            "status": 200,
+            "request_id": "55d9f229-0f3e-404a-aaff-07b141812e6f"
+          }
+        ],
+        "billed_qa_usd": null,
+        "note": "Bounded QA calls; allowance is not a quoted or billed price."
+      },
+      "qa_sampled_from": "final silent presentation",
+      "v1_qa": {
+        "evaluator": "azure-openai-vision",
+        "measured": true,
+        "scores": {
+          "logo_integrity": 1,
+          "label_legibility": 1,
+          "product_fidelity": 0.72,
+          "prompt_adherence": 0.18
+        },
+        "thresholds": {
+          "logo_integrity": 0.8,
+          "label_legibility": 0.7,
+          "product_fidelity": 0.8,
+          "prompt_adherence": 0.7
+        },
+        "findings": [
+          "No visible logos, signage, price numbers, or on-screen text.",
+          "Laptop screen appears to show a plain gradient with no interface or symbols.",
+          "The three devices are not arranged in a clear left-to-right row as requested; the headphones are centered but the mouse is far right and the laptop is angled, making the row less exact.",
+          "The laptop is open and silver, and the headphones and mouse appear unbranded.",
+          "Background includes a mug, bookshelves, and plant consistent with the scene brief."
+        ],
+        "hallucinated_objects": [
+          "coffee mug",
+          "bookshelves",
+          "plant",
+          "window"
+        ],
+        "content_safety": [
+          {
+            "frame": "frame_01.png",
+            "categories": [
+              {
+                "category": "Hate",
+                "severity": 0
+              },
+              {
+                "category": "SelfHarm",
+                "severity": 0
+              },
+              {
+                "category": "Sexual",
+                "severity": 0
+              },
+              {
+                "category": "Violence",
+                "severity": 0
+              }
+            ]
+          },
+          {
+            "frame": "frame_02.png",
+            "categories": [
+              {
+                "category": "Hate",
+                "severity": 0
+              },
+              {
+                "category": "SelfHarm",
+                "severity": 0
+              },
+              {
+                "category": "Sexual",
+                "severity": 0
+              },
+              {
+                "category": "Violence",
+                "severity": 0
+              }
+            ]
+          },
+          {
+            "frame": "frame_03.png",
+            "categories": [
+              {
+                "category": "Hate",
+                "severity": 0
+              },
+              {
+                "category": "SelfHarm",
+                "severity": 0
+              },
+              {
+                "category": "Sexual",
+                "severity": 0
+              },
+              {
+                "category": "Violence",
+                "severity": 0
+              }
+            ]
+          },
+          {
+            "frame": "frame_04.png",
+            "categories": [
+              {
+                "category": "Hate",
+                "severity": 0
+              },
+              {
+                "category": "SelfHarm",
+                "severity": 0
+              },
+              {
+                "category": "Sexual",
+                "severity": 0
+              },
+              {
+                "category": "Violence",
+                "severity": 0
+              }
+            ]
+          }
+        ],
+        "verdict": "fail",
+        "failed_checks": [
+          "product_fidelity",
+          "prompt_adherence"
+        ],
+        "publish_approved": false,
+        "reroll": {
+          "model": "ltx-2.5-pro",
+          "mode": "text-to-video",
+          "reason": "quality threshold failed; re-roll on the higher-fidelity tier"
+        },
+        "automated_checks_passed": false,
+        "human_signoff_required": true,
+        "sampled_frame_count": 4,
+        "evaluator_version": "brand-qa-vision-v1",
+        "check_evidence": null
+      },
+      "gating_control": {
+        "clip": "account-proseware-draft-s5",
+        "evidence": "manifest.json",
+        "rubric": "brand-qa-vision-v1"
+      },
+      "qa_provenance": {
+        "qa_source_sha256": "e5f502b34c0c936c2d879e120481f1dd57586a3bbbec75d1ad4ef26e9b298a6f",
+        "sample_timestamps_s": [
+          0.75,
+          2.25,
+          3.75,
+          5.25
+        ]
+      }
+    },
+    {
+      "id": "account-southridge-draft-s2",
+      "sku": "LTW-LT14-SLV",
+      "vertical": "electronics",
+      "model": "minimax-h3-max",
+      "mode": "text-to-video",
+      "aspect_ratio": "16:9",
+      "duration": 6,
+      "file": "account-southridge-draft-s2.mp4",
+      "provenance": "foundry",
+      "audio": "not requested; silent draft",
+      "media": {
+        "duration_s": 6.0,
+        "width": 1280,
+        "height": 732,
+        "has_audio": false,
+        "size_bytes": 477957
+      },
+      "elapsed_s": 16.63,
+      "accepted_to_completed_s": 13.5,
+      "processing": "H.264 display rendition; longest edge <=1280; CRF 28; metadata stripped; unexpected model audio removed for silent presentation; original-audio rendition retained; presentation trimmed to requested 6 seconds; re-encoded H.264 at 25 fps / CRF 20",
+      "source_media": {
+        "duration_s": 6.59,
+        "width": 1344,
+        "height": 768,
+        "has_audio": true,
+        "size_bytes": 4516392
+      },
+      "source_sha256": "b3428b4904b22296199946753cee2b833f2a1691b4c9ca8cc4945d0b2d472d1e",
+      "source_image": null,
+      "prompt": "Six-second silent photographic product video, landscape 16:9. A realistic lived-in home office with a natural oak desk, fine visible wood grain, soft window daylight, natural shadows, a softly blurred plain bookshelf and a small green plant behind the desk. The camera looks STRAIGHT ON at the desk, perpendicular to its front edge, with the desk edge horizontal across the image. Three unbranded devices are side by side in a perfectly straight horizontal row, not diagonal: LEFT a silver 14-inch aluminum laptop facing squarely toward the viewer, CENTER charcoal over-ear headphones standing upright, RIGHT a small ordinary symmetrical charcoal computer mouse. Their front edges align along the same horizontal line on the desk, with clear empty gaps and no overlap. The laptop sits entirely to the left of the headphones; the mouse sits entirely to the right of them. The laptop is open at 110 degrees and stays still. Its screen shows only a smooth neutral grey-to-teal gradient: no UI, text, icons, menus or symbols. Devices have blank unbranded surfaces. A plain ivory coffee mug sits behind and left of the laptop, outside the three-device row. Wide composition with generous empty space around every object; nothing cropped. Locked-off camera and stationary objects throughout, no orbit, pan, push-in, cuts or opening animation. Realistic product proportions, aluminum reflections, matte headphones and natural materials, not a CGI showroom. No people, hands or faces. No visible writing on books or background surfaces; book spines face away. No logos, labels, signage, numbers, branding, recognizable trade dress or soundtrack.",
+      "request_id": "bf05e529-12ba-4916-a7bb-c87dd5c97f3b",
+      "original_file": "account-southridge-draft-s2-original-audio.mp4",
+      "presentation_audio_removed": true,
+      "presentation_trimmed_to_s": 6,
+      "deployment": "minimax-h3-max",
+      "rendered_at": "2026-11-16T23:25:09.678103+00:00",
+      "estimate": {
+        "model": "minimax-h3-max",
+        "seconds": 6.0,
+        "resolution": "768P",
+        "price_key": "768P",
+        "usd_per_second": 0.08,
+        "estimate_usd": 0.48,
+        "estimate_high_usd": 0.536,
+        "caveats": [
+          "MiniMax output can run ~0.7 s longer than requested (high estimate includes it)",
+          "preview list price per generated second; not a billing guarantee"
+        ]
+      },
+      "qa": {
+        "evaluator": "azure-openai-vision",
+        "measured": true,
+        "scores": {
+          "logo_integrity": 1,
+          "label_legibility": 1,
+          "product_fidelity": 0.92,
+          "prompt_adherence": 0.78
+        },
+        "thresholds": {
+          "logo_integrity": 0.8,
+          "label_legibility": 0.7,
+          "product_fidelity": 0.8,
+          "prompt_adherence": 0.7
+        },
+        "findings": [
+          "No visible logos, wordmarks, signage, or on-screen text.",
+          "Laptop screen appears as a plain abstract gradient with no UI or icons.",
+          "Three devices are present in a left-to-right row: silver laptop, headphones, mouse.",
+          "Scene matches a realistic home office with oak desk, daylight, bookshelf, and plant.",
+          "The row is not perfectly straight/aligned as requested; headphones and mouse sit slightly offset relative to the laptop.",
+          "The laptop appears more like a generic modern laptop than a clearly specified 14-inch silver ultrabook, but overall product match is strong."
+        ],
+        "hallucinated_objects": [
+          "coffee mug",
+          "bookshelf books",
+          "plant",
+          "window curtain"
+        ],
+        "content_safety": [
+          {
+            "frame": "frame_01.png",
+            "categories": [
+              {
+                "category": "Hate",
+                "severity": 0
+              },
+              {
+                "category": "SelfHarm",
+                "severity": 0
+              },
+              {
+                "category": "Sexual",
+                "severity": 0
+              },
+              {
+                "category": "Violence",
+                "severity": 0
+              }
+            ]
+          },
+          {
+            "frame": "frame_02.png",
+            "categories": [
+              {
+                "category": "Hate",
+                "severity": 0
+              },
+              {
+                "category": "SelfHarm",
+                "severity": 0
+              },
+              {
+                "category": "Sexual",
+                "severity": 0
+              },
+              {
+                "category": "Violence",
+                "severity": 0
+              }
+            ]
+          },
+          {
+            "frame": "frame_03.png",
+            "categories": [
+              {
+                "category": "Hate",
+                "severity": 0
+              },
+              {
+                "category": "SelfHarm",
+                "severity": 0
+              },
+              {
+                "category": "Sexual",
+                "severity": 0
+              },
+              {
+                "category": "Violence",
+                "severity": 0
+              }
+            ]
+          },
+          {
+            "frame": "frame_04.png",
+            "categories": [
+              {
+                "category": "Hate",
+                "severity": 0
+              },
+              {
+                "category": "SelfHarm",
+                "severity": 0
+              },
+              {
+                "category": "Sexual",
+                "severity": 0
+              },
+              {
+                "category": "Violence",
+                "severity": 0
+              }
+            ]
+          }
+        ],
+        "verdict": "pass",
+        "failed_checks": [],
+        "publish_approved": false,
+        "automated_checks_passed": true,
+        "human_signoff_required": true,
+        "sampled_frame_count": 4,
+        "evaluator_version": "brand-qa-vision-v1",
+        "check_evidence": null
+      },
+      "qa_evaluated_at": "2026-11-16T23:25:09.678103+00:00",
+      "account": "southridge",
+      "stage": "draft",
+      "hero_eligible": false,
+      "human_signoff_required": true,
+      "replacement_for": "account-southridge-draft-s1",
+      "reroll_reason": "simplified-brief",
+      "brief_version": 3,
+      "evaluations": {
+        "status": "not_yet_evaluated",
+        "reason": "No new Foundry Evaluations run; original v1 evidence is immutable."
+      },
+      "completion_usage": {
+        "qa_allowance_usd": 0.5,
+        "calls": [
+          {
+            "kind": "vision",
+            "status": 200,
+            "request_id": "ec10e595-ea35-4d1c-8b3d-00fdd2295169",
+            "usage": {
+              "prompt_tokens": 4952,
+              "completion_tokens": 172,
+              "total_tokens": 5124
+            }
+          },
+          {
+            "kind": "content_safety",
+            "status": 200,
+            "request_id": "5ca4d13f-6aeb-4f29-9b99-c04699e6d8dd"
+          },
+          {
+            "kind": "content_safety",
+            "status": 200,
+            "request_id": "a21640dc-182d-493e-a0b0-77be5ac64bf9"
+          },
+          {
+            "kind": "content_safety",
+            "status": 200,
+            "request_id": "bb9d750d-3f3f-4da6-97ac-9c07807c01fc"
+          },
+          {
+            "kind": "content_safety",
+            "status": 200,
+            "request_id": "4f81111f-91a0-46e8-b6a5-e02b82424881"
+          }
+        ],
+        "billed_qa_usd": null,
+        "note": "Bounded QA calls; allowance is not a quoted or billed price."
+      },
+      "qa_sampled_from": "final silent presentation",
+      "v1_qa": {
+        "evaluator": "azure-openai-vision",
+        "measured": true,
+        "scores": {
+          "logo_integrity": 1,
+          "label_legibility": 1,
+          "product_fidelity": 0.92,
+          "prompt_adherence": 0.78
+        },
+        "thresholds": {
+          "logo_integrity": 0.8,
+          "label_legibility": 0.7,
+          "product_fidelity": 0.8,
+          "prompt_adherence": 0.7
+        },
+        "findings": [
+          "No visible logos, wordmarks, signage, or on-screen text.",
+          "Laptop screen appears as a plain abstract gradient with no UI or icons.",
+          "Three devices are present in a left-to-right row: silver laptop, headphones, mouse.",
+          "Scene matches a realistic home office with oak desk, daylight, bookshelf, and plant.",
+          "The row is not perfectly straight/aligned as requested; headphones and mouse sit slightly offset relative to the laptop.",
+          "The laptop appears more like a generic modern laptop than a clearly specified 14-inch silver ultrabook, but overall product match is strong."
+        ],
+        "hallucinated_objects": [
+          "coffee mug",
+          "bookshelf books",
+          "plant",
+          "window curtain"
+        ],
+        "content_safety": [
+          {
+            "frame": "frame_01.png",
+            "categories": [
+              {
+                "category": "Hate",
+                "severity": 0
+              },
+              {
+                "category": "SelfHarm",
+                "severity": 0
+              },
+              {
+                "category": "Sexual",
+                "severity": 0
+              },
+              {
+                "category": "Violence",
+                "severity": 0
+              }
+            ]
+          },
+          {
+            "frame": "frame_02.png",
+            "categories": [
+              {
+                "category": "Hate",
+                "severity": 0
+              },
+              {
+                "category": "SelfHarm",
+                "severity": 0
+              },
+              {
+                "category": "Sexual",
+                "severity": 0
+              },
+              {
+                "category": "Violence",
+                "severity": 0
+              }
+            ]
+          },
+          {
+            "frame": "frame_03.png",
+            "categories": [
+              {
+                "category": "Hate",
+                "severity": 0
+              },
+              {
+                "category": "SelfHarm",
+                "severity": 0
+              },
+              {
+                "category": "Sexual",
+                "severity": 0
+              },
+              {
+                "category": "Violence",
+                "severity": 0
+              }
+            ]
+          },
+          {
+            "frame": "frame_04.png",
+            "categories": [
+              {
+                "category": "Hate",
+                "severity": 0
+              },
+              {
+                "category": "SelfHarm",
+                "severity": 0
+              },
+              {
+                "category": "Sexual",
+                "severity": 0
+              },
+              {
+                "category": "Violence",
+                "severity": 0
+              }
+            ]
+          }
+        ],
+        "verdict": "pass",
+        "failed_checks": [],
+        "publish_approved": false,
+        "automated_checks_passed": true,
+        "human_signoff_required": true,
+        "sampled_frame_count": 4,
+        "evaluator_version": "brand-qa-vision-v1",
+        "check_evidence": null
+      },
+      "gating_control": {
+        "clip": "account-proseware-draft-s5",
+        "evidence": "manifest.json",
+        "rubric": "brand-qa-vision-v1"
+      },
+      "qa_provenance": {
+        "qa_source_sha256": "e5f502b34c0c936c2d879e120481f1dd57586a3bbbec75d1ad4ef26e9b298a6f",
+        "sample_timestamps_s": [
+          0.75,
+          2.25,
+          3.75,
+          5.25
+        ]
+      }
     }
   ],
   "validation": {

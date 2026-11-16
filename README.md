@@ -63,14 +63,24 @@ brief to the right **fal video model in Microsoft Foundry** — `Kling v3 Pro`, 
   picture. Draft concept #2 has no audio track (not requested).
 - **All 14 fictional accounts have a playable recorded example.** The nine new ones are silent text-to-video
   exploratory drafts: preview-only (no approved PIM hero), **Awaiting human review — not approved** and
-  **Not yet evaluated** by Foundry Evaluations. Eight passed automated screening; Proseware's best attempt
-  still fails (product fidelity 0.72) and is labelled as a failed draft. Safe failed attempts appear as
-  **QA learning examples**; attempts with on-screen text, real-brand logos or trade dress, or Content Safety
-  flags are withheld (evidence only, media not published). See [verification](docs/verification.md#account-drafts).
+  **Not yet evaluated** by Foundry Evaluations. All nine selected new-account clips passed automated screening,
+  including Proseware's realistic-office replacement. This does not erase review concerns: Southridge retains
+  its original studio clip and order disclosure because neither realistic-room replacement qualified.
+  Safe failed attempts appear as **QA learning examples**; text, trade-dress, Content Safety and agent-observed
+  product defects can withhold an attempt even when AI screening passed. Evidence stays visible.
+  See [verification](docs/verification.md#account-drafts).
   The original eight clips and v1 evidence are unchanged.
 
 **Fictional brands and products. Real company names identify representative retail segments and cite public
 sources only; no affiliation, endorsement, trademarks, or customer data.**
+
+### Aim for photographic realism
+
+Use real-world environments, believable material detail, natural lighting and photographic camera language,
+not only the word "photorealistic." Approved real product photography with **Kling v3 Pro image-to-video**
+is the strongest lever for recognizable products and realistic context. Busier scenes increase accidental
+text, logo and trade-dress risk; keep QA and human inspection focused on those details, object identity,
+physics and framing. Realistic-looking footage remains AI-generated and must be described honestly.
 
 ## The agents
 

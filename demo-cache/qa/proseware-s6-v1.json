@@ -1,0 +1,308 @@
+{
+  "schema_version": 1,
+  "clip": "account-proseware-draft-s6",
+  "is_negative_control": false,
+  "agent_review": {
+    "decision": "withheld",
+    "observations": "Recorded automated pass retained. The rounded mesh-chair design resembles a recognizable designer chair, creating a trade-dress concern. Not selected; media retained privately.",
+    "human_approval": false
+  },
+  "generation_request_id": "0f18fb1c-2362-4286-bbae-84391e1b0114",
+  "qa_source_sha256": "e5f502b34c0c936c2d879e120481f1dd57586a3bbbec75d1ad4ef26e9b298a6f",
+  "evaluated_at": "2026-11-16T23:21:01.912588+00:00",
+  "qa": {
+    "evaluator": "azure-openai-vision",
+    "measured": true,
+    "scores": {
+      "logo_integrity": 1,
+      "label_legibility": 1,
+      "product_fidelity": 0.86,
+      "prompt_adherence": 0.78
+    },
+    "thresholds": {
+      "logo_integrity": 0.8,
+      "label_legibility": 0.7,
+      "product_fidelity": 0.8,
+      "prompt_adherence": 0.7
+    },
+    "findings": [
+      "No visible logos, signage, prices, or on-screen text.",
+      "Four product groups are arranged left to right with clear gaps, and the chair is present.",
+      "The scene is a real small office-like interior with daylight, pale wall, and wood floor.",
+      "Some prompt details are off: the chair is centered and large, the boxes appear more blue/grey than the specified dusty grey-indigo, and the overall composition is not as wide/empty as requested."
+    ],
+    "hallucinated_objects": [
+      "small plant on the windowsill",
+      "window"
+    ],
+    "content_safety": [
+      {
+        "frame": "frame_01.png",
+        "categories": [
+          {
+            "category": "Hate",
+            "severity": 0
+          },
+          {
+            "category": "SelfHarm",
+            "severity": 0
+          },
+          {
+            "category": "Sexual",
+            "severity": 0
+          },
+          {
+            "category": "Violence",
+            "severity": 0
+          }
+        ]
+      },
+      {
+        "frame": "frame_02.png",
+        "categories": [
+          {
+            "category": "Hate",
+            "severity": 0
+          },
+          {
+            "category": "SelfHarm",
+            "severity": 0
+          },
+          {
+            "category": "Sexual",
+            "severity": 0
+          },
+          {
+            "category": "Violence",
+            "severity": 0
+          }
+        ]
+      },
+      {
+        "frame": "frame_03.png",
+        "categories": [
+          {
+            "category": "Hate",
+            "severity": 0
+          },
+          {
+            "category": "SelfHarm",
+            "severity": 0
+          },
+          {
+            "category": "Sexual",
+            "severity": 0
+          },
+          {
+            "category": "Violence",
+            "severity": 0
+          }
+        ]
+      },
+      {
+        "frame": "frame_04.png",
+        "categories": [
+          {
+            "category": "Hate",
+            "severity": 0
+          },
+          {
+            "category": "SelfHarm",
+            "severity": 0
+          },
+          {
+            "category": "Sexual",
+            "severity": 0
+          },
+          {
+            "category": "Violence",
+            "severity": 0
+          }
+        ]
+      }
+    ],
+    "verdict": "pass",
+    "failed_checks": [],
+    "publish_approved": false,
+    "automated_checks_passed": true,
+    "human_signoff_required": true,
+    "sampled_frame_count": 4,
+    "evaluator_version": "brand-qa-vision-v1",
+    "check_evidence": null
+  },
+  "v1_qa": {
+    "evaluator": "azure-openai-vision",
+    "measured": true,
+    "scores": {
+      "logo_integrity": 1,
+      "label_legibility": 1,
+      "product_fidelity": 0.86,
+      "prompt_adherence": 0.78
+    },
+    "thresholds": {
+      "logo_integrity": 0.8,
+      "label_legibility": 0.7,
+      "product_fidelity": 0.8,
+      "prompt_adherence": 0.7
+    },
+    "findings": [
+      "No visible logos, signage, prices, or on-screen text.",
+      "Four product groups are arranged left to right with clear gaps, and the chair is present.",
+      "The scene is a real small office-like interior with daylight, pale wall, and wood floor.",
+      "Some prompt details are off: the chair is centered and large, the boxes appear more blue/grey than the specified dusty grey-indigo, and the overall composition is not as wide/empty as requested."
+    ],
+    "hallucinated_objects": [
+      "small plant on the windowsill",
+      "window"
+    ],
+    "content_safety": [
+      {
+        "frame": "frame_01.png",
+        "categories": [
+          {
+            "category": "Hate",
+            "severity": 0
+          },
+          {
+            "category": "SelfHarm",
+            "severity": 0
+          },
+          {
+            "category": "Sexual",
+            "severity": 0
+          },
+          {
+            "category": "Violence",
+            "severity": 0
+          }
+        ]
+      },
+      {
+        "frame": "frame_02.png",
+        "categories": [
+          {
+            "category": "Hate",
+            "severity": 0
+          },
+          {
+            "category": "SelfHarm",
+            "severity": 0
+          },
+          {
+            "category": "Sexual",
+            "severity": 0
+          },
+          {
+            "category": "Violence",
+            "severity": 0
+          }
+        ]
+      },
+      {
+        "frame": "frame_03.png",
+        "categories": [
+          {
+            "category": "Hate",
+            "severity": 0
+          },
+          {
+            "category": "SelfHarm",
+            "severity": 0
+          },
+          {
+            "category": "Sexual",
+            "severity": 0
+          },
+          {
+            "category": "Violence",
+            "severity": 0
+          }
+        ]
+      },
+      {
+        "frame": "frame_04.png",
+        "categories": [
+          {
+            "category": "Hate",
+            "severity": 0
+          },
+          {
+            "category": "SelfHarm",
+            "severity": 0
+          },
+          {
+            "category": "Sexual",
+            "severity": 0
+          },
+          {
+            "category": "Violence",
+            "severity": 0
+          }
+        ]
+      }
+    ],
+    "verdict": "pass",
+    "failed_checks": [],
+    "publish_approved": false,
+    "automated_checks_passed": true,
+    "human_signoff_required": true,
+    "sampled_frame_count": 4,
+    "evaluator_version": "brand-qa-vision-v1",
+    "check_evidence": null
+  },
+  "usage": {
+    "qa_allowance_usd": 0.5,
+    "calls": [
+      {
+        "kind": "vision",
+        "status": 200,
+        "request_id": "9e9ac671-4d7d-455e-9f3b-83381034c836",
+        "usage": {
+          "prompt_tokens": 4951,
+          "completion_tokens": 146,
+          "total_tokens": 5097
+        }
+      },
+      {
+        "kind": "content_safety",
+        "status": 200,
+        "request_id": "cde7f14b-e4ca-4a29-947b-da645b4c7728"
+      },
+      {
+        "kind": "content_safety",
+        "status": 200,
+        "request_id": "cd9b753e-d8d9-4bea-bddc-74e243ae8024"
+      },
+      {
+        "kind": "content_safety",
+        "status": 200,
+        "request_id": "4f7d918f-b1e1-4099-8340-c6b85634b89b"
+      },
+      {
+        "kind": "content_safety",
+        "status": 200,
+        "request_id": "5de02196-e356-40ca-bfb0-f358a49fc71c"
+      }
+    ],
+    "billed_qa_usd": null,
+    "note": "Bounded QA calls; allowance is not a quoted or billed price."
+  },
+  "required_items": [
+    "One stainless French coffee press with a cylindrical vessel and a plunger lid.",
+    "One plain ivory ceramic mug.",
+    "One transparent unlabelled cleaning spray bottle.",
+    "One folded cleaning cloth made of fabric, not a bag or packet.",
+    "One office task chair with a five-spoke star base on casters, matching the design requested by the prompt.",
+    "One stack of loose blank white printer paper with visible sheet edges."
+  ],
+  "prompt": "Silent fictional small-office supply kit, six seconds, wide 16:9. Photographic live-action appearance in a real small office: subtly textured pale-grey painted wall, light natural oak floor with fine wood grain, soft window daylight from outside the shot, natural shadows and realistic material detail. Exactly four product groups stand in one straight row from left to right with clear gaps: (1) a cylindrical stainless French coffee press with a visible plunger lid and a plain ivory ceramic mug together on a plain box; (2) a clear unlabelled spray bottle with a folded fabric cleaning cloth on a plain ivory box; (3) one generic ergonomic charcoal mesh office task chair with adjustable lumbar back, armrests and a five-spoke star base on casters, on the floor; (4) a neat stack of loose blank white printer paper with visible sheet edges on a plain box. The boxes under groups 1 and 4 are matte, muted, dark dusty grey-indigo (#44416F), desaturated, not royal blue or saturated violet. The middle box and mug are warm ivory (#F6F4EF). All packaging is blank. Locked-off static camera: no pan, orbit, push-in or cuts. Wide framing with generous empty margin on both sides; every prop and every chair wheel remains fully in frame throughout. The objects stay stationary at realistic scale. No other furniture, electronics, plants, windows or wall art in view. No writing, letters, numbers, stickers, labels, barcodes, logos, symbols, signage, prices, UI, mascots, slogans or real trade dress. No people, hands or faces. No soundtrack.",
+  "sample_timestamps_s": [
+    0.75,
+    2.25,
+    3.75,
+    5.25
+  ],
+  "presentation_sha256": "69705ce11099ba03846e44f3c833fe829c05dcbe1c570ccd58679539a2d15cbf",
+  "human_signoff_required": true,
+  "publish_approved": false
+}

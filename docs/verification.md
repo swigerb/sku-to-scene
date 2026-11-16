@@ -62,24 +62,28 @@ it; the Foundry Evals v1 rubric marks such checks N/A with a reason, without cha
 
 ## Account drafts
 
-Twenty-three silent text-to-video attempts cover the nine new fictional accounts. Each row is an authentic
-Foundry render screened by `@brand-qa` (two sampled frames, Azure OpenAI vision against the brand rules, and
+Twenty-eight silent text-to-video attempts cover the nine new fictional accounts. Each row is an authentic
+Foundry render screened by `@brand-qa` (two sampled frames originally; four for Proseware s5-s7 and
+Southridge s1-s2, Azure OpenAI vision against the brand rules, and
 Content Safety). The verdicts and scores are the recorded ones; nothing was relabelled. Estimates use preview
-list price × requested seconds (6 s each): **$8.10 total**, not an Azure bill.
-The first 22 attempts used $7.62 of the original $8 cap. A separately authorized completion
-ceiling added at most $1.50 for Proseware only ($9.12 cumulative); one $0.48 attempt was made,
-with a conservative duration-overrun estimate of $0.536. No further generation is planned.
+list price × requested seconds (6 s each): **$10.74 total**, not an Azure bill.
+The first 22 attempts used $7.62 of the original $8 cap. Completion initially allowed $1.50 for
+Proseware, later expanded to **$2.50 Proseware + $1.10 Southridge = $3.60 aggregate high-reserve**.
+Completion used $3.12 at requested-duration list prices; conservative reserves total **$3.400**:
+Proseware $2.328 and Southridge $1.072. The remaining $0.200 cannot fund another allowed six-second
+H3 Max attempt ($0.536 high estimate). Generation has stopped, with both two-attempt realism limits reached.
 
 - The first 14 attempts (initial + one re-roll) were rendered before the public-source research was final.
   The four gap accounts (Tailspin, Coho, Proseware, Munson) were then re-briefed as simplified one-shot scenes
   with fewer objects, gentle camera moves and no text-bearing environments (`-s1` to `-s3`). Each brief keeps
   its earlier prompts in `prompt_history`, and each manifest record stores its `brief_version`.
-- **Playable example:** the one clip shown per account. Eight passed screening. Proseware's best attempt still
-  fails product fidelity and is shown as a failed draft.
+- **Playable example:** the one clip shown per account. All nine selected new-account clips passed screening;
+  Proseware s7 replaces the earlier failed example. Human approval remains mandatory.
 - Four passing examples (Tailwind, Wide World, Southridge, Best For You) also show a **Reviewer note** from an
   additional agent frame review. Their recorded screening pass is unchanged; a human decides.
 - **QA learning example:** safe and text-free, but failed screening. Shown only to explain what the gate caught.
-- **Withheld:** on-screen text, a real-brand logo or design resemblance, or a Content Safety flag. The media is
+- **Withheld:** on-screen text, a real-brand logo or design resemblance, a Content Safety flag, or an agent-observed
+  product-realism defect. Automated passes do not override these concerns. The media is
   not published; the request and screening evidence remain here and in the site's QA table.
 - No new Foundry Evaluations run covers these drafts, so the site shows **Not yet evaluated**. No human review
   has approved any of them.
@@ -107,22 +111,119 @@ with a conservative duration-overrun estimate of $0.536. No further generation i
 | `account-coho-draft-s2` | minimax-h3-max-turbo | $0.24 | `129bc61c-22f4-4468-b766-2117a70b7ad5` | fail (0.78 / 0.84) | QA learning example |
 | `account-proseware-draft-s2` | minimax-h3-max | $0.48 | `cdd4e4d5-2e03-487c-b3d9-c5dc8263eedb` | fail (0.72 / 0.18) | Withheld: Office chair closely resembles a well-known designer chair (real trade-dress risk). |
 | `account-coho-draft-s3` | minimax-h3-max-turbo | $0.24 | `0d8530c6-e943-482c-a3a0-20651689fb67` | pass (0.92 / 0.88) | **Playable example** |
-| `account-proseware-draft-s3` | minimax-h3-max | $0.48 | `c7202825-5765-4c82-a292-f6106afe9fed` | fail (0.72 / 0.78) | **Playable example** |
-| `account-proseware-draft-s4` | minimax-h3-max | $0.48 | `51903f88-100b-437e-a933-cab7d18aeb1d` | fail (0.55 / 0.35) | QA learning example; s3 remains selected |
+| `account-proseware-draft-s3` | minimax-h3-max | $0.48 | `c7202825-5765-4c82-a292-f6106afe9fed` | fail (0.72 / 0.78) | QA learning example; replaced by s7 |
+| `account-proseware-draft-s4` | minimax-h3-max | $0.48 | `51903f88-100b-437e-a933-cab7d18aeb1d` | fail (0.55 / 0.35) | QA learning example |
+| `account-proseware-draft-s5` | ltx-2.5-pro | $0.72 | `897d8919-220f-41af-859d-98d7619c1592` | fail (0.72 / 0.68) | Known-bad control / learning example |
+| `account-proseware-draft-s6` | minimax-h3-max | $0.48 | `0f18fb1c-2362-4286-bbae-84391e1b0114` | pass (0.86 / 0.78) | Withheld: recognizable rounded chair design flagged by agent |
+| `account-proseware-draft-s7` | minimax-h3-max | $0.48 | `c7f3a745-2490-498b-936b-398ac6721e00` | pass (0.86 / 0.78) | **Playable example** |
+| `account-southridge-draft-s1` | minimax-h3-max | $0.48 | `ecae61a5-ebbd-4ec2-9d62-d2f7e4ff0bdc` | fail (0.72 / 0.18) | QA learning example |
+| `account-southridge-draft-s2` | minimax-h3-max | $0.48 | `bf05e529-12ba-4916-a7bb-c87dd5c97f3b` | pass (0.92 / 0.78) | Withheld: unnatural upright mouse rejected by agent |
 
-The completion attempt removed colored packaging, retaining the unchanged four-component SKU and
-brand rubric. Its two sampled frames contained no visible writing and Content Safety returned severity 0
+The s4 completion attempt removed colored packaging, conflicting with the unchanged brand rule requiring
+plain indigo/white boxes. Its two sampled frames contained no visible writing and Content Safety returned severity 0
 in every category. The vision judge still failed fidelity and adherence, interpreting the paper as boxed.
 It also called the explicitly requested mug and cloth extra objects: this is a calibration concern,
-not grounds to alter the recorded verdict. The higher-scoring s3 remains the clearly failed selected draft.
-There are now six learning examples and eight withheld attempts; no historical output or verdict was replaced.
+not grounds to alter the recorded verdict. s3 and s4 remain failed learning examples.
+There are now nine learning examples and ten withheld attempts; no historical output or verdict was replaced.
 
-Completion QA used one vision call (2,558 input + 205 output = **2,763 tokens**) and two
+The s4 completion QA used one vision call (2,558 input + 205 output = **2,763 tokens**) and two
 Content Safety image calls, all HTTP 200. Their request IDs and token counts are recorded in
 the new manifest entry's `completion_usage`. The incremental QA allowance was approximately $0.50;
 no billed-cost response is supplied by these APIs, and historical QA token usage was not captured,
 so an actual cumulative Azure QA dollar total is unavailable. These are screening calls, not a new
 Foundry Evaluations run. Human approval remains mandatory.
+
+### Proseware replacement and evaluator diagnosis
+
+**Proseware s7 is the selected passing replacement.** The Brief step uses the selected recording's actual prompt, model, resolution,
+duration and estimate, not the original cart-and-opening-boxes proposal.
+
+s5 uses LTX-2.5 Pro text-to-video, 720p, 16:9, six seconds, `generate_audio=false`.
+The exact s5 generation prompt is the version 7 `prompt_history` entry in
+[`briefs/account-proseware.json`](../briefs/account-proseware.json), also preserved verbatim in
+[`demo-cache/manifest.json`](../demo-cache/manifest.json). Four groups explicitly contain six
+product props and three blank packaging boxes, consistent with the unchanged brand and SKU rules.
+The generator reserves its high cost estimate before submitting; the s4 overrun reserve is retained.
+
+The final silent H.264 presentation was screened at 0.75, 2.25, 3.75 and 5.25 seconds.
+Standard v1 scores: logo **0.98**, label **1.00**, fidelity **0.72**, adherence **0.68**;
+all 16 Content Safety category scores were zero. This is sampled visual screening, not full-video safety
+or human approval. Agent inspection additionally found a percolator-like coffee-maker shape, bag-like cloth,
+a four-leg/caster chair instead of the requested five-wheel task base, and a push-in that crops edge props.
+
+![Four s5 presentation samples, in time order, showing the office kit and progressively cropped edge props.](images/proseware-s5-qa-frames.png)
+
+The v1 judge also criticized "only three" boxes when three were requested. The experimental
+`brand-qa-vision-v2` diagnostic included the full product attributes, layout and brand palette; distinguished
+groups, members and packaging; and required expected/observed evidence with valid frame references for
+every check. Thresholds, brand rules and SKU data are unchanged. This improves traceability; it does not
+guarantee that a model's judgments are correct.
+
+One diagnostic run on the **same s5 media** returned scores 1.00 / 1.00 / 0.92 / 0.98 but nested findings
+inside `check_evidence`, which the initial parser silently lost. The corrected validator rejects that
+malformed shape. Its raw recorded result, original v1 failure and offline rejection are all preserved in
+[`demo-cache/qa/proseware-s5-v2.json`](../demo-cache/qa/proseware-s5-v2.json). It is **not an accepted pass**:
+it also missed wrong object identities and under-penalized cropping. No old QA was overwritten, and its
+scores did not change the selected clip.
+
+An opt-in `brand-qa-vision-v3` experiment adds a per-item presence/identity/framing checklist and a
+deterministic downward-only fidelity cap for a missing, wrong or cropped required item. Offline regression
+fixtures prove these guard and schema-error paths. Its **one** s5 calibration returned **error, unmeasured**,
+not a measured negative-control failure; the artifact did not retain the detailed evaluator error.
+[`proseware-s5-v3.json`](../demo-cache/qa/proseware-s5-v3.json) preserves that result.
+**v3 is uncalibrated and was not adopted as the gate.** Ordinary callers retain v1; no further calibration
+or score retries occurred. Neither high diagnostic scores nor an error can approve a candidate.
+
+| s5 QA call set | Vision request | Input / output tokens | Content Safety image calls |
+| --- | --- | --- | --- |
+| Original standard screening | `97579797-3d8e-4821-b8fd-dbbb5e82fb64` | 4,952 / 198 | 4 |
+| Versioned diagnostic (rejected) | `3ab5932e-a5c9-4692-ba84-20ae2257030a` | 5,219 / 636 | 4 |
+| v3 calibration (error, not adopted) | `02b21423-43a4-4198-a651-a3bde093f598` | 5,437 / 1,002 | 4 |
+
+### Realistic replacement results
+
+The actual gate is **unchanged v1**, which fails the known-bad s5 on the same four sample times. Each new
+candidate used that rubric, four final-presentation frames, Content Safety, and separate agent inspection.
+All sampled safety severities were zero; this does not cover every frame or audio.
+
+| Candidate | Logo / label / fidelity / adherence | Agent disposition | Evidence |
+| --- | --- | --- | --- |
+| Proseware s6 | 1 / 1 / .86 / .78, pass | Withheld for rounded-chair design resemblance | [QA](../demo-cache/qa/proseware-s6-v1.json) |
+| Proseware s7 | 1 / 1 / .86 / .78, pass | Selected; correct identities, palette, order and framing; human review pending | [QA](../demo-cache/qa/proseware-s7-v1.json) |
+| Southridge s1 | 1 / 1 / .72 / .18, fail | Angled layout failed screening; learning example | [QA](../demo-cache/qa/southridge-s1-v1.json) |
+| Southridge s2 | 1 / 1 / .92 / .78, pass | Withheld: mouse stands unnaturally on its rear edge | [QA](../demo-cache/qa/southridge-s2-v1.json) |
+
+![Four Proseware s7 samples: correct kit groups in a photographic office, with all objects visible.](images/proseware-s7-qa-frames.png)
+
+Southridge's original studio recording remains selected with its original item-order disclosure.
+Neither realistic-room attempt met both screening and agent visual acceptance. No further generation
+is authorized under these exhausted attempt limits; the automated s2 pass is preserved, not relabelled.
+
+![Four Southridge s2 review samples: photographic room but an upright mouse, rejected by agent inspection.](images/southridge-s2-qa-frames.png)
+
+**Exact prompts and provenance:** the immutable per-clip `prompt` in the manifest and in each QA artifact
+records what was actually sent. Proseware `prompt_history` versions 7/8/9 correspond to s5/s6/s7;
+Southridge versions 2/3 correspond to s1/s2. Current presenter brief, model, route and estimate follow the
+selected clip, not the most recently attempted prompt. Historical proposals and recorded verdicts remain intact.
+
+**Cost reconciliation:** this follow-up adds $2.64 requested-duration generation estimates
+($2.864 high-reserve); including prior s4, completion is $3.12 nominal / $3.400 high-reserve.
+All 28 account attempts total $10.74 nominal / $11.020 reserved. This follow-up's seven vision calls
+used **35,400 input + 2,512 output = 37,912 tokens**, plus **28 Content Safety image calls**.
+Including prior s4 gives eight vision calls, **37,958 input + 2,717 output = 40,675 tokens**, and
+**30 Content Safety calls**. At the repository's planning assumptions ($1/M input, $5/M output),
+vision estimates are $0.047960 for this follow-up and $0.051543 including s4; Content Safety is excluded.
+**Actual Azure generation and QA bills are unavailable.** Usage/request IDs are retained in
+`completion_usage` and the versioned QA artifacts. No new Foundry Evaluations run or human approval exists.
+
+**Delivery checks:** 173 offline tests passed, including guide/theme/evidence playback regressions.
+Disabling the real identity-cap source made all three defect regressions fail; the unchanged source passes.
+The configured MCP stdio launcher initialized and exposed 17 tools. The curated build contains 68 files.
+Browser playback advanced for all 14 selected accounts; Proseware s7 played to its six-second end.
+Presenter brief/model/price match selected recordings. Private paths and both newly withheld MP4s return 404.
+At a 320px iframe viewport, Home Brief and expanded Evals both have 305px client and scroll widths.
+All 31 pre-follow-up manifest entries and prior media, assets, brand/SKU rules and immutable evaluations
+were compared against `origin/dev` and remain unchanged.
 
 ## Verifying what automation cannot
 
