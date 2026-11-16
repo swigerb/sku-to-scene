@@ -24,31 +24,26 @@ The gallery lists every account in its area. The sun/moon control explicitly cho
 | Area / fictional example | Representative account | Presenter talk track |
 | --- | --- | --- |
 | QSR · Northwind Coffee | Starbucks | Seasonal launch: compare the original three drafts; explicitly select #2, then discuss the unresolved native-audio blocker. |
-| QSR · Tailspin Burger Co. | McDonald's | Explain the value-bundle brief and the withheld wrong-product result; no adherence-only re-roll. |
-| QSR · Coho Corner Market | 7-Eleven | Present the fresh-food handoff brief, not a playable draft: initial text violation and re-roll safety flag keep both attempts withheld. |
+| QSR · Tailspin Burger Co. | McDonald's | Value-bundle brief for vertical social; LTX-2.5 Fast is routed for fast silent iteration. No recording yet. |
+| QSR · Coho Corner Market | 7-Eleven | Fresh grab-and-go brief; MiniMax H3 Max Turbo keeps local promo volume affordable. No recording yet. |
 | Apparel · Fabrikam | Gap | The existing approved-image jacket lookbook anchors product-led storytelling; screening pass is not approval. |
-| Apparel · VanArsdel Finds | TJX | A vase, throw and tote show how frequently changing assortments can get short discovery videos. |
-| Apparel · Tailwind Traders | Target | Use the home-decor brief; background marks require human assessment despite a recorded screening pass. |
-| Apparel · Wide World Wholesale | Costco | Show the bulk-essentials brief and withheld labelling findings; the single re-roll did not resolve them. |
+| Apparel · VanArsdel Finds | TJX | Treasure-hunt newness: short discovery videos for a frequently changing assortment. No recording yet. |
+| Apparel · Tailwind Traders | Target | Owned-brand home-decor newness for in-store screens and retail media. No recording yet. |
+| Apparel · Wide World Wholesale | Costco | Club-pack private-label value on member-first media. No recording yet. |
 | Home · Alpine Pro Supply | The Home Depot | The existing Contoso Pro drill render explores professional product context; show its prompt-adherence failure. |
 | Home · Zava DIY | Lowe's | The existing Fabrikam Home patio preview tests layout constraints, not approved PIM fidelity. |
-| Home · Southridge Electronics | Best Buy | Use the Litware brief to explain strict placement; separate agent review disputed the passing layout score. |
-| Home · Proseware Workplace Supply | Staples | Present the small-office kit brief and failed evidence: packaging text, then a background computer logo, exhausted the one permitted re-roll. |
+| Home · Southridge Electronics | Best Buy | Litware Ultrabook 14 brief explains why H3 Max is routed for strict placement. No recording yet. |
+| Home · Proseware Workplace Supply | Staples | Small-business workspace kit with explicit left-to-right layout on H3 Max. No recording yet. |
 | Grocery · Woodgrove Wellness | Walgreens | An existing wellness-bundle screen is calm and educational, with no medical claims; show its missing-product findings. |
-| Grocery · Best For You Market | Kroger | Explain the meal-kit brief, initial safety flag and re-roll prompt violation; neither attempt is primary playback. |
-| Grocery · Munson's Markets | Albertsons | Explain localized grocery creative and the withheld signage/product findings; no identity or loyalty data is used. |
+| Grocery · Best For You Market | Kroger | Private-label holiday meal prep for the weekly circular, routed to Turbo for volume. No recording yet. |
+| Grocery · Munson's Markets | Albertsons | Multi-banner localized weekly deal; no identity or loyalty data is used. No recording yet. |
 
 Sources, publication/access dates, briefs, model choices and list-price estimates are in
-[`catalog/accounts.json`](../catalog/accounts.json). New previews are **Silent draft · Awaiting human review**,
-not publication-ready deliverables. If audio was removed from an unexpected model stream, the edit is labelled
-and an original-audio rendition is available in Inspect evidence. New drafts are **Not yet evaluated** in
-Foundry Evaluations; the v1 run covers only the original eight plus its negative control and routing cases.
-The original **2/8 screening pass rate**, coffee-hero sound mismatch and silent concept #2 remain visible.
-For the new examples, five of fourteen attempts passed sampled-frame screening; nine did not.
-Separate agent frame review found contradictions in some passing scores. Only VanArsdel's new draft is in
-primary playback; the other eight new account examples retain their briefs and withheld evidence, not a
-substitute success claim. Five accounts received their single permitted re-roll; none is publication-approved.
-See [attempt IDs and list-price estimates](verification.md#account-recording-attempts).
+[`catalog/accounts.json`](../catalog/accounts.json). The nine new examples are planned silent drafts that have
+not been generated; say "brief only" and never show another clip in their place. Once recorded they will be
+preview-only and **Awaiting human review — not approved**, and **Not yet evaluated** until a separate
+Foundry Evaluations run covers them. The original **2/8 screening pass rate**, coffee-hero sound mismatch
+and silent concept #2 remain visible.
 
 Fictional brands and products. Real company names identify representative retail segments and cite public
 sources only; no affiliation, endorsement, trademarks, or customer data.

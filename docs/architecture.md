@@ -68,13 +68,12 @@ source `fallback`, so the demo never claims Fusion is guaranteed. In the Copilot
 ## Static demo site
 
 `site/` holds the browser app (`index.html`, `app.css`, `app.js`). `scripts/build_site.py --out _site` builds a
-curated artifact: only the app files, brand assets, the four product images, the original eight cached MP4s
-plus account-draft attempts and disclosed original-audio renditions, the recorded
+curated artifact: only the app files, brand assets, the four product images, the original eight cached MP4s, the recorded
 overview with its poster and captions, sanitized evaluation and human-review evidence, and a `data.json`
 derived from `demo-cache/manifest.json` and the catalog. It refuses non-`foundry` clips and never
 copies `.env`, `.sku2scene/` or the repository root. `.github/workflows/pages.yml` deploys it to GitHub Pages.
-`catalog/accounts.json` supplies the fourteen representative-account briefs, citations and preview exclusions.
-Withheld attempts remain technical evidence but are not playable cards in the area guides or gallery.
+`catalog/accounts.json` supplies the fourteen representative-account briefs and citations. An account's
+`planned_clip` becomes playable only after a matching authentic manifest record exists; until then it is a brief.
 
 Preview locally:
 

@@ -804,8 +804,8 @@
     const base = [
       stat(`${pass} of ${original.length}`, "original recorded clips passed automated screening"),
       stat(String(all.length), "need human sign-off before publication"),
-      stat(`${data.accounts.filter((a) => a.planned_clip && !a.recorded_clip && a.excluded_clips?.length).length} / ${data.accounts.filter((a) => a.planned_clip).length}`,
-        "new account examples withheld from primary playback; briefs and evidence retained"),
+      stat(String(data.accounts.filter((a) => a.planned_clip && !a.recorded_clip).length),
+        "new account examples not yet generated; briefs only"),
     ];
     const box = $("#readiness-summary");
     if (!hrAvailable()) {
