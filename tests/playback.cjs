@@ -5,6 +5,7 @@ const vm = require("node:vm");
 const data = JSON.parse(fs.readFileSync(0, "utf8"));
 const roots = new Map();
 const documentListeners = {};
+const requests = [];
 
 class Element {
   constructor(tag) {
@@ -70,13 +71,20 @@ const timers = new Map();
 let timerId = 0;
 const context = vm.createContext({
   document, Node: Element, HTMLVideoElement: Element,
-  fetch: async (url) => ({ ok: url === "data.json", json: async () => data }),
+  fetch: async (url, options) => {
+    requests.push({ url, options });
+    return { ok: url === "data.json", json: async () => data };
+  },
   setTimeout: (fn, delay) => { timers.set(++timerId, { fn, delay }); return timerId; },
   clearTimeout: (id) => timers.delete(id),
 });
 vm.runInContext(fs.readFileSync(process.argv[2] || "site/app.js", "utf8"), context);
 
 setImmediate(() => {
+  assert.deepEqual(requests.map((r) => r.url).sort(), [
+    "data.json", "evaluations/foundry-evals-v1.json", "evaluations/human-review.json",
+  ]);
+  assert.ok(requests.every((r) => r.options?.cache === "no-cache"), "all mutable JSON must revalidate");
   const $ = (selector) => document.querySelector(selector);
   const drafts = () => $("#drafts").querySelectorAll(".draft");
   const draftVideo = (i) => drafts()[i].querySelector("video");

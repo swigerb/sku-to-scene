@@ -1,4 +1,5 @@
 import importlib.util
+import hashlib
 import json
 import re
 import shutil
@@ -68,6 +69,33 @@ def test_site_artifact_is_curated_and_truthful(tmp_path):
     blob = json.dumps(data).lower()
     for leaked in ("services.ai.azure.com", "cognitiveservices.azure.com", "tenant", "subscription"):
         assert leaked not in blob
+
+
+def test_generated_asset_versions_follow_published_content(tmp_path, monkeypatch):
+    builder = _load_builder()
+    original = builder.build(tmp_path / "original")
+    versions = {}
+    for name in ("app.js", "app.css"):
+        versions[name] = hashlib.sha256((original / name).read_bytes()).hexdigest()[:16]
+        assert f'"{name}?v={versions[name]}"' in (original / "index.html").read_text(encoding="utf-8")
+
+    copy = builder.shutil.copy2
+
+    def changed_asset(src, dst):
+        result = copy(src, dst)
+        if Path(src).name in versions:
+            with Path(dst).open("a", encoding="utf-8") as file:
+                file.write("\n/* regression: changed asset content */\n")
+        return result
+
+    monkeypatch.setattr(builder.shutil, "copy2", changed_asset)
+    changed = builder.build(tmp_path / "changed")
+    index = (changed / "index.html").read_text(encoding="utf-8")
+    for name, old_version in versions.items():
+        version = hashlib.sha256((changed / name).read_bytes()).hexdigest()[:16]
+        assert version != old_version
+        assert f'"{name}?v={version}"' in index
+        assert f'"{name}?v={old_version}"' not in index
 
 
 def test_site_artifact_uses_required_theme(tmp_path):

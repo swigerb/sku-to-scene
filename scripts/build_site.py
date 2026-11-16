@@ -11,6 +11,7 @@ run outputs and anything else are never copied. The page makes no cloud calls.
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
 import re
 import shutil
@@ -152,6 +153,11 @@ def build(out: Path) -> Path:
     (out / "media").mkdir()
     for name in ("index.html", "app.css", "app.js"):
         shutil.copy2(REPO / "site" / name, out / name)
+    index = (out / "index.html").read_text(encoding="utf-8")
+    for name in ("app.css", "app.js"):
+        version = hashlib.sha256((out / name).read_bytes()).hexdigest()[:16]
+        index = index.replace(f'"{name}"', f'"{name}?v={version}"')
+    (out / "index.html").write_text(index, encoding="utf-8")
     for f in (REPO / "assets" / "brand" / "web").glob("*.png"):
         shutil.copy2(f, out / "brand" / f.name)
     for f in (REPO / "assets" / "brand").glob("sku-to-scene-*.png"):

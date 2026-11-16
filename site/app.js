@@ -125,9 +125,9 @@
     try { localStorage.setItem("s2s-theme", next); } catch (_) { /* storage unavailable */ }
   });
 
-  const optionalJson = (url) => fetch(url).then((r) => (r.ok ? r.json() : null)).catch(() => null);
+  const optionalJson = (url) => fetch(url, { cache: "no-cache" }).then((r) => (r.ok ? r.json() : null)).catch(() => null);
   Promise.all([
-    fetch("data.json").then((r) => {
+    fetch("data.json", { cache: "no-cache" }).then((r) => {
       if (!r.ok) throw new Error(`data.json ${r.status}`);
       return r.json();
     }),
