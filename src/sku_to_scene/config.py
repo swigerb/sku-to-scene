@@ -44,6 +44,8 @@ class Settings:
     mock_latency_scale: float
     poll_interval_s: float
     timeout_s: float
+    tenant_id: str | None = None
+    subscription_id: str | None = None
 
     @property
     def live(self) -> bool:
@@ -71,4 +73,6 @@ def get_settings() -> Settings:
         mock_latency_scale=float(os.environ.get("SKU2SCENE_MOCK_LATENCY_SCALE", "0.1")),
         poll_interval_s=float(os.environ.get("FOUNDRY_POLL_INTERVAL", "5")),
         timeout_s=float(os.environ.get("FOUNDRY_TIMEOUT", "600")),
+        tenant_id=os.environ.get("FOUNDRY_TENANT_ID") or os.environ.get("AZURE_TENANT_ID") or None,
+        subscription_id=os.environ.get("FOUNDRY_SUBSCRIPTION_ID") or None,
     )

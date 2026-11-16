@@ -9,6 +9,7 @@ jobs:
   test:
     runs-on: ubuntu-latest
     env:
+      SKU2SCENE_MODE: mock
       SKU2SCENE_DATA_DIR: ${{ github.workspace }}/.ci-data
       SKU2SCENE_MOCK_LATENCY_SCALE: "0"
     steps:

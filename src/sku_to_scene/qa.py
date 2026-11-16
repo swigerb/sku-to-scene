@@ -23,6 +23,7 @@ import httpx
 
 from . import catalog
 from .config import REPO_ROOT, Settings, get_settings
+from .credentials import SCOPE, create_credential
 from .media import extract_frames, have_ffmpeg
 from .pipeline import get_job, load_manifest, save_job
 
@@ -35,9 +36,7 @@ def _headers(key_env: str) -> dict[str, str]:
     key = os.environ.get(key_env)
     if key:
         return {"api-key": key} if key_env.startswith("AZURE_OPENAI") else {"Ocp-Apim-Subscription-Key": key}
-    from azure.identity import DefaultAzureCredential
-
-    tok = DefaultAzureCredential().get_token("https://cognitiveservices.azure.com/.default")
+    tok = create_credential().get_token(SCOPE)
     return {"Authorization": f"Bearer {tok.token}"}
 
 
@@ -83,7 +82,15 @@ def _content_safety(frames: list[Path]) -> list[dict[str, Any]]:
             timeout=60,
         )
         r.raise_for_status()
-        out.append({"frame": f.name, "categories": r.json().get("categoriesAnalysis", [])})
+        categories = r.json().get("categoriesAnalysis")
+        expected = {"Hate", "SelfHarm", "Sexual", "Violence"}
+        if (not isinstance(categories, list)
+                or any(not isinstance(c, dict) for c in categories)
+                or {c.get("category") for c in categories} != expected
+                or any(type(c.get("severity")) is not int or c["severity"] not in (0, 2, 4, 6)
+                       for c in categories)):
+            raise ValueError("Content Safety returned incomplete or malformed image categories")
+        out.append({"frame": f.name, "categories": categories})
     return out
 
 
@@ -122,7 +129,7 @@ def evaluate(
         raise ValueError("Provide sku or brand so @brand-qa knows which guidelines apply")
     guide = catalog.brands()[brand_key]
     thresholds = guide["thresholds"]
-    prompt = prompt or (job.get("label") or "")
+    prompt = prompt or job.get("prompt") or job.get("label") or ""
 
     frame_files: list[Path] = []
     if have_ffmpeg():
@@ -130,7 +137,7 @@ def evaluate(
 
     result: dict[str, Any] = {
         "job_id": job_id, "video": str(vp), "brand": guide["display_name"], "thresholds": thresholds,
-        "frames": [str(f) for f in frame_files], "content_safety": None,
+        "frames": [str(f) for f in frame_files], "sampled_frame_count": len(frame_files), "content_safety": None,
     }
     if os.environ.get("AZURE_OPENAI_ENDPOINT") and os.environ.get("AZURE_OPENAI_VISION_DEPLOYMENT") and frame_files:
         try:
@@ -166,16 +173,28 @@ def evaluate(
 
     result.update(decide(result.get("scores"), thresholds, result["content_safety"],
                          evaluator_error=result.get("evaluator_error") or result.get("content_safety_error")))
-    # Rehearsal values can exercise the branch logic, but only measured scores can approve publication.
-    result["publish_approved"] = result["verdict"] == "pass" and bool(result.get("measured"))
+    # Automated screening is not human publication approval.
+    result["automated_checks_passed"] = result["verdict"] == "pass" and bool(result.get("measured"))
+    result["human_signoff_required"] = True
+    result["publish_approved"] = False
     if result["verdict"] == "fail":
         has_image = bool(sku_rec and catalog.image_path(sku_rec))
         result["reroll"] = recommend_reroll(job, has_image)
     if job_id:
-        job["qa"] = {k: result.get(k) for k in ("verdict", "evaluator", "measured", "failed_checks",
-                                                "publish_approved", "reroll")}
+        job["qa"] = evidence_summary(result)
         save_job(s, job)
     return result
+
+
+def evidence_summary(result: dict[str, Any]) -> dict[str, Any]:
+    """Portable evidence only: omit private paths, endpoint-bearing errors and request headers."""
+    keys = ("evaluator", "measured", "scores", "thresholds", "findings", "hallucinated_objects",
+            "content_safety", "verdict", "failed_checks", "publish_approved", "reroll",
+            "automated_checks_passed", "human_signoff_required", "sampled_frame_count")
+    summary = {k: result[k] for k in keys if k in result}
+    if result.get("evaluator_error") or result.get("content_safety_error"):
+        summary["evaluation_error"] = True
+    return summary
 
 
 def validate_scores(scores: Any) -> tuple[dict[str, float] | None, list[str]]:

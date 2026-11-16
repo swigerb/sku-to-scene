@@ -220,9 +220,16 @@ def generate_video(
         if s.live:
             client = FoundryVideoClient(s)
             rid = client.submit(m, mode, payload)
-            job.update(request_id=rid, status="in_progress")
+            accepted = time.time()
+            job.update(request_id=rid, status="in_progress", accepted_at_unix_s=accepted)
             save_job(s, job)
-            result = client.wait(m, rid, on_status=lambda st: say(f"[{job_id}] {st}"))
+
+            def status_event(st: str) -> None:
+                say(f"[{job_id}] {st}")
+                if st == "COMPLETED":
+                    job["accepted_to_completed_s"] = round(time.time() - accepted, 2)
+
+            result = client.wait(m, rid, on_status=status_event)
             url = (result.get("video") or {}).get("url")
             if not url:
                 raise RuntimeError(f"No video.url in result: {str(result)[:300]}")
@@ -252,6 +259,11 @@ def generate_video(
         job["output"] = _rel(dest)
         if have_ffmpeg():
             job["media"] = probe(dest)
+            if s.live and audio and not job["media"]["has_audio"]:
+                raise RuntimeError("Foundry output has no audio stream despite native audio being requested")
+            if s.live and not matches_aspect((job["media"]["width"], job["media"]["height"]), aspect_ratio):
+                notes.append(f"model output dimensions {job['media']['width']}x{job['media']['height']} differ "
+                             f"from requested {aspect_ratio}; inspect/crop before publishing")
         job["status"] = "completed"
         say(f"[{job_id}] completed in {job['elapsed_s']}s -> {job['output']} ({job['provenance']})")
     except Exception as e:  # noqa: BLE001 - recorded on the job and re-raised

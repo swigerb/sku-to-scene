@@ -115,6 +115,16 @@ def extract_frames(video: Path, out_dir: Path, count: int = 4) -> list[Path]:
     return frames
 
 
+def transcode_preview(src: Path, dest: Path) -> Path:
+    """Make a small public display rendition, preserving audio and stripping source metadata."""
+    dest.parent.mkdir(parents=True, exist_ok=True)
+    _run(["ffmpeg", "-y", "-loglevel", "error", "-i", str(src), "-map_metadata", "-1",
+          "-vf", "scale=1280:1280:force_original_aspect_ratio=decrease:force_divisible_by=2",
+          "-c:v", "libx264", "-preset", "medium", "-crf", "28",
+          "-c:a", "aac", "-b:a", "96k", "-movflags", "+faststart", str(dest)])
+    return dest
+
+
 def crop_image_to_aspect(src: Path, aspect: str, dest: Path) -> Path:
     """Center-crop a source image to the channel aspect before image-to-video."""
     aw, ah = (int(x) for x in aspect.split(":"))

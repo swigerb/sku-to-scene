@@ -5,6 +5,7 @@ from conftest import write_png
 from sku_to_scene import pipeline
 from sku_to_scene.config import get_settings
 from sku_to_scene.foundry import FoundryVideoClient, TokenProvider
+from sku_to_scene.models import get_model
 from sku_to_scene.pipeline import CacheMismatch, ProcessingUnavailable, generate_video
 
 
@@ -111,4 +112,85 @@ def test_download_no_credentials_on_http_or_foreign_initial_url(live, tmp_path):
     c = _client(handler, live)
     c.download("https://fal.media/files/v.mp4", tmp_path / "a.mp4")
     c.download("http://res.services.ai.azure.com/v.mp4", tmp_path / "b.mp4")
-    assert seen == [None, None]
+    c.download("https://res.services.ai.azure.com:8443/v.mp4", tmp_path / "c.mp4")
+    assert seen == [None, None, None]
+
+
+def test_submit_retries_explicit_429_with_retry_after(live, monkeypatch):
+    seen, sleeps = [], []
+
+    def handler(req):
+        seen.append(req)
+        if len(seen) == 1:
+            return httpx.Response(429, headers={"Retry-After": "30"})
+        return httpx.Response(200, json={"request_id": "accepted-once"})
+
+    monkeypatch.setattr("sku_to_scene.foundry.time.sleep", sleeps.append)
+    assert _client(handler, live).submit(get_model("minimax-h3-max-turbo"), "text-to-video", {}) == "accepted-once"
+    assert len(seen) == 2 and sleeps == [30]
+
+
+@pytest.mark.parametrize("status", [500, 502, 503])
+def test_submit_never_retries_uncertain_server_errors(live, status):
+    seen = []
+
+    def handler(req):
+        seen.append(req)
+        return httpx.Response(status, text="uncertain acceptance")
+
+    with pytest.raises(RuntimeError, match="Submit failed"):
+        _client(handler, live).submit(get_model("minimax-h3-max-turbo"), "text-to-video", {})
+    assert len(seen) == 1
+
+
+def test_submit_rate_limit_retry_is_bounded(live, monkeypatch):
+    seen = []
+
+    def handler(req):
+        seen.append(req)
+        return httpx.Response(429, headers={"Retry-After": "0"})
+
+    monkeypatch.setattr("sku_to_scene.foundry.time.sleep", lambda _: None)
+    with pytest.raises(RuntimeError, match="429"):
+        _client(handler, live).submit(get_model("minimax-h3-max-turbo"), "text-to-video", {})
+    assert len(seen) == 4
+
+
+def test_status_and_result_bypass_stale_gateway_cache(live):
+    seen = []
+
+    def handler(req):
+        seen.append(req)
+        return httpx.Response(200, json={"status": "COMPLETED"})
+
+    client = _client(handler, live)
+    model = get_model("minimax-h3-max-turbo")
+    client.status(model, "existing-request")
+    client.status(model, "existing-request")
+    client.result(model, "existing-request")
+    assert len({r.url.params["_poll"] for r in seen}) == 3
+    assert all(r.method == "GET" and "existing-request" in r.url.path for r in seen)
+
+
+def test_post_submit_transient_401_retries_get_only(live, monkeypatch):
+    seen, sleeps = [], []
+
+    def handler(req):
+        seen.append(req)
+        if len(seen) <= 2:
+            return httpx.Response(401, json={"error": {"code": "PermissionDenied"}})
+        return httpx.Response(200, json={"status": "COMPLETED"})
+
+    monkeypatch.setattr("sku_to_scene.foundry.time.sleep", sleeps.append)
+    assert _client(handler, live).status(get_model("minimax-h3-max-turbo"), "paid-request")["status"] == "COMPLETED"
+    assert sleeps == [3, 5]
+    assert all(r.method == "GET" for r in seen)
+    assert len({r.url.params["_poll"] for r in seen}) == 3
+
+
+def test_post_submit_auth_retry_expires_without_resubmit(live, monkeypatch):
+    clock = iter((0, 181))
+    monkeypatch.setattr("sku_to_scene.foundry.time.monotonic", lambda: next(clock))
+    client = _client(lambda _: httpx.Response(401), live)
+    with pytest.raises(RuntimeError, match="Do not resubmit"):
+        client.result(get_model("minimax-h3-max-turbo"), "paid-request")

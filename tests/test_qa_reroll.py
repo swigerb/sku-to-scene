@@ -92,6 +92,35 @@ def test_vision_failure_is_error(vision, monkeypatch):
     assert res["verdict"] == "error" and res["publish_approved"] is False
 
 
+def test_real_qa_uses_persisted_prompt_and_requires_human_signoff(vision, settings, monkeypatch):
+    seen = []
+
+    def scorer(frames, brand, prompt, sku, checks):
+        seen.append(prompt)
+        return {"scores": GOOD, "findings": ["screening only"]}
+
+    monkeypatch.setattr(qa, "_vision_scores", scorer)
+    save_job(settings, {"job_id": "real-qa", "output": str(vision), "prompt": "The original creative prompt",
+                        "label": "Not the creative prompt"})
+    result = qa.evaluate(job_id="real-qa", sku="NWC-LTO-PCB-16", settings=settings)
+    assert seen == ["The original creative prompt"]
+    assert result["verdict"] == "pass" and result["automated_checks_passed"]
+    assert result["human_signoff_required"] and not result["publish_approved"]
+    stored = get_job("real-qa", settings)["qa"]
+    assert stored["scores"] == GOOD and stored["findings"] == ["screening only"]
+    assert "video" not in stored and "reference_image" not in stored
+
+
+def test_malformed_content_safety_is_error_not_approval(vision, monkeypatch):
+    monkeypatch.setenv("CONTENT_SAFETY_ENDPOINT", "https://safety.example.com")
+    monkeypatch.setenv("CONTENT_SAFETY_KEY", "test")
+    monkeypatch.setattr(qa, "_vision_scores", lambda *_: {"scores": GOOD})
+    monkeypatch.setattr(qa.httpx, "post", lambda *_a, **_k: type(
+        "Response", (), {"raise_for_status": lambda _: None, "json": lambda _: {"categoriesAnalysis": []}})())
+    result = qa.evaluate(video_path=str(vision), sku="NWC-LTO-PCB-16")
+    assert result["verdict"] == "error" and not result["publish_approved"]
+
+
 def test_readiness_survives_missing_azure_namespace(settings, monkeypatch):
     def raise_mnf(name, *a, **k):
         raise ModuleNotFoundError("No module named 'azure'")

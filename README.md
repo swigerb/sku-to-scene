@@ -17,10 +17,13 @@ needs and source asset type.
 > [docs/governance.md](docs/governance.md).
 
 > [!IMPORTANT]
-> **Every clip in this repo is a SIMULATED placeholder**, not a Foundry render. The clips are built locally with
-> ffmpeg from the product images and labelled `provenance: "simulated"` in `demo-cache/manifest.json`. The demo
-> runs end to end offline in **mock mode**. **Live mode** (`SKU2SCENE_MODE=live`) calls real Foundry fal routes.
-> No live render has been produced or verified yet; see [Current status](#current-status--blockers).
+> **All eight cached clips are authentic Foundry renders**, and live generation has been exercised on all five
+> model variants. Check `demo-cache/manifest.json` for each clip's provenance: `foundry` means an authentic render;
+> `simulated` denotes a visibly labelled local fallback. **Mock mode** replays cached generation without new jobs
+> (configured QA evaluators can still call Azure).
+> **Live mode** (`SKU2SCENE_MODE=live`) makes billable Foundry calls. Generation is not brand approval:
+> vision scoring and Content Safety are screening aids, and human sign-off is still required.
+> See [Current status](#current-status--blockers).
 
 ## Why five model variants matter: RCG routing
 
@@ -149,8 +152,10 @@ deliberately omit a `model:` field; model choice stays with Squad config and the
 2. Deploy the five models. Kling v3 Pro uses the US Data Zone offering; LTX and MiniMax use Global Standard
    (PayGo). See [docs/foundry-setup.md](docs/foundry-setup.md).
 3. Copy `.env.example` to `.env`, then set `SKU2SCENE_MODE=live`, `FOUNDRY_ENDPOINT=https://<resource>.services.ai.azure.com`
-   and the deployment names. Sign in with `az login`; auth uses `DefaultAzureCredential` with the Cognitive
-   Services User role. **A fal.ai `FAL_KEY` is not used.**
+   and the deployment names. Set `FOUNDRY_TENANT_ID` (or `AZURE_TENANT_ID`) for tenant-pinned CLI auth, and
+   `FOUNDRY_SUBSCRIPTION_ID` if the CLI default account is in another tenant. Subscription selection takes
+   precedence and never changes the CLI default. Without either selector, auth uses `DefaultAzureCredential`.
+   Assign **Foundry User** on the account. **A fal.ai `FAL_KEY` is not used.**
 4. `pip install -e ".[live]"`, run `sku2scene readiness --check-auth`, then
    `python scripts/precache.py --yes` to replace the simulated clips with real renders, with provenance recorded.
 
@@ -171,12 +176,35 @@ ComfyUI article use `/providers/falai/v1/...`. The default is `providers/falai/v
 
 - ✅ Mock mode works end to end locally: CLI, MCP server over stdio through the configured launcher, Squad and
   Copilot agents, and the pytest suite. CI (`.github/workflows/ci.yml`) runs the same checks.
-- ⛔ **No live Foundry render or endpoint has been configured or verified for this demo.** In the build
-  environment no demo Foundry endpoint was configured, and `Fal.EnableDeploy` showed as not registered on the
-  subscription that was checked. Live use needs a designated demo target and administrator review of the fal
-  terms. Every `demo-cache/` clip is simulated.
-- ⚠️ QA scores in mock mode are **scripted rehearsal values** (`measured: false`). `publish_approved` stays
-  false until a real vision evaluator is configured.
+- **Live smoke runs verified on 2026-11-16:** Entra-only authentication, submit/status/result polling and MP4
+  downloads succeeded for all five variants. Endpoint and account identifiers stay in ignored local configuration.
+
+| Model | Requested settings | End-to-end wall time | Requested-duration estimate |
+| --- | --- | --- | --- |
+| MiniMax H3 Max Turbo | T2V, 5 s, 480P | 44.02 s, including transient-401 recovery | $0.1250 |
+| LTX-2.5 Fast | T2V, 6 s, 720p | 50.06 s | $0.5400 |
+| Kling v3 Pro | I2V, 3 s, native audio requested and audio stream present | 191.03 s | $0.5544 |
+| LTX-2.5 Pro | T2V, 6 s, 720p | 54.67 s | $0.7200 |
+| MiniMax H3 Max | T2V, 5 s, 480P | 18.76 s | $0.2500 |
+
+These are individual observations, not comparative benchmarks or latency guarantees. Wall time includes
+submission, polling and download; it is not fal's `timings.inference`. MiniMax returned an audio stream even
+without an audio request; that observation is not a claim about a supported audio-control parameter.
+
+- **Cache:** eight authentic display renditions, about 6.2 MB total; no simulated cached clips remain.
+  [Play the Northwind hero](demo-cache/lto-hero-kling.mp4). All request IDs, timings and QA evidence are in the manifest.
+- **Live QA verified:** Azure OpenAI vision scoring compares sampled generated frames with approved PIM imagery
+  and brand rules; Azure AI Content Safety analyzes those frames. **Two cached clips passed automated screening
+  and six failed**; all sampled Content Safety severities were zero. In the separate recorded LTO run, the hero
+  passed while two drafts failed. A deliberate cold-brew-versus-drill negative control also failed.
+  These are model-generated screening judgments, not ground-truth quality scores or human approval.
+- **Bounded re-roll verified:** the failed live LTX draft triggered one Kling I2V re-roll. It still failed prompt
+  adherence, and the chain stopped; reusing the root was refused before dispatch. No thresholds were relaxed.
+- **Generation cost:** 18 accepted jobs, $10.4806 requested-duration estimate / $10.7851 conservative reservation
+  against the $15 cap. These are list-price estimates, not an Azure bill; QA token/image charges are separate.
+- ⚠️ **Human sign-off remains mandatory.** `automated_checks_passed` records a measured pass;
+  `publish_approved` stays false and `human_signoff_required` stays true. Without configured evaluators, clips
+  receive `manual_review`. Foundry Evaluations is not integrated.
 - ⚠️ Prices are **preview list prices × requested seconds**. These are estimates, not bills. MiniMax outputs can
   run about 0.7 s longer than requested.
 

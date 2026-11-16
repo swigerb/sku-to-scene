@@ -13,6 +13,8 @@
 - Extracts frames (MCP: `extract_frames`) and scores logo integrity, label legibility, product fidelity against the approved catalog image, and prompt adherence (MCP: `evaluate_brand_compliance`).
 - A clip passes only when all four scores are present, finite, in [0, 1] and above the brand thresholds. Missing or malformed evaluator output is `manual_review`; evaluator failure is `error`. Neither is approval.
 - Scripted rehearsal values on cached placeholders are labelled `measured: false` and never set `publish_approved`.
+- A measured pass is automated screening only (`automated_checks_passed`). Human sign-off remains required;
+  `publish_approved` stays false. I report genuine failures without relaxing thresholds.
 - On `fail`, triggers one bounded re-roll (MCP: `reroll_clip`) to Kling v3 Pro (approved image) or LTX-2.5 Pro. The re-roll budget is enforced per chain root; I follow the child job instead of re-rolling a parent twice.
 
 ## Boundaries

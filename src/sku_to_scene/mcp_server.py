@@ -1,7 +1,8 @@
 """Local stdio MCP server exposing the SKU to Scene pipeline as tools for GitHub Copilot agents.
 
 Run:  python -m sku_to_scene.mcp_server      (or the `sku2scene-mcp` script)
-Mode: SKU2SCENE_MODE=mock (default, simulated clips, no Azure calls) | live (fal routes on Microsoft Foundry)
+Mode: SKU2SCENE_MODE=mock (default, cached generation) | live (fal routes on Microsoft Foundry).
+Configured QA evaluators can call Azure in either mode.
 """
 
 from __future__ import annotations
@@ -97,7 +98,7 @@ def generate_video(
     aspect_ratio: str = "16:9", resolution: str | None = None, audio: bool = False, mode: str | None = None,
     sku: str | None = None, cache_key: str | None = None,
 ) -> dict[str, Any]:
-    """Generate one clip on a fal model in Microsoft Foundry (live) or serve/render a SIMULATED clip (mock).
+    """Generate on Foundry (live), or serve cached media/render a labelled local placeholder (mock).
     image_path (repo-relative) switches to image-to-video. Returns job id, output path, provenance and estimate."""
     return _generate_video(model, prompt, image_path, duration, aspect_ratio=aspect_ratio, resolution=resolution,
                            audio=audio, mode=mode, sku=sku, cache_key=cache_key)

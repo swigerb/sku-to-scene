@@ -1,5 +1,5 @@
 {
-  "_note": "All clips with provenance 'simulated' are local ffmpeg placeholders, NOT Foundry renders. scripts/precache.py replaces entries with provenance 'foundry' after a real render.",
+  "_note": "Eight authentic Foundry-generated display renditions. QA is measured AI screening, not human approval. Negative control is labeled separately and is not a failed generation. No simulated clips.",
   "clips": [
     {
       "id": "lto-draft-1",
@@ -10,28 +10,132 @@
       "aspect_ratio": "9:16",
       "duration": 6,
       "file": "lto-draft-1.mp4",
-      "provenance": "simulated",
-      "audio": "none",
-      "source_image": "assets/products/nwc-pumpkin-cold-brew-hero.png",
+      "provenance": "foundry",
+      "audio": "not requested; inspect media.has_audio",
       "media": {
-        "duration_s": 6.0,
-        "width": 432,
-        "height": 768,
-        "has_audio": false,
-        "size_bytes": 75315
+        "duration_s": 6.59,
+        "width": 732,
+        "height": 1280,
+        "has_audio": true,
+        "size_bytes": 631080
       },
-      "rehearsal_qa": {
+      "elapsed_s": 16.42,
+      "accepted_to_completed_s": 13.45,
+      "processing": "H.264 display rendition; longest edge <=1280; CRF 28; audio preserved; metadata stripped",
+      "source_media": {
+        "duration_s": 6.59,
+        "width": 768,
+        "height": 1344,
+        "has_audio": true,
+        "size_bytes": 8409336
+      },
+      "source_sha256": "7ae255669681732ae52dac4fa47aba7d61badcfaf2e0ec511938d86e67fc05c2",
+      "source_image": null,
+      "prompt": "Storyboard draft 'Harvest Market': Pacific Northwest farmers' market at golden hour, the cup on a hay bale beside heirloom pumpkins. Northwind Pumpkin Cold Brew (Grande, 16 oz) by Northwind Coffee. Scene for adults 25-44: ice clinking, cold foam cascading, condensation beads. Camera: slow dolly-in, macro on condensation, golden hour rim lighting. Brand palette #1F5C3A, #F2E6D0, #C8742B. Keep the product exactly as in the reference: logo upright and legible, cup is clear with green straw, cold foam on top. Vertical 9:16 social cut.",
+      "request_id": "0be6cc22-cdef-40f4-b3c9-fb2ac6266b37",
+      "deployment": "minimax-h3-max-turbo",
+      "rendered_at": "2026-11-16T15:35:44.753032+00:00",
+      "estimate": {
+        "model": "minimax-h3-max-turbo",
+        "seconds": 6.0,
+        "resolution": "768P",
+        "price_key": "768P",
+        "usd_per_second": 0.04,
+        "estimate_usd": 0.24,
+        "estimate_high_usd": 0.268,
+        "caveats": [
+          "MiniMax output can run ~0.7 s longer than requested (high estimate includes it)",
+          "preview list price per generated second; not a billing guarantee"
+        ]
+      },
+      "qa": {
+        "evaluator": "azure-openai-vision",
+        "measured": true,
         "scores": {
-          "logo_integrity": 0.85,
-          "label_legibility": 0.75,
-          "product_fidelity": 0.82,
-          "prompt_adherence": 0.74
+          "logo_integrity": 0.15,
+          "label_legibility": 0.2,
+          "product_fidelity": 0.35,
+          "prompt_adherence": 0.55
+        },
+        "thresholds": {
+          "logo_integrity": 0.8,
+          "label_legibility": 0.7,
+          "product_fidelity": 0.8,
+          "prompt_adherence": 0.7
         },
         "findings": [
-          "Rehearsal script: market setting reads clearly; pumpkins present."
+          "Logo is visible but appears partially occluded/warped by the cup curvature and differs from the upright green roundel reference; the wordmark is not fully crisp in the generated frames.",
+          "Label text is only partially legible in the generated frames; the logo/wordmark is blurred and not as clean as the reference.",
+          "Product matches some reference traits: clear cup, green straw, cold foam on top, iced beverage with condensation. However, the cup branding and overall presentation differ from the approved reference.",
+          "Prompt elements are partially followed: pumpkins, hay bale, and golden-hour outdoor setting are present. Missing or weak: clear Pacific Northwest farmers' market staging, macro condensation emphasis, and the exact reference product presentation."
         ],
-        "label": "SCRIPTED REHEARSAL VALUES - not a measurement"
-      }
+        "hallucinated_objects": [
+          "large pumpkins framing the cup",
+          "hay bale/straw bedding",
+          "sun flare / field background",
+          "dripping cold foam spill"
+        ],
+        "content_safety": [
+          {
+            "frame": "frame_01.png",
+            "categories": [
+              {
+                "category": "Hate",
+                "severity": 0
+              },
+              {
+                "category": "SelfHarm",
+                "severity": 0
+              },
+              {
+                "category": "Sexual",
+                "severity": 0
+              },
+              {
+                "category": "Violence",
+                "severity": 0
+              }
+            ]
+          },
+          {
+            "frame": "frame_02.png",
+            "categories": [
+              {
+                "category": "Hate",
+                "severity": 0
+              },
+              {
+                "category": "SelfHarm",
+                "severity": 0
+              },
+              {
+                "category": "Sexual",
+                "severity": 0
+              },
+              {
+                "category": "Violence",
+                "severity": 0
+              }
+            ]
+          }
+        ],
+        "verdict": "fail",
+        "failed_checks": [
+          "logo_integrity",
+          "label_legibility",
+          "product_fidelity",
+          "prompt_adherence"
+        ],
+        "publish_approved": false,
+        "reroll": {
+          "model": "kling-v3-pro",
+          "mode": "image-to-video",
+          "reason": "quality threshold failed; re-roll on the higher-fidelity tier"
+        },
+        "automated_checks_passed": false,
+        "human_signoff_required": true
+      },
+      "qa_evaluated_at": "2026-11-16T15:37:11.711268+00:00"
     },
     {
       "id": "lto-draft-2",
@@ -42,28 +146,133 @@
       "aspect_ratio": "9:16",
       "duration": 6,
       "file": "lto-draft-2.mp4",
-      "provenance": "simulated",
-      "audio": "none",
-      "source_image": "assets/products/nwc-pumpkin-cold-brew-hero.png",
+      "provenance": "foundry",
+      "audio": "not requested; inspect media.has_audio",
       "media": {
         "duration_s": 6.0,
-        "width": 432,
-        "height": 768,
+        "width": 720,
+        "height": 1280,
         "has_audio": false,
-        "size_bytes": 74717
+        "size_bytes": 869708
       },
-      "rehearsal_qa": {
+      "elapsed_s": 47.39,
+      "accepted_to_completed_s": 44.51,
+      "processing": "H.264 display rendition; longest edge <=1280; CRF 28; audio preserved; metadata stripped",
+      "source_media": {
+        "duration_s": 6.0,
+        "width": 720,
+        "height": 1280,
+        "has_audio": false,
+        "size_bytes": 2968194
+      },
+      "source_sha256": "244966f3ca25df01b00db77b84465b15b5cde5554f76c4b16b052f69225768f4",
+      "source_image": null,
+      "prompt": "Storyboard draft 'First Frost Commute': Northeast city sidewalk on the first cold morning, maple leaves swirling past the cup on a cafe ledge. Northwind Pumpkin Cold Brew (Grande, 16 oz) by Northwind Coffee. Scene for adults 25-44: ice clinking, cold foam cascading, condensation beads. Camera: slow dolly-in, macro on condensation, golden hour rim lighting. Brand palette #1F5C3A, #F2E6D0, #C8742B. Keep the product exactly as in the reference: logo upright and legible, cup is clear with green straw, cold foam on top. Vertical 9:16 social cut.",
+      "request_id": "c2be2e53-7717-4ac6-bf98-c8662ea15995",
+      "deployment": "ltx-2.5-fast",
+      "rendered_at": "2026-11-16T15:36:32.766220+00:00",
+      "estimate": {
+        "model": "ltx-2.5-fast",
+        "seconds": 6.0,
+        "resolution": "720p",
+        "price_key": "720p",
+        "usd_per_second": 0.09,
+        "estimate_usd": 0.54,
+        "estimate_high_usd": 0.54,
+        "caveats": [
+          "preview list price per generated second; not a billing guarantee"
+        ]
+      },
+      "qa": {
+        "evaluator": "azure-openai-vision",
+        "measured": true,
         "scores": {
-          "logo_integrity": 0.88,
-          "label_legibility": 0.8,
-          "product_fidelity": 0.85,
-          "prompt_adherence": 0.86
+          "logo_integrity": 0.12,
+          "label_legibility": 0.08,
+          "product_fidelity": 0.18,
+          "prompt_adherence": 0.22
+        },
+        "thresholds": {
+          "logo_integrity": 0.8,
+          "label_legibility": 0.7,
+          "product_fidelity": 0.8,
+          "prompt_adherence": 0.7
         },
         "findings": [
-          "Rehearsal script: strongest match to brief; leaves and cafe ledge present."
+          "Reference product shows a clear cup with upright green straw and visible Northwind Coffee logo; generated frames keep a green straw and cup shape but the logo is partially occluded/blurred and not fully legible.",
+          "The generated cup label text is distorted and unreadable compared with the clean upright logo/wordmark in the reference.",
+          "Product colorway is not faithful: the reference is a clear cup with visible iced coffee and pumpkin cold foam; the generated frames show a more opaque tan drink and the branding/label placement differs.",
+          "Prompt elements are only partially present: autumn leaves and warm sunrise lighting appear, but the requested Northeast city sidewalk, cafe ledge, macro condensation focus, and clean storyboard product presentation are not consistently shown.",
+          "No visible competitor cups, alcohol, or children consuming caffeine are present."
         ],
-        "label": "SCRIPTED REHEARSAL VALUES - not a measurement"
-      }
+        "hallucinated_objects": [
+          "autumn leaves overlay",
+          "window-side street scene",
+          "city background",
+          "lens flare/sun glare",
+          "handwritten-style hashtag text on cup"
+        ],
+        "content_safety": [
+          {
+            "frame": "frame_01.png",
+            "categories": [
+              {
+                "category": "Hate",
+                "severity": 0
+              },
+              {
+                "category": "SelfHarm",
+                "severity": 0
+              },
+              {
+                "category": "Sexual",
+                "severity": 0
+              },
+              {
+                "category": "Violence",
+                "severity": 0
+              }
+            ]
+          },
+          {
+            "frame": "frame_02.png",
+            "categories": [
+              {
+                "category": "Hate",
+                "severity": 0
+              },
+              {
+                "category": "SelfHarm",
+                "severity": 0
+              },
+              {
+                "category": "Sexual",
+                "severity": 0
+              },
+              {
+                "category": "Violence",
+                "severity": 0
+              }
+            ]
+          }
+        ],
+        "verdict": "fail",
+        "failed_checks": [
+          "logo_integrity",
+          "label_legibility",
+          "product_fidelity",
+          "prompt_adherence"
+        ],
+        "publish_approved": false,
+        "reroll": {
+          "model": "kling-v3-pro",
+          "mode": "image-to-video",
+          "reason": "quality threshold failed; re-roll on the higher-fidelity tier"
+        },
+        "automated_checks_passed": false,
+        "human_signoff_required": true
+      },
+      "qa_evaluated_at": "2026-11-16T15:37:34.695847+00:00"
     },
     {
       "id": "lto-draft-3",
@@ -74,28 +283,134 @@
       "aspect_ratio": "9:16",
       "duration": 6,
       "file": "lto-draft-3.mp4",
-      "provenance": "simulated",
-      "audio": "none",
-      "source_image": "assets/products/nwc-pumpkin-cold-brew-hero.png",
+      "provenance": "foundry",
+      "audio": "not requested; inspect media.has_audio",
       "media": {
-        "duration_s": 6.0,
-        "width": 432,
-        "height": 768,
-        "has_audio": false,
-        "size_bytes": 75185
+        "duration_s": 6.59,
+        "width": 732,
+        "height": 1280,
+        "has_audio": true,
+        "size_bytes": 659154
       },
-      "rehearsal_qa": {
+      "elapsed_s": 21.71,
+      "accepted_to_completed_s": 18.69,
+      "processing": "H.264 display rendition; longest edge <=1280; CRF 28; audio preserved; metadata stripped",
+      "source_media": {
+        "duration_s": 6.59,
+        "width": 768,
+        "height": 1344,
+        "has_audio": true,
+        "size_bytes": 8114259
+      },
+      "source_sha256": "fa5ba7adae607f32dfe62168b95577bac72f6624ad01f29852f73cece981631c",
+      "source_image": null,
+      "prompt": "Storyboard draft 'Desert Fall Evening': Southwest patio at dusk under string lights, the cup on terracotta tile with pumpkin-spice dust drifting. Northwind Pumpkin Cold Brew (Grande, 16 oz) by Northwind Coffee. Scene for adults 25-44: ice clinking, cold foam cascading, condensation beads. Camera: slow dolly-in, macro on condensation, golden hour rim lighting. Brand palette #1F5C3A, #F2E6D0, #C8742B. Keep the product exactly as in the reference: logo upright and legible, cup is clear with green straw, cold foam on top. Vertical 9:16 social cut.",
+      "request_id": "2778c850-a1f0-4496-a508-7bc2f20466b7",
+      "deployment": "minimax-h3-max-turbo",
+      "rendered_at": "2026-11-16T15:36:55.035221+00:00",
+      "estimate": {
+        "model": "minimax-h3-max-turbo",
+        "seconds": 6.0,
+        "resolution": "768P",
+        "price_key": "768P",
+        "usd_per_second": 0.04,
+        "estimate_usd": 0.24,
+        "estimate_high_usd": 0.268,
+        "caveats": [
+          "MiniMax output can run ~0.7 s longer than requested (high estimate includes it)",
+          "preview list price per generated second; not a billing guarantee"
+        ]
+      },
+      "qa": {
+        "evaluator": "azure-openai-vision",
+        "measured": true,
         "scores": {
-          "logo_integrity": 0.84,
-          "label_legibility": 0.76,
-          "product_fidelity": 0.81,
-          "prompt_adherence": 0.66
+          "logo_integrity": 0.15,
+          "label_legibility": 0.2,
+          "product_fidelity": 0.35,
+          "prompt_adherence": 0.55
+        },
+        "thresholds": {
+          "logo_integrity": 0.8,
+          "label_legibility": 0.7,
+          "product_fidelity": 0.8,
+          "prompt_adherence": 0.7
         },
         "findings": [
-          "Rehearsal script: string lights missing; below 0.70 adherence threshold."
+          "Reference product shows a clear cup with upright green straw and visible cold foam; generated frames keep the green straw and foam, but the logo/wordmark is altered and partially illegible in the frames.",
+          "The approved logo is a green leaf-compass roundel with NORTHWIND / COFFEE wordmark; the generated cup uses a different white deer-style mark and the text is not clearly legible, so brand fidelity is poor.",
+          "Product shape is broadly similar to a clear iced cold brew cup, but the framing, cup markings, and logo treatment do not match the reference exactly.",
+          "Scene partially matches the desert patio at dusk with string lights and terracotta tile, but the prompt\u2019s macro condensation / slow dolly-in / pumpkin-spice dust details are not strongly evidenced in the visible frames."
         ],
-        "label": "SCRIPTED REHEARSAL VALUES - not a measurement"
-      }
+        "hallucinated_objects": [
+          "pool",
+          "patio string lights",
+          "house roofline",
+          "background trees",
+          "terracotta patio edge dust",
+          "white spill/foam at cup base"
+        ],
+        "content_safety": [
+          {
+            "frame": "frame_01.png",
+            "categories": [
+              {
+                "category": "Hate",
+                "severity": 0
+              },
+              {
+                "category": "SelfHarm",
+                "severity": 0
+              },
+              {
+                "category": "Sexual",
+                "severity": 0
+              },
+              {
+                "category": "Violence",
+                "severity": 0
+              }
+            ]
+          },
+          {
+            "frame": "frame_02.png",
+            "categories": [
+              {
+                "category": "Hate",
+                "severity": 0
+              },
+              {
+                "category": "SelfHarm",
+                "severity": 0
+              },
+              {
+                "category": "Sexual",
+                "severity": 0
+              },
+              {
+                "category": "Violence",
+                "severity": 0
+              }
+            ]
+          }
+        ],
+        "verdict": "fail",
+        "failed_checks": [
+          "logo_integrity",
+          "label_legibility",
+          "product_fidelity",
+          "prompt_adherence"
+        ],
+        "publish_approved": false,
+        "reroll": {
+          "model": "kling-v3-pro",
+          "mode": "image-to-video",
+          "reason": "quality threshold failed; re-roll on the higher-fidelity tier"
+        },
+        "automated_checks_passed": false,
+        "human_signoff_required": true
+      },
+      "qa_evaluated_at": "2026-11-16T15:37:57.315328+00:00"
     },
     {
       "id": "lto-hero-kling",
@@ -106,28 +421,162 @@
       "aspect_ratio": "9:16",
       "duration": 8,
       "file": "lto-hero-kling.mp4",
-      "provenance": "simulated",
-      "audio": "synthetic noise bed (placeholder, not generated audio)",
-      "source_image": "assets/products/nwc-pumpkin-cold-brew-hero.png",
+      "provenance": "foundry",
+      "audio": "native requested",
       "media": {
-        "duration_s": 8.0,
-        "width": 432,
-        "height": 768,
+        "duration_s": 8.04,
+        "width": 720,
+        "height": 1280,
         "has_audio": true,
-        "size_bytes": 153228
+        "size_bytes": 912488
       },
-      "rehearsal_qa": {
+      "elapsed_s": 282.81,
+      "accepted_to_completed_s": 278.3,
+      "processing": "H.264 display rendition; longest edge <=1280; CRF 28; audio preserved; metadata stripped",
+      "source_media": {
+        "duration_s": 8.04,
+        "width": 1080,
+        "height": 1920,
+        "has_audio": true,
+        "size_bytes": 29050103
+      },
+      "source_sha256": "ee188b2c878a3200fda1fa195c60ec668e9287a10cddade7bb505e1e2bad11d3",
+      "source_image": "assets/products/nwc-pumpkin-cold-brew-hero.png",
+      "prompt": "Hero cut of 'First Frost Commute': Northeast city sidewalk on the first cold morning, maple leaves swirling past the cup on a cafe ledge. Start from the approved hero cup exactly as shown. Cold brew pours over clear ice, pumpkin cold foam cascades into the coffee, condensation beads run down the cup. Camera: slow dolly-in, macro on condensation, golden hour rim lighting. Audio: ice clinking, a smooth pour, a soft cafe ambience. Keep the Northwind Coffee logo upright and legible.",
+      "request_id": "764ef166-8158-4642-aa45-88d9e024eee1",
+      "deployment": "kling-v3-pro",
+      "rendered_at": "2026-11-16T15:35:27.759924+00:00",
+      "estimate": {
+        "model": "kling-v3-pro",
+        "seconds": 8.0,
+        "resolution": "n/a",
+        "price_key": "audio_on",
+        "usd_per_second": 0.1848,
+        "estimate_usd": 1.4784,
+        "estimate_high_usd": 1.4784,
+        "caveats": [
+          "preview list price per generated second; not a billing guarantee"
+        ]
+      },
+      "qa": {
+        "evaluator": "azure-openai-vision",
+        "measured": true,
         "scores": {
-          "logo_integrity": 0.9,
-          "label_legibility": 0.85,
-          "product_fidelity": 0.9,
-          "prompt_adherence": 0.88
+          "logo_integrity": 1,
+          "label_legibility": 1,
+          "product_fidelity": 1,
+          "prompt_adherence": 0.78
+        },
+        "thresholds": {
+          "logo_integrity": 0.8,
+          "label_legibility": 0.7,
+          "product_fidelity": 0.8,
+          "prompt_adherence": 0.7
         },
         "findings": [
-          "Rehearsal script: logo upright; foam and condensation preserved."
+          "Logo is upright, green, and fully legible on the cup; no visible stretching or occlusion.",
+          "Cup matches the approved clear grande cold brew with green straw and pumpkin cold foam on top.",
+          "Generated frames preserve the product shape, colorway, and branding closely to the reference.",
+          "Prompt adherence is strong for the pour/foam/condensation look, but the scene does not show the requested Northeast city sidewalk, cafe ledge, or swirling maple leaves consistently across frames."
         ],
-        "label": "SCRIPTED REHEARSAL VALUES - not a measurement"
-      }
+        "hallucinated_objects": [
+          "maple leaves",
+          "fall leaf foreground element",
+          "pour stream"
+        ],
+        "content_safety": [
+          {
+            "frame": "frame_01.png",
+            "categories": [
+              {
+                "category": "Hate",
+                "severity": 0
+              },
+              {
+                "category": "SelfHarm",
+                "severity": 0
+              },
+              {
+                "category": "Sexual",
+                "severity": 0
+              },
+              {
+                "category": "Violence",
+                "severity": 0
+              }
+            ]
+          },
+          {
+            "frame": "frame_02.png",
+            "categories": [
+              {
+                "category": "Hate",
+                "severity": 0
+              },
+              {
+                "category": "SelfHarm",
+                "severity": 0
+              },
+              {
+                "category": "Sexual",
+                "severity": 0
+              },
+              {
+                "category": "Violence",
+                "severity": 0
+              }
+            ]
+          },
+          {
+            "frame": "frame_03.png",
+            "categories": [
+              {
+                "category": "Hate",
+                "severity": 0
+              },
+              {
+                "category": "SelfHarm",
+                "severity": 0
+              },
+              {
+                "category": "Sexual",
+                "severity": 0
+              },
+              {
+                "category": "Violence",
+                "severity": 0
+              }
+            ]
+          },
+          {
+            "frame": "frame_04.png",
+            "categories": [
+              {
+                "category": "Hate",
+                "severity": 0
+              },
+              {
+                "category": "SelfHarm",
+                "severity": 0
+              },
+              {
+                "category": "Sexual",
+                "severity": 0
+              },
+              {
+                "category": "Violence",
+                "severity": 0
+              }
+            ]
+          }
+        ],
+        "verdict": "pass",
+        "failed_checks": [],
+        "publish_approved": false,
+        "automated_checks_passed": true,
+        "human_signoff_required": true
+      },
+      "qa_evaluated_at": "2026-11-16T15:38:25.463328+00:00"
     },
     {
       "id": "hero-apparel-kling",
@@ -138,16 +587,116 @@
       "aspect_ratio": "1:1",
       "duration": 5,
       "file": "hero-apparel-kling.mp4",
-      "provenance": "simulated",
-      "audio": "none",
-      "source_image": "assets/products/fabrikam-quilted-jacket-rust.png",
+      "provenance": "foundry",
+      "audio": "not requested; inspect media.has_audio",
       "media": {
-        "duration_s": 5.0,
-        "width": 576,
-        "height": 576,
+        "duration_s": 5.04,
+        "width": 1280,
+        "height": 1280,
         "has_audio": false,
-        "size_bytes": 72735
-      }
+        "size_bytes": 1049438
+      },
+      "elapsed_s": 204.01,
+      "accepted_to_completed_s": 199.89,
+      "processing": "H.264 display rendition; longest edge <=1280; CRF 28; audio preserved; metadata stripped",
+      "source_media": {
+        "duration_s": 5.04,
+        "width": 1440,
+        "height": 1440,
+        "has_audio": false,
+        "size_bytes": 16217421
+      },
+      "source_sha256": "498a6bc1a88073d3a792bdbfdbfc70904ac7cc89b4e44d69a8ab61edda7b97ec",
+      "source_image": "assets/products/fabrikam-quilted-jacket-rust.png",
+      "prompt": "The Fabrikam rust quilted field jacket from the approved ghost-mannequin image turns slowly through 360 degrees; quilting stitches and corduroy collar stay exact while the fabric sways naturally. Soft studio light, seamless warm-grey backdrop, smooth orbit camera.",
+      "request_id": "6289798a-c854-48aa-b47c-dee04976332b",
+      "deployment": "kling-v3-pro",
+      "rendered_at": "2026-11-16T15:26:11.189145+00:00",
+      "estimate": {
+        "model": "kling-v3-pro",
+        "seconds": 5.0,
+        "resolution": "n/a",
+        "price_key": "audio_off",
+        "usd_per_second": 0.1232,
+        "estimate_usd": 0.616,
+        "estimate_high_usd": 0.616,
+        "caveats": [
+          "preview list price per generated second; not a billing guarantee"
+        ]
+      },
+      "qa": {
+        "evaluator": "azure-openai-vision",
+        "measured": true,
+        "scores": {
+          "logo_integrity": 0.92,
+          "label_legibility": 0.78,
+          "product_fidelity": 0.95,
+          "prompt_adherence": 0.88
+        },
+        "thresholds": {
+          "logo_integrity": 0.7,
+          "label_legibility": 0.5,
+          "product_fidelity": 0.85,
+          "prompt_adherence": 0.7
+        },
+        "findings": [
+          "Small woven FABRIKAM label is visible on the chest and matches the reference placement; no exterior logos added.",
+          "Label text is legible in the front view but becomes less readable at the angled view due to size and motion blur.",
+          "Quilt pattern, rust colorway, zipper placement, and corduroy collar appear consistent with the approved reference across frames.",
+          "Fabric drape and slight natural sway are present; the orbit turn is partially shown but not a full 360-degree sequence in the provided frames."
+        ],
+        "hallucinated_objects": [],
+        "content_safety": [
+          {
+            "frame": "frame_01.png",
+            "categories": [
+              {
+                "category": "Hate",
+                "severity": 0
+              },
+              {
+                "category": "SelfHarm",
+                "severity": 0
+              },
+              {
+                "category": "Sexual",
+                "severity": 0
+              },
+              {
+                "category": "Violence",
+                "severity": 0
+              }
+            ]
+          },
+          {
+            "frame": "frame_02.png",
+            "categories": [
+              {
+                "category": "Hate",
+                "severity": 0
+              },
+              {
+                "category": "SelfHarm",
+                "severity": 0
+              },
+              {
+                "category": "Sexual",
+                "severity": 0
+              },
+              {
+                "category": "Violence",
+                "severity": 0
+              }
+            ]
+          }
+        ],
+        "verdict": "pass",
+        "failed_checks": [],
+        "publish_approved": false,
+        "automated_checks_passed": true,
+        "human_signoff_required": true
+      },
+      "qa_evaluated_at": "2026-11-16T15:38:48.119770+00:00"
     },
     {
       "id": "hero-home-kling",
@@ -156,18 +705,135 @@
       "model": "kling-v3-pro",
       "mode": "image-to-video",
       "aspect_ratio": "16:9",
-      "duration": 5,
+      "duration": 6,
       "file": "hero-home-kling.mp4",
-      "provenance": "simulated",
-      "audio": "none",
-      "source_image": "assets/products/contoso-pro-20v-drill.png",
+      "provenance": "foundry",
+      "audio": "not requested; inspect media.has_audio",
       "media": {
-        "duration_s": 5.0,
-        "width": 768,
-        "height": 432,
+        "duration_s": 6.04,
+        "width": 1280,
+        "height": 720,
         "has_audio": false,
-        "size_bytes": 46713
-      }
+        "size_bytes": 544515
+      },
+      "elapsed_s": 234.46,
+      "accepted_to_completed_s": 230.65,
+      "processing": "H.264 display rendition; longest edge <=1280; CRF 28; audio preserved; metadata stripped",
+      "source_media": {
+        "duration_s": 6.04,
+        "width": 1920,
+        "height": 1080,
+        "has_audio": false,
+        "size_bytes": 19008867
+      },
+      "source_sha256": "e4abe157929a5eb881e812dd9ce8713521a98280b0e6a3a6a740882b48bd23b3",
+      "source_image": "assets/products/contoso-pro-20v-drill.png",
+      "prompt": "The Contoso Pro 20V drill from the approved product image drives a screw into a pine stud on a sunlit job site; sawdust drifts, the LED work light glows, handheld tracking shot. Battery and Contoso Pro wordmark stay legible.",
+      "request_id": "0ad6b06f-a18c-44e8-b267-8a01f206266e",
+      "deployment": "kling-v3-pro",
+      "rendered_at": "2026-11-16T15:30:24.849479+00:00",
+      "estimate": {
+        "model": "kling-v3-pro",
+        "seconds": 6.0,
+        "resolution": "n/a",
+        "price_key": "audio_off",
+        "usd_per_second": 0.1232,
+        "estimate_usd": 0.7392,
+        "estimate_high_usd": 0.7392,
+        "caveats": [
+          "preview list price per generated second; not a billing guarantee"
+        ]
+      },
+      "qa": {
+        "evaluator": "azure-openai-vision",
+        "measured": true,
+        "scores": {
+          "logo_integrity": 0.92,
+          "label_legibility": 0.78,
+          "product_fidelity": 0.95,
+          "prompt_adherence": 0.72
+        },
+        "thresholds": {
+          "logo_integrity": 0.8,
+          "label_legibility": 0.7,
+          "product_fidelity": 0.85,
+          "prompt_adherence": 0.75
+        },
+        "findings": [
+          "The drill body, colorway, chuck, and battery closely match the approved reference.",
+          "CONTOSO PRO wordmark is visible and appears intact on the housing; 20V battery label is also visible.",
+          "In the generated frame, the drill is shown actively driving into wood, but the scene does not clearly show a sunlit job site or handheld tracking motion.",
+          "No person is visible, so the safety-glasses requirement cannot be verified from the frame.",
+          "The LED work light glow is visible near the trigger area.",
+          "The screw/drill interaction is plausible, with no obvious missing or extra tool parts.",
+          "The prompt asks for battery and wordmark to stay legible; both are mostly legible, though partially cropped in the action frame."
+        ],
+        "hallucinated_objects": [
+          "pine stud",
+          "sawdust drift",
+          "sunlit job site",
+          "handheld tracking shot",
+          "person/operator",
+          "safety glasses"
+        ],
+        "content_safety": [
+          {
+            "frame": "frame_01.png",
+            "categories": [
+              {
+                "category": "Hate",
+                "severity": 0
+              },
+              {
+                "category": "SelfHarm",
+                "severity": 0
+              },
+              {
+                "category": "Sexual",
+                "severity": 0
+              },
+              {
+                "category": "Violence",
+                "severity": 0
+              }
+            ]
+          },
+          {
+            "frame": "frame_02.png",
+            "categories": [
+              {
+                "category": "Hate",
+                "severity": 0
+              },
+              {
+                "category": "SelfHarm",
+                "severity": 0
+              },
+              {
+                "category": "Sexual",
+                "severity": 0
+              },
+              {
+                "category": "Violence",
+                "severity": 0
+              }
+            ]
+          }
+        ],
+        "verdict": "fail",
+        "failed_checks": [
+          "prompt_adherence"
+        ],
+        "publish_approved": false,
+        "reroll": {
+          "model": "ltx-2.5-pro",
+          "mode": "image-to-video",
+          "reason": "quality threshold failed; re-roll on the higher-fidelity tier"
+        },
+        "automated_checks_passed": false,
+        "human_signoff_required": true
+      },
+      "qa_evaluated_at": "2026-11-16T15:39:10.922005+00:00"
     },
     {
       "id": "hero-patio-h3max",
@@ -178,16 +844,127 @@
       "aspect_ratio": "16:9",
       "duration": 6,
       "file": "hero-patio-h3max.mp4",
-      "provenance": "simulated",
-      "audio": "none",
-      "source_image": null,
+      "provenance": "foundry",
+      "audio": "not requested; inspect media.has_audio",
       "media": {
-        "duration_s": 6.0,
-        "width": 768,
-        "height": 432,
-        "has_audio": false,
-        "size_bytes": 10997
-      }
+        "duration_s": 6.59,
+        "width": 1280,
+        "height": 720,
+        "has_audio": true,
+        "size_bytes": 610678
+      },
+      "elapsed_s": 18.42,
+      "accepted_to_completed_s": 14.43,
+      "processing": "H.264 display rendition; longest edge <=1280; CRF 28; audio preserved; metadata stripped",
+      "source_media": {
+        "duration_s": 6.59,
+        "width": 1920,
+        "height": 1080,
+        "has_audio": true,
+        "size_bytes": 13273492
+      },
+      "source_sha256": "0e26ee8c7d971d174840a285cc0d8fbed00d6a6d312e8fc92a514fdd197cbaaa",
+      "source_image": null,
+      "prompt": "Exactly one teak dining table and exactly four matching teak chairs on a stone patio at dusk, table centred, two chairs on each long side, string lights overhead, slow crane-down. No extra furniture, no people.",
+      "request_id": "2b62f729-e4fe-45fe-8dab-ac84d02fee7e",
+      "deployment": "minimax-h3-max",
+      "rendered_at": "2026-11-16T15:30:43.886714+00:00",
+      "estimate": {
+        "model": "minimax-h3-max",
+        "seconds": 6.0,
+        "resolution": "1080P",
+        "price_key": "1080P",
+        "usd_per_second": 0.16,
+        "estimate_usd": 0.96,
+        "estimate_high_usd": 1.072,
+        "caveats": [
+          "MiniMax output can run ~0.7 s longer than requested (high estimate includes it)",
+          "preview list price per generated second; not a billing guarantee"
+        ]
+      },
+      "qa": {
+        "evaluator": "azure-openai-vision",
+        "measured": true,
+        "scores": {
+          "logo_integrity": 0,
+          "label_legibility": 0,
+          "product_fidelity": 0.92,
+          "prompt_adherence": 0.78
+        },
+        "thresholds": {
+          "logo_integrity": 0.7,
+          "label_legibility": 0.5,
+          "product_fidelity": 0.85,
+          "prompt_adherence": 0.7
+        },
+        "findings": [
+          "No visible FABRIKAM woven label or any logo on the product.",
+          "No readable product label is visible.",
+          "The set appears to be a teak dining table with four matching chairs; wood tone and outdoor setting are consistent with the product.",
+          "Prompt is mostly followed: one table, four chairs, stone patio, dusk lighting, and string lights overhead are present.",
+          "Deviation: the table is not clearly centred in the frame and the camera motion cannot be verified from a still image.",
+          "No extra furniture or people are visible."
+        ],
+        "hallucinated_objects": [],
+        "content_safety": [
+          {
+            "frame": "frame_01.png",
+            "categories": [
+              {
+                "category": "Hate",
+                "severity": 0
+              },
+              {
+                "category": "SelfHarm",
+                "severity": 0
+              },
+              {
+                "category": "Sexual",
+                "severity": 0
+              },
+              {
+                "category": "Violence",
+                "severity": 0
+              }
+            ]
+          },
+          {
+            "frame": "frame_02.png",
+            "categories": [
+              {
+                "category": "Hate",
+                "severity": 0
+              },
+              {
+                "category": "SelfHarm",
+                "severity": 0
+              },
+              {
+                "category": "Sexual",
+                "severity": 0
+              },
+              {
+                "category": "Violence",
+                "severity": 0
+              }
+            ]
+          }
+        ],
+        "verdict": "fail",
+        "failed_checks": [
+          "logo_integrity",
+          "label_legibility"
+        ],
+        "publish_approved": false,
+        "reroll": {
+          "model": "ltx-2.5-pro",
+          "mode": "text-to-video",
+          "reason": "quality threshold failed; re-roll on the higher-fidelity tier"
+        },
+        "automated_checks_passed": false,
+        "human_signoff_required": true
+      },
+      "qa_evaluated_at": "2026-11-16T15:39:32.765180+00:00"
     },
     {
       "id": "hero-grocery-turbo",
@@ -198,16 +975,847 @@
       "aspect_ratio": "16:9",
       "duration": 6,
       "file": "hero-grocery-turbo.mp4",
-      "provenance": "simulated",
-      "audio": "none",
-      "source_image": "assets/products/woodgrove-wellness-bundle.png",
+      "provenance": "foundry",
+      "audio": "not requested; inspect media.has_audio",
       "media": {
-        "duration_s": 6.0,
-        "width": 768,
-        "height": 432,
-        "has_audio": false,
-        "size_bytes": 127506
-      }
+        "duration_s": 6.59,
+        "width": 1280,
+        "height": 732,
+        "has_audio": true,
+        "size_bytes": 913571
+      },
+      "elapsed_s": 17.14,
+      "accepted_to_completed_s": 13.42,
+      "processing": "H.264 display rendition; longest edge <=1280; CRF 28; audio preserved; metadata stripped",
+      "source_media": {
+        "duration_s": 6.59,
+        "width": 1344,
+        "height": 768,
+        "has_audio": true,
+        "size_bytes": 11146167
+      },
+      "source_sha256": "c1fc175611cf8298a3cd133ccc4d3766441fd4606ec5b501c9eda1b8fadb14b1",
+      "source_image": "assets/products/woodgrove-wellness-bundle.png",
+      "prompt": "The Woodgrove Wellness cold & flu bundle from the approved image on a bright pharmacy endcap; gentle push-in, warm winter light, a soft seasonal snowfall outside the window. Labels stay crisp.",
+      "request_id": "fbd76f1d-48a6-4fcb-90a8-661bea1a1205",
+      "deployment": "minimax-h3-max-turbo",
+      "rendered_at": "2026-11-16T15:26:29.354672+00:00",
+      "estimate": {
+        "model": "minimax-h3-max-turbo",
+        "seconds": 6.0,
+        "resolution": "768P",
+        "price_key": "768P",
+        "usd_per_second": 0.04,
+        "estimate_usd": 0.24,
+        "estimate_high_usd": 0.268,
+        "caveats": [
+          "MiniMax output can run ~0.7 s longer than requested (high estimate includes it)",
+          "preview list price per generated second; not a billing guarantee"
+        ]
+      },
+      "qa": {
+        "evaluator": "azure-openai-vision",
+        "measured": true,
+        "scores": {
+          "logo_integrity": 0.98,
+          "label_legibility": 0.96,
+          "product_fidelity": 0.18,
+          "prompt_adherence": 0.22
+        },
+        "thresholds": {
+          "logo_integrity": 0.8,
+          "label_legibility": 0.8,
+          "product_fidelity": 0.85,
+          "prompt_adherence": 0.7
+        },
+        "findings": [
+          "Woodgrove Wellness leaf wordmark is visible and consistent across the bundle.",
+          "Package labels are mostly crisp and readable on the visible products.",
+          "Generated frames do not match the approved PIM bundle: the PIM includes vitamin C, soft tissues, thermometer, throat lozenges, honey lemon herbal tea, and pure honey, but the generated scene omits the thermometer and pure honey and adds a different composition/crop.",
+          "Prompt asks for a bright pharmacy endcap with warm winter light and soft snowfall outside the window; the generated frames show a cozy window scene, not a pharmacy endcap.",
+          "No visible medical claims, medication consumption, or dosage text beyond product packaging text."
+        ],
+        "hallucinated_objects": [
+          "window winter bokeh lights",
+          "snowy outdoor scene",
+          "pharmacy endcap setting"
+        ],
+        "content_safety": [
+          {
+            "frame": "frame_01.png",
+            "categories": [
+              {
+                "category": "Hate",
+                "severity": 0
+              },
+              {
+                "category": "SelfHarm",
+                "severity": 0
+              },
+              {
+                "category": "Sexual",
+                "severity": 0
+              },
+              {
+                "category": "Violence",
+                "severity": 0
+              }
+            ]
+          },
+          {
+            "frame": "frame_02.png",
+            "categories": [
+              {
+                "category": "Hate",
+                "severity": 0
+              },
+              {
+                "category": "SelfHarm",
+                "severity": 0
+              },
+              {
+                "category": "Sexual",
+                "severity": 0
+              },
+              {
+                "category": "Violence",
+                "severity": 0
+              }
+            ]
+          }
+        ],
+        "verdict": "fail",
+        "failed_checks": [
+          "product_fidelity",
+          "prompt_adherence"
+        ],
+        "publish_approved": false,
+        "reroll": {
+          "model": "kling-v3-pro",
+          "mode": "image-to-video",
+          "reason": "quality threshold failed; re-roll on the higher-fidelity tier"
+        },
+        "automated_checks_passed": false,
+        "human_signoff_required": true
+      },
+      "qa_evaluated_at": "2026-11-16T15:39:55.065392+00:00"
     }
-  ]
+  ],
+  "validation": {
+    "date": "2026-11-16",
+    "negative_control": {
+      "kind": "negative_control",
+      "description": "Authentic cold-brew clip intentionally evaluated against the cordless-drill reference; not a failed generation.",
+      "source_request_id": "0aef37a5-d64b-4e2b-b7ed-9534651ec6e5",
+      "reference_sku": "CTP-DRL-20V-BL",
+      "qa": {
+        "evaluator": "azure-openai-vision",
+        "measured": true,
+        "scores": {
+          "logo_integrity": 0,
+          "label_legibility": 0,
+          "product_fidelity": 0,
+          "prompt_adherence": 0
+        },
+        "thresholds": {
+          "logo_integrity": 0.8,
+          "label_legibility": 0.7,
+          "product_fidelity": 0.85,
+          "prompt_adherence": 0.75
+        },
+        "findings": [
+          "Generated frames do not depict the Contoso Pro drill/driver reference product; they show a Northwind Coffee iced drink instead.",
+          "No CONTOSO PRO wordmark on yellow housing is visible in the generated frames.",
+          "No drill label, chuck, battery, or tool case is visible; product shape and colorway do not match the reference.",
+          "Prompt asks for a cordless drill on a workbench with its tool case, but the frames show a beverage cup on a plain background."
+        ],
+        "hallucinated_objects": [
+          "iced coffee cup",
+          "green straw",
+          "foam topping",
+          "coffee logo/text",
+          "plain studio background"
+        ],
+        "content_safety": [
+          {
+            "frame": "frame_01.png",
+            "categories": [
+              {
+                "category": "Hate",
+                "severity": 0
+              },
+              {
+                "category": "SelfHarm",
+                "severity": 0
+              },
+              {
+                "category": "Sexual",
+                "severity": 0
+              },
+              {
+                "category": "Violence",
+                "severity": 0
+              }
+            ]
+          },
+          {
+            "frame": "frame_02.png",
+            "categories": [
+              {
+                "category": "Hate",
+                "severity": 0
+              },
+              {
+                "category": "SelfHarm",
+                "severity": 0
+              },
+              {
+                "category": "Sexual",
+                "severity": 0
+              },
+              {
+                "category": "Violence",
+                "severity": 0
+              }
+            ]
+          }
+        ],
+        "verdict": "fail",
+        "failed_checks": [
+          "logo_integrity",
+          "label_legibility",
+          "product_fidelity",
+          "prompt_adherence"
+        ],
+        "publish_approved": false,
+        "reroll": {
+          "model": "kling-v3-pro",
+          "mode": "image-to-video",
+          "reason": "quality threshold failed; re-roll on the higher-fidelity tier"
+        },
+        "automated_checks_passed": false,
+        "human_signoff_required": true
+      }
+    },
+    "live_lto": {
+      "selected_variant": 2,
+      "state": "hero_rendered",
+      "jobs": [
+        {
+          "model": "minimax-h3-max-turbo",
+          "request_id": "0141f77a-34d4-4fee-864c-55cb526a5523",
+          "elapsed_s": 11.98,
+          "accepted_to_completed_s": 8.29,
+          "estimate": {
+            "model": "minimax-h3-max-turbo",
+            "seconds": 6.0,
+            "resolution": "768P",
+            "price_key": "768P",
+            "usd_per_second": 0.04,
+            "estimate_usd": 0.24,
+            "estimate_high_usd": 0.268,
+            "caveats": [
+              "MiniMax output can run ~0.7 s longer than requested (high estimate includes it)",
+              "preview list price per generated second; not a billing guarantee"
+            ]
+          },
+          "qa": {
+            "evaluator": "azure-openai-vision",
+            "measured": true,
+            "scores": {
+              "logo_integrity": 0.18,
+              "label_legibility": 0.22,
+              "product_fidelity": 0.12,
+              "prompt_adherence": 0.78
+            },
+            "thresholds": {
+              "logo_integrity": 0.8,
+              "label_legibility": 0.7,
+              "product_fidelity": 0.8,
+              "prompt_adherence": 0.7
+            },
+            "findings": [
+              "Reference product shows a clear cup with green straw and cold foam; generated frames keep those core elements, but the logo treatment changes from the approved green upright roundel/wordmark to a white deer-style mark in the second and third frames.",
+              "Label is partially legible in the first reference image, but the generated frames use a different logo/wordmark styling and the text is not consistently matching the approved NORTHWIND COFFEE lockup.",
+              "Product shape is broadly similar to a clear iced cold brew cup with green straw and foam, but the generated frames deviate in branding and presentation from the reference.",
+              "Prompt adherence is fairly strong: harvest-market / pumpkin / hay bale / golden-hour cues are visible, and the cup is staged among pumpkins with warm rim lighting."
+            ],
+            "hallucinated_objects": [
+              "hay bale",
+              "heirloom pumpkins",
+              "sun flare / sunset field backdrop",
+              "deer logo mark",
+              "straw bale texture"
+            ],
+            "content_safety": [
+              {
+                "frame": "frame_01.png",
+                "categories": [
+                  {
+                    "category": "Hate",
+                    "severity": 0
+                  },
+                  {
+                    "category": "SelfHarm",
+                    "severity": 0
+                  },
+                  {
+                    "category": "Sexual",
+                    "severity": 0
+                  },
+                  {
+                    "category": "Violence",
+                    "severity": 0
+                  }
+                ]
+              },
+              {
+                "frame": "frame_02.png",
+                "categories": [
+                  {
+                    "category": "Hate",
+                    "severity": 0
+                  },
+                  {
+                    "category": "SelfHarm",
+                    "severity": 0
+                  },
+                  {
+                    "category": "Sexual",
+                    "severity": 0
+                  },
+                  {
+                    "category": "Violence",
+                    "severity": 0
+                  }
+                ]
+              }
+            ],
+            "verdict": "fail",
+            "failed_checks": [
+              "logo_integrity",
+              "label_legibility",
+              "product_fidelity"
+            ],
+            "publish_approved": false,
+            "reroll": {
+              "model": "kling-v3-pro",
+              "mode": "image-to-video",
+              "reason": "quality threshold failed; re-roll on the higher-fidelity tier"
+            },
+            "automated_checks_passed": false,
+            "human_signoff_required": true
+          }
+        },
+        {
+          "model": "ltx-2.5-fast",
+          "request_id": "b01d9bac-299f-4088-8157-701a944071f7",
+          "elapsed_s": 52.78,
+          "accepted_to_completed_s": 49.42,
+          "estimate": {
+            "model": "ltx-2.5-fast",
+            "seconds": 6.0,
+            "resolution": "720p",
+            "price_key": "720p",
+            "usd_per_second": 0.09,
+            "estimate_usd": 0.54,
+            "estimate_high_usd": 0.54,
+            "caveats": [
+              "preview list price per generated second; not a billing guarantee"
+            ]
+          },
+          "qa": {
+            "evaluator": "azure-openai-vision",
+            "measured": true,
+            "scores": {
+              "logo_integrity": 0.0,
+              "label_legibility": 0.0,
+              "product_fidelity": 0.0,
+              "prompt_adherence": 0.0
+            },
+            "thresholds": {
+              "logo_integrity": 0.8,
+              "label_legibility": 0.7,
+              "product_fidelity": 0.8,
+              "prompt_adherence": 0.7
+            },
+            "findings": [
+              "Reference product shows a clear upright green NORTHWIND COFFEE roundel and wordmark; generated frames show a different, distorted, partially cropped logo/text that is not legible.",
+              "Reference product is a clear cup with a green straw and visible cold foam on top; generated frames do not match the reference cup presentation and the branding is obscured.",
+              "The generated frames depict a different cup/label design and overall product appearance, so product fidelity to the PIM reference is poor.",
+              "Prompt scene elements like the Northeast city sidewalk, maple leaves swirling past the cup on a cafe ledge, and the intended branded product presentation are not consistently visible; the frames instead focus on a generic pouring cup scene."
+            ],
+            "hallucinated_objects": [
+              "unapproved cup logo/text",
+              "city skyline background",
+              "fall leaves",
+              "pouring liquid stream",
+              "table/ledge surface"
+            ],
+            "content_safety": [
+              {
+                "frame": "frame_01.png",
+                "categories": [
+                  {
+                    "category": "Hate",
+                    "severity": 0
+                  },
+                  {
+                    "category": "SelfHarm",
+                    "severity": 0
+                  },
+                  {
+                    "category": "Sexual",
+                    "severity": 0
+                  },
+                  {
+                    "category": "Violence",
+                    "severity": 0
+                  }
+                ]
+              },
+              {
+                "frame": "frame_02.png",
+                "categories": [
+                  {
+                    "category": "Hate",
+                    "severity": 0
+                  },
+                  {
+                    "category": "SelfHarm",
+                    "severity": 0
+                  },
+                  {
+                    "category": "Sexual",
+                    "severity": 0
+                  },
+                  {
+                    "category": "Violence",
+                    "severity": 0
+                  }
+                ]
+              }
+            ],
+            "verdict": "fail",
+            "failed_checks": [
+              "logo_integrity",
+              "label_legibility",
+              "product_fidelity",
+              "prompt_adherence"
+            ],
+            "publish_approved": false,
+            "reroll": {
+              "model": "kling-v3-pro",
+              "mode": "image-to-video",
+              "reason": "quality threshold failed; re-roll on the higher-fidelity tier"
+            },
+            "automated_checks_passed": false,
+            "human_signoff_required": true
+          }
+        },
+        {
+          "model": "minimax-h3-max-turbo",
+          "request_id": "42a3eea2-c876-4228-8890-22f8238224c7",
+          "elapsed_s": 11.76,
+          "accepted_to_completed_s": 8.31,
+          "estimate": {
+            "model": "minimax-h3-max-turbo",
+            "seconds": 6.0,
+            "resolution": "768P",
+            "price_key": "768P",
+            "usd_per_second": 0.04,
+            "estimate_usd": 0.24,
+            "estimate_high_usd": 0.268,
+            "caveats": [
+              "MiniMax output can run ~0.7 s longer than requested (high estimate includes it)",
+              "preview list price per generated second; not a billing guarantee"
+            ]
+          },
+          "qa": {
+            "evaluator": "azure-openai-vision",
+            "measured": true,
+            "scores": {
+              "logo_integrity": 0.95,
+              "label_legibility": 0.9,
+              "product_fidelity": 0.88,
+              "prompt_adherence": 0.72
+            },
+            "thresholds": {
+              "logo_integrity": 0.8,
+              "label_legibility": 0.7,
+              "product_fidelity": 0.8,
+              "prompt_adherence": 0.7
+            },
+            "findings": [
+              "Reference product is a clear cup with green straw and cold foam on top; generated frames preserve these core elements.",
+              "Northwind logo appears upright and legible in the generated frames, with no obvious stretching or recoloring.",
+              "Label text/logo are visible, though smaller and slightly less crisp than the reference in some frames.",
+              "Product shape and colorway are broadly consistent with the reference pumpkin cold brew.",
+              "Prompt scene adherence is partial: the patio-at-dusk/string-lights/sunset mood is present, but the exact desert fall evening styling and macro condensation emphasis are limited.",
+              "No visible competitor cups, alcohol, or children consuming caffeine."
+            ],
+            "hallucinated_objects": [
+              "pool",
+              "string lights",
+              "sunset sky",
+              "terracotta patio tile",
+              "water puddle"
+            ],
+            "content_safety": [
+              {
+                "frame": "frame_01.png",
+                "categories": [
+                  {
+                    "category": "Hate",
+                    "severity": 0
+                  },
+                  {
+                    "category": "SelfHarm",
+                    "severity": 0
+                  },
+                  {
+                    "category": "Sexual",
+                    "severity": 0
+                  },
+                  {
+                    "category": "Violence",
+                    "severity": 0
+                  }
+                ]
+              },
+              {
+                "frame": "frame_02.png",
+                "categories": [
+                  {
+                    "category": "Hate",
+                    "severity": 0
+                  },
+                  {
+                    "category": "SelfHarm",
+                    "severity": 0
+                  },
+                  {
+                    "category": "Sexual",
+                    "severity": 0
+                  },
+                  {
+                    "category": "Violence",
+                    "severity": 0
+                  }
+                ]
+              }
+            ],
+            "verdict": "pass",
+            "failed_checks": [],
+            "publish_approved": false,
+            "automated_checks_passed": true,
+            "human_signoff_required": true
+          }
+        },
+        {
+          "model": "kling-v3-pro",
+          "request_id": "0aef37a5-d64b-4e2b-b7ed-9534651ec6e5",
+          "elapsed_s": 281.4,
+          "accepted_to_completed_s": 277.07,
+          "estimate": {
+            "model": "kling-v3-pro",
+            "seconds": 8.0,
+            "resolution": "n/a",
+            "price_key": "audio_on",
+            "usd_per_second": 0.1848,
+            "estimate_usd": 1.4784,
+            "estimate_high_usd": 1.4784,
+            "caveats": [
+              "preview list price per generated second; not a billing guarantee"
+            ]
+          },
+          "qa": {
+            "evaluator": "azure-openai-vision",
+            "measured": true,
+            "scores": {
+              "logo_integrity": 1,
+              "label_legibility": 1,
+              "product_fidelity": 1,
+              "prompt_adherence": 0.78
+            },
+            "thresholds": {
+              "logo_integrity": 0.8,
+              "label_legibility": 0.7,
+              "product_fidelity": 0.8,
+              "prompt_adherence": 0.7
+            },
+            "findings": [
+              "Approved Northwind logo is upright, green, and legible on the cup in the generated frames.",
+              "Cup shape, clear plastic, green straw, and pumpkin cold foam match the reference closely.",
+              "The drink presentation remains faithful to the approved product across frames, with visible condensation and iced cold brew.",
+              "Prompt adherence is partial: the frames show the pour, foam cascade, and autumn leaf motion, but the requested Northeast city sidewalk/cafe ledge hero setting and slow dolly-in/macro cinematic framing are not fully visible in the stills."
+            ],
+            "hallucinated_objects": [
+              "falling maple leaves",
+              "pouring stream of coffee",
+              "pumpkin foam topping motion"
+            ],
+            "content_safety": [
+              {
+                "frame": "frame_01.png",
+                "categories": [
+                  {
+                    "category": "Hate",
+                    "severity": 0
+                  },
+                  {
+                    "category": "SelfHarm",
+                    "severity": 0
+                  },
+                  {
+                    "category": "Sexual",
+                    "severity": 0
+                  },
+                  {
+                    "category": "Violence",
+                    "severity": 0
+                  }
+                ]
+              },
+              {
+                "frame": "frame_02.png",
+                "categories": [
+                  {
+                    "category": "Hate",
+                    "severity": 0
+                  },
+                  {
+                    "category": "SelfHarm",
+                    "severity": 0
+                  },
+                  {
+                    "category": "Sexual",
+                    "severity": 0
+                  },
+                  {
+                    "category": "Violence",
+                    "severity": 0
+                  }
+                ]
+              },
+              {
+                "frame": "frame_03.png",
+                "categories": [
+                  {
+                    "category": "Hate",
+                    "severity": 0
+                  },
+                  {
+                    "category": "SelfHarm",
+                    "severity": 0
+                  },
+                  {
+                    "category": "Sexual",
+                    "severity": 0
+                  },
+                  {
+                    "category": "Violence",
+                    "severity": 0
+                  }
+                ]
+              },
+              {
+                "frame": "frame_04.png",
+                "categories": [
+                  {
+                    "category": "Hate",
+                    "severity": 0
+                  },
+                  {
+                    "category": "SelfHarm",
+                    "severity": 0
+                  },
+                  {
+                    "category": "Sexual",
+                    "severity": 0
+                  },
+                  {
+                    "category": "Violence",
+                    "severity": 0
+                  }
+                ]
+              }
+            ],
+            "verdict": "pass",
+            "failed_checks": [],
+            "publish_approved": false,
+            "automated_checks_passed": true,
+            "human_signoff_required": true
+          }
+        }
+      ],
+      "costs": {
+        "drafts_estimate_usd": 1.02,
+        "turbo_drafts_estimate_usd": 0.48,
+        "same_turbo_drafts_on_h3_max_usd": 0.96,
+        "note": "Preview list-price estimates; not billing guarantees.",
+        "final_estimate_usd": 1.4784,
+        "reroll_estimate_usd": 0,
+        "total_estimate_usd": 2.4984
+      }
+    },
+    "bounded_reroll": {
+      "root_request_id": "b01d9bac-299f-4088-8157-701a944071f7",
+      "attempt": 1,
+      "limit": 1,
+      "repeat_parent_refused_before_dispatch": true,
+      "model": "kling-v3-pro",
+      "request_id": "e09deae8-9047-499b-8589-30a399001787",
+      "elapsed_s": 272.85,
+      "accepted_to_completed_s": 268.32,
+      "estimate": {
+        "model": "kling-v3-pro",
+        "seconds": 6.0,
+        "resolution": "n/a",
+        "price_key": "audio_off",
+        "usd_per_second": 0.1232,
+        "estimate_usd": 0.7392,
+        "estimate_high_usd": 0.7392,
+        "caveats": [
+          "preview list price per generated second; not a billing guarantee"
+        ]
+      },
+      "qa": {
+        "evaluator": "azure-openai-vision",
+        "measured": true,
+        "scores": {
+          "logo_integrity": 0.98,
+          "label_legibility": 0.98,
+          "product_fidelity": 0.96,
+          "prompt_adherence": 0.22
+        },
+        "thresholds": {
+          "logo_integrity": 0.8,
+          "label_legibility": 0.7,
+          "product_fidelity": 0.8,
+          "prompt_adherence": 0.7
+        },
+        "findings": [
+          "Logo is upright, green, and legible on the cup in all visible frames; no obvious stretching or occlusion.",
+          "Brand wordmark 'NORTHWIND COFFEE' is readable on the cup.",
+          "Product matches the reference closely: clear cup, green straw, cold foam on top, iced pumpkin cold brew appearance with condensation.",
+          "Prompt adherence is weak: the frames are mostly isolated product shots on a plain studio background rather than a Northeast city sidewalk/cafe ledge scene with swirling maple leaves, dolly-in motion, or visible commute context.",
+          "No visible competitor cups, alcohol, or children consuming caffeine."
+        ],
+        "hallucinated_objects": [
+          "maple leaves",
+          "city sidewalk",
+          "cafe ledge",
+          "adult commuter scene",
+          "ice clinking motion",
+          "golden-hour city environment"
+        ],
+        "content_safety": [
+          {
+            "frame": "frame_01.png",
+            "categories": [
+              {
+                "category": "Hate",
+                "severity": 0
+              },
+              {
+                "category": "SelfHarm",
+                "severity": 0
+              },
+              {
+                "category": "Sexual",
+                "severity": 0
+              },
+              {
+                "category": "Violence",
+                "severity": 0
+              }
+            ]
+          },
+          {
+            "frame": "frame_02.png",
+            "categories": [
+              {
+                "category": "Hate",
+                "severity": 0
+              },
+              {
+                "category": "SelfHarm",
+                "severity": 0
+              },
+              {
+                "category": "Sexual",
+                "severity": 0
+              },
+              {
+                "category": "Violence",
+                "severity": 0
+              }
+            ]
+          },
+          {
+            "frame": "frame_03.png",
+            "categories": [
+              {
+                "category": "Hate",
+                "severity": 0
+              },
+              {
+                "category": "SelfHarm",
+                "severity": 0
+              },
+              {
+                "category": "Sexual",
+                "severity": 0
+              },
+              {
+                "category": "Violence",
+                "severity": 0
+              }
+            ]
+          },
+          {
+            "frame": "frame_04.png",
+            "categories": [
+              {
+                "category": "Hate",
+                "severity": 0
+              },
+              {
+                "category": "SelfHarm",
+                "severity": 0
+              },
+              {
+                "category": "Sexual",
+                "severity": 0
+              },
+              {
+                "category": "Violence",
+                "severity": 0
+              }
+            ]
+          }
+        ],
+        "verdict": "fail",
+        "failed_checks": [
+          "prompt_adherence"
+        ],
+        "publish_approved": false,
+        "reroll": {
+          "model": "ltx-2.5-pro",
+          "mode": "image-to-video",
+          "reason": "quality threshold failed; re-roll on the higher-fidelity tier"
+        },
+        "automated_checks_passed": false,
+        "human_signoff_required": true
+      }
+    },
+    "generation_budget": {
+      "cap_usd": 15,
+      "requested_duration_estimate_usd": 10.4806,
+      "reserved_high_estimate_usd": 10.7851,
+      "submits": 18,
+      "note": "Conservative generation list-price reservations, not an actual Azure bill; excludes QA token/image charges."
+    }
+  }
 }

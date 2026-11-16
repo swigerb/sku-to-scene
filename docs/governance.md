@@ -33,7 +33,11 @@ the operational wrapper described below.
 
 - A pass requires **all four** scores, each finite and within [0, 1], at or above threshold.
 - Missing, malformed or errored evaluator output → `manual_review`/`error`, **never approval**.
-- In mock mode, scores are scripted **rehearsal values** (`measured: false`), and `publish_approved` is always false.
+- A measured pass sets `automated_checks_passed`; it does not grant human approval.
+  `human_signoff_required` is true and `publish_approved` remains false.
+- Scripted **rehearsal values** (`measured: false`) apply only to matching simulated clips, never authentic
+  Foundry cache entries. Without a real evaluator, authentic clips return `manual_review`; offline cache
+  playback does not turn them into measured approvals.
 - A failed clip may be re-rolled on LTX-2.5 Pro or Kling v3 Pro, **bounded per root job** (`MAX_REROLLS=2`). The
   budget is reserved before dispatch, so concurrent or failed paid submits still count. A parent can be re-rolled
   only once; after that, follow its child.
@@ -42,3 +46,21 @@ the operational wrapper described below.
 
 `demo-cache/manifest.json` and the run ledger record `provenance` as `simulated` or `foundry`. Simulated clips are
 also visibly labelled in-frame. Never present a simulated clip as a Foundry render.
+
+Live smoke generation and authenticated downloads were exercised on all five variants on 2026-11-16.
+This validates transport, not enterprise compliance. Azure OpenAI vision scoring and Azure AI Content Safety
+were also exercised on sampled authentic frames. VLM scores are AI screening judgments, not ground-truth
+measurements of SKU fidelity; the full clip and its audio still require human review. Content Safety's sampled
+image categories are not a full-video safety guarantee. Foundry Evaluations is still not integrated.
+No generated clip is approved for publication.
+
+The manifest also labels a **negative control**: an authentic coffee clip was intentionally screened against
+the drill reference and failed all four checks. This is a mismatched-reference experiment, not a failed render.
+Ordinary clip entries keep their actual SKU and measured verdict, including genuine failures; thresholds are
+never relaxed to make the showcase pass.
+
+Cached Foundry clips are small H.264 display renditions (longest edge at most 1280 pixels), not unmodified
+full-resolution masters. The manifest records source dimensions/hash, display media properties, request ID
+and measured wall-clock latency. `accepted_to_completed_s` excludes download/encoding; `elapsed_s` covers the
+generation pipeline through download. Neither is fal's inference-only timing. Source URLs and account
+identifiers are deliberately excluded. Review both visuals and audio manually before using the clips externally.

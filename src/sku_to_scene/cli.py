@@ -156,7 +156,8 @@ def _say(a: argparse.Namespace):
 
 def _header() -> None:
     s = get_settings()
-    print(f"\nSKU to Scene - Step 2 two-tier LTO ({'LIVE Foundry' if s.live else 'MOCK: simulated clips, no Azure calls'})")
+    print(f"\nSKU to Scene - Step 2 two-tier LTO "
+          f"({'LIVE Foundry' if s.live else 'CACHED generation: see per-clip provenance'})")
     print(f'Brief: "{LTO_BRIEF}"\n')
 
 
@@ -192,7 +193,7 @@ def _print_hero(r: dict[str, Any]) -> None:
     print(f"\nDrafts ${c['drafts_estimate_usd']:.2f} + hero ${c['final_estimate_usd']:.2f} + re-rolls "
           f"${c['reroll_estimate_usd']:.2f} = ${c['total_estimate_usd']:.2f}. {c['note']}")
     if "simulated" in r["provenance"]:
-        print("All clips above are SIMULATED placeholders, not Foundry renders.")
+        print("Clips marked SIMULATED are local placeholders, not Foundry renders.")
 
 
 def cmd_demo_lto(a: argparse.Namespace) -> None:

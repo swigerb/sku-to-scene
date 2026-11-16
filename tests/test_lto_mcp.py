@@ -3,6 +3,15 @@ import asyncio
 from sku_to_scene import lto
 
 
+def test_cached_cli_banner_does_not_relabel_authentic_media(settings, capsys):
+    from sku_to_scene.cli import _header
+
+    _header()
+    text = capsys.readouterr().out
+    assert "CACHED generation" in text
+    assert "simulated clips" not in text
+
+
 def test_lto_drafts_stop_for_selection_then_hero(settings):
     sess = lto.lto_drafts(settings=settings)
     assert sess["status"] == "awaiting_selection" and "final" not in sess

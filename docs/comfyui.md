@@ -16,7 +16,8 @@ cost estimate, ledger and provenance.
 1. Copy or symlink `comfyui/custom_nodes/sku_to_scene_foundry` into `ComfyUI/custom_nodes/`.
 2. In ComfyUI's Python environment, run `pip install -e <path-to-repo>[live]`.
 3. For live renders, set `SKU2SCENE_MODE=live`, `FOUNDRY_ENDPOINT` and `FOUNDRY_DEPLOYMENT_*`, and sign in with
-   `az login`. Without these, the nodes return **simulated** placeholders labelled `provenance=simulated`.
+   `az login`. Without live configuration, the nodes stay offline: matching cached clips retain their recorded
+   provenance, while newly rendered local placeholders are labelled `provenance=simulated`.
 4. Load `comfyui/workflows/lto-two-tier.api.json` (API format). It runs an LTX-2.5 Fast draft, then a Kling v3
    Pro hero from `nwc-pumpkin-cold-brew-hero.png`; copy that image into ComfyUI's `input/` folder first.
 
