@@ -1,5 +1,55 @@
 # 15-minute executive demo script
 
+## Recorded browser walkthrough
+
+The browser demo replays existing recordings; it does not generate video or run fresh evaluations.
+Optionally open **Watch overview** for the captioned introduction, then choose **Start guided demo**.
+Use **Next** and **Previous** deliberately, with **Play/Pause** for playback; the guide does not advance on a timer.
+Previewing a draft does not choose it. Explicitly choose **concept #2** to continue to its available recorded
+hero; concepts #1 and #3 have no recorded hero.
+
+Open **Technical evidence** to inspect model routing, original QA and recorded evaluations separately.
+Keep each clip's publication status visible: AI screening is not human approval, and the recorded human
+publication blockers remain unresolved. If human-review evidence is unavailable, treat every clip as not approved.
+Return to the guide or explore the scenario gallery without implying that cached playback is a live cloud run.
+
+### Four area guides
+
+The home cards open `#guide/qsr`, `#guide/apparel`, `#guide/home` and `#guide/grocery`; `#guide` still opens
+QSR. Each has Account briefs → Drafts → Choose → Recorded hero → Review & sign-off. Account briefs cite
+public sources beside fictional analogs, not customer data. Preview is never selection. Only recorded PIM
+heroes unlock the last two steps; no new draft has a hero. The older patio video is a text-only preview.
+The gallery lists every account in its area. The sun/moon control explicitly chooses light/dark.
+
+| Area / fictional example | Representative account | Presenter talk track |
+| --- | --- | --- |
+| QSR · Northwind Coffee | Starbucks | Seasonal launch: compare the original three drafts; explicitly select #2, then discuss the unresolved native-audio blocker. |
+| QSR · Tailspin Burger Co. | McDonald's | Value-bundle meal on vertical social; LTX-2.5 Fast iterates quickly. Show the simplified pass, then the earlier two-box learning example. |
+| QSR · Coho Corner Market | 7-Eleven | Fresh grab-and-go on Turbo for local volume. Third simplified brief passed; two safe misses are learning examples, two attempts withheld. |
+| Apparel · Fabrikam | Gap | The existing approved-image jacket lookbook anchors product-led storytelling; screening pass is not approval. |
+| Apparel · VanArsdel Finds | TJX | Treasure-hunt newness: short discovery videos for a changing assortment. Silent draft passed screening; awaiting human review. |
+| Apparel · Tailwind Traders | Target | Owned-brand home-decor newness for screens and retail media. Screening passed; read the reviewer note on wall marks. |
+| Apparel · Wide World Wholesale | Costco | Club-pack private-label value on member media. Screening passed; reviewer note flags carton/shelf markings; re-roll withheld. |
+| Home · Alpine Pro Supply | The Home Depot | The existing Contoso Pro drill render explores professional product context; show its prompt-adherence failure. |
+| Home · Zava DIY | Lowe's | The existing Fabrikam Home patio preview tests layout constraints, not approved PIM fidelity. |
+| Home · Southridge Electronics | Best Buy | Litware Ultrabook 14 on H3 Max for strict placement. Screening passed; reviewer note: items appear out of order. |
+| Home · Proseware Workplace Supply | Staples | Strict four-item layout on H3 Max. The selected attempt still fails fidelity (0.72); the final neutral-studio retry also failed and is a learning example. Three attempts withheld. A human decides. |
+| Grocery · Woodgrove Wellness | Walgreens | An existing wellness-bundle screen is calm and educational, with no medical claims; show its missing-product findings. |
+| Grocery · Best For You Market | Kroger | Private-label holiday meal prep on Turbo. The re-roll passed; the first attempt is withheld (Content Safety flag). Reviewer note: utensils. |
+| Grocery · Munson's Markets | Albertsons | Localized weekly deal; no identity or loyalty data. Simplified basket passed; the tinted-bottle re-roll is a learning example. |
+
+Sources, publication/access dates, briefs, model choices and list-price estimates are in
+[`catalog/accounts.json`](../catalog/accounts.json). Every account plays a recorded example. The nine new
+examples are silent exploratory drafts: preview-only, **Awaiting human review — not approved**, and **Not yet
+evaluated** by Foundry Evaluations. Say so, and point to the QA learning examples as the gate working, not as
+content. Withheld attempts are evidence only ([verification](verification.md#account-drafts)). The original **2/8 screening pass rate**, coffee-hero sound mismatch
+and silent concept #2 remain visible.
+
+Fictional brands and products. Real company names identify representative retail segments and cite public
+sources only; no affiliation, endorsement, trademarks, or customer data.
+
+## CLI and agent pitch
+
 **Setup:** GitHub Copilot app open on this repo, with the Squad team loaded (`@retail-merchandiser`,
 `@foundry-router`, `@brand-qa`). Before you start:
 
@@ -11,7 +61,7 @@
   Start it early and use the authentic cached render to keep the 15-minute pitch on time.
 
 **Honesty rule:** say "simulated preview" for any clip whose provenance is `simulated`. Say "estimate" for
-every price. The eight checked-in clips are authentic, but only two passed automated screening. Open the
+every price. The original eight checked-in clips are authentic, but only two passed automated screening. Open the
 manifest's recorded QA evidence when offline; without configured evaluators, a new run returns manual review.
 The live bounded re-roll also failed prompt adherence and stopped at its cap; do not describe it as an approved fix.
 

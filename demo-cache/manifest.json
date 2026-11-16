@@ -1099,6 +1099,3330 @@
         "human_signoff_required": true
       },
       "qa_evaluated_at": "2026-11-16T15:39:55.065392+00:00"
+    },
+    {
+      "id": "account-tailspin-draft",
+      "sku": "TBC-BUNDLE-01",
+      "vertical": "qsr",
+      "model": "ltx-2.5-fast",
+      "mode": "text-to-video",
+      "aspect_ratio": "9:16",
+      "duration": 6,
+      "file": "account-tailspin-draft.mp4",
+      "provenance": "foundry",
+      "audio": "not requested; silent draft",
+      "media": {
+        "duration_s": 6.0,
+        "width": 720,
+        "height": 1280,
+        "has_audio": false,
+        "size_bytes": 602627
+      },
+      "elapsed_s": 48.03,
+      "accepted_to_completed_s": 44.28,
+      "processing": "H.264 display rendition; longest edge <=1280; CRF 28; metadata stripped",
+      "source_media": {
+        "duration_s": 6.0,
+        "width": 720,
+        "height": 1280,
+        "has_audio": false,
+        "size_bytes": 1926423
+      },
+      "source_sha256": "5ef96047cdcf9da457fb98a9a7e5622167f3145c0af4f3062d761a3a7cc31604",
+      "source_image": null,
+      "prompt": "Silent fictional retail food concept, six seconds. Overhead tray on a warm counter: a burger in plain teal-and-cream wrap, a plain fries carton and a plain drink cup slide together into a bundle. Light steam, quick push-in, warm counter light. No writing or symbols on any packaging. No logos, signage, text, prices, phone UI, mascots, slogans, identifiable people, faces in close-up or real trade dress. Only teal and cream packaging. No soundtrack.",
+      "request_id": "5f58d22c-daca-44b5-9693-d6470c1d39a2",
+      "deployment": "ltx-2.5-fast",
+      "rendered_at": "2026-11-16T22:05:30.558764+00:00",
+      "estimate": {
+        "model": "ltx-2.5-fast",
+        "seconds": 6.0,
+        "resolution": "720p",
+        "price_key": "720p",
+        "usd_per_second": 0.09,
+        "estimate_usd": 0.54,
+        "estimate_high_usd": 0.54,
+        "caveats": [
+          "preview list price per generated second; not a billing guarantee"
+        ]
+      },
+      "qa": {
+        "evaluator": "azure-openai-vision",
+        "measured": true,
+        "scores": {
+          "logo_integrity": 1,
+          "label_legibility": 1,
+          "product_fidelity": 0.35,
+          "prompt_adherence": 0.4
+        },
+        "thresholds": {
+          "logo_integrity": 0.8,
+          "label_legibility": 0.7,
+          "product_fidelity": 0.8,
+          "prompt_adherence": 0.7
+        },
+        "findings": [
+          "Packaging is plain teal and cream with no visible text, logos, signage, or price numbers.",
+          "No on-screen text or identifiable people/faces are visible.",
+          "The scene shows only two wrapped box-like items; it does not clearly present a recognizable burger, fries carton, and drink cup bundle.",
+          "The composition is a close overhead/angled tabletop shot, but the required three-item meal bundle and explicit fictional retail food concept are only partially represented."
+        ],
+        "hallucinated_objects": [
+          "two plain wrapped boxes",
+          "steam"
+        ],
+        "content_safety": [
+          {
+            "frame": "frame_01.png",
+            "categories": [
+              {
+                "category": "Hate",
+                "severity": 0
+              },
+              {
+                "category": "SelfHarm",
+                "severity": 0
+              },
+              {
+                "category": "Sexual",
+                "severity": 0
+              },
+              {
+                "category": "Violence",
+                "severity": 0
+              }
+            ]
+          },
+          {
+            "frame": "frame_02.png",
+            "categories": [
+              {
+                "category": "Hate",
+                "severity": 0
+              },
+              {
+                "category": "SelfHarm",
+                "severity": 0
+              },
+              {
+                "category": "Sexual",
+                "severity": 0
+              },
+              {
+                "category": "Violence",
+                "severity": 0
+              }
+            ]
+          }
+        ],
+        "verdict": "fail",
+        "failed_checks": [
+          "product_fidelity",
+          "prompt_adherence"
+        ],
+        "publish_approved": false,
+        "reroll": {
+          "model": "ltx-2.5-pro",
+          "mode": "text-to-video",
+          "reason": "quality threshold failed; re-roll on the higher-fidelity tier"
+        },
+        "automated_checks_passed": false,
+        "human_signoff_required": true,
+        "sampled_frame_count": 2
+      },
+      "qa_evaluated_at": "2026-11-16T22:05:30.558764+00:00",
+      "account": "tailspin",
+      "stage": "draft",
+      "hero_eligible": false,
+      "human_signoff_required": true,
+      "evaluations": {
+        "status": "not_yet_evaluated",
+        "reason": "No new Foundry Evaluations run; original v1 evidence is immutable."
+      }
+    },
+    {
+      "id": "account-coho-draft",
+      "sku": "CCM-MEAL-01",
+      "vertical": "qsr",
+      "model": "minimax-h3-max-turbo",
+      "mode": "text-to-video",
+      "aspect_ratio": "9:16",
+      "duration": 6,
+      "file": "account-coho-draft.mp4",
+      "provenance": "foundry",
+      "audio": "not requested; silent draft",
+      "media": {
+        "duration_s": 6.0,
+        "width": 732,
+        "height": 1280,
+        "has_audio": false,
+        "size_bytes": 2161006
+      },
+      "elapsed_s": 16.5,
+      "accepted_to_completed_s": 13.49,
+      "processing": "H.264 display rendition; longest edge <=1280; CRF 28; metadata stripped; unexpected model audio removed for silent presentation; original-audio rendition retained; local presentation trimmed to requested 6 seconds after screening; recorded sampled-frame QA comes from the retained untrimmed rendition; re-encoded H.264 at 25 fps / CRF 20",
+      "source_media": {
+        "duration_s": 6.59,
+        "width": 768,
+        "height": 1344,
+        "has_audio": true,
+        "size_bytes": 8817839
+      },
+      "source_sha256": "ff06e813f600d5fc9062b64e353a53aadfb992a33afaba26f4a49d363000e258",
+      "source_image": null,
+      "prompt": "Silent fictional convenience-store concept, six seconds. A hot grab-and-go food parcel is lifted with tongs from a clean heated case into a plain kraft bag with plum-and-cream accents, then handed across a bright counter to gloved courier hands at night. Frame hands only. Plain neutral store interior. No writing on the bag or store. No logos, signage, text, prices, phone UI, mascots, slogans, faces in close-up, striped store livery or real trade dress. No soundtrack.",
+      "request_id": "f924196a-237f-430b-8104-02fcc01d3133",
+      "original_file": "account-coho-draft-original-audio.mp4",
+      "presentation_audio_removed": true,
+      "deployment": "minimax-h3-max-turbo",
+      "rendered_at": "2026-11-16T22:06:57.431963+00:00",
+      "estimate": {
+        "model": "minimax-h3-max-turbo",
+        "seconds": 6.0,
+        "resolution": "768P",
+        "price_key": "768P",
+        "usd_per_second": 0.04,
+        "estimate_usd": 0.24,
+        "estimate_high_usd": 0.268,
+        "caveats": [
+          "MiniMax output can run ~0.7 s longer than requested (high estimate includes it)",
+          "preview list price per generated second; not a billing guarantee"
+        ]
+      },
+      "qa": {
+        "evaluator": "azure-openai-vision",
+        "measured": true,
+        "scores": {
+          "logo_integrity": 0.1,
+          "label_legibility": 0.2,
+          "product_fidelity": 0.4,
+          "prompt_adherence": 0.15
+        },
+        "thresholds": {
+          "logo_integrity": 0.8,
+          "label_legibility": 0.7,
+          "product_fidelity": 0.8,
+          "prompt_adherence": 0.7
+        },
+        "findings": [
+          "A visible printed label/sticker appears on the food parcel, violating the no on-screen text / no writing requirement.",
+          "The bag has plum and cream accents, but the overall scene does not match the requested silent night-time convenience-store concept.",
+          "The food item is a wrapped parcel in tongs, but the exact grab-and-go meal presentation is only partially aligned.",
+          "Hands are visible, but the frame includes more of the counter/case environment than the prompt\u2019s plain neutral, hands-only emphasis."
+        ],
+        "hallucinated_objects": [
+          "printed label/sticker",
+          "heated case",
+          "courier hands",
+          "night-time setting"
+        ],
+        "content_safety": [
+          {
+            "frame": "frame_01.png",
+            "categories": [
+              {
+                "category": "Hate",
+                "severity": 0
+              },
+              {
+                "category": "SelfHarm",
+                "severity": 0
+              },
+              {
+                "category": "Sexual",
+                "severity": 0
+              },
+              {
+                "category": "Violence",
+                "severity": 0
+              }
+            ]
+          },
+          {
+            "frame": "frame_02.png",
+            "categories": [
+              {
+                "category": "Hate",
+                "severity": 0
+              },
+              {
+                "category": "SelfHarm",
+                "severity": 0
+              },
+              {
+                "category": "Sexual",
+                "severity": 0
+              },
+              {
+                "category": "Violence",
+                "severity": 0
+              }
+            ]
+          }
+        ],
+        "verdict": "fail",
+        "failed_checks": [
+          "logo_integrity",
+          "label_legibility",
+          "product_fidelity",
+          "prompt_adherence"
+        ],
+        "publish_approved": false,
+        "reroll": {
+          "model": "ltx-2.5-pro",
+          "mode": "text-to-video",
+          "reason": "quality threshold failed; re-roll on the higher-fidelity tier"
+        },
+        "automated_checks_passed": false,
+        "human_signoff_required": true,
+        "sampled_frame_count": 2
+      },
+      "qa_evaluated_at": "2026-11-16T22:06:57.431963+00:00",
+      "account": "coho",
+      "stage": "draft",
+      "hero_eligible": false,
+      "human_signoff_required": true,
+      "evaluations": {
+        "status": "not_yet_evaluated",
+        "reason": "No new Foundry Evaluations run; original v1 evidence is immutable."
+      },
+      "presentation_trimmed_to_s": 6,
+      "qa_sampled_from": "account-coho-draft-original-audio.mp4"
+    },
+    {
+      "id": "account-vanarsdel-draft",
+      "sku": "VAF-FINDS-01",
+      "vertical": "apparel",
+      "model": "minimax-h3-max-turbo",
+      "mode": "text-to-video",
+      "aspect_ratio": "9:16",
+      "duration": 6,
+      "file": "account-vanarsdel-draft.mp4",
+      "provenance": "foundry",
+      "audio": "not requested; silent draft",
+      "media": {
+        "duration_s": 6.0,
+        "width": 732,
+        "height": 1280,
+        "has_audio": false,
+        "size_bytes": 1993415
+      },
+      "elapsed_s": 36.83,
+      "accepted_to_completed_s": 13.48,
+      "processing": "H.264 display rendition; longest edge <=1280; CRF 28; metadata stripped; unexpected model audio removed for silent presentation; original-audio rendition retained; local presentation trimmed to requested 6 seconds after screening; recorded sampled-frame QA comes from the retained untrimmed rendition; re-encoded H.264 at 25 fps / CRF 20",
+      "source_media": {
+        "duration_s": 6.59,
+        "width": 768,
+        "height": 1344,
+        "has_audio": true,
+        "size_bytes": 9691775
+      },
+      "source_sha256": "1f9b84251ee72ad0da3dac1d6fdb397c1eca2ef1673997ad8cbbd2307fbd042b",
+      "source_image": null,
+      "prompt": "Silent fictional home-and-accessory discovery concept, six seconds. POV hand moves along a neutral rack and shelf in quick discovery beats, revealing a ceramic vase, a knit throw and a leather-look tote. Any tags are completely blank charcoal-and-blush rectangles, without text or symbols. Natural tactile lighting. No logos, designer labels, signage, text, prices, phone UI, mascots, slogans, faces in close-up or real trade dress. No soundtrack.",
+      "request_id": "275b8c72-c692-42f6-9fce-5cf0df3fd1d7",
+      "original_file": "account-vanarsdel-draft-original-audio.mp4",
+      "presentation_audio_removed": true,
+      "deployment": "minimax-h3-max-turbo",
+      "rendered_at": "2026-11-16T22:07:44.073613+00:00",
+      "estimate": {
+        "model": "minimax-h3-max-turbo",
+        "seconds": 6.0,
+        "resolution": "768P",
+        "price_key": "768P",
+        "usd_per_second": 0.04,
+        "estimate_usd": 0.24,
+        "estimate_high_usd": 0.268,
+        "caveats": [
+          "MiniMax output can run ~0.7 s longer than requested (high estimate includes it)",
+          "preview list price per generated second; not a billing guarantee"
+        ]
+      },
+      "qa": {
+        "evaluator": "azure-openai-vision",
+        "measured": true,
+        "scores": {
+          "logo_integrity": 1,
+          "label_legibility": 1,
+          "product_fidelity": 0.93,
+          "prompt_adherence": 0.78
+        },
+        "thresholds": {
+          "logo_integrity": 0.8,
+          "label_legibility": 0.7,
+          "product_fidelity": 0.8,
+          "prompt_adherence": 0.7
+        },
+        "findings": [
+          "Visible ceramic vase, knit throw, and leather-look tote are present.",
+          "No visible logos, designer labels, signage, prices, or on-screen text.",
+          "Tags appear blank or not readable in the visible frames.",
+          "Neutral shelf/rack setting and tactile lighting are consistent with the prompt.",
+          "The tote and throw are only partially visible, and the scene does not clearly show a full six-second discovery sequence."
+        ],
+        "hallucinated_objects": [],
+        "content_safety": [
+          {
+            "frame": "frame_01.png",
+            "categories": [
+              {
+                "category": "Hate",
+                "severity": 0
+              },
+              {
+                "category": "SelfHarm",
+                "severity": 0
+              },
+              {
+                "category": "Sexual",
+                "severity": 0
+              },
+              {
+                "category": "Violence",
+                "severity": 0
+              }
+            ]
+          },
+          {
+            "frame": "frame_02.png",
+            "categories": [
+              {
+                "category": "Hate",
+                "severity": 0
+              },
+              {
+                "category": "SelfHarm",
+                "severity": 0
+              },
+              {
+                "category": "Sexual",
+                "severity": 0
+              },
+              {
+                "category": "Violence",
+                "severity": 0
+              }
+            ]
+          }
+        ],
+        "verdict": "pass",
+        "failed_checks": [],
+        "publish_approved": false,
+        "automated_checks_passed": true,
+        "human_signoff_required": true,
+        "sampled_frame_count": 2
+      },
+      "qa_evaluated_at": "2026-11-16T22:07:44.073613+00:00",
+      "account": "vanarsdel",
+      "stage": "draft",
+      "hero_eligible": false,
+      "human_signoff_required": true,
+      "evaluations": {
+        "status": "not_yet_evaluated",
+        "reason": "No new Foundry Evaluations run; original v1 evidence is immutable."
+      },
+      "presentation_trimmed_to_s": 6,
+      "qa_sampled_from": "account-vanarsdel-draft-original-audio.mp4"
+    },
+    {
+      "id": "account-tailwind-draft",
+      "sku": "TWT-DECOR-01",
+      "vertical": "apparel",
+      "model": "ltx-2.5-fast",
+      "mode": "text-to-video",
+      "aspect_ratio": "16:9",
+      "duration": 6,
+      "file": "account-tailwind-draft.mp4",
+      "provenance": "foundry",
+      "audio": "not requested; silent draft",
+      "media": {
+        "duration_s": 6.0,
+        "width": 1280,
+        "height": 720,
+        "has_audio": false,
+        "size_bytes": 652605
+      },
+      "elapsed_s": 47.84,
+      "accepted_to_completed_s": 45.06,
+      "processing": "H.264 display rendition; longest edge <=1280; CRF 28; metadata stripped",
+      "source_media": {
+        "duration_s": 6.0,
+        "width": 1280,
+        "height": 720,
+        "has_audio": false,
+        "size_bytes": 2379538
+      },
+      "source_sha256": "b3b834812a4b0b081798ca9117568835603ecc4a471dd9df2091145fd8ff5163",
+      "source_image": null,
+      "prompt": "Silent fictional home-decor discovery concept, six seconds. Slow dolly across a newly refreshed endcap of ceramic lamps, textured pillows and a woven basket in a sage-and-sand palette, soft daylight. Objects have no labels, tags or logos. Neutral interior with no signs. No logos, signage, writing, prices, phone UI, mascots, slogans, faces in close-up, circular store emblems or real trade dress. No soundtrack.",
+      "request_id": "14fe8d78-dbf5-4cb9-a5f3-12a7b08376c4",
+      "original_file": null,
+      "presentation_audio_removed": false,
+      "deployment": "ltx-2.5-fast",
+      "rendered_at": "2026-11-16T22:08:41.642012+00:00",
+      "estimate": {
+        "model": "ltx-2.5-fast",
+        "seconds": 6.0,
+        "resolution": "720p",
+        "price_key": "720p",
+        "usd_per_second": 0.09,
+        "estimate_usd": 0.54,
+        "estimate_high_usd": 0.54,
+        "caveats": [
+          "preview list price per generated second; not a billing guarantee"
+        ]
+      },
+      "qa": {
+        "evaluator": "azure-openai-vision",
+        "measured": true,
+        "scores": {
+          "logo_integrity": 1,
+          "label_legibility": 1,
+          "product_fidelity": 0.92,
+          "prompt_adherence": 0.88
+        },
+        "thresholds": {
+          "logo_integrity": 0.8,
+          "label_legibility": 0.7,
+          "product_fidelity": 0.8,
+          "prompt_adherence": 0.7
+        },
+        "findings": [
+          "No visible logos, signage, price numbers, or on-screen text.",
+          "Visible home decor matches the requested sage-and-sand palette with ceramic lamps, textured pillows, and woven basket elements.",
+          "Scene appears to be a neutral interior with soft daylight and no close-up faces.",
+          "The display is close to the prompt, though the framing is tighter than a full endcap discovery shot."
+        ],
+        "hallucinated_objects": [],
+        "content_safety": [
+          {
+            "frame": "frame_01.png",
+            "categories": [
+              {
+                "category": "Hate",
+                "severity": 0
+              },
+              {
+                "category": "SelfHarm",
+                "severity": 0
+              },
+              {
+                "category": "Sexual",
+                "severity": 0
+              },
+              {
+                "category": "Violence",
+                "severity": 0
+              }
+            ]
+          },
+          {
+            "frame": "frame_02.png",
+            "categories": [
+              {
+                "category": "Hate",
+                "severity": 0
+              },
+              {
+                "category": "SelfHarm",
+                "severity": 0
+              },
+              {
+                "category": "Sexual",
+                "severity": 0
+              },
+              {
+                "category": "Violence",
+                "severity": 0
+              }
+            ]
+          }
+        ],
+        "verdict": "pass",
+        "failed_checks": [],
+        "publish_approved": false,
+        "automated_checks_passed": true,
+        "human_signoff_required": true,
+        "sampled_frame_count": 2
+      },
+      "qa_evaluated_at": "2026-11-16T22:08:41.642012+00:00",
+      "account": "tailwind",
+      "stage": "draft",
+      "hero_eligible": false,
+      "human_signoff_required": true,
+      "evaluations": {
+        "status": "not_yet_evaluated",
+        "reason": "No new Foundry Evaluations run; original v1 evidence is immutable."
+      }
+    },
+    {
+      "id": "account-wide-world-draft",
+      "sku": "WWW-BULK-01",
+      "vertical": "apparel",
+      "model": "minimax-h3-max-turbo",
+      "mode": "text-to-video",
+      "aspect_ratio": "16:9",
+      "duration": 6,
+      "file": "account-wide-world-draft.mp4",
+      "provenance": "foundry",
+      "audio": "not requested; silent draft",
+      "media": {
+        "duration_s": 6.0,
+        "width": 1280,
+        "height": 732,
+        "has_audio": false,
+        "size_bytes": 1733029
+      },
+      "elapsed_s": 21.58,
+      "accepted_to_completed_s": 18.6,
+      "processing": "H.264 display rendition; longest edge <=1280; CRF 28; metadata stripped; unexpected model audio removed for silent presentation; original-audio rendition retained; local presentation trimmed to requested 6 seconds after screening; recorded sampled-frame QA comes from the retained untrimmed rendition; re-encoded H.264 at 25 fps / CRF 20",
+      "source_media": {
+        "duration_s": 6.59,
+        "width": 1344,
+        "height": 768,
+        "has_audio": true,
+        "size_bytes": 9449502
+      },
+      "source_sha256": "88ea7dc8b4ee65be5ef8ab0bb05a29e57d0b3aff503226a0c9b6ec4ef8e65acb",
+      "source_image": null,
+      "prompt": "Silent fictional wholesale essentials concept, six seconds. In a warehouse aisle with tall steel racking and natural light, a flatbed cart receives an unbranded bulk multipack of paper towels and a case of sparkling water in plain slate-and-mustard packaging. Smooth low camera push toward the cart. Packaging is entirely blank. No logos, signage, text, prices, phone UI, mascots, slogans, faces in close-up or real trade dress. No soundtrack.",
+      "request_id": "cacd055a-3289-40a8-9332-fd58ecc860be",
+      "original_file": "account-wide-world-draft-original-audio.mp4",
+      "presentation_audio_removed": true,
+      "deployment": "minimax-h3-max-turbo",
+      "rendered_at": "2026-11-16T22:09:13.483359+00:00",
+      "estimate": {
+        "model": "minimax-h3-max-turbo",
+        "seconds": 6.0,
+        "resolution": "768P",
+        "price_key": "768P",
+        "usd_per_second": 0.04,
+        "estimate_usd": 0.24,
+        "estimate_high_usd": 0.268,
+        "caveats": [
+          "MiniMax output can run ~0.7 s longer than requested (high estimate includes it)",
+          "preview list price per generated second; not a billing guarantee"
+        ]
+      },
+      "qa": {
+        "evaluator": "azure-openai-vision",
+        "measured": true,
+        "scores": {
+          "logo_integrity": 1,
+          "label_legibility": 1,
+          "product_fidelity": 0.92,
+          "prompt_adherence": 0.98
+        },
+        "thresholds": {
+          "logo_integrity": 0.8,
+          "label_legibility": 0.7,
+          "product_fidelity": 0.8,
+          "prompt_adherence": 0.7
+        },
+        "findings": [
+          "No visible logos, signage, prices, or on-screen text.",
+          "Warehouse aisle with tall racking and natural light is present.",
+          "Unbranded bulk multipacks are shown on a flatbed cart.",
+          "Packaging is plain slate and mustard with blank surfaces; no real trade dress visible.",
+          "No faces in close-up or soundtrack are visible/audible from the frames provided."
+        ],
+        "hallucinated_objects": [],
+        "content_safety": [
+          {
+            "frame": "frame_01.png",
+            "categories": [
+              {
+                "category": "Hate",
+                "severity": 0
+              },
+              {
+                "category": "SelfHarm",
+                "severity": 0
+              },
+              {
+                "category": "Sexual",
+                "severity": 0
+              },
+              {
+                "category": "Violence",
+                "severity": 0
+              }
+            ]
+          },
+          {
+            "frame": "frame_02.png",
+            "categories": [
+              {
+                "category": "Hate",
+                "severity": 0
+              },
+              {
+                "category": "SelfHarm",
+                "severity": 0
+              },
+              {
+                "category": "Sexual",
+                "severity": 0
+              },
+              {
+                "category": "Violence",
+                "severity": 0
+              }
+            ]
+          }
+        ],
+        "verdict": "pass",
+        "failed_checks": [],
+        "publish_approved": false,
+        "automated_checks_passed": true,
+        "human_signoff_required": true,
+        "sampled_frame_count": 2
+      },
+      "qa_evaluated_at": "2026-11-16T22:09:13.483359+00:00",
+      "account": "wide-world",
+      "stage": "draft",
+      "hero_eligible": false,
+      "human_signoff_required": true,
+      "evaluations": {
+        "status": "not_yet_evaluated",
+        "reason": "No new Foundry Evaluations run; original v1 evidence is immutable."
+      },
+      "presentation_trimmed_to_s": 6,
+      "qa_sampled_from": "account-wide-world-draft-original-audio.mp4"
+    },
+    {
+      "id": "account-southridge-draft",
+      "sku": "LTW-LT14-SLV",
+      "vertical": "electronics",
+      "model": "minimax-h3-max",
+      "mode": "text-to-video",
+      "aspect_ratio": "16:9",
+      "duration": 6,
+      "file": "account-southridge-draft.mp4",
+      "provenance": "foundry",
+      "audio": "not requested; silent draft",
+      "media": {
+        "duration_s": 6.0,
+        "width": 1280,
+        "height": 732,
+        "has_audio": false,
+        "size_bytes": 758269
+      },
+      "elapsed_s": 16.49,
+      "accepted_to_completed_s": 13.5,
+      "processing": "H.264 display rendition; longest edge <=1280; CRF 28; metadata stripped; unexpected model audio removed for silent presentation; original-audio rendition retained; local presentation trimmed to requested 6 seconds after screening; recorded sampled-frame QA comes from the retained untrimmed rendition; re-encoded H.264 at 25 fps / CRF 20",
+      "source_media": {
+        "duration_s": 6.59,
+        "width": 1344,
+        "height": 768,
+        "has_audio": true,
+        "size_bytes": 4437230
+      },
+      "source_sha256": "665895e1b160a5e15ea2aff79b68cea7873368da01a122ea1487ebcf062a50f0",
+      "source_image": null,
+      "prompt": "Silent fictional electronics product concept, six seconds. A plain silver 14-inch ultrabook representing the fictional Litware Ultrabook 14 sits on a clean graphite desk. Its lid opens. Slow orbit reveals left-side ports. Headphones and a mouse are placed in an exact left-to-right row: laptop, headphones, mouse. Screen shows only an abstract teal gradient. No wordmark on the laptop. No logos, signage, writing, prices, phone UI, branded operating-system UI, mascots, slogans, faces in close-up, price-tag shapes or real trade dress. No soundtrack.",
+      "request_id": "60f7be4e-6a0e-4e78-b381-f81608b089c0",
+      "original_file": "account-southridge-draft-original-audio.mp4",
+      "presentation_audio_removed": true,
+      "deployment": "minimax-h3-max",
+      "rendered_at": "2026-11-16T22:09:38.402361+00:00",
+      "estimate": {
+        "model": "minimax-h3-max",
+        "seconds": 6.0,
+        "resolution": "768P",
+        "price_key": "768P",
+        "usd_per_second": 0.08,
+        "estimate_usd": 0.48,
+        "estimate_high_usd": 0.536,
+        "caveats": [
+          "MiniMax output can run ~0.7 s longer than requested (high estimate includes it)",
+          "preview list price per generated second; not a billing guarantee"
+        ]
+      },
+      "qa": {
+        "evaluator": "azure-openai-vision",
+        "measured": true,
+        "scores": {
+          "logo_integrity": 1,
+          "label_legibility": 1,
+          "product_fidelity": 0.98,
+          "prompt_adherence": 0.96
+        },
+        "thresholds": {
+          "logo_integrity": 0.8,
+          "label_legibility": 0.7,
+          "product_fidelity": 0.8,
+          "prompt_adherence": 0.7
+        },
+        "findings": [
+          "No visible logos, wordmarks, signage, prices, or OS UI.",
+          "Screen shows only an abstract teal gradient.",
+          "Laptop, headphones, and mouse are arranged left-to-right as requested.",
+          "Product appears to be a silver ultrabook on a plain desk with no close-up faces or branded trade dress."
+        ],
+        "hallucinated_objects": [],
+        "content_safety": [
+          {
+            "frame": "frame_01.png",
+            "categories": [
+              {
+                "category": "Hate",
+                "severity": 0
+              },
+              {
+                "category": "SelfHarm",
+                "severity": 0
+              },
+              {
+                "category": "Sexual",
+                "severity": 0
+              },
+              {
+                "category": "Violence",
+                "severity": 0
+              }
+            ]
+          },
+          {
+            "frame": "frame_02.png",
+            "categories": [
+              {
+                "category": "Hate",
+                "severity": 0
+              },
+              {
+                "category": "SelfHarm",
+                "severity": 0
+              },
+              {
+                "category": "Sexual",
+                "severity": 0
+              },
+              {
+                "category": "Violence",
+                "severity": 0
+              }
+            ]
+          }
+        ],
+        "verdict": "pass",
+        "failed_checks": [],
+        "publish_approved": false,
+        "automated_checks_passed": true,
+        "human_signoff_required": true,
+        "sampled_frame_count": 2
+      },
+      "qa_evaluated_at": "2026-11-16T22:09:38.402361+00:00",
+      "account": "southridge",
+      "stage": "draft",
+      "hero_eligible": false,
+      "human_signoff_required": true,
+      "evaluations": {
+        "status": "not_yet_evaluated",
+        "reason": "No new Foundry Evaluations run; original v1 evidence is immutable."
+      },
+      "presentation_trimmed_to_s": 6,
+      "qa_sampled_from": "account-southridge-draft-original-audio.mp4"
+    },
+    {
+      "id": "account-proseware-draft",
+      "sku": "PWS-KIT-01",
+      "vertical": "home-improvement",
+      "model": "minimax-h3-max",
+      "mode": "text-to-video",
+      "aspect_ratio": "16:9",
+      "duration": 6,
+      "file": "account-proseware-draft.mp4",
+      "provenance": "foundry",
+      "audio": "not requested; silent draft",
+      "media": {
+        "duration_s": 6.0,
+        "width": 1280,
+        "height": 732,
+        "has_audio": false,
+        "size_bytes": 861861
+      },
+      "elapsed_s": 21.58,
+      "accepted_to_completed_s": 18.67,
+      "processing": "H.264 display rendition; longest edge <=1280; CRF 28; metadata stripped; unexpected model audio removed for silent presentation; original-audio rendition retained; local presentation trimmed to requested 6 seconds after screening; recorded sampled-frame QA comes from the retained untrimmed rendition; re-encoded H.264 at 25 fps / CRF 20",
+      "source_media": {
+        "duration_s": 6.59,
+        "width": 1344,
+        "height": 768,
+        "has_audio": true,
+        "size_bytes": 6257997
+      },
+      "source_sha256": "b57757e80cbf7dc20142bc2ece3c34a51e2ef5e7305a1cf3d0f2a3eff2d806f2",
+      "source_image": null,
+      "prompt": "Silent fictional workplace-supply concept, six seconds. One delivery cart rolls into a small empty office. Plain indigo-and-white boxes open, revealing a coffee kit, sealed cleaning supplies, an ergonomic chair and printer paper. Arrange exactly left to right: coffee kit, cleaning supplies, chair, printer paper. Smooth wide shot, clean even lighting. Boxes and products have no labels or symbols. No logos, signage, writing, prices, phone UI, mascots, slogans, button props, faces in close-up or real trade dress. No soundtrack.",
+      "request_id": "44fd2967-501e-4d83-80e9-8e0fb28e3d46",
+      "original_file": "account-proseware-draft-original-audio.mp4",
+      "presentation_audio_removed": true,
+      "deployment": "minimax-h3-max",
+      "rendered_at": "2026-11-16T22:10:09.747769+00:00",
+      "estimate": {
+        "model": "minimax-h3-max",
+        "seconds": 6.0,
+        "resolution": "768P",
+        "price_key": "768P",
+        "usd_per_second": 0.08,
+        "estimate_usd": 0.48,
+        "estimate_high_usd": 0.536,
+        "caveats": [
+          "MiniMax output can run ~0.7 s longer than requested (high estimate includes it)",
+          "preview list price per generated second; not a billing guarantee"
+        ]
+      },
+      "qa": {
+        "evaluator": "azure-openai-vision",
+        "measured": true,
+        "scores": {
+          "logo_integrity": 0.1,
+          "label_legibility": 0.2,
+          "product_fidelity": 0.4,
+          "prompt_adherence": 0.35
+        },
+        "thresholds": {
+          "logo_integrity": 0.8,
+          "label_legibility": 0.7,
+          "product_fidelity": 0.8,
+          "prompt_adherence": 0.7
+        },
+        "findings": [
+          "Visible brand-like text/logos appear on the coffee kit packaging ('Lefie' and 'Power'), violating the no-logos/no-writing rule.",
+          "The cleaning supplies and paper are present, and the chair is visible, but the arrangement is not cleanly isolated as a simple left-to-right product lineup due to the open boxes and cart framing.",
+          "The chair appears to be an office chair, but the coffee kit and cleaning supplies do not match the plain unlabeled fictional packaging requirement.",
+          "No on-screen signage or price numbers are visible; the scene is a wide office shot with no close-up faces."
+        ],
+        "hallucinated_objects": [
+          "delivery cart",
+          "potted plant",
+          "cabinet",
+          "additional box packaging details",
+          "brand logos/text on coffee kit"
+        ],
+        "content_safety": [
+          {
+            "frame": "frame_01.png",
+            "categories": [
+              {
+                "category": "Hate",
+                "severity": 0
+              },
+              {
+                "category": "SelfHarm",
+                "severity": 0
+              },
+              {
+                "category": "Sexual",
+                "severity": 0
+              },
+              {
+                "category": "Violence",
+                "severity": 0
+              }
+            ]
+          },
+          {
+            "frame": "frame_02.png",
+            "categories": [
+              {
+                "category": "Hate",
+                "severity": 0
+              },
+              {
+                "category": "SelfHarm",
+                "severity": 0
+              },
+              {
+                "category": "Sexual",
+                "severity": 0
+              },
+              {
+                "category": "Violence",
+                "severity": 0
+              }
+            ]
+          }
+        ],
+        "verdict": "fail",
+        "failed_checks": [
+          "logo_integrity",
+          "label_legibility",
+          "product_fidelity",
+          "prompt_adherence"
+        ],
+        "publish_approved": false,
+        "reroll": {
+          "model": "ltx-2.5-pro",
+          "mode": "text-to-video",
+          "reason": "quality threshold failed; re-roll on the higher-fidelity tier"
+        },
+        "automated_checks_passed": false,
+        "human_signoff_required": true,
+        "sampled_frame_count": 2
+      },
+      "qa_evaluated_at": "2026-11-16T22:10:09.747769+00:00",
+      "account": "proseware",
+      "stage": "draft",
+      "hero_eligible": false,
+      "human_signoff_required": true,
+      "evaluations": {
+        "status": "not_yet_evaluated",
+        "reason": "No new Foundry Evaluations run; original v1 evidence is immutable."
+      },
+      "presentation_trimmed_to_s": 6,
+      "qa_sampled_from": "account-proseware-draft-original-audio.mp4"
+    },
+    {
+      "id": "account-best-for-you-draft",
+      "sku": "BFY-MEAL-01",
+      "vertical": "grocery-pharmacy",
+      "model": "minimax-h3-max-turbo",
+      "mode": "text-to-video",
+      "aspect_ratio": "16:9",
+      "duration": 6,
+      "file": "account-best-for-you-draft.mp4",
+      "provenance": "foundry",
+      "audio": "not requested; silent draft",
+      "media": {
+        "duration_s": 6.0,
+        "width": 1280,
+        "height": 732,
+        "has_audio": false,
+        "size_bytes": 1350660
+      },
+      "elapsed_s": 16.41,
+      "accepted_to_completed_s": 13.59,
+      "processing": "H.264 display rendition; longest edge <=1280; CRF 28; metadata stripped; unexpected model audio removed for silent presentation; original-audio rendition retained; local presentation trimmed to requested 6 seconds after screening; recorded sampled-frame QA comes from the retained untrimmed rendition; re-encoded H.264 at 25 fps / CRF 20",
+      "source_media": {
+        "duration_s": 6.59,
+        "width": 1344,
+        "height": 768,
+        "has_audio": true,
+        "size_bytes": 6468627
+      },
+      "source_sha256": "a63fffb3e16d3cf273de6e17c00ff526c235d91d51c5467279efb542d284321e",
+      "source_image": null,
+      "prompt": "Silent fictional grocery meal inspiration concept, six seconds. A plain terracotta-and-olive meal-kit box opens on a clean kitchen counter. Fresh prepared ingredients assemble in a stylized stop-motion movement into a plated holiday dinner under warm light. Box and containers are completely blank. Gentle tabletop push-in. No logos, signage, writing, health claims, price comparisons, prices, phone UI, mascots, slogans, faces in close-up or real trade dress. No soundtrack.",
+      "request_id": "23a926ac-ec14-4e9b-a84b-d70f7cf31f1d",
+      "original_file": "account-best-for-you-draft-original-audio.mp4",
+      "presentation_audio_removed": true,
+      "deployment": "minimax-h3-max-turbo",
+      "rendered_at": "2026-11-16T22:10:36.006817+00:00",
+      "estimate": {
+        "model": "minimax-h3-max-turbo",
+        "seconds": 6.0,
+        "resolution": "768P",
+        "price_key": "768P",
+        "usd_per_second": 0.04,
+        "estimate_usd": 0.24,
+        "estimate_high_usd": 0.268,
+        "caveats": [
+          "MiniMax output can run ~0.7 s longer than requested (high estimate includes it)",
+          "preview list price per generated second; not a billing guarantee"
+        ]
+      },
+      "qa": {
+        "evaluator": "azure-openai-vision",
+        "measured": true,
+        "scores": {
+          "logo_integrity": 1,
+          "label_legibility": 1,
+          "product_fidelity": 0.92,
+          "prompt_adherence": 0.88
+        },
+        "thresholds": {
+          "logo_integrity": 0.8,
+          "label_legibility": 0.7,
+          "product_fidelity": 0.8,
+          "prompt_adherence": 0.7
+        },
+        "findings": [
+          "No visible logos, signage, price numbers, or on-screen text.",
+          "Meal-kit box appears plain terracotta-and-olive with blank containers, matching the requested packaging style.",
+          "Visible ingredients and plated holiday dinner are recognizable and consistent with a meal-kit inspiration concept.",
+          "The scene shows a kitchen counter and warm lighting, but the box is already open and the stop-motion movement is only implied rather than clearly visible in a single frame."
+        ],
+        "hallucinated_objects": [],
+        "content_safety": [
+          {
+            "frame": "frame_01.png",
+            "categories": [
+              {
+                "category": "Hate",
+                "severity": 0
+              },
+              {
+                "category": "SelfHarm",
+                "severity": 0
+              },
+              {
+                "category": "Sexual",
+                "severity": 0
+              },
+              {
+                "category": "Violence",
+                "severity": 0
+              }
+            ]
+          },
+          {
+            "frame": "frame_02.png",
+            "categories": [
+              {
+                "category": "Hate",
+                "severity": 0
+              },
+              {
+                "category": "SelfHarm",
+                "severity": 0
+              },
+              {
+                "category": "Sexual",
+                "severity": 0
+              },
+              {
+                "category": "Violence",
+                "severity": 2
+              }
+            ]
+          }
+        ],
+        "verdict": "fail",
+        "failed_checks": [
+          "content_safety"
+        ],
+        "publish_approved": false,
+        "reroll": {
+          "model": "ltx-2.5-pro",
+          "mode": "text-to-video",
+          "reason": "quality threshold failed; re-roll on the higher-fidelity tier"
+        },
+        "automated_checks_passed": false,
+        "human_signoff_required": true,
+        "sampled_frame_count": 2
+      },
+      "qa_evaluated_at": "2026-11-16T22:10:36.006817+00:00",
+      "account": "best-for-you",
+      "stage": "draft",
+      "hero_eligible": false,
+      "human_signoff_required": true,
+      "evaluations": {
+        "status": "not_yet_evaluated",
+        "reason": "No new Foundry Evaluations run; original v1 evidence is immutable."
+      },
+      "presentation_trimmed_to_s": 6,
+      "qa_sampled_from": "account-best-for-you-draft-original-audio.mp4"
+    },
+    {
+      "id": "account-munson-draft",
+      "sku": "MUN-BASKET-01",
+      "vertical": "grocery-pharmacy",
+      "model": "minimax-h3-max-turbo",
+      "mode": "text-to-video",
+      "aspect_ratio": "9:16",
+      "duration": 6,
+      "file": "account-munson-draft.mp4",
+      "provenance": "foundry",
+      "audio": "not requested; silent draft",
+      "media": {
+        "duration_s": 6.0,
+        "width": 732,
+        "height": 1280,
+        "has_audio": false,
+        "size_bytes": 2162934
+      },
+      "elapsed_s": 16.33,
+      "accepted_to_completed_s": 13.5,
+      "processing": "H.264 display rendition; longest edge <=1280; CRF 28; metadata stripped; unexpected model audio removed for silent presentation; original-audio rendition retained; local presentation trimmed to requested 6 seconds after screening; recorded sampled-frame QA comes from the retained untrimmed rendition; re-encoded H.264 at 25 fps / CRF 20",
+      "source_media": {
+        "duration_s": 6.59,
+        "width": 768,
+        "height": 1344,
+        "has_audio": true,
+        "size_bytes": 10484098
+      },
+      "source_sha256": "b3dcafabf2a94a41e037c98cb52c89cdbc2600bda0d32dcfa5cb2a3571319a73",
+      "source_image": null,
+      "prompt": "Silent fictional neighborhood-grocery concept, six seconds. In a bright neutral market aisle, a shopper's hands place a fresh bakery loaf, a plain packet of pantry pasta and an unlabelled olive-oil bottle into a deep-green-and-oat basket. Warm, local feel; close framing on hands and basket. All packaging blank. No logos, signage, writing, health or safety claims, prices, phone UI, mascots, slogans, faces in close-up or real trade dress. No soundtrack.",
+      "request_id": "ef6ee9fd-a65c-4f18-b19a-4796bda6f866",
+      "original_file": "account-munson-draft-original-audio.mp4",
+      "presentation_audio_removed": true,
+      "deployment": "minimax-h3-max-turbo",
+      "rendered_at": "2026-11-16T22:11:02.972122+00:00",
+      "estimate": {
+        "model": "minimax-h3-max-turbo",
+        "seconds": 6.0,
+        "resolution": "768P",
+        "price_key": "768P",
+        "usd_per_second": 0.04,
+        "estimate_usd": 0.24,
+        "estimate_high_usd": 0.268,
+        "caveats": [
+          "MiniMax output can run ~0.7 s longer than requested (high estimate includes it)",
+          "preview list price per generated second; not a billing guarantee"
+        ]
+      },
+      "qa": {
+        "evaluator": "azure-openai-vision",
+        "measured": true,
+        "scores": {
+          "logo_integrity": 0.95,
+          "label_legibility": 0.15,
+          "product_fidelity": 0.55,
+          "prompt_adherence": 0.35
+        },
+        "thresholds": {
+          "logo_integrity": 0.8,
+          "label_legibility": 0.7,
+          "product_fidelity": 0.8,
+          "prompt_adherence": 0.7
+        },
+        "findings": [
+          "No visible logos or branded marks on the basket or packaging.",
+          "Visible blank labels/tags on bread and pasta packaging; packaging is not fully unbranded in appearance.",
+          "Bread and pasta are present, but no olive-oil bottle is visible.",
+          "Basket is deep green, but it is not oat-colored and does not match the requested deep-green-and-oat basket.",
+          "Scene shows a grocery aisle with hands placing items into a basket, but the prompt\u2019s full product set and blank-packaging requirements are not met."
+        ],
+        "hallucinated_objects": [
+          "olive-oil bottle",
+          "oat-colored basket",
+          "unbranded packaging on all items"
+        ],
+        "content_safety": [
+          {
+            "frame": "frame_01.png",
+            "categories": [
+              {
+                "category": "Hate",
+                "severity": 0
+              },
+              {
+                "category": "SelfHarm",
+                "severity": 0
+              },
+              {
+                "category": "Sexual",
+                "severity": 0
+              },
+              {
+                "category": "Violence",
+                "severity": 0
+              }
+            ]
+          },
+          {
+            "frame": "frame_02.png",
+            "categories": [
+              {
+                "category": "Hate",
+                "severity": 0
+              },
+              {
+                "category": "SelfHarm",
+                "severity": 0
+              },
+              {
+                "category": "Sexual",
+                "severity": 0
+              },
+              {
+                "category": "Violence",
+                "severity": 0
+              }
+            ]
+          }
+        ],
+        "verdict": "fail",
+        "failed_checks": [
+          "label_legibility",
+          "product_fidelity",
+          "prompt_adherence"
+        ],
+        "publish_approved": false,
+        "reroll": {
+          "model": "ltx-2.5-pro",
+          "mode": "text-to-video",
+          "reason": "quality threshold failed; re-roll on the higher-fidelity tier"
+        },
+        "automated_checks_passed": false,
+        "human_signoff_required": true,
+        "sampled_frame_count": 2
+      },
+      "qa_evaluated_at": "2026-11-16T22:11:02.972122+00:00",
+      "account": "munson",
+      "stage": "draft",
+      "hero_eligible": false,
+      "human_signoff_required": true,
+      "evaluations": {
+        "status": "not_yet_evaluated",
+        "reason": "No new Foundry Evaluations run; original v1 evidence is immutable."
+      },
+      "presentation_trimmed_to_s": 6,
+      "qa_sampled_from": "account-munson-draft-original-audio.mp4"
+    },
+    {
+      "id": "account-coho-draft-r1",
+      "sku": "CCM-MEAL-01",
+      "vertical": "qsr",
+      "model": "minimax-h3-max-turbo",
+      "mode": "text-to-video",
+      "aspect_ratio": "9:16",
+      "duration": 6,
+      "file": "account-coho-draft-r1.mp4",
+      "provenance": "foundry",
+      "audio": "not requested; silent draft",
+      "media": {
+        "duration_s": 6.0,
+        "width": 732,
+        "height": 1280,
+        "has_audio": false,
+        "size_bytes": 1081425
+      },
+      "elapsed_s": 21.95,
+      "accepted_to_completed_s": 18.74,
+      "processing": "H.264 display rendition; longest edge <=1280; CRF 28; metadata stripped; unexpected model audio removed for silent presentation; original-audio rendition retained; local presentation trimmed to requested 6 seconds after screening; recorded sampled-frame QA comes from the retained untrimmed rendition; re-encoded H.264 at 25 fps / CRF 20",
+      "source_media": {
+        "duration_s": 6.59,
+        "width": 768,
+        "height": 1344,
+        "has_audio": true,
+        "size_bytes": 5566398
+      },
+      "source_sha256": "2c3277d70b8dcb2b7fcea40232a6496036a901778b74f5463874a113b94ecf9f",
+      "source_image": null,
+      "prompt": "Silent fictional retail-food concept, six seconds, vertical. Extreme clarity on one UNWRAPPED toasted sandwich with visible bread and filling, held by plain metal tongs above a completely blank kraft paper bag. A pair of gloved hands lowers the sandwich into the bag at a simple plum-and-cream counter under warm night lighting. Only hands and food, no people visible. Every surface and paper item is entirely blank. NO stickers, wrappers, product labels, printed markings, logos, letters, numbers, menus, signs, UI, badges, symbols, mascots, prices, real trade dress or soundtrack.",
+      "request_id": "4ec1703e-6006-4bb8-87d0-aed9e354c3f4",
+      "original_file": "account-coho-draft-r1-original-audio.mp4",
+      "presentation_audio_removed": true,
+      "deployment": "minimax-h3-max-turbo",
+      "rendered_at": "2026-11-16T22:12:22.512461+00:00",
+      "estimate": {
+        "model": "minimax-h3-max-turbo",
+        "seconds": 6.0,
+        "resolution": "768P",
+        "price_key": "768P",
+        "usd_per_second": 0.04,
+        "estimate_usd": 0.24,
+        "estimate_high_usd": 0.268,
+        "caveats": [
+          "MiniMax output can run ~0.7 s longer than requested (high estimate includes it)",
+          "preview list price per generated second; not a billing guarantee"
+        ]
+      },
+      "qa": {
+        "evaluator": "azure-openai-vision",
+        "measured": true,
+        "scores": {
+          "logo_integrity": 1,
+          "label_legibility": 1,
+          "product_fidelity": 0.92,
+          "prompt_adherence": 0.78
+        },
+        "thresholds": {
+          "logo_integrity": 0.8,
+          "label_legibility": 0.7,
+          "product_fidelity": 0.8,
+          "prompt_adherence": 0.7
+        },
+        "findings": [
+          "No visible logos, signage, price numbers, or printed text on the bag or scene.",
+          "The kraft paper bag appears blank and unbranded.",
+          "A toasted sandwich is clearly visible and is being handled with tongs and gloved hands.",
+          "The scene matches the grab-and-go food concept, but the background is not clearly plum-and-cream and the framing does not fully show a simple counter setting.",
+          "The sandwich is not shown fully inside the bag yet, and the composition is more like a close-up food prep shot than a six-second retail concept shot."
+        ],
+        "hallucinated_objects": [
+          "metal tongs",
+          "gloved hands",
+          "kraft paper bag",
+          "toasted sandwich",
+          "counter surface"
+        ],
+        "content_safety": [
+          {
+            "frame": "frame_01.png",
+            "categories": [
+              {
+                "category": "Hate",
+                "severity": 0
+              },
+              {
+                "category": "SelfHarm",
+                "severity": 0
+              },
+              {
+                "category": "Sexual",
+                "severity": 0
+              },
+              {
+                "category": "Violence",
+                "severity": 2
+              }
+            ]
+          },
+          {
+            "frame": "frame_02.png",
+            "categories": [
+              {
+                "category": "Hate",
+                "severity": 0
+              },
+              {
+                "category": "SelfHarm",
+                "severity": 0
+              },
+              {
+                "category": "Sexual",
+                "severity": 0
+              },
+              {
+                "category": "Violence",
+                "severity": 0
+              }
+            ]
+          }
+        ],
+        "verdict": "fail",
+        "failed_checks": [
+          "content_safety"
+        ],
+        "publish_approved": false,
+        "reroll": {
+          "model": "ltx-2.5-pro",
+          "mode": "text-to-video",
+          "reason": "quality threshold failed; re-roll on the higher-fidelity tier"
+        },
+        "automated_checks_passed": false,
+        "human_signoff_required": true,
+        "sampled_frame_count": 2
+      },
+      "qa_evaluated_at": "2026-11-16T22:12:22.512461+00:00",
+      "account": "coho",
+      "stage": "draft",
+      "hero_eligible": false,
+      "human_signoff_required": true,
+      "replacement_for": "account-coho-draft",
+      "reroll_reason": "text-or-logo",
+      "evaluations": {
+        "status": "not_yet_evaluated",
+        "reason": "No new Foundry Evaluations run; original v1 evidence is immutable."
+      },
+      "presentation_trimmed_to_s": 6,
+      "qa_sampled_from": "account-coho-draft-r1-original-audio.mp4"
+    },
+    {
+      "id": "account-proseware-draft-r1",
+      "sku": "PWS-KIT-01",
+      "vertical": "home-improvement",
+      "model": "minimax-h3-max",
+      "mode": "text-to-video",
+      "aspect_ratio": "16:9",
+      "duration": 6,
+      "file": "account-proseware-draft-r1.mp4",
+      "provenance": "foundry",
+      "audio": "not requested; silent draft",
+      "media": {
+        "duration_s": 6.0,
+        "width": 1280,
+        "height": 732,
+        "has_audio": false,
+        "size_bytes": 759021
+      },
+      "elapsed_s": 16.63,
+      "accepted_to_completed_s": 13.52,
+      "processing": "H.264 display rendition; longest edge <=1280; CRF 28; metadata stripped; unexpected model audio removed for silent presentation; original-audio rendition retained; local presentation trimmed to requested 6 seconds after screening; recorded sampled-frame QA comes from the retained untrimmed rendition; re-encoded H.264 at 25 fps / CRF 20",
+      "source_media": {
+        "duration_s": 6.59,
+        "width": 1344,
+        "height": 768,
+        "has_audio": true,
+        "size_bytes": 4911679
+      },
+      "source_sha256": "80798e7cb96dd9e4df3148986f81197294a1c8ea352c2db9ddffa0db77ade85e",
+      "source_image": null,
+      "prompt": "Silent fictional workplace-kit concept, six seconds. Wide fixed view of a small empty office. One plain indigo-and-white delivery cart rolls in. On its shelf, a single plain indigo box opens. Reveal UNPACKAGED objects arranged exactly left to right: stainless coffee press with a plain mug; transparent unlabelled cleaning bottle with a blank cloth; ergonomic charcoal office chair; loose blank white printer paper. No retail product packets or coffee bags. Every surface completely blank, no printed or embossed markings anywhere. No logos, letters, writing, labels, numbers, stickers, signs, slogans, UI, button props, people, faces, real trade dress or soundtrack.",
+      "request_id": "d9c4c1e9-01f4-420b-8757-31805a02ac28",
+      "original_file": "account-proseware-draft-r1-original-audio.mp4",
+      "presentation_audio_removed": true,
+      "deployment": "minimax-h3-max",
+      "rendered_at": "2026-11-16T22:12:48.513591+00:00",
+      "estimate": {
+        "model": "minimax-h3-max",
+        "seconds": 6.0,
+        "resolution": "768P",
+        "price_key": "768P",
+        "usd_per_second": 0.08,
+        "estimate_usd": 0.48,
+        "estimate_high_usd": 0.536,
+        "caveats": [
+          "MiniMax output can run ~0.7 s longer than requested (high estimate includes it)",
+          "preview list price per generated second; not a billing guarantee"
+        ]
+      },
+      "qa": {
+        "evaluator": "azure-openai-vision",
+        "measured": true,
+        "scores": {
+          "logo_integrity": 0.1,
+          "label_legibility": 0.0,
+          "product_fidelity": 0.35,
+          "prompt_adherence": 0.25
+        },
+        "thresholds": {
+          "logo_integrity": 0.8,
+          "label_legibility": 0.7,
+          "product_fidelity": 0.8,
+          "prompt_adherence": 0.7
+        },
+        "findings": [
+          "Visible Apple logo on the computer in the office background, violating the no-logos rule.",
+          "The scene shows a coffee press, mug, cleaning bottle, and paper, but the required chair is not visible in the revealed arrangement.",
+          "The prompt calls for a plain indigo-and-white delivery cart and box with completely blank surfaces; the cart/box are visible but the overall scene includes noncompliant branded office equipment in the background.",
+          "No visible on-screen text or labels on the featured kit items."
+        ],
+        "hallucinated_objects": [
+          "Apple logo",
+          "computer/iMac branding",
+          "office printer/copier",
+          "binder folders",
+          "pen cup",
+          "desk chair in background"
+        ],
+        "content_safety": [
+          {
+            "frame": "frame_01.png",
+            "categories": [
+              {
+                "category": "Hate",
+                "severity": 0
+              },
+              {
+                "category": "SelfHarm",
+                "severity": 0
+              },
+              {
+                "category": "Sexual",
+                "severity": 0
+              },
+              {
+                "category": "Violence",
+                "severity": 0
+              }
+            ]
+          },
+          {
+            "frame": "frame_02.png",
+            "categories": [
+              {
+                "category": "Hate",
+                "severity": 0
+              },
+              {
+                "category": "SelfHarm",
+                "severity": 0
+              },
+              {
+                "category": "Sexual",
+                "severity": 0
+              },
+              {
+                "category": "Violence",
+                "severity": 0
+              }
+            ]
+          }
+        ],
+        "verdict": "fail",
+        "failed_checks": [
+          "logo_integrity",
+          "label_legibility",
+          "product_fidelity",
+          "prompt_adherence"
+        ],
+        "publish_approved": false,
+        "reroll": {
+          "model": "ltx-2.5-pro",
+          "mode": "text-to-video",
+          "reason": "quality threshold failed; re-roll on the higher-fidelity tier"
+        },
+        "automated_checks_passed": false,
+        "human_signoff_required": true,
+        "sampled_frame_count": 2
+      },
+      "qa_evaluated_at": "2026-11-16T22:12:48.513591+00:00",
+      "account": "proseware",
+      "stage": "draft",
+      "hero_eligible": false,
+      "human_signoff_required": true,
+      "replacement_for": "account-proseware-draft",
+      "reroll_reason": "text-or-logo",
+      "evaluations": {
+        "status": "not_yet_evaluated",
+        "reason": "No new Foundry Evaluations run; original v1 evidence is immutable."
+      },
+      "presentation_trimmed_to_s": 6,
+      "qa_sampled_from": "account-proseware-draft-r1-original-audio.mp4"
+    },
+    {
+      "id": "account-wide-world-draft-r1",
+      "sku": "WWW-BULK-01",
+      "vertical": "apparel",
+      "model": "minimax-h3-max-turbo",
+      "mode": "text-to-video",
+      "aspect_ratio": "16:9",
+      "duration": 6,
+      "file": "account-wide-world-draft-r1.mp4",
+      "provenance": "foundry",
+      "audio": "not requested; silent draft",
+      "media": {
+        "duration_s": 6.0,
+        "width": 1280,
+        "height": 732,
+        "has_audio": false,
+        "size_bytes": 1308185
+      },
+      "elapsed_s": 22.58,
+      "accepted_to_completed_s": 19.03,
+      "processing": "H.264 display rendition; longest edge <=1280; CRF 28; metadata stripped; unexpected model audio removed for silent presentation; original-audio rendition retained; local presentation trimmed to requested 6 seconds after screening; recorded sampled-frame QA comes from the retained untrimmed rendition; re-encoded H.264 at 25 fps / CRF 20",
+      "source_media": {
+        "duration_s": 6.59,
+        "width": 1344,
+        "height": 768,
+        "has_audio": true,
+        "size_bytes": 7056634
+      },
+      "source_sha256": "e7bf2a73872d09db85f5ae9ef0928ca990ac7c47ba91926ccfdad5c15c63c098",
+      "source_image": null,
+      "prompt": "Silent fictional wholesale essentials concept, six seconds. Extreme close framing on a flatbed cart holding a loose bundle of plain unprinted paper-towel rolls and six sparkling-water bottles. Every bottle is entirely transparent with no label, sleeve, cap printing or marks. A plain slate-and-mustard open cardboard tray surrounds the bottles, with completely blank surfaces and no barcode. The cart rolls gently past an out-of-focus empty steel warehouse rack in natural light. Only the blank goods and cart are in focus; background racks have no tags or shelf labels. No people, logos, symbols, barcodes, signage, text, letters, numbers, prices, phone UI or real trade dress. No soundtrack.",
+      "request_id": "a5481167-5d0c-4b70-b4d9-7a80eac64644",
+      "original_file": "account-wide-world-draft-r1-original-audio.mp4",
+      "presentation_audio_removed": true,
+      "deployment": "minimax-h3-max-turbo",
+      "rendered_at": "2026-11-16T22:18:26.331609+00:00",
+      "estimate": {
+        "model": "minimax-h3-max-turbo",
+        "seconds": 6.0,
+        "resolution": "768P",
+        "price_key": "768P",
+        "usd_per_second": 0.04,
+        "estimate_usd": 0.24,
+        "estimate_high_usd": 0.268,
+        "caveats": [
+          "MiniMax output can run ~0.7 s longer than requested (high estimate includes it)",
+          "preview list price per generated second; not a billing guarantee"
+        ]
+      },
+      "qa": {
+        "evaluator": "azure-openai-vision",
+        "measured": true,
+        "scores": {
+          "logo_integrity": 0.98,
+          "label_legibility": 0.92,
+          "product_fidelity": 0.78,
+          "prompt_adherence": 0.74
+        },
+        "thresholds": {
+          "logo_integrity": 0.8,
+          "label_legibility": 0.7,
+          "product_fidelity": 0.8,
+          "prompt_adherence": 0.7
+        },
+        "findings": [
+          "No visible logos, signage, price numbers, or on-screen text.",
+          "Packaging appears plain slate and mustard with blank surfaces; bottles are transparent and unlabeled.",
+          "Warehouse shelving is visible in the background, consistent with the setting.",
+          "The scene shows four visible bottles rather than six, and the paper-towel rolls are not clearly a loose bundle on a flatbed cart.",
+          "The cart/tray is in focus, but the framing does not fully match the extreme close, six-bottle composition described in the prompt."
+        ],
+        "hallucinated_objects": [
+          "flatbed cart",
+          "six sparkling-water bottles",
+          "loose bundle of paper-towel rolls",
+          "empty steel warehouse rack"
+        ],
+        "content_safety": [
+          {
+            "frame": "frame_01.png",
+            "categories": [
+              {
+                "category": "Hate",
+                "severity": 0
+              },
+              {
+                "category": "SelfHarm",
+                "severity": 0
+              },
+              {
+                "category": "Sexual",
+                "severity": 0
+              },
+              {
+                "category": "Violence",
+                "severity": 0
+              }
+            ]
+          },
+          {
+            "frame": "frame_02.png",
+            "categories": [
+              {
+                "category": "Hate",
+                "severity": 0
+              },
+              {
+                "category": "SelfHarm",
+                "severity": 0
+              },
+              {
+                "category": "Sexual",
+                "severity": 0
+              },
+              {
+                "category": "Violence",
+                "severity": 0
+              }
+            ]
+          }
+        ],
+        "verdict": "fail",
+        "failed_checks": [
+          "product_fidelity"
+        ],
+        "publish_approved": false,
+        "reroll": {
+          "model": "ltx-2.5-pro",
+          "mode": "text-to-video",
+          "reason": "quality threshold failed; re-roll on the higher-fidelity tier"
+        },
+        "automated_checks_passed": false,
+        "human_signoff_required": true,
+        "sampled_frame_count": 2
+      },
+      "qa_evaluated_at": "2026-11-16T22:18:26.331609+00:00",
+      "account": "wide-world",
+      "stage": "draft",
+      "hero_eligible": false,
+      "human_signoff_required": true,
+      "replacement_for": "account-wide-world-draft",
+      "reroll_reason": "text-or-logo",
+      "evaluations": {
+        "status": "not_yet_evaluated",
+        "reason": "No new Foundry Evaluations run; original v1 evidence is immutable."
+      },
+      "presentation_trimmed_to_s": 6,
+      "qa_sampled_from": "account-wide-world-draft-r1-original-audio.mp4"
+    },
+    {
+      "id": "account-munson-draft-r1",
+      "sku": "MUN-BASKET-01",
+      "vertical": "grocery-pharmacy",
+      "model": "minimax-h3-max-turbo",
+      "mode": "text-to-video",
+      "aspect_ratio": "9:16",
+      "duration": 6,
+      "file": "account-munson-draft-r1.mp4",
+      "provenance": "foundry",
+      "audio": "not requested; silent draft",
+      "media": {
+        "duration_s": 6.0,
+        "width": 732,
+        "height": 1280,
+        "has_audio": false,
+        "size_bytes": 1436343
+      },
+      "elapsed_s": 16.35,
+      "accepted_to_completed_s": 13.46,
+      "processing": "H.264 display rendition; longest edge <=1280; CRF 28; metadata stripped; unexpected model audio removed for silent presentation; original-audio rendition retained; local presentation trimmed to requested 6 seconds after screening; recorded sampled-frame QA comes from the retained untrimmed rendition; re-encoded H.264 at 25 fps / CRF 20",
+      "source_media": {
+        "duration_s": 6.59,
+        "width": 768,
+        "height": 1344,
+        "has_audio": true,
+        "size_bytes": 8378155
+      },
+      "source_sha256": "cc86c2e2cb44f2edc9f098e02b544ae578882eda7965884c4b8976c8d8fa51ae",
+      "source_image": null,
+      "prompt": "Silent fictional neighborhood-grocery concept, six seconds. Tight overhead close-up of an otherwise empty deep-green-and-oat woven basket on a plain oat countertop. Only a shopper's hands enter the shot, gently placing one unwrapped bakery loaf, dry pasta in a completely transparent unprinted bag, and an entirely transparent unlabelled olive-oil bottle into the basket, one at a time. Warm local market daylight. All three groceries remain visible together at the end. Only a softly blurred blank cream wall is behind the counter; no shelves, retail fixtures, label strips or price cards anywhere. No logos, signage, writing, barcodes, letters, numbers, prices, phone UI, faces, health claims or real trade dress. No soundtrack.",
+      "request_id": "0a64488f-2c9a-41d9-a685-77fe05eff9ad",
+      "original_file": "account-munson-draft-r1-original-audio.mp4",
+      "presentation_audio_removed": true,
+      "deployment": "minimax-h3-max-turbo",
+      "rendered_at": "2026-11-16T22:18:52.511012+00:00",
+      "estimate": {
+        "model": "minimax-h3-max-turbo",
+        "seconds": 6.0,
+        "resolution": "768P",
+        "price_key": "768P",
+        "usd_per_second": 0.04,
+        "estimate_usd": 0.24,
+        "estimate_high_usd": 0.268,
+        "caveats": [
+          "MiniMax output can run ~0.7 s longer than requested (high estimate includes it)",
+          "preview list price per generated second; not a billing guarantee"
+        ]
+      },
+      "qa": {
+        "evaluator": "azure-openai-vision",
+        "measured": true,
+        "scores": {
+          "logo_integrity": 1,
+          "label_legibility": 1,
+          "product_fidelity": 0.72,
+          "prompt_adherence": 0.78
+        },
+        "thresholds": {
+          "logo_integrity": 0.8,
+          "label_legibility": 0.7,
+          "product_fidelity": 0.8,
+          "prompt_adherence": 0.7
+        },
+        "findings": [
+          "No visible logos, signage, price numbers, or on-screen text.",
+          "Basket is deep-green and woven; packaging shown is unbranded and transparent.",
+          "Bread, pasta, and an olive-oil bottle are all present in the basket by the end.",
+          "Prompt mismatch: the basket is not otherwise empty at the start of the visible sequence, and the olive-oil bottle appears dark/opaque rather than entirely transparent.",
+          "The scene appears to include only hands and products; no faces or health claims are visible."
+        ],
+        "hallucinated_objects": [
+          "olive-oil bottle (appears opaque/dark rather than transparent)"
+        ],
+        "content_safety": [
+          {
+            "frame": "frame_01.png",
+            "categories": [
+              {
+                "category": "Hate",
+                "severity": 0
+              },
+              {
+                "category": "SelfHarm",
+                "severity": 0
+              },
+              {
+                "category": "Sexual",
+                "severity": 0
+              },
+              {
+                "category": "Violence",
+                "severity": 0
+              }
+            ]
+          },
+          {
+            "frame": "frame_02.png",
+            "categories": [
+              {
+                "category": "Hate",
+                "severity": 0
+              },
+              {
+                "category": "SelfHarm",
+                "severity": 0
+              },
+              {
+                "category": "Sexual",
+                "severity": 0
+              },
+              {
+                "category": "Violence",
+                "severity": 0
+              }
+            ]
+          }
+        ],
+        "verdict": "fail",
+        "failed_checks": [
+          "product_fidelity"
+        ],
+        "publish_approved": false,
+        "reroll": {
+          "model": "ltx-2.5-pro",
+          "mode": "text-to-video",
+          "reason": "quality threshold failed; re-roll on the higher-fidelity tier"
+        },
+        "automated_checks_passed": false,
+        "human_signoff_required": true,
+        "sampled_frame_count": 2
+      },
+      "qa_evaluated_at": "2026-11-16T22:18:52.511012+00:00",
+      "account": "munson",
+      "stage": "draft",
+      "hero_eligible": false,
+      "human_signoff_required": true,
+      "replacement_for": "account-munson-draft",
+      "reroll_reason": "text-or-logo",
+      "evaluations": {
+        "status": "not_yet_evaluated",
+        "reason": "No new Foundry Evaluations run; original v1 evidence is immutable."
+      },
+      "presentation_trimmed_to_s": 6,
+      "qa_sampled_from": "account-munson-draft-r1-original-audio.mp4"
+    },
+    {
+      "id": "account-best-for-you-draft-r1",
+      "sku": "BFY-MEAL-01",
+      "vertical": "grocery-pharmacy",
+      "model": "minimax-h3-max-turbo",
+      "mode": "text-to-video",
+      "aspect_ratio": "16:9",
+      "duration": 6,
+      "file": "account-best-for-you-draft-r1.mp4",
+      "provenance": "foundry",
+      "audio": "not requested; silent draft",
+      "media": {
+        "duration_s": 6.0,
+        "width": 1280,
+        "height": 732,
+        "has_audio": false,
+        "size_bytes": 1324766
+      },
+      "elapsed_s": 17.36,
+      "accepted_to_completed_s": 13.94,
+      "processing": "H.264 display rendition; longest edge <=1280; CRF 28; metadata stripped; unexpected model audio removed for silent presentation; original-audio rendition retained; local presentation trimmed to requested 6 seconds after screening; recorded sampled-frame QA comes from the retained untrimmed rendition; re-encoded H.264 at 25 fps / CRF 20",
+      "source_media": {
+        "duration_s": 6.59,
+        "width": 1344,
+        "height": 768,
+        "has_audio": true,
+        "size_bytes": 6882355
+      },
+      "source_sha256": "b4b4c053ad0dc25c1c58cca8e02c82b1eb134620d267b26646c258a0a51c2739",
+      "source_image": null,
+      "prompt": "Silent fictional grocery meal inspiration concept, six seconds. A completely blank terracotta-and-olive meal-kit box opens on a spotless kitchen counter. Whole cooked carrots, roasted potatoes, green peas and a bread roll gently slide from the box onto a plain ceramic dinner plate in playful stop-motion. Warm golden holiday lighting and a gentle tabletop push-in. Entirely vegetarian prepared food; no raw meat, knives, forks, cutting, flames, hands, people or animals. No injury or threatening activity. All packaging completely blank. No logos, signage, writing, letters, numbers, price comparisons, prices, phone UI, mascots, slogans or real trade dress. No soundtrack.",
+      "request_id": "222530a6-13d7-4710-8a2e-9f63bdec954d",
+      "original_file": "account-best-for-you-draft-r1-original-audio.mp4",
+      "presentation_audio_removed": true,
+      "deployment": "minimax-h3-max-turbo",
+      "rendered_at": "2026-11-16T22:19:21.161911+00:00",
+      "estimate": {
+        "model": "minimax-h3-max-turbo",
+        "seconds": 6.0,
+        "resolution": "768P",
+        "price_key": "768P",
+        "usd_per_second": 0.04,
+        "estimate_usd": 0.24,
+        "estimate_high_usd": 0.268,
+        "caveats": [
+          "MiniMax output can run ~0.7 s longer than requested (high estimate includes it)",
+          "preview list price per generated second; not a billing guarantee"
+        ]
+      },
+      "qa": {
+        "evaluator": "azure-openai-vision",
+        "measured": true,
+        "scores": {
+          "logo_integrity": 1,
+          "label_legibility": 1,
+          "product_fidelity": 0.92,
+          "prompt_adherence": 0.78
+        },
+        "thresholds": {
+          "logo_integrity": 0.8,
+          "label_legibility": 0.7,
+          "product_fidelity": 0.8,
+          "prompt_adherence": 0.7
+        },
+        "findings": [
+          "No visible logo, signage, text, or price markings on the box or scene.",
+          "The meal-kit box is plain terracotta/olive and appears blank as required.",
+          "Visible food matches the vegetarian holiday meal concept: carrots, potatoes, peas, and a bread roll.",
+          "The scene includes a plate and kitchen setting consistent with the prompt.",
+          "Prompt adherence is reduced because the box is not fully terracotta-and-olive in a clearly branded meal-kit presentation, and the composition shows utensils/bowl in frame despite the prompt excluding forks/knives and emphasizing a minimal blank-box concept."
+        ],
+        "hallucinated_objects": [
+          "ceramic dinner plate",
+          "bowl",
+          "forks/utensils",
+          "kitchen counter/background props"
+        ],
+        "content_safety": [
+          {
+            "frame": "frame_01.png",
+            "categories": [
+              {
+                "category": "Hate",
+                "severity": 0
+              },
+              {
+                "category": "SelfHarm",
+                "severity": 0
+              },
+              {
+                "category": "Sexual",
+                "severity": 0
+              },
+              {
+                "category": "Violence",
+                "severity": 0
+              }
+            ]
+          },
+          {
+            "frame": "frame_02.png",
+            "categories": [
+              {
+                "category": "Hate",
+                "severity": 0
+              },
+              {
+                "category": "SelfHarm",
+                "severity": 0
+              },
+              {
+                "category": "Sexual",
+                "severity": 0
+              },
+              {
+                "category": "Violence",
+                "severity": 0
+              }
+            ]
+          }
+        ],
+        "verdict": "pass",
+        "failed_checks": [],
+        "publish_approved": false,
+        "automated_checks_passed": true,
+        "human_signoff_required": true,
+        "sampled_frame_count": 2
+      },
+      "qa_evaluated_at": "2026-11-16T22:19:21.161911+00:00",
+      "account": "best-for-you",
+      "stage": "draft",
+      "hero_eligible": false,
+      "human_signoff_required": true,
+      "replacement_for": "account-best-for-you-draft",
+      "reroll_reason": "unsafe",
+      "evaluations": {
+        "status": "not_yet_evaluated",
+        "reason": "No new Foundry Evaluations run; original v1 evidence is immutable."
+      },
+      "presentation_trimmed_to_s": 6,
+      "qa_sampled_from": "account-best-for-you-draft-r1-original-audio.mp4"
+    },
+    {
+      "id": "account-tailspin-draft-s1",
+      "sku": "TBC-BUNDLE-01",
+      "vertical": "qsr",
+      "model": "ltx-2.5-fast",
+      "mode": "text-to-video",
+      "aspect_ratio": "9:16",
+      "duration": 6,
+      "file": "account-tailspin-draft-s1.mp4",
+      "provenance": "foundry",
+      "audio": "not requested; silent draft",
+      "media": {
+        "duration_s": 6.0,
+        "width": 720,
+        "height": 1280,
+        "has_audio": false,
+        "size_bytes": 356387
+      },
+      "elapsed_s": 50.58,
+      "accepted_to_completed_s": 44.92,
+      "processing": "H.264 display rendition; longest edge <=1280; CRF 28; metadata stripped",
+      "source_media": {
+        "duration_s": 6.0,
+        "width": 720,
+        "height": 1280,
+        "has_audio": false,
+        "size_bytes": 1365705
+      },
+      "source_sha256": "85e83c0e838f6a741703ab8cbb953b08012ee8e9b2c71412c3d28de66c89934e",
+      "source_image": null,
+      "prompt": "Silent fictional quick-service meal concept, six seconds, vertical. One simple value meal sits together on a plain teal tray on a warm wooden counter: a clearly visible cheeseburger with sesame bun, lettuce and tomato resting on open plain cream paper, golden fries standing in a plain teal paper carton, and a plain cream paper cup with a teal lid. Light steam rises from the burger. Gentle slow push-in, warm counter light, shallow depth of field. Only teal and cream packaging. Every surface is completely blank: no writing, letters, numbers, stickers, labels, barcodes, logos, symbols, signage, prices, phone UI, mascots, slogans or real trade dress. No people, hands or faces. No soundtrack.",
+      "request_id": "d5429d37-e4b1-40de-9c10-04995c418895",
+      "original_file": null,
+      "presentation_audio_removed": false,
+      "presentation_trimmed_to_s": null,
+      "deployment": "ltx-2.5-fast",
+      "rendered_at": "2026-11-16T22:37:40.682338+00:00",
+      "estimate": {
+        "model": "ltx-2.5-fast",
+        "seconds": 6.0,
+        "resolution": "720p",
+        "price_key": "720p",
+        "usd_per_second": 0.09,
+        "estimate_usd": 0.54,
+        "estimate_high_usd": 0.54,
+        "caveats": [
+          "preview list price per generated second; not a billing guarantee"
+        ]
+      },
+      "qa": {
+        "evaluator": "azure-openai-vision",
+        "measured": true,
+        "scores": {
+          "logo_integrity": 1,
+          "label_legibility": 1,
+          "product_fidelity": 0.98,
+          "prompt_adherence": 0.96
+        },
+        "thresholds": {
+          "logo_integrity": 0.8,
+          "label_legibility": 0.7,
+          "product_fidelity": 0.8,
+          "prompt_adherence": 0.7
+        },
+        "findings": [
+          "No visible logos, signage, prices, or on-screen text.",
+          "Packaging is plain teal and cream with no readable labels or symbols.",
+          "Burger, fries, and drink are all clearly visible and arranged as a single meal bundle.",
+          "Warm wooden counter and shallow depth-of-field match the prompt; steam is visible.",
+          "Minor deviation: the burger appears slightly more stylized/compact than a literal cheeseburger reference, but still fits the concept."
+        ],
+        "hallucinated_objects": [],
+        "content_safety": [
+          {
+            "frame": "frame_01.png",
+            "categories": [
+              {
+                "category": "Hate",
+                "severity": 0
+              },
+              {
+                "category": "SelfHarm",
+                "severity": 0
+              },
+              {
+                "category": "Sexual",
+                "severity": 0
+              },
+              {
+                "category": "Violence",
+                "severity": 0
+              }
+            ]
+          },
+          {
+            "frame": "frame_02.png",
+            "categories": [
+              {
+                "category": "Hate",
+                "severity": 0
+              },
+              {
+                "category": "SelfHarm",
+                "severity": 0
+              },
+              {
+                "category": "Sexual",
+                "severity": 0
+              },
+              {
+                "category": "Violence",
+                "severity": 0
+              }
+            ]
+          }
+        ],
+        "verdict": "pass",
+        "failed_checks": [],
+        "publish_approved": false,
+        "automated_checks_passed": true,
+        "human_signoff_required": true,
+        "sampled_frame_count": 2
+      },
+      "qa_evaluated_at": "2026-11-16T22:37:40.682338+00:00",
+      "account": "tailspin",
+      "stage": "draft",
+      "hero_eligible": false,
+      "human_signoff_required": true,
+      "replacement_for": "account-tailspin-draft",
+      "reroll_reason": "simplified-brief",
+      "brief_version": 2,
+      "evaluations": {
+        "status": "not_yet_evaluated",
+        "reason": "No new Foundry Evaluations run; original v1 evidence is immutable."
+      }
+    },
+    {
+      "id": "account-coho-draft-s1",
+      "sku": "CCM-MEAL-01",
+      "vertical": "qsr",
+      "model": "minimax-h3-max-turbo",
+      "mode": "text-to-video",
+      "aspect_ratio": "9:16",
+      "duration": 6,
+      "file": "account-coho-draft-s1.mp4",
+      "provenance": "foundry",
+      "audio": "not requested; silent draft",
+      "media": {
+        "duration_s": 6.0,
+        "width": 732,
+        "height": 1280,
+        "has_audio": false,
+        "size_bytes": 985384
+      },
+      "elapsed_s": 16.52,
+      "accepted_to_completed_s": 13.52,
+      "processing": "H.264 display rendition; longest edge <=1280; CRF 28; metadata stripped; unexpected model audio removed for silent presentation; original-audio rendition retained; presentation trimmed to requested 6 seconds; re-encoded H.264 at 25 fps / CRF 20",
+      "source_media": {
+        "duration_s": 6.59,
+        "width": 768,
+        "height": 1344,
+        "has_audio": true,
+        "size_bytes": 5742025
+      },
+      "source_sha256": "38021018d5df5ca2a1c9dfc41355369e9029805958d30948f2e48e90a16a6481",
+      "source_image": null,
+      "prompt": "Silent fictional convenience-food concept, six seconds, vertical. One freshly toasted hot sandwich, cut in half to show its filling, rests on a small sheet of plain cream paper next to an upright plain kraft paper bag with a plum folded top, on a clean cream counter. Soft steam rises. Warm evening light with a dark softly blurred background. Gentle slow push-in. No tongs, utensils, food case, store interior or stripes. Every surface is completely blank: no writing, letters, numbers, stickers, labels, barcodes, logos, symbols, signage, prices, phone UI, mascots, slogans or real trade dress. No people, hands or faces. No soundtrack.",
+      "request_id": "65d6a50b-e1f2-4fab-b1b4-c5bcdb4ed53c",
+      "original_file": "account-coho-draft-s1-original-audio.mp4",
+      "presentation_audio_removed": true,
+      "presentation_trimmed_to_s": 6,
+      "deployment": "minimax-h3-max-turbo",
+      "rendered_at": "2026-11-16T22:38:07.551312+00:00",
+      "estimate": {
+        "model": "minimax-h3-max-turbo",
+        "seconds": 6.0,
+        "resolution": "768P",
+        "price_key": "768P",
+        "usd_per_second": 0.04,
+        "estimate_usd": 0.24,
+        "estimate_high_usd": 0.268,
+        "caveats": [
+          "MiniMax output can run ~0.7 s longer than requested (high estimate includes it)",
+          "preview list price per generated second; not a billing guarantee"
+        ]
+      },
+      "qa": {
+        "evaluator": "azure-openai-vision",
+        "measured": true,
+        "scores": {
+          "logo_integrity": 1,
+          "label_legibility": 1,
+          "product_fidelity": 0.92,
+          "prompt_adherence": 0.18
+        },
+        "thresholds": {
+          "logo_integrity": 0.8,
+          "label_legibility": 0.7,
+          "product_fidelity": 0.8,
+          "prompt_adherence": 0.7
+        },
+        "findings": [
+          "No visible logos, signage, prices, or on-screen text.",
+          "The bag is plain kraft and unbranded; the food is recognizable as a grab-and-go sandwich meal.",
+          "Product is not a single sandwich: it is cut into two halves, which matches part of the prompt, but the scene shows a kitchen/counter setup rather than a fully blank fictional convenience-food presentation.",
+          "Prompt violations visible: no plum folded top on the bag, no clearly cream-only accents, no dark softly blurred background consistent with the brief, and the setting appears like a real kitchen/store prep area rather than a blank concept scene.",
+          "No people, hands, utensils, or unsafe handling are visible."
+        ],
+        "hallucinated_objects": [
+          "kitchen sink/faucet background",
+          "countertop environment beyond the requested blank cream counter"
+        ],
+        "content_safety": [
+          {
+            "frame": "frame_01.png",
+            "categories": [
+              {
+                "category": "Hate",
+                "severity": 0
+              },
+              {
+                "category": "SelfHarm",
+                "severity": 0
+              },
+              {
+                "category": "Sexual",
+                "severity": 0
+              },
+              {
+                "category": "Violence",
+                "severity": 0
+              }
+            ]
+          },
+          {
+            "frame": "frame_02.png",
+            "categories": [
+              {
+                "category": "Hate",
+                "severity": 0
+              },
+              {
+                "category": "SelfHarm",
+                "severity": 0
+              },
+              {
+                "category": "Sexual",
+                "severity": 0
+              },
+              {
+                "category": "Violence",
+                "severity": 0
+              }
+            ]
+          }
+        ],
+        "verdict": "fail",
+        "failed_checks": [
+          "prompt_adherence"
+        ],
+        "publish_approved": false,
+        "reroll": {
+          "model": "ltx-2.5-pro",
+          "mode": "text-to-video",
+          "reason": "quality threshold failed; re-roll on the higher-fidelity tier"
+        },
+        "automated_checks_passed": false,
+        "human_signoff_required": true,
+        "sampled_frame_count": 2
+      },
+      "qa_evaluated_at": "2026-11-16T22:38:07.551312+00:00",
+      "account": "coho",
+      "stage": "draft",
+      "hero_eligible": false,
+      "human_signoff_required": true,
+      "replacement_for": "account-coho-draft-r1",
+      "reroll_reason": "simplified-brief",
+      "brief_version": 3,
+      "evaluations": {
+        "status": "not_yet_evaluated",
+        "reason": "No new Foundry Evaluations run; original v1 evidence is immutable."
+      }
+    },
+    {
+      "id": "account-proseware-draft-s1",
+      "sku": "PWS-KIT-01",
+      "vertical": "home-improvement",
+      "model": "minimax-h3-max",
+      "mode": "text-to-video",
+      "aspect_ratio": "16:9",
+      "duration": 6,
+      "file": "account-proseware-draft-s1.mp4",
+      "provenance": "foundry",
+      "audio": "not requested; silent draft",
+      "media": {
+        "duration_s": 6.0,
+        "width": 1280,
+        "height": 732,
+        "has_audio": false,
+        "size_bytes": 637605
+      },
+      "elapsed_s": 16.23,
+      "accepted_to_completed_s": 13.46,
+      "processing": "H.264 display rendition; longest edge <=1280; CRF 28; metadata stripped; unexpected model audio removed for silent presentation; original-audio rendition retained; presentation trimmed to requested 6 seconds; re-encoded H.264 at 25 fps / CRF 20",
+      "source_media": {
+        "duration_s": 6.59,
+        "width": 1344,
+        "height": 768,
+        "has_audio": true,
+        "size_bytes": 4857549
+      },
+      "source_sha256": "7c67fd12d234ac0b9776e0ce7a600a7458663c1c7f05430aab5181b309b1282f",
+      "source_image": null,
+      "prompt": "Silent fictional small-office supply concept, six seconds, wide 16:9. A bright, empty small-office corner with a plain pale-grey wall and a light wood floor. Exactly four items stand in one straight row from left to right: a low white side table holding a stainless coffee press and a plain white mug; a clear unlabelled spray bottle with a folded grey cloth on a plain indigo box; a charcoal ergonomic office chair; a neat stack of plain white printer paper on a plain white box. Gentle slow lateral camera slide from left to right, even daylight. No computers, monitors, screens, printers, phones, electronics, plants, shelves, windows, wall art, carts or opening boxes. Every surface is completely blank: no writing, letters, numbers, stickers, labels, barcodes, logos, symbols, signage, prices, phone UI, mascots, slogans or real trade dress. No people, hands or faces. No soundtrack.",
+      "request_id": "d3ed5e81-dfbe-41e7-b441-b7363e63c107",
+      "original_file": "account-proseware-draft-s1-original-audio.mp4",
+      "presentation_audio_removed": true,
+      "presentation_trimmed_to_s": 6,
+      "deployment": "minimax-h3-max",
+      "rendered_at": "2026-11-16T22:38:33.199975+00:00",
+      "estimate": {
+        "model": "minimax-h3-max",
+        "seconds": 6.0,
+        "resolution": "768P",
+        "price_key": "768P",
+        "usd_per_second": 0.08,
+        "estimate_usd": 0.48,
+        "estimate_high_usd": 0.536,
+        "caveats": [
+          "MiniMax output can run ~0.7 s longer than requested (high estimate includes it)",
+          "preview list price per generated second; not a billing guarantee"
+        ]
+      },
+      "qa": {
+        "evaluator": "azure-openai-vision",
+        "measured": true,
+        "scores": {
+          "logo_integrity": 1,
+          "label_legibility": 1,
+          "product_fidelity": 0.62,
+          "prompt_adherence": 0.58
+        },
+        "thresholds": {
+          "logo_integrity": 0.8,
+          "label_legibility": 0.7,
+          "product_fidelity": 0.8,
+          "prompt_adherence": 0.7
+        },
+        "findings": [
+          "No visible logos, signage, prices, or on-screen text.",
+          "Visible items are arranged left to right as coffee setup, cleaning supplies, chair, and paper stack, matching the core product concept.",
+          "All visible surfaces appear blank and unbranded.",
+          "The scene is not a bright empty corner with only four items; it includes a more staged setup and multiple supporting objects/boxes.",
+          "The prompt specifies a low white side table, a clear unlabelled spray bottle with folded grey cloth on a plain indigo box, a charcoal ergonomic office chair, and a neat stack of plain white printer paper on a plain white box; the image broadly matches but the coffee press/table styling and overall composition are not exact.",
+          "The camera is static in the provided frame rather than clearly showing a gentle lateral slide."
+        ],
+        "hallucinated_objects": [
+          "white side table",
+          "coffee press",
+          "white mug",
+          "spray bottle",
+          "grey cloth",
+          "indigo box",
+          "ergonomic office chair",
+          "stack of printer paper",
+          "white box"
+        ],
+        "content_safety": [
+          {
+            "frame": "frame_01.png",
+            "categories": [
+              {
+                "category": "Hate",
+                "severity": 0
+              },
+              {
+                "category": "SelfHarm",
+                "severity": 0
+              },
+              {
+                "category": "Sexual",
+                "severity": 0
+              },
+              {
+                "category": "Violence",
+                "severity": 0
+              }
+            ]
+          },
+          {
+            "frame": "frame_02.png",
+            "categories": [
+              {
+                "category": "Hate",
+                "severity": 0
+              },
+              {
+                "category": "SelfHarm",
+                "severity": 0
+              },
+              {
+                "category": "Sexual",
+                "severity": 0
+              },
+              {
+                "category": "Violence",
+                "severity": 0
+              }
+            ]
+          }
+        ],
+        "verdict": "fail",
+        "failed_checks": [
+          "product_fidelity",
+          "prompt_adherence"
+        ],
+        "publish_approved": false,
+        "reroll": {
+          "model": "ltx-2.5-pro",
+          "mode": "text-to-video",
+          "reason": "quality threshold failed; re-roll on the higher-fidelity tier"
+        },
+        "automated_checks_passed": false,
+        "human_signoff_required": true,
+        "sampled_frame_count": 2
+      },
+      "qa_evaluated_at": "2026-11-16T22:38:33.199975+00:00",
+      "account": "proseware",
+      "stage": "draft",
+      "hero_eligible": false,
+      "human_signoff_required": true,
+      "replacement_for": "account-proseware-draft-r1",
+      "reroll_reason": "simplified-brief",
+      "brief_version": 3,
+      "evaluations": {
+        "status": "not_yet_evaluated",
+        "reason": "No new Foundry Evaluations run; original v1 evidence is immutable."
+      }
+    },
+    {
+      "id": "account-munson-draft-s1",
+      "sku": "MUN-BASKET-01",
+      "vertical": "grocery-pharmacy",
+      "model": "minimax-h3-max-turbo",
+      "mode": "text-to-video",
+      "aspect_ratio": "9:16",
+      "duration": 6,
+      "file": "account-munson-draft-s1.mp4",
+      "provenance": "foundry",
+      "audio": "not requested; silent draft",
+      "media": {
+        "duration_s": 6.0,
+        "width": 732,
+        "height": 1280,
+        "has_audio": false,
+        "size_bytes": 1336366
+      },
+      "elapsed_s": 16.69,
+      "accepted_to_completed_s": 14.0,
+      "processing": "H.264 display rendition; longest edge <=1280; CRF 28; metadata stripped; unexpected model audio removed for silent presentation; original-audio rendition retained; presentation trimmed to requested 6 seconds; re-encoded H.264 at 25 fps / CRF 20",
+      "source_media": {
+        "duration_s": 6.59,
+        "width": 768,
+        "height": 1344,
+        "has_audio": true,
+        "size_bytes": 8432562
+      },
+      "source_sha256": "9fab843e9e6784101962f7b2bddcad8f27b3527ccfed80a8f2283564609188f1",
+      "source_image": null,
+      "prompt": "Silent fictional neighborhood-grocery concept, six seconds, vertical. A deep-green woven basket with an oat-colored rim rests on a plain oat countertop against a blank cream wall. Inside it, clearly visible: one unwrapped crusty bakery loaf, a bundle of dry spaghetti tied with plain twine, and a small completely clear glass bottle of golden olive oil with a plain cork. Gentle slow push-in, warm morning light. No shelves, aisles, store fixtures or price cards. Every surface is completely blank: no writing, letters, numbers, stickers, labels, barcodes, logos, symbols, signage, prices, phone UI, mascots, slogans or real trade dress. No people, hands or faces. No soundtrack.",
+      "request_id": "999dbba9-2616-4daf-bbed-d2c691d22eab",
+      "original_file": "account-munson-draft-s1-original-audio.mp4",
+      "presentation_audio_removed": true,
+      "presentation_trimmed_to_s": 6,
+      "deployment": "minimax-h3-max-turbo",
+      "rendered_at": "2026-11-16T22:38:59.639993+00:00",
+      "estimate": {
+        "model": "minimax-h3-max-turbo",
+        "seconds": 6.0,
+        "resolution": "768P",
+        "price_key": "768P",
+        "usd_per_second": 0.04,
+        "estimate_usd": 0.24,
+        "estimate_high_usd": 0.268,
+        "caveats": [
+          "MiniMax output can run ~0.7 s longer than requested (high estimate includes it)",
+          "preview list price per generated second; not a billing guarantee"
+        ]
+      },
+      "qa": {
+        "evaluator": "azure-openai-vision",
+        "measured": true,
+        "scores": {
+          "logo_integrity": 1,
+          "label_legibility": 1,
+          "product_fidelity": 0.98,
+          "prompt_adherence": 0.96
+        },
+        "thresholds": {
+          "logo_integrity": 0.8,
+          "label_legibility": 0.7,
+          "product_fidelity": 0.8,
+          "prompt_adherence": 0.7
+        },
+        "findings": [
+          "No visible logos, signage, price numbers, labels, or on-screen text.",
+          "Basket is deep-green with an oat-colored rim and appears unbranded.",
+          "Visible contents match the requested bread, dry spaghetti, and clear glass olive oil bottle.",
+          "Scene is a plain countertop against a blank cream wall with no people or store fixtures.",
+          "Minor deviation: the basket appears slightly more teal-green than deep-green, and the loaf/bottle styling is generic rather than explicitly matching a branded product concept."
+        ],
+        "hallucinated_objects": [],
+        "content_safety": [
+          {
+            "frame": "frame_01.png",
+            "categories": [
+              {
+                "category": "Hate",
+                "severity": 0
+              },
+              {
+                "category": "SelfHarm",
+                "severity": 0
+              },
+              {
+                "category": "Sexual",
+                "severity": 0
+              },
+              {
+                "category": "Violence",
+                "severity": 0
+              }
+            ]
+          },
+          {
+            "frame": "frame_02.png",
+            "categories": [
+              {
+                "category": "Hate",
+                "severity": 0
+              },
+              {
+                "category": "SelfHarm",
+                "severity": 0
+              },
+              {
+                "category": "Sexual",
+                "severity": 0
+              },
+              {
+                "category": "Violence",
+                "severity": 0
+              }
+            ]
+          }
+        ],
+        "verdict": "pass",
+        "failed_checks": [],
+        "publish_approved": false,
+        "automated_checks_passed": true,
+        "human_signoff_required": true,
+        "sampled_frame_count": 2
+      },
+      "qa_evaluated_at": "2026-11-16T22:38:59.639993+00:00",
+      "account": "munson",
+      "stage": "draft",
+      "hero_eligible": false,
+      "human_signoff_required": true,
+      "replacement_for": "account-munson-draft-r1",
+      "reroll_reason": "simplified-brief",
+      "brief_version": 3,
+      "evaluations": {
+        "status": "not_yet_evaluated",
+        "reason": "No new Foundry Evaluations run; original v1 evidence is immutable."
+      }
+    },
+    {
+      "id": "account-coho-draft-s2",
+      "sku": "CCM-MEAL-01",
+      "vertical": "qsr",
+      "model": "minimax-h3-max-turbo",
+      "mode": "text-to-video",
+      "aspect_ratio": "9:16",
+      "duration": 6,
+      "file": "account-coho-draft-s2.mp4",
+      "provenance": "foundry",
+      "audio": "not requested; silent draft",
+      "media": {
+        "duration_s": 6.0,
+        "width": 732,
+        "height": 1280,
+        "has_audio": false,
+        "size_bytes": 822339
+      },
+      "elapsed_s": 21.97,
+      "accepted_to_completed_s": 18.63,
+      "processing": "H.264 display rendition; longest edge <=1280; CRF 28; metadata stripped; unexpected model audio removed for silent presentation; original-audio rendition retained; presentation trimmed to requested 6 seconds; re-encoded H.264 at 25 fps / CRF 20",
+      "source_media": {
+        "duration_s": 6.59,
+        "width": 768,
+        "height": 1344,
+        "has_audio": true,
+        "size_bytes": 4968433
+      },
+      "source_sha256": "b1cff9849456bb6214a8c4d8c54067ddba89f92d06ef0b759cce8d9b23f6dce9",
+      "source_image": null,
+      "prompt": "Silent fictional convenience-food concept, six seconds, vertical. One freshly toasted hot sandwich, cut in half to show its filling, rests on a small square of plain cream paper on a smooth cream counter. Beside it stands an upright plain kraft paper bag whose folded top is wrapped in a solid plum paper band. Soft steam rises. Behind them is only a smooth, softly blurred deep-plum backdrop: no kitchen, sinks, faucets, equipment, tiles, shelves, food case or store interior. Warm evening light, gentle slow push-in. No tongs or utensils. Every surface is completely blank: no writing, letters, numbers, stickers, labels, barcodes, logos, symbols, signage, prices, phone UI, mascots, slogans or real trade dress. No people, hands or faces. No soundtrack.",
+      "request_id": "129bc61c-22f4-4468-b766-2117a70b7ad5",
+      "original_file": "account-coho-draft-s2-original-audio.mp4",
+      "presentation_audio_removed": true,
+      "presentation_trimmed_to_s": 6,
+      "deployment": "minimax-h3-max-turbo",
+      "rendered_at": "2026-11-16T22:40:15.095821+00:00",
+      "estimate": {
+        "model": "minimax-h3-max-turbo",
+        "seconds": 6.0,
+        "resolution": "768P",
+        "price_key": "768P",
+        "usd_per_second": 0.04,
+        "estimate_usd": 0.24,
+        "estimate_high_usd": 0.268,
+        "caveats": [
+          "MiniMax output can run ~0.7 s longer than requested (high estimate includes it)",
+          "preview list price per generated second; not a billing guarantee"
+        ]
+      },
+      "qa": {
+        "evaluator": "azure-openai-vision",
+        "measured": true,
+        "scores": {
+          "logo_integrity": 0.92,
+          "label_legibility": 0.08,
+          "product_fidelity": 0.78,
+          "prompt_adherence": 0.84
+        },
+        "thresholds": {
+          "logo_integrity": 0.8,
+          "label_legibility": 0.7,
+          "product_fidelity": 0.8,
+          "prompt_adherence": 0.7
+        },
+        "findings": [
+          "Plain plum and cream palette is present; no visible brand logo or signage.",
+          "A plain kraft bag with a plum band is visible, but there is also a visible plum rectangular patch/label area on the bag.",
+          "The food is a recognizable grab-and-go toasted sandwich cut in half, matching the core product concept.",
+          "The scene matches the minimal cream counter and blurred plum backdrop, with no people, utensils, or store interior visible.",
+          "No on-screen text is visible."
+        ],
+        "hallucinated_objects": [
+          "plum rectangular patch/label on the bag",
+          "paper placemat/liner under the sandwich"
+        ],
+        "content_safety": [
+          {
+            "frame": "frame_01.png",
+            "categories": [
+              {
+                "category": "Hate",
+                "severity": 0
+              },
+              {
+                "category": "SelfHarm",
+                "severity": 0
+              },
+              {
+                "category": "Sexual",
+                "severity": 0
+              },
+              {
+                "category": "Violence",
+                "severity": 0
+              }
+            ]
+          },
+          {
+            "frame": "frame_02.png",
+            "categories": [
+              {
+                "category": "Hate",
+                "severity": 0
+              },
+              {
+                "category": "SelfHarm",
+                "severity": 0
+              },
+              {
+                "category": "Sexual",
+                "severity": 0
+              },
+              {
+                "category": "Violence",
+                "severity": 0
+              }
+            ]
+          }
+        ],
+        "verdict": "fail",
+        "failed_checks": [
+          "label_legibility",
+          "product_fidelity"
+        ],
+        "publish_approved": false,
+        "reroll": {
+          "model": "ltx-2.5-pro",
+          "mode": "text-to-video",
+          "reason": "quality threshold failed; re-roll on the higher-fidelity tier"
+        },
+        "automated_checks_passed": false,
+        "human_signoff_required": true,
+        "sampled_frame_count": 2
+      },
+      "qa_evaluated_at": "2026-11-16T22:40:15.095821+00:00",
+      "account": "coho",
+      "stage": "draft",
+      "hero_eligible": false,
+      "human_signoff_required": true,
+      "replacement_for": "account-coho-draft-s1",
+      "reroll_reason": "simplified-brief",
+      "brief_version": 4,
+      "evaluations": {
+        "status": "not_yet_evaluated",
+        "reason": "No new Foundry Evaluations run; original v1 evidence is immutable."
+      }
+    },
+    {
+      "id": "account-proseware-draft-s2",
+      "sku": "PWS-KIT-01",
+      "vertical": "home-improvement",
+      "model": "minimax-h3-max",
+      "mode": "text-to-video",
+      "aspect_ratio": "16:9",
+      "duration": 6,
+      "file": "account-proseware-draft-s2.mp4",
+      "provenance": "foundry",
+      "audio": "not requested; silent draft",
+      "media": {
+        "duration_s": 6.0,
+        "width": 1280,
+        "height": 732,
+        "has_audio": false,
+        "size_bytes": 694508
+      },
+      "elapsed_s": 16.25,
+      "accepted_to_completed_s": 13.48,
+      "processing": "H.264 display rendition; longest edge <=1280; CRF 28; metadata stripped; unexpected model audio removed for silent presentation; original-audio rendition retained; presentation trimmed to requested 6 seconds; re-encoded H.264 at 25 fps / CRF 20",
+      "source_media": {
+        "duration_s": 6.59,
+        "width": 1344,
+        "height": 768,
+        "has_audio": true,
+        "size_bytes": 6104017
+      },
+      "source_sha256": "d5b6604cd32569cc5506ce1efd2ca297085e2c08c71d206af427d94e04cd76d8",
+      "source_image": null,
+      "prompt": "Silent fictional small-office supply kit, six seconds, wide 16:9. Exactly four items stand in one straight row from left to right against a plain pale-grey wall on a light wood floor, with nothing else in view: (1) a stainless coffee press and a plain white mug on a plain indigo box; (2) a clear unlabelled spray bottle with a folded grey cloth on a plain white box; (3) one charcoal ergonomic office chair; (4) a neat stack of plain white printer paper on a plain indigo box. Only indigo and white packaging. Gentle slow push-in, even daylight. No tables, computers, monitors, screens, printers, phones, electronics, plants, shelves, windows, wall art or extra boxes. Every surface is completely blank: no writing, letters, numbers, stickers, labels, barcodes, logos, symbols, signage, prices, phone UI, mascots, slogans or real trade dress. No people, hands or faces. No soundtrack.",
+      "request_id": "cdd4e4d5-2e03-487c-b3d9-c5dc8263eedb",
+      "original_file": "account-proseware-draft-s2-original-audio.mp4",
+      "presentation_audio_removed": true,
+      "presentation_trimmed_to_s": 6,
+      "deployment": "minimax-h3-max",
+      "rendered_at": "2026-11-16T22:40:40.632405+00:00",
+      "estimate": {
+        "model": "minimax-h3-max",
+        "seconds": 6.0,
+        "resolution": "768P",
+        "price_key": "768P",
+        "usd_per_second": 0.08,
+        "estimate_usd": 0.48,
+        "estimate_high_usd": 0.536,
+        "caveats": [
+          "MiniMax output can run ~0.7 s longer than requested (high estimate includes it)",
+          "preview list price per generated second; not a billing guarantee"
+        ]
+      },
+      "qa": {
+        "evaluator": "azure-openai-vision",
+        "measured": true,
+        "scores": {
+          "logo_integrity": 1,
+          "label_legibility": 1,
+          "product_fidelity": 0.72,
+          "prompt_adherence": 0.18
+        },
+        "thresholds": {
+          "logo_integrity": 0.8,
+          "label_legibility": 0.7,
+          "product_fidelity": 0.8,
+          "prompt_adherence": 0.7
+        },
+        "findings": [
+          "No visible logos, signage, prices, or on-screen text.",
+          "Four main items are present in a left-to-right arrangement: coffee setup, cleaning supplies, chair, and paper stack.",
+          "Packaging appears plain indigo and white without visible text.",
+          "The scene includes extra/incorrect elements relative to prompt: the coffee press is on the left box with a mug, the spray bottle and cloth are on the white box, and the chair is centered but the composition is not a strict minimal kit presentation.",
+          "Prompt asks for a silent fictional small-office supply kit with only the specified items and nothing else; the image appears to match the general product concept but not the exact staging requirements."
+        ],
+        "hallucinated_objects": [
+          "none"
+        ],
+        "content_safety": [
+          {
+            "frame": "frame_01.png",
+            "categories": [
+              {
+                "category": "Hate",
+                "severity": 0
+              },
+              {
+                "category": "SelfHarm",
+                "severity": 0
+              },
+              {
+                "category": "Sexual",
+                "severity": 0
+              },
+              {
+                "category": "Violence",
+                "severity": 0
+              }
+            ]
+          },
+          {
+            "frame": "frame_02.png",
+            "categories": [
+              {
+                "category": "Hate",
+                "severity": 0
+              },
+              {
+                "category": "SelfHarm",
+                "severity": 0
+              },
+              {
+                "category": "Sexual",
+                "severity": 0
+              },
+              {
+                "category": "Violence",
+                "severity": 0
+              }
+            ]
+          }
+        ],
+        "verdict": "fail",
+        "failed_checks": [
+          "product_fidelity",
+          "prompt_adherence"
+        ],
+        "publish_approved": false,
+        "reroll": {
+          "model": "ltx-2.5-pro",
+          "mode": "text-to-video",
+          "reason": "quality threshold failed; re-roll on the higher-fidelity tier"
+        },
+        "automated_checks_passed": false,
+        "human_signoff_required": true,
+        "sampled_frame_count": 2
+      },
+      "qa_evaluated_at": "2026-11-16T22:40:40.632405+00:00",
+      "account": "proseware",
+      "stage": "draft",
+      "hero_eligible": false,
+      "human_signoff_required": true,
+      "replacement_for": "account-proseware-draft-s1",
+      "reroll_reason": "simplified-brief",
+      "brief_version": 4,
+      "evaluations": {
+        "status": "not_yet_evaluated",
+        "reason": "No new Foundry Evaluations run; original v1 evidence is immutable."
+      }
+    },
+    {
+      "id": "account-coho-draft-s3",
+      "sku": "CCM-MEAL-01",
+      "vertical": "qsr",
+      "model": "minimax-h3-max-turbo",
+      "mode": "text-to-video",
+      "aspect_ratio": "9:16",
+      "duration": 6,
+      "file": "account-coho-draft-s3.mp4",
+      "provenance": "foundry",
+      "audio": "not requested; silent draft",
+      "media": {
+        "duration_s": 6.0,
+        "width": 732,
+        "height": 1280,
+        "has_audio": false,
+        "size_bytes": 667843
+      },
+      "elapsed_s": 16.72,
+      "accepted_to_completed_s": 13.51,
+      "processing": "H.264 display rendition; longest edge <=1280; CRF 28; metadata stripped; unexpected model audio removed for silent presentation; original-audio rendition retained; presentation trimmed to requested 6 seconds; re-encoded H.264 at 25 fps / CRF 20",
+      "source_media": {
+        "duration_s": 6.59,
+        "width": 768,
+        "height": 1344,
+        "has_audio": true,
+        "size_bytes": 4154731
+      },
+      "source_sha256": "4231a8fbafce8d076bc43a5f995f32d89c1e7b5f4dc107cae6715158ed1bb93e",
+      "source_image": null,
+      "prompt": "Silent fictional convenience-food concept, six seconds, vertical. One freshly toasted hot sandwich, cut in half to show its filling, rests on a small square of plain cream paper on a smooth cream counter. Beside it stands an upright plain kraft paper bag: only its folded top edge is solid plum; the rest of the bag is uniform plain kraft paper with no patch, panel, window, sticker, tag or label of any kind. Soft steam rises. Behind them is only a smooth, softly blurred deep-plum backdrop. Warm evening light, gentle slow push-in. No utensils. Every surface is completely blank: no writing, letters, numbers, stickers, labels, barcodes, logos, symbols, signage, prices, phone UI, mascots, slogans or real trade dress. No people, hands or faces. No soundtrack.",
+      "request_id": "0d8530c6-e943-482c-a3a0-20651689fb67",
+      "original_file": "account-coho-draft-s3-original-audio.mp4",
+      "presentation_audio_removed": true,
+      "presentation_trimmed_to_s": 6,
+      "deployment": "minimax-h3-max-turbo",
+      "rendered_at": "2026-11-16T22:42:03.914923+00:00",
+      "estimate": {
+        "model": "minimax-h3-max-turbo",
+        "seconds": 6.0,
+        "resolution": "768P",
+        "price_key": "768P",
+        "usd_per_second": 0.04,
+        "estimate_usd": 0.24,
+        "estimate_high_usd": 0.268,
+        "caveats": [
+          "MiniMax output can run ~0.7 s longer than requested (high estimate includes it)",
+          "preview list price per generated second; not a billing guarantee"
+        ]
+      },
+      "qa": {
+        "evaluator": "azure-openai-vision",
+        "measured": true,
+        "scores": {
+          "logo_integrity": 1,
+          "label_legibility": 1,
+          "product_fidelity": 0.92,
+          "prompt_adherence": 0.88
+        },
+        "thresholds": {
+          "logo_integrity": 0.8,
+          "label_legibility": 0.7,
+          "product_fidelity": 0.8,
+          "prompt_adherence": 0.7
+        },
+        "findings": [
+          "No visible logos, signage, price numbers, or on-screen text.",
+          "Plain kraft bag with a solid plum folded top edge is visible and unbranded.",
+          "The sandwich is recognizable as a grab-and-go hot sandwich and is cut in half.",
+          "Background is a smooth deep-plum blur with a cream counter, matching the palette.",
+          "Minor deviation: the sandwich appears to rest on a larger cream sheet rather than only a small square of plain cream paper.",
+          "Minor deviation: the bag shape and lighting are consistent, but the scene is a still image rather than a clearly observable six-second push-in video."
+        ],
+        "hallucinated_objects": [],
+        "content_safety": [
+          {
+            "frame": "frame_01.png",
+            "categories": [
+              {
+                "category": "Hate",
+                "severity": 0
+              },
+              {
+                "category": "SelfHarm",
+                "severity": 0
+              },
+              {
+                "category": "Sexual",
+                "severity": 0
+              },
+              {
+                "category": "Violence",
+                "severity": 0
+              }
+            ]
+          },
+          {
+            "frame": "frame_02.png",
+            "categories": [
+              {
+                "category": "Hate",
+                "severity": 0
+              },
+              {
+                "category": "SelfHarm",
+                "severity": 0
+              },
+              {
+                "category": "Sexual",
+                "severity": 0
+              },
+              {
+                "category": "Violence",
+                "severity": 0
+              }
+            ]
+          }
+        ],
+        "verdict": "pass",
+        "failed_checks": [],
+        "publish_approved": false,
+        "automated_checks_passed": true,
+        "human_signoff_required": true,
+        "sampled_frame_count": 2
+      },
+      "qa_evaluated_at": "2026-11-16T22:42:03.914923+00:00",
+      "account": "coho",
+      "stage": "draft",
+      "hero_eligible": false,
+      "human_signoff_required": true,
+      "replacement_for": "account-coho-draft-s2",
+      "reroll_reason": "simplified-brief",
+      "brief_version": 5,
+      "evaluations": {
+        "status": "not_yet_evaluated",
+        "reason": "No new Foundry Evaluations run; original v1 evidence is immutable."
+      }
+    },
+    {
+      "id": "account-proseware-draft-s3",
+      "sku": "PWS-KIT-01",
+      "vertical": "home-improvement",
+      "model": "minimax-h3-max",
+      "mode": "text-to-video",
+      "aspect_ratio": "16:9",
+      "duration": 6,
+      "file": "account-proseware-draft-s3.mp4",
+      "provenance": "foundry",
+      "audio": "not requested; silent draft",
+      "media": {
+        "duration_s": 6.0,
+        "width": 1280,
+        "height": 732,
+        "has_audio": false,
+        "size_bytes": 639941
+      },
+      "elapsed_s": 16.31,
+      "accepted_to_completed_s": 13.47,
+      "processing": "H.264 display rendition; longest edge <=1280; CRF 28; metadata stripped; unexpected model audio removed for silent presentation; original-audio rendition retained; presentation trimmed to requested 6 seconds; re-encoded H.264 at 25 fps / CRF 20",
+      "source_media": {
+        "duration_s": 6.59,
+        "width": 1344,
+        "height": 768,
+        "has_audio": true,
+        "size_bytes": 5273147
+      },
+      "source_sha256": "603fce7a6731082f3c140a5d081b20bfab2a70cb97c218f3462d773d323c6703",
+      "source_image": null,
+      "prompt": "Silent fictional small-office supply kit, six seconds, wide 16:9. Exactly four items stand in one straight row from left to right against a plain pale-grey wall on a light wood floor, with nothing else in view: (1) a stainless coffee press and a plain white mug on a plain indigo box; (2) a clear unlabelled spray bottle with a folded grey cloth on a plain white box; (3) one basic, generic black task chair with a simple plain mesh back and plain padded seat; (4) a neat stack of plain white printer paper on a plain indigo box. Gentle slow push-in, even daylight. No other furniture, electronics, plants, windows or wall art. Every surface is completely blank: no writing, letters, numbers, stickers, labels, barcodes, logos, symbols, signage, prices, phone UI, mascots, slogans or real trade dress. No people, hands or faces. No soundtrack.",
+      "request_id": "c7202825-5765-4c82-a292-f6106afe9fed",
+      "original_file": "account-proseware-draft-s3-original-audio.mp4",
+      "presentation_audio_removed": true,
+      "presentation_trimmed_to_s": 6,
+      "deployment": "minimax-h3-max",
+      "rendered_at": "2026-11-16T22:42:29.831264+00:00",
+      "estimate": {
+        "model": "minimax-h3-max",
+        "seconds": 6.0,
+        "resolution": "768P",
+        "price_key": "768P",
+        "usd_per_second": 0.08,
+        "estimate_usd": 0.48,
+        "estimate_high_usd": 0.536,
+        "caveats": [
+          "MiniMax output can run ~0.7 s longer than requested (high estimate includes it)",
+          "preview list price per generated second; not a billing guarantee"
+        ]
+      },
+      "qa": {
+        "evaluator": "azure-openai-vision",
+        "measured": true,
+        "scores": {
+          "logo_integrity": 1,
+          "label_legibility": 1,
+          "product_fidelity": 0.72,
+          "prompt_adherence": 0.78
+        },
+        "thresholds": {
+          "logo_integrity": 0.8,
+          "label_legibility": 0.7,
+          "product_fidelity": 0.8,
+          "prompt_adherence": 0.7
+        },
+        "findings": [
+          "No visible logos, signage, price numbers, or on-screen text.",
+          "Four main items are present in a left-to-right arrangement: coffee setup, cleaning supplies, chair, and paper stack.",
+          "The coffee item is a French press with a mug, and the cleaning item is a spray bottle with cloth, matching the intended kit broadly.",
+          "The chair appears generic black with mesh back and padded seat.",
+          "The paper stack is present on a box, but the boxes are blue/purple rather than plain indigo and white as specified.",
+          "The scene is not perfectly minimal: the coffee press and mug are both on the left box, and the spray bottle/cloth are on the white box, but the overall layout still matches the prompt closely."
+        ],
+        "hallucinated_objects": [],
+        "content_safety": [
+          {
+            "frame": "frame_01.png",
+            "categories": [
+              {
+                "category": "Hate",
+                "severity": 0
+              },
+              {
+                "category": "SelfHarm",
+                "severity": 0
+              },
+              {
+                "category": "Sexual",
+                "severity": 0
+              },
+              {
+                "category": "Violence",
+                "severity": 0
+              }
+            ]
+          },
+          {
+            "frame": "frame_02.png",
+            "categories": [
+              {
+                "category": "Hate",
+                "severity": 0
+              },
+              {
+                "category": "SelfHarm",
+                "severity": 0
+              },
+              {
+                "category": "Sexual",
+                "severity": 0
+              },
+              {
+                "category": "Violence",
+                "severity": 0
+              }
+            ]
+          }
+        ],
+        "verdict": "fail",
+        "failed_checks": [
+          "product_fidelity"
+        ],
+        "publish_approved": false,
+        "reroll": {
+          "model": "ltx-2.5-pro",
+          "mode": "text-to-video",
+          "reason": "quality threshold failed; re-roll on the higher-fidelity tier"
+        },
+        "automated_checks_passed": false,
+        "human_signoff_required": true,
+        "sampled_frame_count": 2
+      },
+      "qa_evaluated_at": "2026-11-16T22:42:29.831264+00:00",
+      "account": "proseware",
+      "stage": "draft",
+      "hero_eligible": false,
+      "human_signoff_required": true,
+      "replacement_for": "account-proseware-draft-s2",
+      "reroll_reason": "simplified-brief",
+      "brief_version": 5,
+      "evaluations": {
+        "status": "not_yet_evaluated",
+        "reason": "No new Foundry Evaluations run; original v1 evidence is immutable."
+      }
+    },
+    {
+      "id": "account-proseware-draft-s4",
+      "sku": "PWS-KIT-01",
+      "vertical": "home-improvement",
+      "model": "minimax-h3-max",
+      "mode": "text-to-video",
+      "aspect_ratio": "16:9",
+      "duration": 6,
+      "file": "account-proseware-draft-s4.mp4",
+      "provenance": "foundry",
+      "audio": "not requested; silent draft",
+      "media": {
+        "duration_s": 6.0,
+        "width": 1280,
+        "height": 732,
+        "has_audio": false,
+        "size_bytes": 517381
+      },
+      "elapsed_s": 17.88,
+      "accepted_to_completed_s": 13.45,
+      "processing": "H.264 display rendition; longest edge <=1280; CRF 28; metadata stripped; unexpected model audio removed for silent presentation; original-audio rendition retained; presentation trimmed to requested 6 seconds; re-encoded H.264 at 25 fps / CRF 20",
+      "source_media": {
+        "duration_s": 6.59,
+        "width": 1344,
+        "height": 768,
+        "has_audio": true,
+        "size_bytes": 4034465
+      },
+      "source_sha256": "9ea9d97da1208d95b95fafbf00310f93dd5979b77b65c5a9e0875032736727fe",
+      "source_image": null,
+      "prompt": "Six-second silent studio product video, landscape 16:9. One complete small-office supply kit, four large isolated groups in a single straight row, left to right: stainless French coffee press with a plain ivory mug; transparent unlabelled cleaning spray bottle with folded ivory cloth; simple generic charcoal task chair with padded back and seat; neat stack of blank ivory printer paper. All four groups visible in full throughout, spaced apart on a seamless warm ivory floor and background. No boxes, pedestals, tables or extra objects. A tiny slow camera push-in, no object movement or transformations. Soft neutral daylight, accurate stainless steel, transparent glass, ivory paper and charcoal upholstery. Every surface blank and unmarked. No writing, letters, numbers, labels, barcodes, logos, symbols, signage, real brands or recognizable designer furniture. No people, hands or soundtrack.",
+      "request_id": "51903f88-100b-437e-a933-cab7d18aeb1d",
+      "original_file": "account-proseware-draft-s4-original-audio.mp4",
+      "presentation_audio_removed": true,
+      "presentation_trimmed_to_s": 6,
+      "deployment": "minimax-h3-max",
+      "rendered_at": "2026-11-16T22:52:58.935925+00:00",
+      "estimate": {
+        "model": "minimax-h3-max",
+        "seconds": 6.0,
+        "resolution": "768P",
+        "price_key": "768P",
+        "usd_per_second": 0.08,
+        "estimate_usd": 0.48,
+        "estimate_high_usd": 0.536,
+        "caveats": [
+          "MiniMax output can run ~0.7 s longer than requested (high estimate includes it)",
+          "preview list price per generated second; not a billing guarantee"
+        ]
+      },
+      "qa": {
+        "evaluator": "azure-openai-vision",
+        "measured": true,
+        "scores": {
+          "logo_integrity": 0.95,
+          "label_legibility": 1.0,
+          "product_fidelity": 0.55,
+          "prompt_adherence": 0.35
+        },
+        "thresholds": {
+          "logo_integrity": 0.8,
+          "label_legibility": 0.7,
+          "product_fidelity": 0.8,
+          "prompt_adherence": 0.7
+        },
+        "findings": [
+          "No visible logos, signage, price numbers, or on-screen text.",
+          "Objects are arranged left to right in four groups, but the scene includes extra items beyond the prompt: a separate ivory mug and a folded cloth are present, and the cleaning bottle is not clearly unlabelled in a product-kit context.",
+          "The chair, spray bottle, coffee press, and paper stack are visible, but the paper appears as a boxed stack rather than loose blank sheets, and the overall composition does not fully match the requested isolated groups.",
+          "The prompt requested no boxes, pedestals, tables, or extra objects; a paper box is visible.",
+          "Background and lighting are studio-like and neutral, but the exact kit specification is only partially matched."
+        ],
+        "hallucinated_objects": [
+          "paper box",
+          "extra mug",
+          "folded cloth"
+        ],
+        "content_safety": [
+          {
+            "frame": "frame_01.png",
+            "categories": [
+              {
+                "category": "Hate",
+                "severity": 0
+              },
+              {
+                "category": "SelfHarm",
+                "severity": 0
+              },
+              {
+                "category": "Sexual",
+                "severity": 0
+              },
+              {
+                "category": "Violence",
+                "severity": 0
+              }
+            ]
+          },
+          {
+            "frame": "frame_02.png",
+            "categories": [
+              {
+                "category": "Hate",
+                "severity": 0
+              },
+              {
+                "category": "SelfHarm",
+                "severity": 0
+              },
+              {
+                "category": "Sexual",
+                "severity": 0
+              },
+              {
+                "category": "Violence",
+                "severity": 0
+              }
+            ]
+          }
+        ],
+        "verdict": "fail",
+        "failed_checks": [
+          "product_fidelity",
+          "prompt_adherence"
+        ],
+        "publish_approved": false,
+        "reroll": {
+          "model": "ltx-2.5-pro",
+          "mode": "text-to-video",
+          "reason": "quality threshold failed; re-roll on the higher-fidelity tier"
+        },
+        "automated_checks_passed": false,
+        "human_signoff_required": true,
+        "sampled_frame_count": 2
+      },
+      "qa_evaluated_at": "2026-11-16T22:52:58.935925+00:00",
+      "account": "proseware",
+      "stage": "draft",
+      "hero_eligible": false,
+      "human_signoff_required": true,
+      "replacement_for": "account-proseware-draft-s3",
+      "reroll_reason": "simplified-brief",
+      "brief_version": 6,
+      "completion_usage": {
+        "generation_estimate_usd": 0.48,
+        "generation_high_estimate_usd": 0.536,
+        "incremental_generation_ceiling_usd": 1.5,
+        "qa_budget_estimate_usd": 0.5,
+        "billed_cost_usd": null,
+        "vision": {
+          "request_id": "bdc0d3ef-68e3-4144-b722-bd75b33a5afb",
+          "prompt_tokens": 2558,
+          "completion_tokens": 205,
+          "total_tokens": 2763
+        },
+        "content_safety_requests": [
+          "45362f08-301f-4612-8c0d-a01bd3199e28",
+          "1e23f7c7-fac2-40ee-af3d-e9d401ec3a01"
+        ],
+        "note": "One vision call and two image-safety calls, all HTTP 200. Estimates are not invoiced Azure costs. Historical QA token usage was not captured."
+      },
+      "evaluations": {
+        "status": "not_yet_evaluated",
+        "reason": "No new Foundry Evaluations run; original v1 evidence is immutable."
+      }
     }
   ],
   "validation": {
