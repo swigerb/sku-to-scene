@@ -1,0 +1,50 @@
+{
+  "_note": "Fictional brand guidelines used by @brand-qa. Thresholds are 0-1 scores; a clip fails if any check is below its threshold.",
+  "brands": {
+    "northwind-coffee": {
+      "display_name": "Northwind Coffee",
+      "palette": ["#1F5C3A", "#F2E6D0", "#C8742B"],
+      "logo": "Green leaf-compass roundel with NORTHWIND / COFFEE wordmark; never stretched, recolored or partially occluded",
+      "voice": "Warm, crafted, seasonal. No health claims.",
+      "must": ["logo upright and legible", "cup is clear with green straw", "cold foam on top"],
+      "must_not": ["competitor cups", "alcohol", "children consuming caffeine"],
+      "thresholds": {"logo_integrity": 0.8, "label_legibility": 0.7, "product_fidelity": 0.8, "prompt_adherence": 0.7}
+    },
+    "contoso-pro": {
+      "display_name": "Contoso Pro",
+      "palette": ["#F2B705", "#1A1A1A"],
+      "logo": "CONTOSO PRO wordmark on yellow housing",
+      "voice": "Jobsite-tough, precise, safety-first.",
+      "must": ["safety glasses on any person operating a tool", "correct chuck and battery shape"],
+      "must_not": ["unsafe tool handling", "extra or missing tool parts"],
+      "thresholds": {"logo_integrity": 0.8, "label_legibility": 0.7, "product_fidelity": 0.85, "prompt_adherence": 0.75}
+    },
+    "fabrikam": {
+      "display_name": "Fabrikam",
+      "palette": ["#B4532A", "#F5F1EA", "#2E3B32"],
+      "logo": "Small woven FABRIKAM label at inner collar; do not invent exterior logos",
+      "voice": "Understated, natural, outdoors.",
+      "must": ["quilt pattern preserved", "rust colorway accurate", "natural fabric physics"],
+      "must_not": ["added logos or graphics", "color shift away from rust"],
+      "thresholds": {"logo_integrity": 0.7, "label_legibility": 0.5, "product_fidelity": 0.85, "prompt_adherence": 0.7}
+    },
+    "woodgrove-wellness": {
+      "display_name": "Woodgrove Wellness",
+      "palette": ["#2F6E8E", "#FFFFFF", "#8CC63F"],
+      "logo": "Woodgrove Wellness leaf wordmark",
+      "voice": "Caring, calm, clear. Regulated category: no efficacy or cure claims; pharmacist-reviewed copy only.",
+      "must": ["package labels legible", "bundle contents match PIM"],
+      "must_not": ["medical claims", "medication being consumed on screen", "dosage text"],
+      "thresholds": {"logo_integrity": 0.8, "label_legibility": 0.8, "product_fidelity": 0.85, "prompt_adherence": 0.7}
+    },
+    "litware": {
+      "display_name": "Litware",
+      "palette": ["#C0C4C8", "#0B1F33"],
+      "logo": "LITWARE wordmark on lid",
+      "voice": "Clean, modern, productive.",
+      "must": ["screen content abstract only"],
+      "must_not": ["third-party OS or app UI on screen"],
+      "thresholds": {"logo_integrity": 0.8, "label_legibility": 0.6, "product_fidelity": 0.8, "prompt_adherence": 0.75}
+    }
+  }
+}

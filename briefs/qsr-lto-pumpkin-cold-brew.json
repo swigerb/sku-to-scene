@@ -1,0 +1,13 @@
+{
+  "vertical": "QSR, Coffee & C-Store",
+  "cache_id": "lto-hero-kling",
+  "sku_id": "NWC-LTO-PCB-16",
+  "presenter_prompt": "We're launching a fall pumpkin cold brew LTO for a national coffee chain. Generate 3 rapid storyboard concepts using our lowest-cost fast models in Microsoft Foundry, evaluate prompt adherence, and then render the best concept in high fidelity with native audio using our approved hero cup image.",
+  "prompt": "Cinematic close-up of the Northwind Pumpkin Cold Brew cup from the approved hero image: cold brew pours over ice, pumpkin cream cascades down, condensation beads on the cup, slow dolly-in, golden-hour rim lighting. Native audio: ice clinking, liquid pour, soft cafe ambience. Keep the Northwind logo and label sharp and undistorted.",
+  "channel": "tiktok",
+  "source": "pim_image",
+  "image_path": "assets/products/nwc-pumpkin-cold-brew-hero.png",
+  "stage": "final",
+  "needs_audio": true,
+  "duration": 8
+}

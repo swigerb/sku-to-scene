@@ -1,0 +1,12 @@
+{
+  "vertical": "Home Improvement & Electronics",
+  "cache_id": "hero-home-kling",
+  "sku_id": "CTP-DRL-20V-BL",
+  "prompt": "The Contoso Pro 20V drill from the approved product image drives a screw into a pine stud on a sunlit job site; sawdust drifts, the LED work light glows, handheld tracking shot. Battery and Contoso Pro wordmark stay legible.",
+  "channel": "signage",
+  "source": "pim_image",
+  "image_path": "assets/products/contoso-pro-20v-drill.png",
+  "stage": "final",
+  "physical_interaction": true,
+  "duration": 6
+}

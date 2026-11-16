@@ -1,0 +1,41 @@
+{
+  "assignment_cast_snapshots": {
+    "cli-cast-r2-2026-11-16T14:16:45.095Z": {
+      "created_at": "2026-11-16T14:16:45.095Z",
+      "agents": [
+        "retail-merchandiser"
+      ],
+      "universe": "cli-cast"
+    },
+    "cli-cast-r3-2026-11-16T14:16:45.509Z": {
+      "created_at": "2026-11-16T14:16:45.509Z",
+      "agents": [
+        "foundry-router"
+      ],
+      "universe": "cli-cast"
+    },
+    "cli-cast-r4-2026-11-16T14:16:45.878Z": {
+      "created_at": "2026-11-16T14:16:45.878Z",
+      "agents": [
+        "brand-qa"
+      ],
+      "universe": "cli-cast"
+    }
+  },
+  "universe_usage_history": [
+    {
+      "universe": "cli-cast",
+      "used_at": "2026-11-16T14:16:45.095Z"
+    },
+    {
+      "universe": "cli-cast",
+      "used_at": "2026-11-16T14:16:45.509Z"
+    },
+    {
+      "universe": "cli-cast",
+      "used_at": "2026-11-16T14:16:45.878Z"
+    }
+  ],
+  "transaction_id": "9f2955f6-1987-4115-931e-5d16d34d3eee",
+  "registry_revision": 4
+}

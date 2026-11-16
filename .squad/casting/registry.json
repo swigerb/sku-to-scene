@@ -1,0 +1,36 @@
+{
+  "schema": "squad-agent-provenance/v1",
+  "schema_version": 1,
+  "revision": 4,
+  "generated_at": "2026-11-16T14:16:45.878Z",
+  "agents": {
+    "retail-merchandiser": {
+      "display_name": "retail-merchandiser",
+      "persistent_name": "retail-merchandiser",
+      "role": "Marketing Strategist",
+      "universe": "cli-cast",
+      "status": "active",
+      "created_at": "2026-11-16T14:16:45.095Z",
+      "updated_at": "2026-11-16T14:16:45.095Z"
+    },
+    "foundry-router": {
+      "display_name": "foundry-router",
+      "persistent_name": "foundry-router",
+      "role": "AI / ML Engineer",
+      "universe": "cli-cast",
+      "status": "active",
+      "created_at": "2026-11-16T14:16:45.509Z",
+      "updated_at": "2026-11-16T14:16:45.509Z"
+    },
+    "brand-qa": {
+      "display_name": "brand-qa",
+      "persistent_name": "brand-qa",
+      "role": "Code Reviewer",
+      "universe": "cli-cast",
+      "status": "active",
+      "created_at": "2026-11-16T14:16:45.878Z",
+      "updated_at": "2026-11-16T14:16:45.878Z"
+    }
+  },
+  "transaction_id": "9f2955f6-1987-4115-931e-5d16d34d3eee"
+}

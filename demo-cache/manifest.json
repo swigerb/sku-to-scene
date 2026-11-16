@@ -1,0 +1,213 @@
+{
+  "_note": "All clips with provenance 'simulated' are local ffmpeg placeholders, NOT Foundry renders. scripts/precache.py replaces entries with provenance 'foundry' after a real render.",
+  "clips": [
+    {
+      "id": "lto-draft-1",
+      "sku": "NWC-LTO-PCB-16",
+      "vertical": "qsr",
+      "model": "minimax-h3-max-turbo",
+      "mode": "text-to-video",
+      "aspect_ratio": "9:16",
+      "duration": 6,
+      "file": "lto-draft-1.mp4",
+      "provenance": "simulated",
+      "audio": "none",
+      "source_image": "assets/products/nwc-pumpkin-cold-brew-hero.png",
+      "media": {
+        "duration_s": 6.0,
+        "width": 432,
+        "height": 768,
+        "has_audio": false,
+        "size_bytes": 75315
+      },
+      "rehearsal_qa": {
+        "scores": {
+          "logo_integrity": 0.85,
+          "label_legibility": 0.75,
+          "product_fidelity": 0.82,
+          "prompt_adherence": 0.74
+        },
+        "findings": [
+          "Rehearsal script: market setting reads clearly; pumpkins present."
+        ],
+        "label": "SCRIPTED REHEARSAL VALUES - not a measurement"
+      }
+    },
+    {
+      "id": "lto-draft-2",
+      "sku": "NWC-LTO-PCB-16",
+      "vertical": "qsr",
+      "model": "ltx-2.5-fast",
+      "mode": "text-to-video",
+      "aspect_ratio": "9:16",
+      "duration": 6,
+      "file": "lto-draft-2.mp4",
+      "provenance": "simulated",
+      "audio": "none",
+      "source_image": "assets/products/nwc-pumpkin-cold-brew-hero.png",
+      "media": {
+        "duration_s": 6.0,
+        "width": 432,
+        "height": 768,
+        "has_audio": false,
+        "size_bytes": 74717
+      },
+      "rehearsal_qa": {
+        "scores": {
+          "logo_integrity": 0.88,
+          "label_legibility": 0.8,
+          "product_fidelity": 0.85,
+          "prompt_adherence": 0.86
+        },
+        "findings": [
+          "Rehearsal script: strongest match to brief; leaves and cafe ledge present."
+        ],
+        "label": "SCRIPTED REHEARSAL VALUES - not a measurement"
+      }
+    },
+    {
+      "id": "lto-draft-3",
+      "sku": "NWC-LTO-PCB-16",
+      "vertical": "qsr",
+      "model": "minimax-h3-max-turbo",
+      "mode": "text-to-video",
+      "aspect_ratio": "9:16",
+      "duration": 6,
+      "file": "lto-draft-3.mp4",
+      "provenance": "simulated",
+      "audio": "none",
+      "source_image": "assets/products/nwc-pumpkin-cold-brew-hero.png",
+      "media": {
+        "duration_s": 6.0,
+        "width": 432,
+        "height": 768,
+        "has_audio": false,
+        "size_bytes": 75185
+      },
+      "rehearsal_qa": {
+        "scores": {
+          "logo_integrity": 0.84,
+          "label_legibility": 0.76,
+          "product_fidelity": 0.81,
+          "prompt_adherence": 0.66
+        },
+        "findings": [
+          "Rehearsal script: string lights missing; below 0.70 adherence threshold."
+        ],
+        "label": "SCRIPTED REHEARSAL VALUES - not a measurement"
+      }
+    },
+    {
+      "id": "lto-hero-kling",
+      "sku": "NWC-LTO-PCB-16",
+      "vertical": "qsr",
+      "model": "kling-v3-pro",
+      "mode": "image-to-video",
+      "aspect_ratio": "9:16",
+      "duration": 8,
+      "file": "lto-hero-kling.mp4",
+      "provenance": "simulated",
+      "audio": "synthetic noise bed (placeholder, not generated audio)",
+      "source_image": "assets/products/nwc-pumpkin-cold-brew-hero.png",
+      "media": {
+        "duration_s": 8.0,
+        "width": 432,
+        "height": 768,
+        "has_audio": true,
+        "size_bytes": 153228
+      },
+      "rehearsal_qa": {
+        "scores": {
+          "logo_integrity": 0.9,
+          "label_legibility": 0.85,
+          "product_fidelity": 0.9,
+          "prompt_adherence": 0.88
+        },
+        "findings": [
+          "Rehearsal script: logo upright; foam and condensation preserved."
+        ],
+        "label": "SCRIPTED REHEARSAL VALUES - not a measurement"
+      }
+    },
+    {
+      "id": "hero-apparel-kling",
+      "sku": "FAB-JKT-QLT-RST-M",
+      "vertical": "apparel",
+      "model": "kling-v3-pro",
+      "mode": "image-to-video",
+      "aspect_ratio": "1:1",
+      "duration": 5,
+      "file": "hero-apparel-kling.mp4",
+      "provenance": "simulated",
+      "audio": "none",
+      "source_image": "assets/products/fabrikam-quilted-jacket-rust.png",
+      "media": {
+        "duration_s": 5.0,
+        "width": 576,
+        "height": 576,
+        "has_audio": false,
+        "size_bytes": 72735
+      }
+    },
+    {
+      "id": "hero-home-kling",
+      "sku": "CTP-DRL-20V-BL",
+      "vertical": "home-improvement",
+      "model": "kling-v3-pro",
+      "mode": "image-to-video",
+      "aspect_ratio": "16:9",
+      "duration": 5,
+      "file": "hero-home-kling.mp4",
+      "provenance": "simulated",
+      "audio": "none",
+      "source_image": "assets/products/contoso-pro-20v-drill.png",
+      "media": {
+        "duration_s": 5.0,
+        "width": 768,
+        "height": 432,
+        "has_audio": false,
+        "size_bytes": 46713
+      }
+    },
+    {
+      "id": "hero-patio-h3max",
+      "sku": "FAB-HOME-PATIO-5PC",
+      "vertical": "home-improvement",
+      "model": "minimax-h3-max",
+      "mode": "text-to-video",
+      "aspect_ratio": "16:9",
+      "duration": 6,
+      "file": "hero-patio-h3max.mp4",
+      "provenance": "simulated",
+      "audio": "none",
+      "source_image": null,
+      "media": {
+        "duration_s": 6.0,
+        "width": 768,
+        "height": 432,
+        "has_audio": false,
+        "size_bytes": 10997
+      }
+    },
+    {
+      "id": "hero-grocery-turbo",
+      "sku": "WGW-BND-FLU-01",
+      "vertical": "grocery-pharmacy",
+      "model": "minimax-h3-max-turbo",
+      "mode": "image-to-video",
+      "aspect_ratio": "16:9",
+      "duration": 6,
+      "file": "hero-grocery-turbo.mp4",
+      "provenance": "simulated",
+      "audio": "none",
+      "source_image": "assets/products/woodgrove-wellness-bundle.png",
+      "media": {
+        "duration_s": 6.0,
+        "width": 768,
+        "height": 432,
+        "has_audio": false,
+        "size_bytes": 127506
+      }
+    }
+  ]
+}

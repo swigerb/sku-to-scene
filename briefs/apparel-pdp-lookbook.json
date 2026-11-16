@@ -1,0 +1,12 @@
+{
+  "vertical": "Apparel & Home Decor",
+  "cache_id": "hero-apparel-kling",
+  "sku_id": "FAB-JKT-QLT-RST-M",
+  "prompt": "The Fabrikam rust quilted field jacket from the approved ghost-mannequin image turns slowly through 360 degrees; quilting stitches and corduroy collar stay exact while the fabric sways naturally. Soft studio light, seamless warm-grey backdrop, smooth orbit camera.",
+  "channel": "pdp",
+  "source": "pim_image",
+  "image_path": "assets/products/fabrikam-quilted-jacket-rust.png",
+  "stage": "final",
+  "physical_interaction": true,
+  "duration": 5
+}

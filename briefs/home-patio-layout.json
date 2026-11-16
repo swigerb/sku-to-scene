@@ -1,0 +1,11 @@
+{
+  "vertical": "Home Improvement & Electronics",
+  "cache_id": "hero-patio-h3max",
+  "sku_id": "FAB-HOME-PATIO-5PC",
+  "prompt": "Exactly one teak dining table and exactly four matching teak chairs on a stone patio at dusk, table centred, two chairs on each long side, string lights overhead, slow crane-down. No extra furniture, no people.",
+  "channel": "signage",
+  "source": "text",
+  "stage": "final",
+  "strict_layout": true,
+  "duration": 6
+}

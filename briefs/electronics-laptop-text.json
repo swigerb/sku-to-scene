@@ -1,0 +1,10 @@
+{
+  "vertical": "Home Improvement & Electronics",
+  "sku_id": "LTW-LT14-SLV",
+  "prompt": "A silver Litware 14-inch ultrabook opens on a light oak desk in a calm home office; morning light, a mug and a notebook, slow dolly-in to the keyboard. Native audio: soft keyboard clicks and room tone.",
+  "channel": "signage",
+  "source": "text",
+  "stage": "final",
+  "needs_audio": true,
+  "duration": 6
+}

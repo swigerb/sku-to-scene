@@ -1,0 +1,26 @@
+{
+  "mcpServers": {
+    "squad_state": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@bradygaster/squad-cli@1.1.0",
+        "state-mcp"
+      ],
+      "env": {},
+      "tools": [
+        "*"
+      ]
+    },
+    "sku-to-scene": {
+      "command": "python",
+      "args": [
+        "scripts/run_mcp_server.py"
+      ],
+      "env": {},
+      "tools": [
+        "*"
+      ]
+    }
+  }
+}

@@ -1,0 +1,114 @@
+{
+  "_note": "Mock PIM (Product Information Management) catalog. All brands are fictional. Images in assets/products are approved hero images.",
+  "products": [
+    {
+      "sku": "NWC-LTO-PCB-16",
+      "name": "Northwind Pumpkin Cold Brew (Grande, 16 oz)",
+      "brand": "northwind-coffee",
+      "vertical": "qsr",
+      "category": "Beverage / Cold Brew / Limited-Time Offer",
+      "image": "assets/products/nwc-pumpkin-cold-brew-hero.png",
+      "image_status": "approved",
+      "image_size": [1024, 1536],
+      "attributes": {
+        "flavor": "pumpkin spice cold foam over slow-steeped cold brew",
+        "serve": "iced, clear cup, green straw",
+        "season": "fall",
+        "lto_window": "Sep-Nov"
+      },
+      "copy_points": ["Slow-steeped 20 hours", "Velvety pumpkin cold foam", "Back for fall"],
+      "sensory_cues": ["ice clinking", "cold foam cascading", "condensation beads", "pour shot"],
+      "default_channels": ["tiktok", "signage"]
+    },
+    {
+      "sku": "CTP-DRL-20V-BL",
+      "name": "Contoso Pro 20V Brushless Cordless Drill/Driver",
+      "brand": "contoso-pro",
+      "vertical": "home-improvement",
+      "category": "Power Tools / Drills",
+      "image": "assets/products/contoso-pro-20v-drill.png",
+      "image_status": "approved",
+      "image_size": [1536, 1024],
+      "attributes": {
+        "voltage": "20V",
+        "motor": "brushless",
+        "chuck": "1/2 in. keyless",
+        "battery": "2.0Ah lithium-ion (included)"
+      },
+      "copy_points": ["Brushless motor", "Two-speed gearbox", "LED work light"],
+      "sensory_cues": ["drill whir", "sawdust in sunlight", "deck boards"],
+      "default_channels": ["pdp", "signage"]
+    },
+    {
+      "sku": "FAB-JKT-QLT-RST-M",
+      "name": "Fabrikam Quilted Field Jacket - Rust (M)",
+      "brand": "fabrikam",
+      "vertical": "apparel",
+      "category": "Apparel / Outerwear / Jackets",
+      "image": "assets/products/fabrikam-quilted-jacket-rust.png",
+      "image_status": "approved",
+      "image_size": [1024, 1536],
+      "attributes": {
+        "color": "rust",
+        "fabric": "diamond-quilted nylon shell, recycled fill",
+        "fit": "relaxed",
+        "presentation": "ghost mannequin"
+      },
+      "copy_points": ["Lightweight warmth", "Corduroy collar", "Snap front"],
+      "sensory_cues": ["fabric sway", "autumn leaves", "soft breeze"],
+      "default_channels": ["pdp", "tiktok"]
+    },
+    {
+      "sku": "WGW-BND-FLU-01",
+      "name": "Woodgrove Wellness Cold & Flu Season Bundle",
+      "brand": "woodgrove-wellness",
+      "vertical": "grocery-pharmacy",
+      "category": "Pharmacy / Seasonal Wellness Bundles",
+      "image": "assets/products/woodgrove-wellness-bundle.png",
+      "image_status": "approved",
+      "image_size": [1536, 1024],
+      "attributes": {
+        "contents": "thermometer, tissues, herbal tea, vitamin C, hand sanitizer",
+        "season": "flu season"
+      },
+      "copy_points": ["Everything for flu season in one bundle", "Save with rewards"],
+      "sensory_cues": ["warm mug steam", "cozy blanket"],
+      "default_channels": ["signage", "pdp"],
+      "regulated_claims": true
+    },
+    {
+      "sku": "FAB-HOME-PATIO-5PC",
+      "name": "Fabrikam Home 5-Piece Teak Patio Dining Set",
+      "brand": "fabrikam",
+      "vertical": "home-improvement",
+      "category": "Outdoor / Patio Furniture",
+      "image": null,
+      "image_status": "none",
+      "attributes": {
+        "pieces": "table + 4 chairs",
+        "material": "FSC teak, sage cushions"
+      },
+      "copy_points": ["Seats four", "Weather-ready teak"],
+      "sensory_cues": ["string lights", "evening backyard"],
+      "default_channels": ["signage"],
+      "layout_constraints": ["table centered", "exactly four chairs", "umbrella closed", "no people"]
+    },
+    {
+      "sku": "LTW-LT14-SLV",
+      "name": "Litware Ultrabook 14 (Silver)",
+      "brand": "litware",
+      "vertical": "electronics",
+      "category": "Electronics / Laptops",
+      "image": null,
+      "image_status": "none",
+      "attributes": {
+        "display": "14 in.",
+        "finish": "silver aluminum"
+      },
+      "copy_points": ["All-day battery", "Featherweight"],
+      "sensory_cues": ["home office morning light", "keyboard taps"],
+      "default_channels": ["signage", "pdp"],
+      "layout_constraints": ["laptop open at 110 degrees", "screen shows abstract wallpaper only", "coffee mug left of laptop"]
+    }
+  ]
+}

@@ -1,0 +1,8 @@
+{
+  "_note": "Channel specs used by @retail-merchandiser. Aspect ratios drive routing (LTX-2.5 has no native 1:1).",
+  "channels": {
+    "tiktok": {"display_name": "TikTok / Reels", "aspect_ratio": "9:16", "duration_s": [5, 10], "audio": "recommended", "safe_zone": "keep text out of bottom 20% and right 15%"},
+    "signage": {"display_name": "Digital Signage / Endcap", "aspect_ratio": "16:9", "duration_s": [6, 15], "audio": "off (in-store screens are usually muted)", "safe_zone": "large product, minimal text"},
+    "pdp": {"display_name": "Product Detail Page", "aspect_ratio": "1:1", "duration_s": [5, 8], "audio": "off (autoplay muted)", "safe_zone": "product centered, neutral background"}
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "_comment": "SKU to Scene two-tier LTO workflow (ComfyUI API format). Draft on LTX-2.5 Fast, then hero on Kling v3 Pro image-to-video from the approved cup image. Simulated unless SKU2SCENE_MODE=live.",
+  "1": {
+    "class_type": "LoadImage",
+    "inputs": { "image": "nwc-pumpkin-cold-brew-hero.png" }
+  },
+  "2": {
+    "class_type": "SkuToSceneFoundryFalVideo",
+    "inputs": {
+      "model": "ltx-2.5-fast",
+      "prompt": "Storyboard draft 'First Frost Commute': frosty city morning, a commuter lifts a Northwind Pumpkin Cold Brew, breath visible, slow push-in. Vertical 9:16 social cut.",
+      "duration": "6",
+      "aspect_ratio": "9:16",
+      "resolution": "720p",
+      "audio": false,
+      "sku": "NWC-LTO-PCB-16"
+    }
+  },
+  "3": {
+    "class_type": "SkuToSceneFoundryFalVideo",
+    "inputs": {
+      "model": "kling-v3-pro",
+      "prompt": "Cinematic close-up of the Northwind Pumpkin Cold Brew cup: cold brew pours over ice, pumpkin cream cascades, condensation beads, slow dolly-in, golden-hour rim light. Native audio: ice clinking and pour.",
+      "duration": "8",
+      "aspect_ratio": "9:16",
+      "resolution": "",
+      "audio": true,
+      "sku": "NWC-LTO-PCB-16",
+      "start_image": ["1", 0]
+    }
+  }
+}

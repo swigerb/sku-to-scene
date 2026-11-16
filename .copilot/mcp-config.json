@@ -1,0 +1,15 @@
+{
+  "mcpServers": {
+    "sku-to-scene": {
+      "command": "python",
+      "args": [
+        "scripts/run_mcp_server.py"
+      ],
+      "env": {},
+      "type": "local",
+      "tools": [
+        "*"
+      ]
+    }
+  }
+}

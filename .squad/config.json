@@ -1,0 +1,7 @@
+{
+  "version": 1,
+  "defaultModel": "hydrafusion",
+  "agentModelOverrides": {
+    "brand-qa": "hydrafusion-max"
+  }
+}

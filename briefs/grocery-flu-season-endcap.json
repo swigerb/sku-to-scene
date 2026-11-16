@@ -1,0 +1,12 @@
+{
+  "vertical": "Grocery & Pharmacy",
+  "cache_id": "hero-grocery-turbo",
+  "sku_id": "WGW-BND-FLU-01",
+  "prompt": "The Woodgrove Wellness cold & flu bundle from the approved image on a bright pharmacy endcap; gentle push-in, warm winter light, a soft seasonal snowfall outside the window. Labels stay crisp.",
+  "channel": "signage",
+  "source": "pim_image",
+  "image_path": "assets/products/woodgrove-wellness-bundle.png",
+  "stage": "final",
+  "volume": 120,
+  "duration": 6
+}

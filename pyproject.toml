@@ -1,0 +1,30 @@
+[build-system]
+requires = ["setuptools>=69", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "sku-to-scene"
+version = "0.1.0"
+description = "SKU to Scene: AI-directed retail video at enterprise scale with fal video models on Microsoft Foundry."
+readme = "README.md"
+license = { text = "MIT" }
+requires-python = ">=3.11"
+dependencies = [
+  "httpx>=0.27",
+  "mcp>=2.3,<3",
+]
+
+[project.optional-dependencies]
+live = ["azure-identity>=1.17"]
+dev = ["pytest>=8", "azure-identity>=1.17"]
+
+[project.scripts]
+sku2scene = "sku_to_scene.cli:main"
+sku2scene-mcp = "sku_to_scene.mcp_server:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"
