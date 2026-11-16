@@ -1,9 +1,42 @@
 import importlib.util
 import json
 import re
+import shutil
+import subprocess
 from pathlib import Path
 
+import pytest
+
 REPO = Path(__file__).resolve().parents[1]
+
+@pytest.mark.parametrize("mutation", [None, "choose", "reset"])
+def test_playback_transitions_pause_hidden_and_replaced_players(tmp_path, mutation):
+    node = shutil.which("node")
+    if node is None:
+        pytest.skip("Node.js is required for the browser event-handler regression")
+    out = _load_builder().build(tmp_path / "site")
+    source = REPO / "site" / "app.js"
+    if mutation:
+        text = source.read_text(encoding="utf-8")
+        before = ("      pausePlayers(playingDraft);" if mutation == "choose"
+                  else "      pausePlayers();\n      selected = null;")
+        after = "" if mutation == "choose" else "      selected = null;"
+        assert before in text
+        source = tmp_path / "mutated.js"
+        source.write_text(text.replace(before, after, 1), encoding="utf-8")
+    result = subprocess.run(
+        [node, str(REPO / "tests" / "playback.cjs"), str(source)],
+        input=(out / "data.json").read_text(encoding="utf-8"),
+        cwd=REPO, capture_output=True, text=True,
+    )
+    if mutation:
+        assert result.returncode != 0
+        expected = ("choosing a different concept pauses the old draft" if mutation == "choose"
+                    else "reset pauses the hidden hero")
+        assert expected in result.stderr
+    else:
+        assert result.returncode == 0, result.stdout + result.stderr
+        assert "playback transitions passed" in result.stdout
 
 
 def _load_builder():

@@ -1,6 +1,6 @@
 {
  "schema": "sku2scene.human-review.v1",
- "note": "Human findings and evaluator conflicts that automated checks must not resolve on their own. Nothing here changes the historical QA verdicts in demo-cache/manifest.json or the catalog.",
+ "note": "Human audio feedback and evaluator/agent findings that automated checks must not resolve on their own. Only the presenter's loud/frothing audio observation is confirmed human feedback; brand-owner adjudication and human calibration remain pending. Nothing here changes the historical QA verdicts in demo-cache/manifest.json or the catalog.",
  "findings": [
   {
    "id": "hero-audio-semantic-mismatch",
@@ -29,7 +29,7 @@
   {
    "id": "drill-reference-vs-brand-rule",
    "clip": "hero-home-kling",
-   "source": "Foundry Evals brand_marks (3 repeats) + human check of the approved PIM image",
+   "source": "Foundry Evals brand_marks (3 repeats) + agent visual check of the approved PIM image (not human review)",
    "severity": "needs human decision",
    "status": "open",
    "observation": "The grader answered violation, consistent, consistent. The violation cites the catalog rule 'CONTOSO PRO wordmark on yellow housing', but the approved drill PIM image is black/teal. The reference image and the written brand rule conflict.",

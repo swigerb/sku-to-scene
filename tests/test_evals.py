@@ -1,6 +1,7 @@
 import importlib.util
 import json
 import math
+import sys
 from pathlib import Path
 
 import pytest
@@ -96,6 +97,64 @@ def test_failed_or_errored_runs_are_operational_problems_but_low_scores_are_not(
         "brand": {"runs": [{"run_id": "r3", "status": "completed", "result_counts": {"errored": 1}}]},
     })
     assert probs == ["audio:r2 failed", "brand:r3 errored=1"]
+
+@pytest.mark.parametrize("run,expected", [
+    ({"items_error": "retrieval failed", "items": [], "result_counts": {"total": 2}},
+     ["items_error=retrieval failed", "returned_rows=0 expected_rows=2"]),
+    ({"items": [{}], "result_counts": {"total": 2}}, ["returned_rows=1 expected_rows=2"]),
+    ({"result_counts": {"total": 2}}, ["returned_rows=0 expected_rows=2"]),
+    ({"items": [{}, {}], "result_counts": {"total": 1}}, ["returned_rows=2 expected_rows=1"]),
+    ({"items": [{}], "result_counts": {"total": 1, "failed": 1}}, []),
+])
+def test_completed_runs_require_retrieved_complete_results(run, expected):
+    problems = _runner().operational_problems({"a": {"runs": [{"run_id": "r", "status": "completed", **run}]}})
+    assert problems == [f"a:r {message}" for message in expected]
+
+
+@pytest.mark.parametrize("args", [
+    ["--max-usd", "nan"], ["--max-usd", "inf"], ["--max-usd=-inf"],
+    ["--max-usd", "0"], ["--max-usd", "-1"],
+    ["--frames", "0"], ["--frames", "-1"], ["--repeats", "0"], ["--repeats", "-1"],
+])
+def test_invalid_run_limits_exit_before_configuration_or_network(monkeypatch, args):
+    runner = _runner()
+    monkeypatch.setattr(sys, "argv", ["run_foundry_evals.py", "--yes", *args])
+    monkeypatch.setattr(runner, "load_dotenv", lambda *_: pytest.fail("configuration reached"))
+    monkeypatch.setattr(runner, "load_inputs", lambda: pytest.fail("inputs reached"))
+    with pytest.raises(SystemExit) as exc:
+        runner.main()
+    assert exc.value.code == 2
+
+
+def test_public_summary_preserves_retrieval_diagnostics():
+    raw = dict(
+        evals={"a": {"runs": [{"run_id": "r", "status": "completed", "items_error": "retrieval failed",
+                              "items": [], "result_counts": {"total": 2}}]}},
+        stages={}, routing_rows=[], created_at="", design="", versions={}, grader_deployment="judge",
+        repeats=3, frames_per_clip=4, image_input_spikes=[], cost={},
+    )
+    run = evals.summarize_public(raw)["runs"]["a"]["runs"][0]
+    assert run["items_error"] == "retrieval failed"
+    assert run["returned_rows"] == 0 and run["expected_rows"] == 2
+
+
+def test_republish_recomputes_operational_status_before_publishing(monkeypatch, tmp_path):
+    runner = _runner()
+    path = tmp_path / "raw.json"
+    path.write_text(json.dumps({"operational_status": "ok", "evals": {"a": {"runs": [
+        {"run_id": "r", "status": "completed", "items_error": "retrieval failed",
+         "items": [], "result_counts": {"total": 2}},
+    ]}}}), encoding="utf-8")
+    monkeypatch.setattr(sys, "argv", ["run_foundry_evals.py", "--republish"])
+    monkeypatch.setattr(runner, "load_dotenv", lambda *_: None)
+    monkeypatch.setattr(runner, "latest_raw", lambda: path)
+    monkeypatch.setattr(runner, "backfill", lambda record, _: record)
+    published = []
+    monkeypatch.setattr(runner, "publish", published.append)
+    assert runner.main() == 1
+    assert published[0]["operational_status"] == [
+        "a:r items_error=retrieval failed", "a:r returned_rows=0 expected_rows=2",
+    ]
 
 
 def test_published_evidence_is_finite_sanitized_and_keeps_human_blocker():

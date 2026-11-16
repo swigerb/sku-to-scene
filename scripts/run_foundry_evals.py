@@ -19,6 +19,7 @@ from __future__ import annotations
 import argparse
 import base64
 import json
+import math
 import os
 import re
 import subprocess
@@ -246,6 +247,12 @@ def operational_problems(results: dict) -> list[str]:
                 probs.append(f"{check}:{r.get('run_id', '-')} {r.get('status')}")
             elif (r.get("result_counts") or {}).get("errored"):
                 probs.append(f"{check}:{r['run_id']} errored={r['result_counts']['errored']}")
+            if r.get("items_error"):
+                probs.append(f"{check}:{r.get('run_id', '-')} items_error={r['items_error']}")
+            total = (r.get("result_counts") or {}).get("total")
+            returned = len(r.get("items") or [])
+            if total is not None and returned != total:
+                probs.append(f"{check}:{r.get('run_id', '-')} returned_rows={returned} expected_rows={total}")
     return probs
 
 
@@ -334,13 +341,18 @@ def main() -> int:
     ap.add_argument("--only-audio", action="store_true", help="re-run only the audio-signal python grader (no model "
                     "tokens) and merge it into the latest raw record")
     a = ap.parse_args()
+    if not math.isfinite(a.max_usd) or a.max_usd <= 0:
+        ap.error("--max-usd must be finite and positive")
+    if a.frames <= 0 or a.repeats <= 0:
+        ap.error("--frames and --repeats must be positive")
 
     load_dotenv(REPO / ".env")
     if a.republish:
         record = backfill(json.loads(latest_raw().read_text(encoding="utf-8")),
                           a.grader_model or os.environ.get("AZURE_OPENAI_VISION_DEPLOYMENT", "brand-qa-vision"))
-        publish(record)
         probs = operational_problems(record["evals"])
+        record["operational_status"] = probs or "ok"
+        publish(record)
         print("operational problems:", probs or "none")
         return 1 if probs else 0
 

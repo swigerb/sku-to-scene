@@ -49,6 +49,10 @@
   }
   const soundOn = () => $("#sound") && $("#sound").checked;
 
+  function pausePlayers(except = null) {
+    document.querySelectorAll("video").forEach((v) => { if (v !== except && !v.paused) v.pause(); });
+  }
+
   // One player at a time; the Sound toggle and each player's native mute control stay in sync.
   let syncingMute = false;
   function setSound(on) {
@@ -59,7 +63,7 @@
   }
   document.addEventListener("play", (e) => {
     if (!(e.target instanceof HTMLVideoElement)) return;
-    document.querySelectorAll("video").forEach((v) => { if (v !== e.target && !v.paused) v.pause(); });
+    pausePlayers(e.target);
   }, true);
   document.addEventListener("volumechange", (e) => {
     if (syncingMute || !(e.target instanceof HTMLVideoElement)) return;
@@ -178,7 +182,7 @@
       $("#drafts").replaceChildren(...lto.drafts.map((id) => {
         const c = clips[id];
         const v = video(c, { loop: true, variant: c.variant });
-        v.addEventListener("play", () => { if (selected !== c.variant) choose(c.variant, true); });
+        v.addEventListener("play", () => { if (selected !== c.variant) choose(c.variant, true, v); });
         return h("article", { class: "card draft vertical", "data-variant": c.variant },
           h("h3", {}, `#${c.variant} · ${c.concept}`),
           v,
@@ -191,15 +195,16 @@
           h("div", {},
             verdictPill(c.qa.verdict),
             evalPill(evalCheck(c.id, "concept_adherence"), "AI eval · concept")),
-          h("p", { class: "hint" }, "Original QA applies final-brand checks to a text-to-video concept, so drafts fail by design. " +
+          h("p", { class: "hint" }, "These recorded drafts failed measured final-brand criteria, including garbled lettering in concept #2; text-only drafts are not required to fail. " +
             "The AI evaluation judges concept adherence instead; see AI evaluations."),
           h("button", { type: "button", class: "choose", "aria-pressed": "false", onclick: () => choose(c.variant, true) },
             `Choose concept #${c.variant}`));
       }));
     }
 
-    function choose(variant, manual) {
+    function choose(variant, manual, playingDraft = null) {
       if (manual) cancel();
+      pausePlayers(playingDraft);
       selected = variant;
       setStep(3);
       document.querySelectorAll(".draft").forEach((el) => {
@@ -267,6 +272,7 @@
     function cancel() { timers.forEach(clearTimeout); timers = []; }
     function reset() {
       cancel();
+      pausePlayers();
       selected = null;
       $("#log").replaceChildren();
       $("#hero-out").hidden = true;
@@ -298,6 +304,7 @@
     const tabs = $("#scenario-tabs");
     const body = $("#scenario-body");
     function show(i) {
+      pausePlayers();
       tabs.querySelectorAll("button").forEach((b, j) => b.setAttribute("aria-selected", String(i === j)));
       const s = data.scenarios[i];
       body.replaceChildren(
@@ -406,9 +413,9 @@
     ["audio_signal", "Audio signal", "audio signal"],
   ];
   const WHY_FAIL = {
-    "lto-draft-1": "Concept draft scored against final-brand checks (logo/label/product) it was never meant to meet.",
-    "lto-draft-2": "Concept draft scored against final-brand checks it was never meant to meet.",
-    "lto-draft-3": "Concept draft scored against final-brand checks it was never meant to meet.",
+    "lto-draft-1": "Measured QA found warped/blurred branding, partially legible text, product differences and missing scene details.",
+    "lto-draft-2": "Measured QA found garbled, unreadable lettering, product color/branding differences and incomplete scene adherence.",
+    "lto-draft-3": "Measured QA found an altered logo, illegible text, product differences and missing prompt details.",
     "hero-home-kling": "Prompt adherence 0.72 vs 0.75 threshold: job-site scene and tracking motion not clearly shown.",
     "hero-patio-h3max": "Text-to-video with no PIM input: no FABRIKAM label rendered, so logo and label checks score 0.",
     "hero-grocery-turbo": "Genuine product failure: the bundle omits the thermometer and honey from the approved PIM image.",
@@ -435,14 +442,14 @@
       h("div", { class: "qa-summary" },
         h("div", { class: "stat" }, h("b", {}, `${completed} / ${totalRuns}`),
           `Foundry Evals runs completed (+${EV.superseded_audio_runs.runs.length} failed audio runs superseded)`),
-        h("div", { class: "stat" }, h("b", {}, `${EV.repeats}×`), "repeats per check"),
+        h("div", { class: "stat" }, h("b", {}, `${EV.repeats}×`), "repeats per LLM check; one audio-signal run"),
         h("div", { class: "stat" }, h("b", {}, neg.expected_behavior_met ? "rejected" : "MISSED"), `negative control (${neg.agreement})`),
         h("div", { class: "stat" }, h("b", {}, usd(EV.cost.estimated_usd_this_run)), `estimated spend (cap ${usd(EV.cost.cap_usd)})`)),
 
       h("div", { class: "card method" },
         h("h3", {}, "How these evaluations work"),
         h("ol", {},
-          h("li", {}, h("b", {}, "Stage A, vision observation: "), `the brand-qa-vision deployment describes ${EV.frames_per_clip} sampled frames per clip next to the approved PIM reference. It writes neutral observations, not scores.`),
+          h("li", {}, h("b", {}, "Stage A, vision observation: "), `the brand-qa-vision deployment describes ${EV.frames_per_clip} sampled frames per clip, with an approved PIM reference only where supplied. It writes neutral observations, not scores.`),
           h("li", {}, h("b", {}, "Stage B, Foundry Evals: "), "text graders in Microsoft Foundry score those observations against stage-aware rubrics, three repeats each. Routing decisions are evaluated separately, and a Python grader checks audio signal measurements."),
           h("li", {}, h("b", {}, "Why two stages: "), `${EV.image_input_spikes.length} native image-input grader spikes were rejected by the service ("${EV.image_input_spikes[0].error}"). Visual checks therefore depend on Stage A's text observations and can miss details a direct visual judge would catch.`)),
         h("p", { class: "hint" }, "Scope: visual checks judge frames, not motion or full clips. The audio check measures stream, loudness and true peak only; " +
@@ -450,7 +457,7 @@
 
       h("div", { class: "card why" },
         h("h3", {}, "Why does the original QA show so many fails?"),
-        h("p", {}, "The original @brand-qa screen applies one set of final-brand thresholds to every clip. Six of eight fail, for different reasons:"),
+        h("p", {}, "The original @brand-qa screen applies per-brand final-brand thresholds. Six of eight recorded clips fail measured criteria, for different reasons; text-only drafts are not required to fail:"),
         h("ul", {}, Object.entries(WHY_FAIL).map(([id, why]) => h("li", {}, h("b", {}, clips[id] ? (clips[id].concept || id) : id), `: ${why}`))),
         h("p", { class: "hint" }, "The AI evaluations below separate concept adherence from final-brand fidelity and mark checks that do not apply as N/A. " +
           "Concept adherence is 'partial' for all eight clips: the Foundry Evals service reports any non-passing label as 'fail' (score 0), so the grader's own label is shown here, with the service label alongside.")),
@@ -501,7 +508,7 @@
               h("td", {}, labelPill(r[k].label, `${r[k].label} (${r[k].agreement})`)))))))),
 
       HR ? h("div", {},
-        h("h3", { class: "sub" }, "Human review findings"),
+        h("h3", { class: "sub" }, "Human feedback and evaluator/agent findings"),
         h("div", { class: "findings" }, HR.findings.map((f) => h("article", { class: `card finding ${f.severity === "publication blocker" ? "blocking" : ""}` },
           h("p", { class: "eyebrow" }, `${f.severity} · ${f.status}`),
           h("h4", {}, f.clip || f.case),

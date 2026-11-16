@@ -404,7 +404,10 @@ def summarize_public(raw: dict[str, Any]) -> dict[str, Any]:
     for check, e in evals_raw.items():
         runs[check] = {"eval_id": e.get("eval_id"), "criteria": e.get("criteria"), "dataset": e.get("dataset"),
                        "runs": [{k: r.get(k) for k in ("run_id", "status", "result_counts", "per_model_usage", "error",
-                                                       "duration_s", "item_errors")} for r in e.get("runs", [])]}
+                                                       "duration_s", "item_errors", "items_error")} |
+                                {"returned_rows": len(r.get("items") or []),
+                                 "expected_rows": (r.get("result_counts") or {}).get("total")}
+                                for r in e.get("runs", [])]}
         for rep, r in enumerate(e.get("runs", [])):
             for it in r.get("items") or []:
                 rid = it["item"].get("row_id") or it["item"].get("case_id")

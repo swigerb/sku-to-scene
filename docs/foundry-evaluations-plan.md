@@ -22,12 +22,12 @@ Native image input to a grader was tried and **rejected by the service** three t
 deployments (`Image inputs are not supported for grader model: … Try again with a vision model.`). The temporary
 spike deployments were deleted. No public grader-model allowlist exists, so the service errors are the evidence.
 
-1. **Stage A — vision observation.** The `brand-qa-vision` deployment views 4 sampled frames per clip next to
-   the approved PIM reference image. It writes neutral observations, not scores. Output tokens are capped per
+1. **Stage A — vision observation.** The `brand-qa-vision` deployment views 4 sampled frames per clip, with
+   an approved PIM reference only where supplied. It writes neutral observations, not scores. Output tokens are capped per
    call.
 2. **Stage B — Foundry Evals.** `azure-ai-projects>=2.2.0`, `get_openai_client()` and the Evals API. Text
    `label_model` graders score the Stage A observations against stage-aware rubrics. Each check runs **three
-   times**.
+   times** for the LLM checks; audio signal has one run.
 3. **Routing** is evaluated separately against grounded expected behaviour from `router.py`. It uses no media.
 4. **Audio signal** uses a Foundry Python grader over local ffmpeg measurements: stream present, integrated
    loudness and true peak. It **cannot judge whether sounds match the picture.**
@@ -71,15 +71,18 @@ grader now coerces values explicitly. The failed runs are kept as superseded evi
 
 ### Why the original QA shows so many fails
 
-- The three drafts are concept clips scored by final-brand checks, so they fail by design.
+- These three recorded drafts failed measured final-brand criteria; concept 2 has garbled lettering.
+  Text-only generation does not force a failure: every clip is judged against the applicable criteria.
 - The drill misses prompt adherence: 0.72 against a 0.75 threshold.
 - The patio is text-to-video with no label, so the logo and label checks score 0.
 - The grocery clip is a genuine product-fidelity failure (0.18: missing items).
 - The AI evaluation separates concept adherence from final-brand fidelity rather than turning those fails green.
 
-## Human review (not AI validation)
+## Human feedback and evaluator/agent findings
 
-These findings come from [human-review.json](../demo-cache/evaluations/human-review.json):
+These findings come from [human-review.json](../demo-cache/evaluations/human-review.json). Only the
+presenter's loud/frothing audio observation is confirmed human feedback. The drill reference check was
+an agent visual spot-check, not human review; brand-owner adjudication and human calibration remain pending.
 
 - **The Northwind hero audio is a publication blocker.** Café ambience is loud and the frothing sound does not
   match the picture. The demo plays it at 50% volume, but that is mitigation, not a semantic fix.
@@ -112,10 +115,12 @@ The runner:
 
 - Needs a live Foundry project in an ignored `.env` and `--yes`.
 - Reserves each call's estimate **before** dispatch and stops at the cap.
+- Rejects non-finite/nonpositive spend caps and nonpositive frame/repeat counts before loading configuration.
 - Persists eval and run IDs immediately.
 - Stops on a timeout instead of starting more runs.
-- Exits non-zero on service errors, failed runs or incomplete runs. Low scores and the expected negative-control
-  rejection are not operational errors.
+- Exits non-zero on service errors, failed runs, retrieval errors or a retrieved-row count that differs from
+  the service total. Public summaries preserve retrieval diagnostics and expected/returned row counts.
+  Low scores and the expected negative-control rejection are not operational errors.
 
 Normal MCP and Pages modes never call it.
 
