@@ -25,6 +25,8 @@ def test_site_artifact_is_curated_and_truthful(tmp_path):
     assert len(list((out / "brand" / "original").glob("*.png"))) == 6
 
     data = json.loads((out / "data.json").read_text(encoding="utf-8"))
+    for name in ("foundry-evals-v1.json", "human-review.json"):
+        assert json.loads((out / "evaluations" / name).read_text(encoding="utf-8"))
     assert len(data["clips"]) == 8
     assert all((out / c["file"]).is_file() for c in data["clips"])
     hero = next(c for c in data["clips"] if c["id"] == data["lto"]["hero_clip"])

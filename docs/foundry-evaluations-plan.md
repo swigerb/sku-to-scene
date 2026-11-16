@@ -1,9 +1,14 @@
-# Foundry Evaluations plan (not yet implemented)
+# Foundry Evaluations
 
-**Status: plan only.** Nothing here has been run. The QA in this repository today (`qa.py`) calls an Azure
-OpenAI vision deployment and Azure AI Content Safety **directly**; it is **not** Foundry Evaluations. This plan
-describes how to move regression scoring onto Foundry cloud evaluation without overstating what the service
-accepts.
+**Status: v1 executed (recorded, read-only replay).** The results are in
+[demo-cache/evaluations/foundry-evals-v1.json](../demo-cache/evaluations/foundry-evals-v1.json). Human findings
+are in [human-review.json](../demo-cache/evaluations/human-review.json). The browser demo replays both under
+**AI evaluations** and runs no evaluations itself.
+
+The original QA in `qa.py` calls an Azure OpenAI vision deployment and Azure AI Content Safety **directly**.
+It is not Foundry Evaluations, and its verdicts in `demo-cache/manifest.json` (2 pass / 6 fail) are an
+immutable baseline. The evaluations sit **next to** those verdicts and never change them, the thresholds or
+`publish_approved`.
 
 References (Microsoft Learn):
 [Cloud evaluation](https://learn.microsoft.com/en-us/azure/foundry/observability/how-to/cloud-evaluation) ·
@@ -11,111 +16,118 @@ References (Microsoft Learn):
 [Custom evaluators](https://learn.microsoft.com/en-us/azure/foundry/concepts/evaluation-evaluators/custom-evaluators) ·
 [Regions, limits and virtual network](https://learn.microsoft.com/en-us/azure/foundry/concepts/evaluation-regions-limits-virtual-network)
 
-## Goals and non-goals
+## Design: two stages, disclosed
 
-- **Goal:** repeatable, versioned regression scoring for (a) the agent routing decisions and (b) generated media,
-  calibrated against human labels, runnable on demand with a cost cap.
-- **Non-goals:** replacing human publication sign-off; relaxing thresholds; rewriting the historic
-  `demo-cache/manifest.json` evidence; generating new video inside an evaluation run.
+Native image input to a grader was tried and **rejected by the service** three times, with two vision
+deployments (`Image inputs are not supported for grader model: … Try again with a vision model.`). The temporary
+spike deployments were deleted. No public grader-model allowlist exists, so the service errors are the evidence.
 
-## Platform facts that shape the design
+1. **Stage A — vision observation.** The `brand-qa-vision` deployment views 4 sampled frames per clip next to
+   the approved PIM reference image. It writes neutral observations, not scores. Output tokens are capped per
+   call.
+2. **Stage B — Foundry Evals.** `azure-ai-projects>=2.2.0`, `get_openai_client()` and the Evals API. Text
+   `label_model` graders score the Stage A observations against stage-aware rubrics. Each check runs **three
+   times**.
+3. **Routing** is evaluated separately against grounded expected behaviour from `router.py`. It uses no media.
+4. **Audio signal** uses a Foundry Python grader over local ffmpeg measurements: stream present, integrated
+   loudness and true peak. It **cannot judge whether sounds match the picture.**
 
-- The current cloud guide uses `azure-ai-projects>=2.2.0`, `project_client.get_openai_client()` and the Evals
-  API with **versioned JSONL datasets** and explicit `{{item.field}}` mappings.
-- **Code evaluators run without network access**, so they cannot call our VLM or Content Safety.
-- **Prompt evaluators** return `result` and `reason`.
-- **Endpoint evaluators** can wrap networked QA but need a separately secured deployment and project connection.
-  They return `score`, `reason`, `status` and `schema_version`, with a **30-second timeout**.
-- Maximum dataset **row size is 2 MB**; East US 2 is a supported region.
-- Raw MP4 input is **not assumed** to be supported. Video must be represented as pre-extracted frames or
-  references to them.
+Limits: visual checks depend on Stage A text and can miss details a direct visual judge would catch. They judge
+frames, not motion. Datasets are **inline `file_content`, not registered Foundry datasets**, and are pinned by
+content hash.
 
-## Phase 0 — capability spike (gate)
+## v1 runs (all completed)
 
-Small, separately authorized, capped spend. Answer before building anything:
+| Check | Eval ID | Rows | Runs (×3 unless noted) |
+| --- | --- | --- | --- |
+| Concept adherence | `eval_2aad1e2eb0c5436fa995e4ce21abd011` | 8 | `evalrun_dcb47b3e…`, `evalrun_bc905a10…`, `evalrun_bd563616…` |
+| Product identity | `eval_fa293ecfed2c4c0e88fcf1ddf80ac010` | 5 | `evalrun_d3c16fb7…`, `evalrun_4739d508…`, `evalrun_7604bdc9…` |
+| Brand marks | `eval_5132015f322643188f4986f9a27b243d` | 4 | `evalrun_2df142a3…`, `evalrun_313889d9…`, `evalrun_c4eba4cd…` |
+| Routing | `eval_3c572a85a5514a84a363c6b5fa4f83d8` | 9 | `evalrun_ee4db480…`, `evalrun_9459493d…`, `evalrun_7ef09e77…` |
+| Audio signal | `eval_cefd1271b834422bad35b7dd904975b7` | 5 | `evalrun_c8c3e72edbcc4c79931c377ef4a2d124` (×1) |
 
-1. Can a prompt evaluator in our project/region accept **image input** (frame + PIM reference) in a dataset row?
-2. If not, is an **endpoint evaluator** over pre-extracted frames approved by security (private deployment,
-   managed identity, project connection, no secrets in rows)?
-3. Do rows with two to four downscaled frames stay well under 2 MB? (Prefer frame URIs in governed storage over
-   inline base64.)
+The full IDs, per-row reasons and versions are in the JSON. Versions: `media-rubric-v1`, `routing-cases-v1`,
+`audio-signal-v1` and `observation-v1`, plus SHA-256 hashes of the graders and observations.
 
-Exit: a written decision (prompt evaluator vs endpoint adapter) with run IDs and errors recorded.
+Two earlier audio runs **failed**: `evalrun_65fac372…` and `evalrun_8b280b72…`. The cloud Python sandbox passes
+item values as strings, so numeric comparisons raised errors and every row was rejected as invalid input. The
+grader now coerces values explicitly. The failed runs are kept as superseded evidence.
 
-## Phase 1 — datasets
+## Results
 
-Two separate, versioned datasets; never mix routing and media scoring.
+- **Concept adherence:** `partial` 3/3 for all 8 clips. The service normalizes non-passing labels to
+  `fail`/score 0. The demo shows the grader's own verdict and the service label as **separate fields**.
+- **Product identity:** `match` 3/3 on the four image-to-video renders. The **negative control** (cold-brew
+  clip vs drill reference) is `mismatch` 3/3, as expected.
+- **Brand marks:** `consistent` 3/3, except the drill, which is `split` 2/3 and **needs human review**. The
+  approved PIM image is black/teal, but the catalog rule says "yellow housing". This conflict goes to a
+  human; there is no majority vote.
+- **Text-to-video drafts and patio:** identity and brand marks are **N/A** with a recorded reason. No
+  approved image was an input, so they are judged at the final image-to-video stage.
+- **Routing:** model and mode 9/9 on every run. The grocery rationale was judged ungrounded 2/3, which is a
+  **grader calibration finding, not a routing defect**.
+- **Audio signal:** hero `fail` (true peak +2.0 dBTP, clipping risk) and draft 3 `fail` (−42.8 LUFS, very
+  quiet). Draft 2 has **no audio stream**: audio was not requested, `has_audio=false`. That check is N/A.
 
-**`sku2scene-routing` (no media).** One row per brief: brief fields (stage, channel, has approved image, audio,
-strict layout, volume, budget) and the **grounded expected behaviour** derived from `router.py` rules and
-`docs/model-routing.md` (expected model, mode, aspect ratio and estimated cost band). Include the sample briefs
-in `briefs/` plus edge cases (no PIM image with audio requested, conflicting signals, budget below draft cost).
-Score with a deterministic code evaluator (exact model/mode match, cost within band) — no network needed.
+### Why the original QA shows so many fails
 
-**`sku2scene-media` (frames).** One row per clip from existing evidence only: clip ID, request ID, model, mode,
-SKU, PIM reference frame, two to four extracted frames (extracted offline; **no ffmpeg or rendering inside a
-scoring request**), scene prompt, brand ID, catalog revision and brand rules. Seed with the 8 cached clips and
-include the **negative control** (cold-brew clip vs drill reference) labelled `expected: fail`. Keep historical
-scores and each clip's recorded `qa.thresholds` as read-only baseline evidence, not as labels.
+- The three drafts are concept clips scored by final-brand checks, so they fail by design.
+- The drill misses prompt adherence: 0.72 against a 0.75 threshold.
+- The patio is text-to-video with no label, so the logo and label checks score 0.
+- The grocery clip is a genuine product-fidelity failure (0.18: missing items).
+- The AI evaluation separates concept adherence from final-brand fidelity rather than turning those fails green.
 
-## Phase 2 — custom multimodal brand rubric
+## Human review (not AI validation)
 
-A versioned rubric (`rubric_version`) mirroring today's four checks — logo integrity, label legibility, product
-fidelity, prompt adherence — with each brand's thresholds from the pinned revision of
-[catalog/brands.json](../catalog/brands.json) as that brand's **floor**, not a universal threshold.
-Use each historical clip's recorded `qa.thresholds` in [demo-cache/manifest.json](../demo-cache/manifest.json)
-when comparing its original verdict; later catalog revisions must not reinterpret it.
-Add an explicit `applicable` flag per check so cases such as the unbranded patio set are scored "not applicable"
-by rule rather than failing. That is a rubric change recorded under a new version, re-calibrated against humans,
-and **never** applied retroactively to the historic manifest.
+These findings come from [human-review.json](../demo-cache/evaluations/human-review.json):
 
-Implementation follows the Phase 0 decision: a prompt evaluator with image input, or an endpoint adapter that
-wraps the existing vision scoring over pre-extracted frames, returns within 30 s, and persists its own request
-IDs and errors. Content Safety stays a separate check with severities reported alongside, not blended into a score.
+- **The Northwind hero audio is a publication blocker.** Café ambience is loud and the frothing sound does not
+  match the picture. The demo plays it at 50% volume, but that is mitigation, not a semantic fix.
+- Drafts 1 and 3 (MiniMax Turbo) contain audio that was not requested and has not been reviewed for meaning.
+- The grocery clip shows a conflict: original QA failed product fidelity, while the AI evaluation's identity
+  check says `match` 3/3. A human must decide.
 
-## Phase 3 — human calibration
+## Cost
 
-- At least two reviewers label each media row per check (pass/fail/not applicable) after watching the full clip
-  with audio. Labels live in a separate `human_labels` dataset version; model scores never overwrite them.
-- Measure agreement (per-check precision/recall vs human, Cohen's κ between reviewers). Adjust the rubric
-  wording, not the thresholds, until agreement is acceptable; if thresholds must change, raise them only with
-  documented evidence and a new rubric version.
-- Expand beyond 8 clips before trusting the numbers; 8 rows is a smoke set, not a calibration set.
-
-## Repeatability and invariants
-
-- Pin dataset version, rubric version, brand ID, catalog revision and per-brand thresholds, evaluator
-  model/deployment version, prompt template hash and frame extraction settings in every run record.
-- Run each media row at least three times (temperature 0) to measure score variance; flag checks whose variance
-  crosses a threshold boundary.
-- Invariants enforced in tests: a brand's thresholds never decrease without a reviewed change; the negative
-  control must fail; missing or errored scores are `manual_review`, never pass; `publish_approved` is never
-  set by an evaluator.
-
-## CI integration
-
-- `workflow_dispatch` only (manual opt-in), never on push or pull request.
-- Inputs: dataset version, rubric version and a **cost cap**; the job refuses to start if the row count × unit
-  estimate exceeds it.
-- Federated (OIDC) credentials to a non-production project; no keys in the repository or logs.
-- Outputs: evaluation run ID, per-row results and errors as an artifact. A regression report compares with
-  the previous run; failures block publication, not merges.
-
-## Acceptance gates
-
-| Gate | Pass condition |
+| Item | Value |
 | --- | --- |
-| G0 Spike | Image-input path or approved endpoint adapter decided; run IDs and errors recorded |
-| G1 Routing | 100% expected model/mode on the routing set; cost within band |
-| G2 Media smoke | 8 clips + negative control scored; negative control fails; no evaluator errors swallowed |
-| G3 Calibration | Agreed per-check precision/recall against human labels on an expanded set |
-| G4 Repeatability | Score variance within tolerance across three runs; no threshold-straddling flips unflagged |
-| G5 Operations | Manual CI job with cost cap, OIDC auth and archived results |
+| Estimated spend | **$0.2201** of a $5.00 coordinator cap |
+| Tokens | 78,716 input + 18,273 output |
+| Assumed rates | $1/M input and $5/M output, plus a $0.05 spike reservation |
+| Pre-run estimate | $0.6522 |
+| Logged during the run | $0.347 (double-counted duplicate usage rows; recomputed) |
 
-## Risks
+When `per_model_usage` is empty, **the service returned no usage or cost attribution**. That is not proof of
+zero cost; the reservation stays in the estimate. These are estimates, not Azure bills.
 
-- Model graders drift between versions — pin and re-calibrate on upgrade.
-- Frame sampling misses transient defects — full-clip human review remains required.
-- Audio is out of scope until a supported audio evaluator path exists; listen manually.
-- fal preview data handling applies to generation, not evaluation; evaluation inputs are frames already in
-  your tenant, but confirm data-handling approval for any new evaluator deployment.
+## Re-running (billable, opt-in)
+
+```powershell
+pip install -e ".[eval]"
+.\.venv\Scripts\python.exe scripts\run_foundry_evals.py              # dry run: estimate only
+.\.venv\Scripts\python.exe scripts\run_foundry_evals.py --yes --max-usd 5   # billable
+```
+
+The runner:
+
+- Needs a live Foundry project in an ignored `.env` and `--yes`.
+- Reserves each call's estimate **before** dispatch and stops at the cap.
+- Persists eval and run IDs immediately.
+- Stops on a timeout instead of starting more runs.
+- Exits non-zero on service errors, failed runs or incomplete runs. Low scores and the expected negative-control
+  rejection are not operational errors.
+
+Normal MCP and Pages modes never call it.
+
+## Next phases
+
+- **Calibration:** at least two human reviewers label each check after watching the full clip with audio.
+  Measure agreement, then adjust rubric wording under a new version. Eight clips are a smoke set, not a
+  calibration set.
+- **Registered datasets:** move inline rows to versioned Foundry datasets.
+- **Direct visual judging:** revisit when a supported grader model accepts image input, or use a secured
+  endpoint evaluator.
+- **Audio semantics:** an audio-capable model (for example gpt-audio) could review the track against
+  timestamped visual observations. That would still not be synchronized audiovisual validation and would need
+  calibration.
+- **CI:** a `workflow_dispatch`-only job with a cost cap and OIDC to a non-production project.

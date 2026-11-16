@@ -1,0 +1,3086 @@
+{
+ "schema": "sku2scene.foundry-evals.public/v1",
+ "created_at": "20261116T172305Z",
+ "design": "two-stage: direct vision observations (Stage A) -> Foundry Evals text graders (Stage B)",
+ "versions": {
+  "media_rubric": "media-rubric-v1",
+  "routing_cases": "routing-cases-v1",
+  "audio_rubric": "audio-signal-v1",
+  "observation_prompt": "observation-v1"
+ },
+ "hashes": {
+  "media_graders_sha256": "sha256:29dc13a2d62602bb952a097f7956df3f91c26ab99e002f59a67c6f351cc86456",
+  "routing_graders_sha256": "sha256:3f2a31068a6ee4f74139215c95e5014c81437f5ecde50651438f92c95620c85b",
+  "observations_sha256": "sha256:e4690659902d4d275ab4baa9e625c652c68a757339abc3ba5e13bcfc9353fb17",
+  "note": "backfilled after the run from unchanged grader definitions and the recorded observations"
+ },
+ "grader_deployment": "brand-qa-vision",
+ "grader_model": [
+  "gpt-5.4-mini-2026-03-17"
+ ],
+ "repeats": 3,
+ "frames_per_clip": 4,
+ "runs": {
+  "concept_adherence": {
+   "eval_id": "eval_2aad1e2eb0c5436fa995e4ce21abd011",
+   "criteria": [
+    "concept_adherence"
+   ],
+   "dataset": {
+    "kind": "inline file_content (not a registered Foundry dataset)",
+    "rows": 8
+   },
+   "runs": [
+    {
+     "run_id": "evalrun_dcb47b3ed52440c2b6af9ca9e2ca8050",
+     "status": "completed",
+     "result_counts": {
+      "errored": 0,
+      "failed": 8,
+      "passed": 0,
+      "total": 8,
+      "skipped": 0
+     },
+     "per_model_usage": [
+      {
+       "cached_tokens": 0,
+       "completion_tokens": 1578,
+       "invocation_count": 8,
+       "run_model_name": "gpt-5.4-mini-2026-03-17",
+       "prompt_tokens": 8289,
+       "total_tokens": 9867,
+       "model_name": "gpt-5.4-mini-2026-03-17"
+      },
+      {
+       "cached_tokens": 0,
+       "completion_tokens": 1578,
+       "invocation_count": 8,
+       "run_model_name": "azure_ai_evaluation",
+       "prompt_tokens": 8289,
+       "total_tokens": 9867,
+       "model_name": "azure_ai_evaluation"
+      }
+     ],
+     "error": null,
+     "duration_s": 53.4,
+     "item_errors": null
+    },
+    {
+     "run_id": "evalrun_bc905a108e9244a6aef0028d9c9a9eb1",
+     "status": "completed",
+     "result_counts": {
+      "errored": 0,
+      "failed": 8,
+      "passed": 0,
+      "total": 8,
+      "skipped": 0
+     },
+     "per_model_usage": [
+      {
+       "cached_tokens": 1280,
+       "completion_tokens": 1516,
+       "invocation_count": 8,
+       "run_model_name": "gpt-5.4-mini-2026-03-17",
+       "prompt_tokens": 8289,
+       "total_tokens": 9805,
+       "model_name": "gpt-5.4-mini-2026-03-17"
+      },
+      {
+       "cached_tokens": 1280,
+       "completion_tokens": 1516,
+       "invocation_count": 8,
+       "run_model_name": "azure_ai_evaluation",
+       "prompt_tokens": 8289,
+       "total_tokens": 9805,
+       "model_name": "azure_ai_evaluation"
+      }
+     ],
+     "error": null,
+     "duration_s": 35.3,
+     "item_errors": null
+    },
+    {
+     "run_id": "evalrun_bd563616c9bd497cb710d7614a342920",
+     "status": "completed",
+     "result_counts": {
+      "errored": 0,
+      "failed": 8,
+      "passed": 0,
+      "total": 8,
+      "skipped": 0
+     },
+     "per_model_usage": [
+      {
+       "cached_tokens": 1280,
+       "completion_tokens": 1480,
+       "invocation_count": 8,
+       "run_model_name": "gpt-5.4-mini-2026-03-17",
+       "prompt_tokens": 8289,
+       "total_tokens": 9769,
+       "model_name": "gpt-5.4-mini-2026-03-17"
+      },
+      {
+       "cached_tokens": 1280,
+       "completion_tokens": 1480,
+       "invocation_count": 8,
+       "run_model_name": "azure_ai_evaluation",
+       "prompt_tokens": 8289,
+       "total_tokens": 9769,
+       "model_name": "azure_ai_evaluation"
+      }
+     ],
+     "error": null,
+     "duration_s": 44.2,
+     "item_errors": null
+    }
+   ]
+  },
+  "product_identity": {
+   "eval_id": "eval_fa293ecfed2c4c0e88fcf1ddf80ac010",
+   "criteria": [
+    "product_identity"
+   ],
+   "dataset": {
+    "kind": "inline file_content (not a registered Foundry dataset)",
+    "rows": 5
+   },
+   "runs": [
+    {
+     "run_id": "evalrun_d3c16fb7d6714cf8ad13d73298f9f0a1",
+     "status": "completed",
+     "result_counts": {
+      "errored": 0,
+      "failed": 1,
+      "passed": 4,
+      "total": 5,
+      "skipped": 0
+     },
+     "per_model_usage": [
+      {
+       "cached_tokens": 0,
+       "completion_tokens": 855,
+       "invocation_count": 5,
+       "run_model_name": "gpt-5.4-mini-2026-03-17",
+       "prompt_tokens": 4868,
+       "total_tokens": 5723,
+       "model_name": "gpt-5.4-mini-2026-03-17"
+      },
+      {
+       "cached_tokens": 0,
+       "completion_tokens": 855,
+       "invocation_count": 5,
+       "run_model_name": "azure_ai_evaluation",
+       "prompt_tokens": 4868,
+       "total_tokens": 5723,
+       "model_name": "azure_ai_evaluation"
+      }
+     ],
+     "error": null,
+     "duration_s": 44.0,
+     "item_errors": null
+    },
+    {
+     "run_id": "evalrun_4739d50825a54e6abb588a89f8c197c6",
+     "status": "completed",
+     "result_counts": {
+      "errored": 0,
+      "failed": 1,
+      "passed": 4,
+      "total": 5,
+      "skipped": 0
+     },
+     "per_model_usage": [
+      {
+       "cached_tokens": 0,
+       "completion_tokens": 906,
+       "invocation_count": 5,
+       "run_model_name": "gpt-5.4-mini-2026-03-17",
+       "prompt_tokens": 4868,
+       "total_tokens": 5774,
+       "model_name": "gpt-5.4-mini-2026-03-17"
+      },
+      {
+       "cached_tokens": 0,
+       "completion_tokens": 906,
+       "invocation_count": 5,
+       "run_model_name": "azure_ai_evaluation",
+       "prompt_tokens": 4868,
+       "total_tokens": 5774,
+       "model_name": "azure_ai_evaluation"
+      }
+     ],
+     "error": null,
+     "duration_s": 35.8,
+     "item_errors": null
+    },
+    {
+     "run_id": "evalrun_7604bdc917124481a76f964763b14021",
+     "status": "completed",
+     "result_counts": {
+      "errored": 0,
+      "failed": 1,
+      "passed": 4,
+      "total": 5,
+      "skipped": 0
+     },
+     "per_model_usage": [
+      {
+       "cached_tokens": 1280,
+       "completion_tokens": 836,
+       "invocation_count": 5,
+       "run_model_name": "gpt-5.4-mini-2026-03-17",
+       "prompt_tokens": 4868,
+       "total_tokens": 5704,
+       "model_name": "gpt-5.4-mini-2026-03-17"
+      },
+      {
+       "cached_tokens": 1280,
+       "completion_tokens": 836,
+       "invocation_count": 5,
+       "run_model_name": "azure_ai_evaluation",
+       "prompt_tokens": 4868,
+       "total_tokens": 5704,
+       "model_name": "azure_ai_evaluation"
+      }
+     ],
+     "error": null,
+     "duration_s": 35.4,
+     "item_errors": null
+    }
+   ]
+  },
+  "brand_marks": {
+   "eval_id": "eval_5132015f322643188f4986f9a27b243d",
+   "criteria": [
+    "brand_marks"
+   ],
+   "dataset": {
+    "kind": "inline file_content (not a registered Foundry dataset)",
+    "rows": 4
+   },
+   "runs": [
+    {
+     "run_id": "evalrun_2df142a3e2f1406abc7b9f6f2546a3d6",
+     "status": "completed",
+     "result_counts": {
+      "errored": 0,
+      "failed": 1,
+      "passed": 3,
+      "total": 4,
+      "skipped": 0
+     },
+     "per_model_usage": [
+      {
+       "cached_tokens": 0,
+       "completion_tokens": 545,
+       "invocation_count": 4,
+       "run_model_name": "gpt-5.4-mini-2026-03-17",
+       "prompt_tokens": 4327,
+       "total_tokens": 4872,
+       "model_name": "gpt-5.4-mini-2026-03-17"
+      },
+      {
+       "cached_tokens": 0,
+       "completion_tokens": 545,
+       "invocation_count": 4,
+       "run_model_name": "azure_ai_evaluation",
+       "prompt_tokens": 4327,
+       "total_tokens": 4872,
+       "model_name": "azure_ai_evaluation"
+      }
+     ],
+     "error": null,
+     "duration_s": 35.5,
+     "item_errors": null
+    },
+    {
+     "run_id": "evalrun_313889d9901f4a93be4cbaa9c56f19c8",
+     "status": "completed",
+     "result_counts": {
+      "errored": 0,
+      "failed": 0,
+      "passed": 4,
+      "total": 4,
+      "skipped": 0
+     },
+     "per_model_usage": [
+      {
+       "cached_tokens": 1280,
+       "completion_tokens": 602,
+       "invocation_count": 4,
+       "run_model_name": "gpt-5.4-mini-2026-03-17",
+       "prompt_tokens": 4327,
+       "total_tokens": 4929,
+       "model_name": "gpt-5.4-mini-2026-03-17"
+      },
+      {
+       "cached_tokens": 1280,
+       "completion_tokens": 602,
+       "invocation_count": 4,
+       "run_model_name": "azure_ai_evaluation",
+       "prompt_tokens": 4327,
+       "total_tokens": 4929,
+       "model_name": "azure_ai_evaluation"
+      }
+     ],
+     "error": null,
+     "duration_s": 36.9,
+     "item_errors": null
+    },
+    {
+     "run_id": "evalrun_c4eba4cd4dfc4cf5bc6fd027bc1b10ca",
+     "status": "completed",
+     "result_counts": {
+      "errored": 0,
+      "failed": 0,
+      "passed": 4,
+      "total": 4,
+      "skipped": 0
+     },
+     "per_model_usage": [
+      {
+       "cached_tokens": 1280,
+       "completion_tokens": 578,
+       "invocation_count": 4,
+       "run_model_name": "gpt-5.4-mini-2026-03-17",
+       "prompt_tokens": 4327,
+       "total_tokens": 4905,
+       "model_name": "gpt-5.4-mini-2026-03-17"
+      },
+      {
+       "cached_tokens": 1280,
+       "completion_tokens": 578,
+       "invocation_count": 4,
+       "run_model_name": "azure_ai_evaluation",
+       "prompt_tokens": 4327,
+       "total_tokens": 4905,
+       "model_name": "azure_ai_evaluation"
+      }
+     ],
+     "error": null,
+     "duration_s": 26.6,
+     "item_errors": null
+    }
+   ]
+  },
+  "routing": {
+   "eval_id": "eval_3c572a85a5514a84a363c6b5fa4f83d8",
+   "criteria": [
+    "model_matches_expected",
+    "mode_matches_expected",
+    "rationale_grounded"
+   ],
+   "dataset": {
+    "kind": "inline file_content (not a registered Foundry dataset)",
+    "rows": 9
+   },
+   "runs": [
+    {
+     "run_id": "evalrun_ee4db4806a384871a6be5564a164ed33",
+     "status": "completed",
+     "result_counts": {
+      "errored": 0,
+      "failed": 1,
+      "passed": 8,
+      "total": 9,
+      "skipped": 0
+     },
+     "per_model_usage": [
+      {
+       "cached_tokens": 0,
+       "completion_tokens": 1383,
+       "invocation_count": 9,
+       "run_model_name": "gpt-5.4-mini-2026-03-17",
+       "prompt_tokens": 2909,
+       "total_tokens": 4292,
+       "model_name": "gpt-5.4-mini-2026-03-17"
+      },
+      {
+       "cached_tokens": 0,
+       "completion_tokens": 1383,
+       "invocation_count": 9,
+       "run_model_name": "azure_ai_evaluation",
+       "prompt_tokens": 2909,
+       "total_tokens": 4292,
+       "model_name": "azure_ai_evaluation"
+      }
+     ],
+     "error": null,
+     "duration_s": 70.9,
+     "item_errors": null
+    },
+    {
+     "run_id": "evalrun_9459493debb54861bf48f9b1a145a844",
+     "status": "completed",
+     "result_counts": {
+      "errored": 0,
+      "failed": 1,
+      "passed": 8,
+      "total": 9,
+      "skipped": 0
+     },
+     "per_model_usage": [
+      {
+       "cached_tokens": 0,
+       "completion_tokens": 1433,
+       "invocation_count": 9,
+       "run_model_name": "gpt-5.4-mini-2026-03-17",
+       "prompt_tokens": 2909,
+       "total_tokens": 4342,
+       "model_name": "gpt-5.4-mini-2026-03-17"
+      },
+      {
+       "cached_tokens": 0,
+       "completion_tokens": 1433,
+       "invocation_count": 9,
+       "run_model_name": "azure_ai_evaluation",
+       "prompt_tokens": 2909,
+       "total_tokens": 4342,
+       "model_name": "azure_ai_evaluation"
+      }
+     ],
+     "error": null,
+     "duration_s": 61.8,
+     "item_errors": null
+    },
+    {
+     "run_id": "evalrun_7ef09e778b06470880d6fbb27d76b9c1",
+     "status": "completed",
+     "result_counts": {
+      "errored": 0,
+      "failed": 1,
+      "passed": 8,
+      "total": 9,
+      "skipped": 0
+     },
+     "per_model_usage": [
+      {
+       "cached_tokens": 0,
+       "completion_tokens": 1431,
+       "invocation_count": 9,
+       "run_model_name": "gpt-5.4-mini-2026-03-17",
+       "prompt_tokens": 2909,
+       "total_tokens": 4340,
+       "model_name": "gpt-5.4-mini-2026-03-17"
+      },
+      {
+       "cached_tokens": 0,
+       "completion_tokens": 1431,
+       "invocation_count": 9,
+       "run_model_name": "azure_ai_evaluation",
+       "prompt_tokens": 2909,
+       "total_tokens": 4340,
+       "model_name": "azure_ai_evaluation"
+      }
+     ],
+     "error": null,
+     "duration_s": 61.9,
+     "item_errors": null
+    }
+   ]
+  },
+  "audio_signal": {
+   "eval_id": "eval_cefd1271b834422bad35b7dd904975b7",
+   "criteria": [
+    "audio_signal"
+   ],
+   "dataset": {
+    "kind": "inline file_content (not a registered Foundry dataset)",
+    "rows": 5,
+    "rows_sha256": "sha256:f1f0253fca41674ed6f6c14417ec93ed042305d4cfe44091040493cbd7caa70e",
+    "criteria_sha256": "sha256:cf5f8429f8f7aa7934cdadb777cf6f55acba561a8c2ebaa1b2fdbb8af999c3bf"
+   },
+   "runs": [
+    {
+     "run_id": "evalrun_c8c3e72edbcc4c79931c377ef4a2d124",
+     "status": "completed",
+     "result_counts": {
+      "errored": 0,
+      "failed": 2,
+      "passed": 3,
+      "total": 5,
+      "skipped": 0
+     },
+     "per_model_usage": [],
+     "error": null,
+     "duration_s": 44.4,
+     "item_errors": []
+    }
+   ]
+  }
+ },
+ "media": {
+  "lto-draft-1": {
+   "stage": "concept draft",
+   "expected_identity": "match",
+   "checks": {
+    "concept_adherence": {
+     "applicable": true,
+     "repeats": [
+      {
+       "repeat": 1,
+       "run_id": "evalrun_dcb47b3ed52440c2b6af9ca9e2ca8050",
+       "service_passed": false,
+       "service_score": 0.0,
+       "service_label": "fail",
+       "grader_label": "partial",
+       "reasons": [
+        "The draft clearly shows the core product category: a branded iced coffee cup for Northwind Coffee is present, with the Northwind text visible on the cup. Core product presence confirmed.",
+        "The requested harvest-market setting is substantially represented by a hay bale, pumpkins, and warm sunset light, matching the Pacific Northwest farmstand/market mood at a draft level. Core scene present.",
+        "Some requested specifics are not clearly evidenced: the 16 oz Grande size, clear cup with green straw, exact brand palette, slow dolly-in, macro condensation emphasis, and upright fully legible logo fidelity are not all verifiable from the observations. However, for a concept draft those are secondary if the scene/product are present. Minor requested details missing or unconfirmed.",
+        "Because the core scene and product are present, but several specified draft elements are absent or unconfirmed, the appropriate label is partial. Assign partial."
+       ]
+      },
+      {
+       "repeat": 2,
+       "run_id": "evalrun_bc905a108e9244a6aef0028d9c9a9eb1",
+       "service_passed": false,
+       "service_score": 0.0,
+       "service_label": "fail",
+       "grader_label": "partial",
+       "reasons": [
+        "The frames clearly show the core concept: a branded iced coffee cup placed on a hay bale among pumpkins in warm golden-hour outdoor light, matching the harvest market / farmers' market feel. Core scene is present.",
+        "The product category and some requested product details are visible, including Northwind branding, an iced coffee cup, and foam appearing on top and running down the cup in later frames. Core product is present with partial styling support.",
+        "A few brief elements from the brief are not clearly evidenced in the sampled frames, such as the Pacific Northwest farmers' market context, the clear cup with green straw, explicit macro condensation beads, and the exact vertical/social-cut framing details. Some requested elements are missing or unverified."
+       ]
+      },
+      {
+       "repeat": 3,
+       "run_id": "evalrun_bd563616c9bd497cb710d7614a342920",
+       "service_passed": false,
+       "service_score": 0.0,
+       "service_label": "fail",
+       "grader_label": "partial",
+       "reasons": [
+        "The frames show the core concept: an iced branded coffee cup placed on a hay bale beside pumpkins in warm golden-hour outdoor lighting, which matches the Harvest Market scene and product category. Core scene and product are present.",
+        "The product appears branded with NORTHWIND/NORTHWIND COFFEE text and the cup is visible with foam, but the prompt specifically calls for a clear cup with a green straw, and the observations do not mention a green straw or confirm the exact Grande 16 oz presentation. Some requested product details are missing or unverified.",
+        "Because this is a concept draft, missing subtle motion details like ice clinking or a full camera move are not fatal; however, the absence of the green straw and exact reference fidelity keeps it from being a full pass. Partial match."
+       ]
+      }
+     ],
+     "label": "partial",
+     "agreement": "3/3 partial",
+     "label_counts": {
+      "partial": 3
+     },
+     "needs_human_review": false,
+     "service_passed": [
+      false,
+      false,
+      false
+     ]
+    },
+    "product_identity": {
+     "applicable": false,
+     "na_reason": "text-to-video render: no approved PIM image was an input, so identity and brand marks are judged at the final image-to-video stage, not here"
+    },
+    "brand_marks": {
+     "applicable": false,
+     "na_reason": "text-to-video render: no approved PIM image was an input, so identity and brand marks are judged at the final image-to-video stage, not here"
+    },
+    "audio_signal": {
+     "applicable": true,
+     "scope": "signal only (stream, loudness, true peak); not semantic or sync",
+     "local": {
+      "label": "pass",
+      "reasons": [
+       "-25.6 LUFS integrated, -11.6 dBTP true peak"
+      ]
+     },
+     "measurements": {
+      "integrated_lufs": -25.6,
+      "true_peak_dbtp": -11.6,
+      "loudness_range_lu": 1.2
+     },
+     "cloud": [
+      {
+       "repeat": 1,
+       "run_id": "evalrun_c8c3e72edbcc4c79931c377ef4a2d124",
+       "service_passed": true,
+       "service_score": 1.0,
+       "service_label": "pass",
+       "grader_label": "pass",
+       "reasons": []
+      }
+     ],
+     "label": "pass",
+     "agreement": "1/1 pass",
+     "label_counts": {
+      "pass": 1
+     },
+     "needs_human_review": false
+    }
+   },
+   "observation": {
+    "scene_summary": "A branded iced coffee cup is shown on hay between two pumpkins outdoors at sunset, with white foam visible on and around the cup in later frames.",
+    "comparison_notes": "",
+    "request_id": "b88ae1ca-0931-4f45-b87a-fcfbdad4a845",
+    "usage": {
+     "input_tokens": 2285,
+     "output_tokens": 400
+    },
+    "frames": 4,
+    "reference_image": null,
+    "deployment": "brand-qa-vision",
+    "model": "gpt-5.4-mini-2026-03-17",
+    "observations_sha256": "sha256:2572717d4867444b7ed1fc43ee039d238f0cd8c93969872423a8937c3dd845ee"
+   }
+  },
+  "lto-draft-2": {
+   "stage": "concept draft",
+   "expected_identity": "match",
+   "checks": {
+    "concept_adherence": {
+     "applicable": true,
+     "repeats": [
+      {
+       "repeat": 1,
+       "run_id": "evalrun_dcb47b3ed52440c2b6af9ca9e2ca8050",
+       "service_passed": false,
+       "service_score": 0.0,
+       "service_label": "fail",
+       "grader_label": "partial",
+       "reasons": [
+        "The draft shows the correct general product category: a clear plastic iced beverage cup with a green straw, and the scene includes autumn leaves and warm sunset lighting consistent with a seasonal commute-style cafe setting. Core product and mood are present.",
+        "However, the requested specific beverage styling is not clearly shown: there is no visible cold foam cascade, condensation beads, or explicit pumpkin cold brew identification, and the logo/text is illegible rather than upright and legible. Several requested product-detail elements are missing or contradicted.",
+        "The setting is close but not a clear Northeast city sidewalk or cafe ledge; it is instead a windowsill with an outdoor view. Since this is a concept draft, this does not fully fail the brief, but it is incomplete. The core is present but important scene details are missing."
+       ]
+      },
+      {
+       "repeat": 2,
+       "run_id": "evalrun_bc905a108e9244a6aef0028d9c9a9eb1",
+       "service_passed": false,
+       "service_score": 0.0,
+       "service_label": "fail",
+       "grader_label": "partial",
+       "reasons": [
+        "The draft clearly shows the core product category: a clear plastic iced beverage cup with a green straw, matching the requested cold brew style at a high level for a concept draft. Core product is present.",
+        "The scene matches several storyboard elements: a city-side/window ledge setting, sunset/golden-hour lighting, and maple leaves around the cup, with a slow push-in/macro-style progression. Core scene and camera mood are mostly present.",
+        "However, the requested specific product execution is not fully shown: there is no clear, legible Northwind branding, no confirmed pumpkin cold brew label, and no visible cold foam/condensation beads or ice-clink action beyond ice being present. Several requested details are missing or contradicted."
+       ]
+      },
+      {
+       "repeat": 3,
+       "run_id": "evalrun_bd563616c9bd497cb710d7614a342920",
+       "service_passed": false,
+       "service_score": 0.0,
+       "service_label": "fail",
+       "grader_label": "partial",
+       "reasons": [
+        "The frames clearly show the core product category: a clear plastic iced drink cup with a green straw, which matches the requested cold brew cup concept stage. Core product is present.",
+        "The setting is a sunset-lit windowsill with leaves, not a Northeast city sidewalk or cafe ledge, and there is no visible first-frost commute context or adults present. Requested scene and commute context are only partially matched.",
+        "The visual observation includes a clear plastic cup and green straw, but the specific Northwind branding/legible logo and exact cold foam/condensation details are not clearly shown. Some requested product-detail elements are missing or unreadable."
+       ]
+      }
+     ],
+     "label": "partial",
+     "agreement": "3/3 partial",
+     "label_counts": {
+      "partial": 3
+     },
+     "needs_human_review": false,
+     "service_passed": [
+      false,
+      false,
+      false
+     ]
+    },
+    "product_identity": {
+     "applicable": false,
+     "na_reason": "text-to-video render: no approved PIM image was an input, so identity and brand marks are judged at the final image-to-video stage, not here"
+    },
+    "brand_marks": {
+     "applicable": false,
+     "na_reason": "text-to-video render: no approved PIM image was an input, so identity and brand marks are judged at the final image-to-video stage, not here"
+    },
+    "audio_signal": {
+     "applicable": false,
+     "na_reason": "no audio track in the file and audio was not requested for this render"
+    }
+   },
+   "observation": {
+    "scene_summary": "A clear plastic iced drink cup with a green straw is shown on a windowsill at sunset, surrounded by red-orange leaves, while the camera moves progressively closer from a wider view to an extreme close-up.",
+    "comparison_notes": "",
+    "request_id": "7074975f-d575-4b73-a7fb-43afff4e13dc",
+    "usage": {
+     "input_tokens": 2349,
+     "output_tokens": 537
+    },
+    "frames": 4,
+    "reference_image": null,
+    "deployment": "brand-qa-vision",
+    "model": "gpt-5.4-mini-2026-03-17",
+    "observations_sha256": "sha256:fb9b74ff119755d6581677ba1049a90cebf06dd0ac018922d71b3ebb9d7c50d5"
+   }
+  },
+  "lto-draft-3": {
+   "stage": "concept draft",
+   "expected_identity": "match",
+   "checks": {
+    "concept_adherence": {
+     "applicable": true,
+     "repeats": [
+      {
+       "repeat": 1,
+       "run_id": "evalrun_dcb47b3ed52440c2b6af9ca9e2ca8050",
+       "service_passed": false,
+       "service_score": 0.0,
+       "service_label": "fail",
+       "grader_label": "partial",
+       "reasons": [
+        "The storyboard shows a clear Northwind Coffee iced beverage in a transparent cup with straw, which matches the requested product category and branded cup presence for a concept draft. Core product is present.",
+        "The setting aligns well with the brief\u2019s outdoor Southwestern evening mood: the cup is on a terracotta-colored ledge at sunset with string lights and warm golden light. However, it is poolside/backyard rather than specifically a Southwest patio, and the draft lacks several emphasized effects like visible pumpkin-spice dust, ice clinking, cold foam cascading, and condensation macro detail. Core scene is mostly present, but several requested elements are missing.",
+        "Because this is a concept draft, exact logo/label fidelity is less critical, and the observed Northwind branding plus vertical-style framing and slow closer camera progression support the intended ad direction. Still, the missing pumpkin cold brew-specific cues mean it does not fully meet the brief. Label is partial."
+       ]
+      },
+      {
+       "repeat": 2,
+       "run_id": "evalrun_bc905a108e9244a6aef0028d9c9a9eb1",
+       "service_passed": false,
+       "service_score": 0.0,
+       "service_label": "fail",
+       "grader_label": "partial",
+       "reasons": [
+        "The core product appears to be a branded Northwind iced coffee/cold brew in a clear plastic cup with lid and straw, which matches the requested product category and some key presentation cues. Core product is present.",
+        "The scene matches several major brief elements: an outdoor patio-like setting at dusk/sunset, terracotta-colored surface, and string lights in the background, with a warm golden-hour feel. Core scene is broadly present.",
+        "Several requested specifics are missing or unconfirmed: the exact Grande 16 oz cup format, clear green straw, visible cold foam, pumpkin-spice dust drifting, macro condensation emphasis, and the exact Southwest patio composition; the setting is poolside rather than clearly a Southwest patio, and the reference-level logo fidelity is not fully verifiable from the observations. Some requested elements are missing or only partially supported.",
+        "Because the core scene and product are present but multiple important brief details are absent or contradicted, the correct judgment is partial rather than pass. Label assigned: partial."
+       ]
+      },
+      {
+       "repeat": 3,
+       "run_id": "evalrun_bd563616c9bd497cb710d7614a342920",
+       "service_passed": false,
+       "service_score": 0.0,
+       "service_label": "fail",
+       "grader_label": "partial",
+       "reasons": [
+        "The draft clearly shows a Northwind-branded clear iced coffee cup outdoors at sunset, with string lights and a warm patio-like setting, which matches the requested product category and overall dusk scene. Core scene and product are present.",
+        "Some requested details are not clearly shown or cannot be confirmed from the observations, including a Southwest patio specifically, pumpkin-spice dust drifting, cold foam on top, green straw, and the exact Grande 16 oz reference fidelity. Several brief elements are missing or unverified.",
+        "Because the concept draft\u2019s main scene/product is aligned but multiple signature styling cues from the brief are absent, the result should be marked as partial rather than pass. partial"
+       ]
+      }
+     ],
+     "label": "partial",
+     "agreement": "3/3 partial",
+     "label_counts": {
+      "partial": 3
+     },
+     "needs_human_review": false,
+     "service_passed": [
+      false,
+      false,
+      false
+     ]
+    },
+    "product_identity": {
+     "applicable": false,
+     "na_reason": "text-to-video render: no approved PIM image was an input, so identity and brand marks are judged at the final image-to-video stage, not here"
+    },
+    "brand_marks": {
+     "applicable": false,
+     "na_reason": "text-to-video render: no approved PIM image was an input, so identity and brand marks are judged at the final image-to-video stage, not here"
+    },
+    "audio_signal": {
+     "applicable": true,
+     "scope": "signal only (stream, loudness, true peak); not semantic or sync",
+     "local": {
+      "label": "fail",
+      "reasons": [
+       "integrated loudness -42.8 LUFS is below -30 LUFS (very quiet)"
+      ]
+     },
+     "measurements": {
+      "integrated_lufs": -42.8,
+      "true_peak_dbtp": -24.5,
+      "loudness_range_lu": 2.0
+     },
+     "cloud": [
+      {
+       "repeat": 1,
+       "run_id": "evalrun_c8c3e72edbcc4c79931c377ef4a2d124",
+       "service_passed": false,
+       "service_score": 0.0,
+       "service_label": "fail",
+       "grader_label": "fail",
+       "reasons": []
+      }
+     ],
+     "label": "fail",
+     "agreement": "1/1 fail",
+     "label_counts": {
+      "fail": 1
+     },
+     "needs_human_review": false
+    }
+   },
+   "observation": {
+    "scene_summary": "A branded iced coffee cup is shown outdoors on a poolside ledge at sunset, with string lights overhead and a softly blurred backyard background.",
+    "comparison_notes": "",
+    "request_id": "b8b3065c-804a-40e9-9638-c8aef6131d2a",
+    "usage": {
+     "input_tokens": 2285,
+     "output_tokens": 490
+    },
+    "frames": 4,
+    "reference_image": null,
+    "deployment": "brand-qa-vision",
+    "model": "gpt-5.4-mini-2026-03-17",
+    "observations_sha256": "sha256:cc7a934d8f4f70a1173fe76df603d5082966ba0541a4eaca6c093f858a5600b5"
+   }
+  },
+  "lto-hero-kling": {
+   "stage": "final render",
+   "expected_identity": "match",
+   "checks": {
+    "concept_adherence": {
+     "applicable": true,
+     "repeats": [
+      {
+       "repeat": 1,
+       "run_id": "evalrun_dcb47b3ed52440c2b6af9ca9e2ca8050",
+       "service_passed": false,
+       "service_score": 0.0,
+       "service_label": "fail",
+       "grader_label": "partial",
+       "reasons": [
+        "The rendered product is a branded iced coffee/cold brew in a clear takeaway cup with the Northwind Coffee mark visible, which matches the requested product category and hero cup concept. Core product is present.",
+        "However, the brief asks for a Northeast city sidewalk on the first cold morning, with the cup on a cafe ledge, maple leaves swirling past it, golden-hour rim lighting, and a macro/dolly-in feel. The observed frames instead show a plain beige background with only occasional leaf overlays, not the city sidewalk or cafe setting. Requested scene is missing.",
+        "The pour/ice/foam elements are partially represented by a visible pour stream and coffee/cream motion, but the specific cold-morning environment and hero staging are not achieved; audio cannot be judged from frames. Overall match is only partial."
+       ]
+      },
+      {
+       "repeat": 2,
+       "run_id": "evalrun_bc905a108e9244a6aef0028d9c9a9eb1",
+       "service_passed": false,
+       "service_score": 0.0,
+       "service_label": "fail",
+       "grader_label": "partial",
+       "reasons": [
+        "The product is clearly present as a Northwind Coffee iced drink in a clear takeaway cup with the brand text/logo visible, matching the core hero product requirement. Core product present.",
+        "However, the requested final-render scene is a Northeast city sidewalk on the first cold morning with a cafe ledge, golden-hour rim lighting, and macro condensation, while the observed frames show a plain beige studio background with no city sidewalk or cafe setting. Requested scene is missing.",
+        "Some requested seasonal cues are partially echoed by autumn leaf overlays and pouring motion, but key brief elements like the first-frost commute environment, clear ice/pumpkin cold foam specifics, and the exact approved hero-cup presentation are not fully evidenced from the frames. Brief is only partially matched."
+       ]
+      },
+      {
+       "repeat": 3,
+       "run_id": "evalrun_bd563616c9bd497cb710d7614a342920",
+       "service_passed": false,
+       "service_score": 0.0,
+       "service_label": "fail",
+       "grader_label": "partial",
+       "reasons": [
+        "The core product is present: a Northwind-branded iced coffee in a clear takeaway cup with lid and green straw, matching the approved hero cup concept. Core product presence confirmed.",
+        "The requested final scene is not shown: the brief calls for a Northeast city sidewalk on the first cold morning, with the cup on a cafe ledge and golden-hour commute atmosphere, but the frames show a plain beige background instead. Requested environment/scene is missing.",
+        "Some requested visual motifs do appear partially, such as pouring into the drink and autumn leaves, but the specific pumpkin cold brew presentation, condensation, cafe ledge placement, and city-sidewalk setting are not clearly established. Several brief elements are absent or contradicted."
+       ]
+      }
+     ],
+     "label": "partial",
+     "agreement": "3/3 partial",
+     "label_counts": {
+      "partial": 3
+     },
+     "needs_human_review": false,
+     "service_passed": [
+      false,
+      false,
+      false
+     ]
+    },
+    "product_identity": {
+     "applicable": true,
+     "repeats": [
+      {
+       "repeat": 1,
+       "run_id": "evalrun_d3c16fb7d6714cf8ad13d73298f9f0a1",
+       "service_passed": true,
+       "service_score": 1.0,
+       "service_label": "pass",
+       "grader_label": "match",
+       "reasons": [
+        "The reference product is a Northwind Pumpkin Cold Brew in a clear plastic takeaway cup with a clear lid and green straw, showing amber-brown coffee, cream foam, and cinnamon topping with Northwind branding. Reference product features are clearly identified.",
+        "The frame observations describe the same branded iced coffee cup, same clear lid and green straw, same amber-brown beverage with cream topping, and the same Northwind Coffee logo/text. Key product type, packaging, and colorway match the reference.",
+        "The added pouring motion and autumn leaf overlays are scene effects and do not change the underlying product identity. No conflicting evidence affects product match."
+       ]
+      },
+      {
+       "repeat": 2,
+       "run_id": "evalrun_4739d50825a54e6abb588a89f8c197c6",
+       "service_passed": true,
+       "service_score": 1.0,
+       "service_label": "pass",
+       "grader_label": "match",
+       "reasons": [
+        "Compare the core product type and packaging in the reference and frames. Both describe a branded iced coffee/cold brew drink in a clear plastic takeaway cup with a clear lid and green straw. Packaging and product form match.",
+        "Compare the visible colorway and markings. Both show amber-brown coffee with light cream/foam and the NORTHWIND COFFEE branding plus leaf/compass-style logo; the autumn leaf overlays and pouring stream are additional scene effects, not product attributes. Colorway and branding match.",
+        "Check whether any observation conflicts with the approved catalog product Northwind Pumpkin Cold Brew (Grande, 16 oz). No conflicting differences are present in the written observations. The product shown appears to be the same catalog item."
+       ]
+      },
+      {
+       "repeat": 3,
+       "run_id": "evalrun_7604bdc917124481a76f964763b14021",
+       "service_passed": true,
+       "service_score": 1.0,
+       "service_label": "pass",
+       "grader_label": "match",
+       "reasons": [
+        "The reference shows a Northwind Pumpkin Cold Brew in a clear plastic takeaway cup with a clear lid and green straw, amber-brown coffee, cream foam, and cinnamon topping, with Northwind Coffee branding. The frames show the same branded clear cup, clear lid, green straw, and similar amber-brown iced coffee with cream topping and matching branding. Product type, packaging, and colorway align with the reference.",
+        "The added pouring stream and autumn leaf overlays only change the scene presentation, not the product itself. The visual observations explicitly note the same cup and branding across frames. These frame-only effects do not indicate a different catalog product."
+       ]
+      }
+     ],
+     "label": "match",
+     "agreement": "3/3 match",
+     "label_counts": {
+      "match": 3
+     },
+     "needs_human_review": false,
+     "service_passed": [
+      true,
+      true,
+      true
+     ]
+    },
+    "brand_marks": {
+     "applicable": true,
+     "repeats": [
+      {
+       "repeat": 1,
+       "run_id": "evalrun_2df142a3e2f1406abc7b9f6f2546a3d6",
+       "service_passed": true,
+       "service_score": 1.0,
+       "service_label": "pass",
+       "grader_label": "consistent",
+       "reasons": [
+        "Compare the visible brand marks in the reference with those reported in the frames: both show NORTHWIND COFFEE and the leaf/compass-style logo. The brand mark is present in the frames and matches the reference textually.",
+        "Check the brand rule for any distortion, recoloring, stretching, or partial occlusion of the mark. No violations are reported; the mark appears intact and unaltered in all sampled frames.",
+        "Note that added autumn leaves and pouring streams are extra scene elements, but they are not brand marks and do not contradict the approved logo. These additions do not affect the brand mark compliance assessment."
+       ]
+      },
+      {
+       "repeat": 2,
+       "run_id": "evalrun_313889d9901f4a93be4cbaa9c56f19c8",
+       "service_passed": true,
+       "service_score": 1.0,
+       "service_label": "pass",
+       "grader_label": "consistent",
+       "reasons": [
+        "The reference shows the NORTHWIND COFFEE wordmark and leaf/compass logo on the cup, and the frames report the same marks visible in each sampled frame. The brand marks are present and match the reference.",
+        "No misspelling, stretching, recoloring, partial occlusion, or invented brand mark is described in the frames; the extra autumn leaves and pouring stream are non-brand scene elements. No brand-rule violation is indicated."
+       ]
+      },
+      {
+       "repeat": 3,
+       "run_id": "evalrun_c4eba4cd4dfc4cf5bc6fd027bc1b10ca",
+       "service_passed": true,
+       "service_score": 1.0,
+       "service_label": "pass",
+       "grader_label": "consistent",
+       "reasons": [
+        "The reference shows the Northwind Coffee brand marks as a leaf/compass logo and the NORTHWIND COFFEE wordmark on the cup, and the frame observations report the same marks visible in every frame. The visible branding matches the reference and is not misspelled, stretched, recolored, or occluded.",
+        "Although later frames add a pouring stream and decorative autumn leaves, these are extra scene elements rather than brand marks and do not contradict the approved logo rule. No brand-rule violation is indicated by the added motion elements."
+       ]
+      }
+     ],
+     "label": "consistent",
+     "agreement": "3/3 consistent",
+     "label_counts": {
+      "consistent": 3
+     },
+     "needs_human_review": false,
+     "service_passed": [
+      true,
+      true,
+      true
+     ]
+    },
+    "audio_signal": {
+     "applicable": true,
+     "scope": "signal only (stream, loudness, true peak); not semantic or sync",
+     "local": {
+      "label": "fail",
+      "reasons": [
+       "true peak +2.0 dBTP exceeds -1.0 dBTP (clipping risk)"
+      ]
+     },
+     "measurements": {
+      "integrated_lufs": -24.6,
+      "true_peak_dbtp": 2.0,
+      "loudness_range_lu": 3.8
+     },
+     "cloud": [
+      {
+       "repeat": 1,
+       "run_id": "evalrun_c8c3e72edbcc4c79931c377ef4a2d124",
+       "service_passed": false,
+       "service_score": 0.0,
+       "service_label": "fail",
+       "grader_label": "fail",
+       "reasons": []
+      }
+     ],
+     "label": "fail",
+     "agreement": "1/1 fail",
+     "label_counts": {
+      "fail": 1
+     },
+     "needs_human_review": false
+    }
+   },
+   "observation": {
+    "scene_summary": "A branded iced coffee drink in a clear takeaway cup is shown against a plain light background, with later frames adding pouring motion and autumn leaf overlays.",
+    "comparison_notes": "The frames show the same branded iced coffee cup, clear lid, green straw, amber-brown liquid, cream topping, and centered beige-background presentation as the reference. Some frames add a pouring stream and moving autumn leaves that are not visible in the reference.",
+    "request_id": "7d59cdd0-17fe-4519-b13e-e2804aa24fd6",
+    "usage": {
+     "input_tokens": 2818,
+     "output_tokens": 631
+    },
+    "frames": 4,
+    "reference_image": "nwc-pumpkin-cold-brew-hero.png",
+    "deployment": "brand-qa-vision",
+    "model": "gpt-5.4-mini-2026-03-17",
+    "observations_sha256": "sha256:3891801845de68c0483d1d1029d633cf87d93601a40b1050bd57a2ce54ae5423"
+   }
+  },
+  "hero-apparel-kling": {
+   "stage": "final render",
+   "expected_identity": "match",
+   "checks": {
+    "concept_adherence": {
+     "applicable": true,
+     "repeats": [
+      {
+       "repeat": 1,
+       "run_id": "evalrun_dcb47b3ed52440c2b6af9ca9e2ca8050",
+       "service_passed": false,
+       "service_score": 0.0,
+       "service_label": "fail",
+       "grader_label": "partial",
+       "reasons": [
+        "The frames clearly show the requested product category: a quilted field jacket, specifically an orange/rust-toned jacket with visible quilting and a collar on a studio-like plain background. Core product is present.",
+        "The render includes multiple viewpoints of the jacket, including front, side, back, and angled views, which supports the brief\u2019s slow 360-degree turn and orbit-style presentation. Requested rotational presentation is present.",
+        "The scene is a clean studio product display on a plain light background, but the brief asks for a seamless warm-grey backdrop and softly lit ghost-mannequin style; the observed background is light/plain rather than clearly warm-grey, and ghost-mannequin suspension is not explicitly evident from the frames. Some requested scene details are missing or not clearly matched."
+       ]
+      },
+      {
+       "repeat": 2,
+       "run_id": "evalrun_bc905a108e9244a6aef0028d9c9a9eb1",
+       "service_passed": false,
+       "service_score": 0.0,
+       "service_label": "fail",
+       "grader_label": "partial",
+       "reasons": [
+        "The core product is present: a rust/orange quilted Fabrikam field jacket shown alone in multiple views, matching the jacket category and overall look. Core product matches.",
+        "The scene is not the requested warm-grey seamless studio setup with a smooth orbit around a ghost-mannequin render; instead, the frames show a plain light background with a static product display and some cropped edges. Scene and presentation only partially match the brief.",
+        "Because the product is clearly visible but the requested studio styling and ghost-mannequin/orbit treatment are not clearly shown, the result should be marked partial. partial"
+       ]
+      },
+      {
+       "repeat": 3,
+       "run_id": "evalrun_bd563616c9bd497cb710d7614a342920",
+       "service_passed": false,
+       "service_score": 0.0,
+       "service_label": "fail",
+       "grader_label": "partial",
+       "reasons": [
+        "The core product appears to be the requested Fabrikam quilted field jacket: an orange/rust quilted jacket is shown alone, with matching quilting, collar, zipper, and brand mark visible in the sampled frames. Core product is present.",
+        "The brief asks for a slow 360-degree turn with a seamless warm-grey studio backdrop and smooth orbit camera. The frames do show multiple angles including front, side, back, and angled views, which supports rotation/orbit, but the backdrop is described as plain light rather than warm-grey, and the motion is only inferred from sampled frames rather than clearly established. Rotation/orbit is partially supported; backdrop does not match the brief.",
+        "Because the product and general rotational presentation are present, but a requested scene element (warm-grey seamless studio backdrop) is contradicted by the observations, the result should not be full pass. Overall label: partial."
+       ]
+      }
+     ],
+     "label": "partial",
+     "agreement": "3/3 partial",
+     "label_counts": {
+      "partial": 3
+     },
+     "needs_human_review": false,
+     "service_passed": [
+      false,
+      false,
+      false
+     ]
+    },
+    "product_identity": {
+     "applicable": true,
+     "repeats": [
+      {
+       "repeat": 1,
+       "run_id": "evalrun_d3c16fb7d6714cf8ad13d73298f9f0a1",
+       "service_passed": true,
+       "service_score": 1.0,
+       "service_label": "pass",
+       "grader_label": "match",
+       "reasons": [
+        "The reference shows an orange rust-colored quilted field jacket with a zip front, stand collar, long sleeves, two vertical zip pockets, and FABRIKAM branding. Reference product is clearly identified as a specific orange quilted jacket.",
+        "The video frame observations describe the same orange quilted jacket across multiple angles, with matching stand collar, front zipper, quilting, zip pockets, and FABRIKAM text. The observed product matches the reference type, form, and colorway.",
+        "Background, crop, and viewpoint differences do not affect product identity, and no conflicting features are reported. The evidence supports a match."
+       ]
+      },
+      {
+       "repeat": 2,
+       "run_id": "evalrun_4739d50825a54e6abb588a89f8c197c6",
+       "service_passed": true,
+       "service_score": 1.0,
+       "service_label": "pass",
+       "grader_label": "match",
+       "reasons": [
+        "Compare the catalog item\u2019s product type, form, and colorway against the reference photo: both describe the same quilted jacket with stand collar, zip front, and orange/rust color. The core product attributes align.",
+        "Check identifying marks and visible details: the brand text FABRIKAM appears in both, and the observed quilting and pocket/zip layout match the reference description. Distinctive details are consistent.",
+        "Assess whether any observations conflict on packaging, variant, or appearance: the only differences are viewpoint and crop, which do not affect product identity. No meaningful conflict is present."
+       ]
+      },
+      {
+       "repeat": 3,
+       "run_id": "evalrun_7604bdc917124481a76f964763b14021",
+       "service_passed": true,
+       "service_score": 1.0,
+       "service_label": "pass",
+       "grader_label": "match",
+       "reasons": [
+        "The reference shows an orange rust-colored quilted zip-front jacket with stand collar, long sleeves, and zip pockets, branded FABRIKAM. Reference product identity is clearly a quilted orange jacket.",
+        "The frames consistently show a single orange quilted jacket with the same stand collar, front zipper, quilting, and FABRIKAM branding in front views. The observed video product matches the reference product type, form, and colorway.",
+        "Differences in camera angle, crop, and the presence of side/back views do not change the underlying product identity. There is sufficient evidence for a same-product determination."
+       ]
+      }
+     ],
+     "label": "match",
+     "agreement": "3/3 match",
+     "label_counts": {
+      "match": 3
+     },
+     "needs_human_review": false,
+     "service_passed": [
+      true,
+      true,
+      true
+     ]
+    },
+    "brand_marks": {
+     "applicable": true,
+     "repeats": [
+      {
+       "repeat": 1,
+       "run_id": "evalrun_2df142a3e2f1406abc7b9f6f2546a3d6",
+       "service_passed": true,
+       "service_score": 1.0,
+       "service_label": "pass",
+       "grader_label": "consistent",
+       "reasons": [
+        "The reference requires a small woven FABRIKAM label at the inner collar and no invented exterior logos. Brand rule identified.",
+        "The frames show the same jacket and the visible text mark 'FABRIKAM' appears in some front and angled front views without misspelling or distortion, and no extra logos are reported. Observed marks are consistent with the reference and no rule violation is indicated."
+       ]
+      },
+      {
+       "repeat": 2,
+       "run_id": "evalrun_313889d9901f4a93be4cbaa9c56f19c8",
+       "service_passed": true,
+       "service_score": 1.0,
+       "service_label": "pass",
+       "grader_label": "consistent",
+       "reasons": [
+        "The reference requires a small woven FABRIKAM label at the inner collar, with no exterior logos invented. Brand rule to check is presence/placement of FABRIKAM and avoidance of extra logos.",
+        "The frames show the same jacket design as the reference, and the visible text mark 'FABRIKAM' appears in several front-view frames without misspelling or distortion. The approved brand mark is present and matches the reference.",
+        "No additional exterior logos are described, and the side/back views simply do not show the label due to angle/cropping, which does not contradict the rule. No logo rule violation is indicated."
+       ]
+      },
+      {
+       "repeat": 3,
+       "run_id": "evalrun_c4eba4cd4dfc4cf5bc6fd027bc1b10ca",
+       "service_passed": true,
+       "service_score": 1.0,
+       "service_label": "pass",
+       "grader_label": "consistent",
+       "reasons": [
+        "The reference requires a small woven FABRIKAM label at the inner collar and forbids invented exterior logos. The frames show the same jacket, and the observed FABRIKAM text appears only in some front/angled views with no misspelling reported. No clear branding mismatch is described.",
+        "The side and back views do not show any text, which is compatible with the mark being hidden or cropped. There is no observation of an invented logo or a rule violation. The evidence supports consistency rather than violation or contradiction."
+       ]
+      }
+     ],
+     "label": "consistent",
+     "agreement": "3/3 consistent",
+     "label_counts": {
+      "consistent": 3
+     },
+     "needs_human_review": false,
+     "service_passed": [
+      true,
+      true,
+      true
+     ]
+    },
+    "audio_signal": {
+     "applicable": false,
+     "na_reason": "no audio track in the file and audio was not requested for this render"
+    }
+   },
+   "observation": {
+    "scene_summary": "An orange quilted jacket is displayed alone against a plain light background from multiple angles.",
+    "comparison_notes": "The frames show the same orange quilted jacket seen in the reference, including the stand collar, front zipper, diamond quilting, and zip pockets. The visible brand mark 'FABRIKAM' appears in the front-view frames. The video frames vary by viewpoint and crop, including side and back views not shown in the reference.",
+    "request_id": "8d3f979c-cafe-4956-88bb-92647924ae7f",
+    "usage": {
+     "input_tokens": 1862,
+     "output_tokens": 470
+    },
+    "frames": 4,
+    "reference_image": "fabrikam-quilted-jacket-rust.png",
+    "deployment": "brand-qa-vision",
+    "model": "gpt-5.4-mini-2026-03-17",
+    "observations_sha256": "sha256:f7fb15b3225889c5b179b0ba1c0b5633b04e0158a4bf50bfaa3fb9d6852ab574"
+   }
+  },
+  "hero-home-kling": {
+   "stage": "final render",
+   "expected_identity": "match",
+   "checks": {
+    "concept_adherence": {
+     "applicable": true,
+     "repeats": [
+      {
+       "repeat": 1,
+       "run_id": "evalrun_dcb47b3ed52440c2b6af9ca9e2ca8050",
+       "service_passed": false,
+       "service_score": 0.0,
+       "service_label": "fail",
+       "grader_label": "partial",
+       "reasons": [
+        "The core product is present: the observations clearly show a Contoso Pro 20V cordless drill with visible wordmark and 20V text. Product match is present.",
+        "The requested action and setting are only partially present: the drill is contacting/inserting into a wooden board, but the brief asks for a sunlit job site, pine stud, sawdust drifting, and a handheld tracking shot, none of which are clearly shown from the sampled frames. Core use action is present, but several scene elements are missing or unconfirmed.",
+        "Because the video contains the right tool and general drilling-into-wood scene, but not the full requested job-site presentation, label it as partial rather than pass. Assign partial."
+       ]
+      },
+      {
+       "repeat": 2,
+       "run_id": "evalrun_bc905a108e9244a6aef0028d9c9a9eb1",
+       "service_passed": false,
+       "service_score": 0.0,
+       "service_label": "fail",
+       "grader_label": "partial",
+       "reasons": [
+        "The core product is present: a Contoso Pro 20V cordless drill with matching visible wordmark/text appears throughout the sampled frames. Product identification matches.",
+        "The requested action and setting are only partially shown: the drill is contacting/inserting into a wooden board, but the scene is still mostly a plain white-background product view and does not clearly show a sunlit job site, pine stud, or handheld tracking shot. Core use/action is present, but key scene elements are missing or not clearly established.",
+        "Some requested details are visible or implied: a small blue light suggests the LED work light, and the Contoso Pro/20V text remains legible; however, sawdust drifting is not evident and the exact environmental brief is not fulfilled. Brief is only partially satisfied."
+       ]
+      },
+      {
+       "repeat": 3,
+       "run_id": "evalrun_bd563616c9bd497cb710d7614a342920",
+       "service_passed": false,
+       "service_score": 0.0,
+       "service_label": "fail",
+       "grader_label": "partial",
+       "reasons": [
+        "The rendered video clearly shows the correct product: a Contoso Pro 20V cordless drill with the wordmark and 20V text visible across frames. Core product is present.",
+        "The drill is used against a wooden board, matching the idea of driving into wood, and the LED-like blue light near the drill body supports the work-light detail. Core action is broadly present.",
+        "However, the brief specifically asks for a sunlit job site, pine stud, sawdust drifting, and a handheld tracking shot; the observations only mention a plain white background in early frames and a vertical wooden board later, with no clear sunlit job site, pine stud, sawdust, or tracking-camera evidence. Several requested scene elements are missing or not confirmed."
+       ]
+      }
+     ],
+     "label": "partial",
+     "agreement": "3/3 partial",
+     "label_counts": {
+      "partial": 3
+     },
+     "needs_human_review": false,
+     "service_passed": [
+      false,
+      false,
+      false
+     ]
+    },
+    "product_identity": {
+     "applicable": true,
+     "repeats": [
+      {
+       "repeat": 1,
+       "run_id": "evalrun_d3c16fb7d6714cf8ad13d73298f9f0a1",
+       "service_passed": true,
+       "service_score": 1.0,
+       "service_label": "pass",
+       "grader_label": "match",
+       "reasons": [
+        "The reference product is a Contoso Pro 20V cordless drill/driver, shown as a black and teal handheld drill with matching text marks. Reference identity is a cordless drill in black/teal with CONTOSO PRO 20V text.",
+        "All sampled frames show a cordless drill with the same visible text ('CONTOSO PRO', '20V') and the same colorway, with only background and action changing from isolated product view to use against wood. The frames depict the same catalog product despite scene/action changes.",
+        "Because product type, form, colorway, and markings all align, there is no meaningful mismatch signal. match"
+       ]
+      },
+      {
+       "repeat": 2,
+       "run_id": "evalrun_4739d50825a54e6abb588a89f8c197c6",
+       "service_passed": true,
+       "service_score": 1.0,
+       "service_label": "pass",
+       "grader_label": "match",
+       "reasons": [
+        "The reference identifies a Contoso Pro 20V cordless drill/driver with black and teal handheld form, battery base, and matching CONTOSO PRO / 20V markings. The key product type and colorway are clearly specified.",
+        "The frame observations describe the same cordless drill, with the same CONTOSO PRO / 20V text and the same black/teal/gray appearance, first isolated on white and later in use against wood. The observed product matches the reference product type, form, and markings.",
+        "Background and activity changes (product demo versus isolated shot) do not affect identity, and no conflicting features are reported. This is a match."
+       ]
+      },
+      {
+       "repeat": 3,
+       "run_id": "evalrun_7604bdc917124481a76f964763b14021",
+       "service_passed": true,
+       "service_score": 1.0,
+       "service_label": "pass",
+       "grader_label": "match",
+       "reasons": [
+        "The catalog item is a Contoso Pro 20V Brushless Cordless Drill/Driver, and the reference image shows a black and teal handheld cordless drill with battery base, attached bit, and the same CONTOSO PRO / 20V marking. Reference product type, form, and colorway are clearly identified.",
+        "The frame observations consistently describe a cordless drill with the same CONTOSO PRO / 20V text, the same black and teal color scheme, and the same handheld drill form, despite changes in background and use against wood. The shown product matches the reference product visually.",
+        "No conflicting evidence is present: the differences are only scene/context changes (white background versus drilling into wood), which do not affect product identity. The product is the same catalog item."
+       ]
+      }
+     ],
+     "label": "match",
+     "agreement": "3/3 match",
+     "label_counts": {
+      "match": 3
+     },
+     "needs_human_review": false,
+     "service_passed": [
+      true,
+      true,
+      true
+     ]
+    },
+    "brand_marks": {
+     "applicable": true,
+     "repeats": [
+      {
+       "repeat": 1,
+       "run_id": "evalrun_2df142a3e2f1406abc7b9f6f2546a3d6",
+       "service_passed": false,
+       "service_score": 0.0,
+       "service_label": "fail",
+       "grader_label": "violation",
+       "reasons": [
+        "The reference mark includes the CONTOSO PRO wordmark and 20V text, and the frames repeatedly show the same visible text without misspelling or distortion. The reference text is present and consistent across frames.",
+        "The brand logo rule requires the CONTOSO PRO wordmark on yellow housing, but the observations describe the drill as black and teal rather than having yellow housing. The logo rule is not satisfied.",
+        "Because the wordmark itself is visible and correct, but the brand rule is broken by the housing color requirement, this is a violation rather than merely not visible. Label as violation."
+       ]
+      },
+      {
+       "repeat": 2,
+       "run_id": "evalrun_313889d9901f4a93be4cbaa9c56f19c8",
+       "service_passed": true,
+       "service_score": 1.0,
+       "service_label": "pass",
+       "grader_label": "consistent",
+       "reasons": [
+        "The reference mark set includes the CONTOSO PRO wordmark and 20V on the drill, and the rule requires CONTOSO PRO on yellow housing. The written observations report CONTOSO PRO and 20V visible in every sampled frame, with no misspelling or distortion noted. The reference marks are present and legible across the frames.",
+        "No observation mentions the wordmark being recolored, the housing color violating the yellow requirement, or any invented/conflicting brand mark. The visible colors are described as black and teal in the reference and frames, but the separate observations do not report a logo-rule breach or any conflicting branding artifact. No explicit mark violation is described in the frames.",
+        "Since the mark appears consistently and nothing in the written observations contradicts the approved branding, the best label is consistent. consistent"
+       ]
+      },
+      {
+       "repeat": 3,
+       "run_id": "evalrun_c4eba4cd4dfc4cf5bc6fd027bc1b10ca",
+       "service_passed": true,
+       "service_score": 1.0,
+       "service_label": "pass",
+       "grader_label": "consistent",
+       "reasons": [
+        "The approved reference includes the CONTOSO PRO wordmark and 20V text on the cordless drill, with no indication that these marks are misspelled or altered in the sampled frames. The visible text matches the reference in spelling and content.",
+        "Across all frames, the observations report CONTOSO PRO and 20V as visible, and there are no notes of distortion, recoloring, invented extra marks, or brand-rule conflicts. No brand mark violation is indicated.",
+        "The key brand mark is visible in the frames rather than being occluded or cropped away, and it is consistently present. The correct label is consistent."
+       ]
+      }
+     ],
+     "label": "split",
+     "agreement": "2/3 consistent",
+     "label_counts": {
+      "violation": 1,
+      "consistent": 2
+     },
+     "needs_human_review": true,
+     "service_passed": [
+      false,
+      true,
+      true
+     ]
+    },
+    "audio_signal": {
+     "applicable": false,
+     "na_reason": "no audio track in the file and audio was not requested for this render"
+    }
+   },
+   "observation": {
+    "scene_summary": "A black and teal cordless drill is shown first as a product view and then being positioned against and inserted into a wooden board.",
+    "comparison_notes": "The reference shows the cordless drill isolated on a plain white background. The frames show the same drill with the same visible text and colors, first on a white background and then in use near or against a wooden board. Later frames add the wood surface and a closer view of the drill bit contacting the wood.",
+    "request_id": "257e1a8f-ccc5-42a5-8f43-b657bfac5922",
+    "usage": {
+     "input_tokens": 1175,
+     "output_tokens": 528
+    },
+    "frames": 4,
+    "reference_image": "contoso-pro-20v-drill.png",
+    "deployment": "brand-qa-vision",
+    "model": "gpt-5.4-mini-2026-03-17",
+    "observations_sha256": "sha256:575d05aa2bce4c5054ab4865102af846465ab2baee210abdfc8c916ffcd60ff4"
+   }
+  },
+  "hero-patio-h3max": {
+   "stage": "final render",
+   "expected_identity": "match",
+   "checks": {
+    "concept_adherence": {
+     "applicable": true,
+     "repeats": [
+      {
+       "repeat": 1,
+       "run_id": "evalrun_dcb47b3ed52440c2b6af9ca9e2ca8050",
+       "service_passed": false,
+       "service_score": 0.0,
+       "service_label": "fail",
+       "grader_label": "partial",
+       "reasons": [
+        "The core product category is present: an outdoor teak-style dining set with one table and four matching chairs, shown in a dusk patio setting with string lights overhead. Core scene/product present.",
+        "The render contradicts several brief details: the patio appears to be under a wooden pergola rather than clearly a stone patio, and the table includes extra tabletop decor (tray, flowers, candle/lantern) which counts as extra items in a final render. Requested scene elements are partially missing/contradicted.",
+        "No people are visible, which matches the brief, and the camera movement suggests a slow crane-down, but the specific furniture layout (two chairs on each long side) is not explicitly verifiable from the observations. Some requested elements are satisfied, but not all can be confirmed."
+       ]
+      },
+      {
+       "repeat": 2,
+       "run_id": "evalrun_bc905a108e9244a6aef0028d9c9a9eb1",
+       "service_passed": false,
+       "service_score": 0.0,
+       "service_label": "fail",
+       "grader_label": "partial",
+       "reasons": [
+        "The core product category is present: an outdoor teak-style patio dining set with one table and four chairs, and there are no people visible. Core product and no-people requirement are satisfied.",
+        "The scene broadly matches a dusk patio with string lights overhead, but the patio is described as under a wooden pergola rather than specifically a stone patio, and the table has extra tabletop decor plus a large planter pot in the scene. Requested setting is only partially matched and there are extra furniture/decor elements beyond the brief.",
+        "The camera motion is consistent with a slow crane-down, though the exact articulation cannot be fully verified from still-frame observations. Motion is consistent and not a blocking issue, but the missing/contradicted scene details keep this from a full pass."
+       ]
+      },
+      {
+       "repeat": 3,
+       "run_id": "evalrun_bd563616c9bd497cb710d7614a342920",
+       "service_passed": false,
+       "service_score": 0.0,
+       "service_label": "fail",
+       "grader_label": "partial",
+       "reasons": [
+        "The core product category is present: an outdoor teak patio dining set appears as a wooden dining table with four matching wooden chairs in a dusk patio setting. Core product and general scene are present.",
+        "Several brief requirements are contradicted or missing: there are extra tabletop items and a large planter, the patio is described as under a pergola rather than clearly a stone patio, and the exact chair arrangement (two on each long side) is not explicitly confirmed. Some requested elements are missing or contradicted.",
+        "The scene does include string lights overhead and no people, and the camera movement is consistent with a crane-down style shift, but the extra objects and layout uncertainty prevent a full match. Overall match is partial rather than pass."
+       ]
+      }
+     ],
+     "label": "partial",
+     "agreement": "3/3 partial",
+     "label_counts": {
+      "partial": 3
+     },
+     "needs_human_review": false,
+     "service_passed": [
+      false,
+      false,
+      false
+     ]
+    },
+    "product_identity": {
+     "applicable": false,
+     "na_reason": "text-to-video render: no approved PIM image was an input, so identity and brand marks are judged at the final image-to-video stage, not here"
+    },
+    "brand_marks": {
+     "applicable": false,
+     "na_reason": "text-to-video render: no approved PIM image was an input, so identity and brand marks are judged at the final image-to-video stage, not here"
+    },
+    "audio_signal": {
+     "applicable": true,
+     "scope": "signal only (stream, loudness, true peak); not semantic or sync",
+     "local": {
+      "label": "pass",
+      "reasons": [
+       "-25.9 LUFS integrated, -8.0 dBTP true peak"
+      ]
+     },
+     "measurements": {
+      "integrated_lufs": -25.9,
+      "true_peak_dbtp": -8.0,
+      "loudness_range_lu": 2.7
+     },
+     "cloud": [
+      {
+       "repeat": 1,
+       "run_id": "evalrun_c8c3e72edbcc4c79931c377ef4a2d124",
+       "service_passed": true,
+       "service_score": 1.0,
+       "service_label": "pass",
+       "grader_label": "pass",
+       "reasons": []
+      }
+     ],
+     "label": "pass",
+     "agreement": "1/1 pass",
+     "label_counts": {
+      "pass": 1
+     },
+     "needs_human_review": false
+    }
+   },
+   "observation": {
+    "scene_summary": "A wooden outdoor dining table with four chairs sits on a patio beneath a pergola with hanging lights, with a floral centerpiece and candle on the table and trees visible in the darkened background.",
+    "comparison_notes": "",
+    "request_id": "1bf3d885-5e48-416c-91c8-f7dfe9b1e499",
+    "usage": {
+     "input_tokens": 945,
+     "output_tokens": 455
+    },
+    "frames": 4,
+    "reference_image": null,
+    "deployment": "brand-qa-vision",
+    "model": "gpt-5.4-mini-2026-03-17",
+    "observations_sha256": "sha256:586ee867f77f483242f5708835009acd8a5cd4edec388be15b41af34c938ff66"
+   }
+  },
+  "hero-grocery-turbo": {
+   "stage": "final render",
+   "expected_identity": "match",
+   "checks": {
+    "concept_adherence": {
+     "applicable": true,
+     "repeats": [
+      {
+       "repeat": 1,
+       "run_id": "evalrun_dcb47b3ed52440c2b6af9ca9e2ca8050",
+       "service_passed": false,
+       "service_score": 0.0,
+       "service_label": "fail",
+       "grader_label": "partial",
+       "reasons": [
+        "The core product is present: a Woodgrove Wellness cold/flu-style bundle shown as an assorted wellness basket with the expected branded items and readable labels. Core product matches the brief.",
+        "The scene is close to the brief with a bright, warm, softly wintery background, but it is not clearly a pharmacy endcap, and the requested seasonal snowfall outside the window is only implied by a blurred winter background rather than explicitly visible. Scene matches in mood but misses some specific requested environment details.",
+        "The lack of a clearly identified pharmacy endcap and explicit window snowfall means a requested element is missing, though the product/category and overall presentation are correct. Label should be partial."
+       ]
+      },
+      {
+       "repeat": 2,
+       "run_id": "evalrun_bc905a108e9244a6aef0028d9c9a9eb1",
+       "service_passed": false,
+       "service_score": 0.0,
+       "service_label": "fail",
+       "grader_label": "partial",
+       "reasons": [
+        "The core product is present: the frames show a Woodgrove Wellness cold/flu-themed bundle with matching wellness items and readable Woodgrove Wellness packaging. Core product matches the brief.",
+        "The scene is broadly aligned with a pharmacy-style display and warm winter lighting, with a softly blurred winter background. However, the brief specifically calls for a bright pharmacy endcap and a soft seasonal snowfall outside the window, which are not clearly shown in the observations. Most scene elements are present, but the endcap/window snowfall details are missing or unverified.",
+        "Because the requested bundle and general winter retail presentation are there, but the specific endcap/window snowfall staging is not confirmed, the result is not a full pass. Label should be partial."
+       ]
+      },
+      {
+       "repeat": 3,
+       "run_id": "evalrun_bd563616c9bd497cb710d7614a342920",
+       "service_passed": false,
+       "service_score": 0.0,
+       "service_label": "fail",
+       "grader_label": "partial",
+       "reasons": [
+        "The core product bundle is present: the frames show a Woodgrove Wellness assortment with the expected wellness items and readable matching text. Core product matches the brief.",
+        "The scene is broadly consistent with a bright pharmacy-style display and warm winter light, but the observations do not mention a pharmacy endcap specifically, and the winter snowfall outside the window is not evidenced. The motion is a static/tightening crop rather than a clear gentle push-in, though that is close enough for a rendered video check if the scene/product are present. Some requested scene details are missing or unconfirmed.",
+        "Because the bundle and overall winter wellness presentation are clearly there, but the pharmacy endcap/snowfall specifics are not shown, the result is only partial rather than full pass. Assign partial."
+       ]
+      }
+     ],
+     "label": "partial",
+     "agreement": "3/3 partial",
+     "label_counts": {
+      "partial": 3
+     },
+     "needs_human_review": false,
+     "service_passed": [
+      false,
+      false,
+      false
+     ]
+    },
+    "product_identity": {
+     "applicable": true,
+     "repeats": [
+      {
+       "repeat": 1,
+       "run_id": "evalrun_d3c16fb7d6714cf8ad13d73298f9f0a1",
+       "service_passed": true,
+       "service_score": 1.0,
+       "service_label": "pass",
+       "grader_label": "match",
+       "reasons": [
+        "The reference shows a Woodgrove Wellness Cold & Flu Season Bundle in a woven basket with the same item set and packaging details: tissues, vitamin C, thermometer, throat lozenges, honey lemon herbal tea, lemon, and pure honey. Reference product is identified as a specific wellness gift basket bundle.",
+        "The frame observations describe the same woven basket bundle with the same Woodgrove Wellness branding, the same visible items, and matching text/colorway across the packaging. The video frames match the reference product type, form, and colorway.",
+        "Differences are only in camera framing and background warmth, with some items cropped out in later frames, which does not indicate a different product. These are view changes, not product changes."
+       ]
+      },
+      {
+       "repeat": 2,
+       "run_id": "evalrun_4739d50825a54e6abb588a89f8c197c6",
+       "service_passed": true,
+       "service_score": 1.0,
+       "service_label": "pass",
+       "grader_label": "match",
+       "reasons": [
+        "The reference describes a Woodgrove Wellness Cold & Flu Season Bundle: a woven basket with specific wellness items and matching text/colorway. The frame observations show the same basket type and the same set of Woodgrove Wellness packaged items, including the tissue box, tea box, lozenges, vitamin C bottle, thermometer, honey jar, and lemon. Product type and packaging composition align with the reference.",
+        "The visible text in the frames matches the reference labels exactly, including WOODGROVE WELLNESS, VITAMIN C 1000 mg IMMUNE SUPPORT 120 TABLETS, SOFT TISSUES 70 TISSUES, THROAT LOZENGES, HONEY LEMON HERBAL TEA 20 TEA BAGS, and PURE HONEY. The stated colors also align with the reference colorway. Branding and colorway match the approved product.",
+        "Background changes and tighter crops do not affect product identity, and no conflicting product features are reported in the frames. This is the same catalog product."
+       ]
+      },
+      {
+       "repeat": 3,
+       "run_id": "evalrun_7604bdc917124481a76f964763b14021",
+       "service_passed": true,
+       "service_score": 1.0,
+       "service_label": "pass",
+       "grader_label": "match",
+       "reasons": [
+        "The reference product is an assorted Woodgrove Wellness cold and flu gift basket with specific included items and matching packaging/text. The frame observations describe the same woven basket containing the same Woodgrove Wellness items, including the tissues, tea, lozenges, vitamin C bottle, thermometer, honey jar, and lemon. Product type, form, contents, and branding all align with the reference.",
+        "The visible text and colorway in the frames match the reference observations, and the differences are only camera framing and background warmth, which do not affect product identity. No meaningful mismatch is present."
+       ]
+      }
+     ],
+     "label": "match",
+     "agreement": "3/3 match",
+     "label_counts": {
+      "match": 3
+     },
+     "needs_human_review": false,
+     "service_passed": [
+      true,
+      true,
+      true
+     ]
+    },
+    "brand_marks": {
+     "applicable": true,
+     "repeats": [
+      {
+       "repeat": 1,
+       "run_id": "evalrun_2df142a3e2f1406abc7b9f6f2546a3d6",
+       "service_passed": true,
+       "service_score": 1.0,
+       "service_label": "pass",
+       "grader_label": "consistent",
+       "reasons": [
+        "The reference mark is the Woodgrove Wellness leaf wordmark, and the frames repeatedly show the WOODGROVE WELLNESS text on the product packaging without misspelling or distortion. The brand mark is visible and matches the reference.",
+        "No contradictory or invented brand marks are reported, and the tighter crops still preserve the visible wordmark where shown. There is no evidence of a logo-rule or mark-rendering violation."
+       ]
+      },
+      {
+       "repeat": 2,
+       "run_id": "evalrun_313889d9901f4a93be4cbaa9c56f19c8",
+       "service_passed": true,
+       "service_score": 1.0,
+       "service_label": "pass",
+       "grader_label": "consistent",
+       "reasons": [
+        "The reference shows the Woodgrove Wellness leaf wordmark on the products, and the frames repeatedly show the same wordmark clearly with no spelling changes or visual distortion reported. The brand mark is visible and matches the reference.",
+        "No invented logos, recoloring, or rule-breaking variants are described in the frames; the remaining changes are only crops and lighting, which do not contradict the mark. There is no brand-mark violation."
+       ]
+      },
+      {
+       "repeat": 3,
+       "run_id": "evalrun_c4eba4cd4dfc4cf5bc6fd027bc1b10ca",
+       "service_passed": true,
+       "service_score": 1.0,
+       "service_label": "pass",
+       "grader_label": "consistent",
+       "reasons": [
+        "The reference includes the Woodgrove Wellness leaf wordmark, and the frame observations repeatedly show the text \"WOODGROVE WELLNESS\" on the packaging without misspelling, distortion, recoloring, or any invented extra marks. The brand mark is visible and matches the reference.",
+        "Later frames crop tighter and hide some products, but the Woodgrove Wellness wordmark remains visible where the packaging is shown, and nothing in the observations contradicts the approved brand rule. No rule violation is indicated; the mark remains consistent across the visible frames."
+       ]
+      }
+     ],
+     "label": "consistent",
+     "agreement": "3/3 consistent",
+     "label_counts": {
+      "consistent": 3
+     },
+     "needs_human_review": false,
+     "service_passed": [
+      true,
+      true,
+      true
+     ]
+    },
+    "audio_signal": {
+     "applicable": true,
+     "scope": "signal only (stream, loudness, true peak); not semantic or sync",
+     "local": {
+      "label": "pass",
+      "reasons": [
+       "-18.1 LUFS integrated, -4.8 dBTP true peak"
+      ]
+     },
+     "measurements": {
+      "integrated_lufs": -18.1,
+      "true_peak_dbtp": -4.8,
+      "loudness_range_lu": 3.2
+     },
+     "cloud": [
+      {
+       "repeat": 1,
+       "run_id": "evalrun_c8c3e72edbcc4c79931c377ef4a2d124",
+       "service_passed": true,
+       "service_score": 1.0,
+       "service_label": "pass",
+       "grader_label": "pass",
+       "reasons": []
+      }
+     ],
+     "label": "pass",
+     "agreement": "1/1 pass",
+     "label_counts": {
+      "pass": 1
+     },
+     "needs_human_review": false
+    }
+   },
+   "observation": {
+    "scene_summary": "A basket of Woodgrove Wellness products is shown on a light surface with a blurred winter background, and the video frames progressively zoom in on the tissue and tea packaging.",
+    "comparison_notes": "The frames show the same product group as the reference: a woven basket containing Woodgrove Wellness items, a lemon, and a honey jar. The visible packaging colors and text match the reference. Compared with the reference, the frames use a warmer, more softly lit background and progressively tighter crops that remove some items from view, especially the vitamin bottle, thermometer, and parts of the honey jar and lemon in later frames.",
+    "request_id": "bb19550c-1d31-4edb-88fd-e893a05a9287",
+    "usage": {
+     "input_tokens": 1239,
+     "output_tokens": 1149
+    },
+    "frames": 4,
+    "reference_image": "woodgrove-wellness-bundle.png",
+    "deployment": "brand-qa-vision",
+    "model": "gpt-5.4-mini-2026-03-17",
+    "observations_sha256": "sha256:265288fff95212e77c4702aef44b286545cf417e083d925de2335db39782d203"
+   }
+  },
+  "negative-control": {
+   "stage": "negative control",
+   "expected_identity": "mismatch",
+   "checks": {
+    "concept_adherence": {
+     "applicable": false,
+     "na_reason": "negative control tests product identity only"
+    },
+    "product_identity": {
+     "applicable": true,
+     "repeats": [
+      {
+       "repeat": 1,
+       "run_id": "evalrun_d3c16fb7d6714cf8ad13d73298f9f0a1",
+       "service_passed": false,
+       "service_score": 0.0,
+       "service_label": "fail",
+       "grader_label": "mismatch",
+       "reasons": [
+        "Compare the catalog product identity from the reference with the product visible in the frames, focusing on product type, form/packaging, and colorway. The reference is a cordless drill/driver with a battery base and drill bit, while the frames show a clear plastic iced coffee drink with a straw and lid.",
+        "Check textual markings and color cues for consistency. The reference text is CONTOSO PRO / 20V in black/teal/gray/silver, while the frames show NORTHWIND COFFEE with amber-brown, cream, green, and clear colors.",
+        "Determine whether the observations support the same catalog item. The product type and appearance are entirely different, so they cannot be the same product."
+       ]
+      },
+      {
+       "repeat": 2,
+       "run_id": "evalrun_4739d50825a54e6abb588a89f8c197c6",
+       "service_passed": false,
+       "service_score": 0.0,
+       "service_label": "fail",
+       "grader_label": "mismatch",
+       "reasons": [
+        "The reference product is a Contoso Pro 20V brushless cordless drill/driver, specifically a handheld power tool with a battery base and drill bit in black/teal/gray/silver. Reference product identified as a cordless drill.",
+        "The video frame observations show a clear-plastic-cup iced coffee drink with lid and straw, branded NORTHWIND COFFEE, with no drill-like form or tool components present. Frame product is a beverage, not a drill.",
+        "The product type, form/packaging, colors, and visible text all differ substantially between the reference and the frames. This is a mismatch."
+       ]
+      },
+      {
+       "repeat": 3,
+       "run_id": "evalrun_7604bdc917124481a76f964763b14021",
+       "service_passed": false,
+       "service_score": 0.0,
+       "service_label": "fail",
+       "grader_label": "mismatch",
+       "reasons": [
+        "The reference product is a Contoso Pro 20V cordless drill/driver with a handheld power-tool shape, battery base, and drill bit, while the frames show an iced coffee drink in a clear cup with a lid and straw. The product types and forms are completely different.",
+        "The visible text also does not align: the reference shows CONTOSO PRO and 20V, but the frames show NORTHWIND COFFEE. Branding and markings are mismatched.",
+        "The colorways are also unrelated, with the reference being black/teal/gray/silver and the frames being amber-brown/cream/green/clear. The visual appearance does not support a match."
+       ]
+      }
+     ],
+     "label": "mismatch",
+     "agreement": "3/3 mismatch",
+     "label_counts": {
+      "mismatch": 3
+     },
+     "needs_human_review": false,
+     "service_passed": [
+      false,
+      false,
+      false
+     ]
+    },
+    "brand_marks": {
+     "applicable": false,
+     "na_reason": "negative control tests product identity only"
+    },
+    "audio_signal": {
+     "applicable": false,
+     "na_reason": "negative control tests product identity only"
+    }
+   },
+   "observation": {
+    "scene_summary": "The frames depict a close-up beverage scene of an iced coffee drink in a clear plastic cup, first stationary and then with liquid being poured into it.",
+    "comparison_notes": "The reference shows a cordless drill with a battery base and drill bit, while the frames show a branded iced coffee drink in a clear cup with a straw and lid. The visible text differs: the reference reads CONTOSO PRO and 20V, while the frames read NORTHWIND COFFEE. The reference has black, teal, gray, and silver colors; the frames are mainly amber-brown, cream, green, and clear.",
+    "request_id": "9851eba2-0078-485f-bfa8-b7fb95f51cba",
+    "usage": {
+     "input_tokens": 2579,
+     "output_tokens": 470
+    },
+    "frames": 4,
+    "reference_image": "contoso-pro-20v-drill.png",
+    "deployment": "brand-qa-vision",
+    "model": "gpt-5.4-mini-2026-03-17",
+    "observations_sha256": "sha256:3a19ee12b5375bc0dd87b03432543bf243cfc9ca9f4748b368001b64e3a2e99c"
+   }
+  }
+ },
+ "routing": {
+  "qsr-lto-hero": {
+   "model_matches_expected": {
+    "repeats": [
+     {
+      "repeat": 1,
+      "run_id": "evalrun_ee4db4806a384871a6be5564a164ed33",
+      "service_passed": true,
+      "service_score": 1.0,
+      "service_label": "pass",
+      "grader_label": "pass",
+      "reasons": []
+     },
+     {
+      "repeat": 2,
+      "run_id": "evalrun_9459493debb54861bf48f9b1a145a844",
+      "service_passed": true,
+      "service_score": 1.0,
+      "service_label": "pass",
+      "grader_label": "pass",
+      "reasons": []
+     },
+     {
+      "repeat": 3,
+      "run_id": "evalrun_7ef09e778b06470880d6fbb27d76b9c1",
+      "service_passed": true,
+      "service_score": 1.0,
+      "service_label": "pass",
+      "grader_label": "pass",
+      "reasons": []
+     }
+    ],
+    "label": "pass",
+    "agreement": "3/3 pass",
+    "label_counts": {
+     "pass": 3
+    },
+    "needs_human_review": false
+   },
+   "mode_matches_expected": {
+    "repeats": [
+     {
+      "repeat": 1,
+      "run_id": "evalrun_ee4db4806a384871a6be5564a164ed33",
+      "service_passed": true,
+      "service_score": 1.0,
+      "service_label": "pass",
+      "grader_label": "pass",
+      "reasons": []
+     },
+     {
+      "repeat": 2,
+      "run_id": "evalrun_9459493debb54861bf48f9b1a145a844",
+      "service_passed": true,
+      "service_score": 1.0,
+      "service_label": "pass",
+      "grader_label": "pass",
+      "reasons": []
+     },
+     {
+      "repeat": 3,
+      "run_id": "evalrun_7ef09e778b06470880d6fbb27d76b9c1",
+      "service_passed": true,
+      "service_score": 1.0,
+      "service_label": "pass",
+      "grader_label": "pass",
+      "reasons": []
+     }
+    ],
+    "label": "pass",
+    "agreement": "3/3 pass",
+    "label_counts": {
+     "pass": 3
+    },
+    "needs_human_review": false
+   },
+   "rationale_grounded": {
+    "repeats": [
+     {
+      "repeat": 1,
+      "run_id": "evalrun_ee4db4806a384871a6be5564a164ed33",
+      "service_passed": true,
+      "service_score": 1.0,
+      "service_label": "pass",
+      "grader_label": "grounded",
+      "reasons": [
+       "The expected rule is driven by the brief's approved hero image/source and the need for native audio, which together map to Kling v3 Pro. The router's choice matches the rule on the core attributes.",
+       "The rationale cites the approved PIM hero image and native audio requirement, which are the relevant brief attributes, and does not rely on irrelevant details like channel or volume. The reasoning is grounded in the brief attributes that actually determine the routing decision."
+      ]
+     },
+     {
+      "repeat": 2,
+      "run_id": "evalrun_9459493debb54861bf48f9b1a145a844",
+      "service_passed": true,
+      "service_score": 1.0,
+      "service_label": "pass",
+      "grader_label": "grounded",
+      "reasons": [
+       "The expected rule is driven by two brief attributes: source=pim_image (approved hero image) and needs_audio=True (native audio required), which maps to Kling v3 Pro. We should check whether the rationale cites those same attributes and only those.",
+       "The rationale explicitly mentions 'Approved PIM hero image' and 'Native audio required -> Kling v3 Pro audio-on,' which directly matches the brief attributes that determine the routing. The key routing basis is grounded in the brief.",
+       "The extra note 'Offering: US Data Zone' is not part of the expected rule, but it does not contradict the rule or add a new requirement that changes the decision. No invented requirement affects the routing outcome."
+      ]
+     },
+     {
+      "repeat": 3,
+      "run_id": "evalrun_7ef09e778b06470880d6fbb27d76b9c1",
+      "service_passed": true,
+      "service_score": 1.0,
+      "service_label": "pass",
+      "grader_label": "grounded",
+      "reasons": [
+       "The expected rule is driven by two brief attributes: the source is a PIM image/approved hero image and needs_audio is true, which maps to Kling v3 Pro. The router\u2019s choice matches the expected rule.",
+       "The rationale cites the approved PIM hero image and native audio requirement, both of which are the actual drivers of the expected rule. These cited attributes are grounded in the brief.",
+       "The additional note about 'US Data Zone' is not part of the stated rule, but it does not override or invent a contradictory requirement for model selection. No ungrounded requirement affects the routing decision."
+      ]
+     }
+    ],
+    "label": "grounded",
+    "agreement": "3/3 grounded",
+    "label_counts": {
+     "grounded": 3
+    },
+    "needs_human_review": false
+   },
+   "case": {
+    "rule": "Approved hero image + native audio -> Kling v3 Pro",
+    "expected_model": "kling-v3-pro",
+    "expected_mode": "image-to-video",
+    "actual_model": "kling-v3-pro",
+    "actual_mode": "image-to-video"
+   }
+  },
+  "apparel-pdp": {
+   "model_matches_expected": {
+    "repeats": [
+     {
+      "repeat": 1,
+      "run_id": "evalrun_ee4db4806a384871a6be5564a164ed33",
+      "service_passed": true,
+      "service_score": 1.0,
+      "service_label": "pass",
+      "grader_label": "pass",
+      "reasons": []
+     },
+     {
+      "repeat": 2,
+      "run_id": "evalrun_9459493debb54861bf48f9b1a145a844",
+      "service_passed": true,
+      "service_score": 1.0,
+      "service_label": "pass",
+      "grader_label": "pass",
+      "reasons": []
+     },
+     {
+      "repeat": 3,
+      "run_id": "evalrun_7ef09e778b06470880d6fbb27d76b9c1",
+      "service_passed": true,
+      "service_score": 1.0,
+      "service_label": "pass",
+      "grader_label": "pass",
+      "reasons": []
+     }
+    ],
+    "label": "pass",
+    "agreement": "3/3 pass",
+    "label_counts": {
+     "pass": 3
+    },
+    "needs_human_review": false
+   },
+   "mode_matches_expected": {
+    "repeats": [
+     {
+      "repeat": 1,
+      "run_id": "evalrun_ee4db4806a384871a6be5564a164ed33",
+      "service_passed": true,
+      "service_score": 1.0,
+      "service_label": "pass",
+      "grader_label": "pass",
+      "reasons": []
+     },
+     {
+      "repeat": 2,
+      "run_id": "evalrun_9459493debb54861bf48f9b1a145a844",
+      "service_passed": true,
+      "service_score": 1.0,
+      "service_label": "pass",
+      "grader_label": "pass",
+      "reasons": []
+     },
+     {
+      "repeat": 3,
+      "run_id": "evalrun_7ef09e778b06470880d6fbb27d76b9c1",
+      "service_passed": true,
+      "service_score": 1.0,
+      "service_label": "pass",
+      "grader_label": "pass",
+      "reasons": []
+     }
+    ],
+    "label": "pass",
+    "agreement": "3/3 pass",
+    "label_counts": {
+     "pass": 3
+    },
+    "needs_human_review": false
+   },
+   "rationale_grounded": {
+    "repeats": [
+     {
+      "repeat": 1,
+      "run_id": "evalrun_ee4db4806a384871a6be5564a164ed33",
+      "service_passed": true,
+      "service_score": 1.0,
+      "service_label": "pass",
+      "grader_label": "grounded",
+      "reasons": [
+       "The brief attributes include source=pim_image and channel=pdp, and the prompt explicitly asks for animation of an approved ghost-mannequin image, which fits the expected approved PIM image to image-to-video rule. The core routing cue is present and correctly points toward Kling v3 Pro.",
+       "The rationale cites 'Approved PIM hero image -> image-to-video on Kling v3 Pro preserves SKU fidelity,' which matches the brief's approved PIM image requirement and does not introduce conflicting criteria. This part is grounded in the brief.",
+       "The rationale also says 'Complex physical interaction -> Kling v3 Pro.' The brief has physical_interaction=True, so this is supported by the attributes; it is not inventing an extra requirement beyond what is given. This part is also grounded.",
+       "'Offering: US Data Zone' is not part of the expected rule, but it does not appear to affect the routing decision in a way that contradicts the brief attributes. No ungrounded requirement is introduced that changes the outcome."
+      ]
+     },
+     {
+      "repeat": 2,
+      "run_id": "evalrun_9459493debb54861bf48f9b1a145a844",
+      "service_passed": false,
+      "service_score": 0.0,
+      "service_label": "fail",
+      "grader_label": "ungrounded",
+      "reasons": [
+       "The expected rule is driven by the brief attributes that indicate an approved PIM image source and fabric-physics style motion, which map to Kling v3 Pro. The key routing factors are present in the brief: source=pim_image and a fabric-physics animation request.",
+       "The router rationale cites the approved PIM hero image and image-to-video on Kling v3 Pro preserving SKU fidelity, which aligns with the source-based part of the rule. This part is grounded in the brief attributes.",
+       "However, the rationale adds 'Complex physical interaction -> Kling v3 Pro,' while the expected rule only mentions approved PIM image and fabric physics, not complex physical interaction as a routing criterion. This is an invented or at least unsupported requirement."
+      ]
+     },
+     {
+      "repeat": 3,
+      "run_id": "evalrun_7ef09e778b06470880d6fbb27d76b9c1",
+      "service_passed": true,
+      "service_score": 1.0,
+      "service_label": "pass",
+      "grader_label": "grounded",
+      "reasons": [
+       "The brief attributes that clearly matter are source=pim_image and physical_interaction=True, which support an image-to-video choice and the need for better motion handling. The expected rule maps approved PIM image plus fabric physics to Kling v3 Pro, so citing the approved hero image and physical interaction is aligned with the brief-driven routing logic. The rationale uses relevant brief attributes that drive the expected rule.",
+       "The rationale also adds 'Offering: US Data Zone,' which is not present in the brief attributes or expected rule. However, this appears as an extra, not a contradiction or a requirement that changes the routing decision. It does not invent a condition that overrides the brief-based rule.",
+       "Because the main reasoning is grounded in the brief attributes and matches the expected mapping, the router rationale is sufficiently supported. grounded"
+      ]
+     }
+    ],
+    "label": "split",
+    "agreement": "2/3 grounded",
+    "label_counts": {
+     "grounded": 2,
+     "ungrounded": 1
+    },
+    "needs_human_review": true
+   },
+   "case": {
+    "rule": "Approved PIM image, fabric physics -> Kling v3 Pro",
+    "expected_model": "kling-v3-pro",
+    "expected_mode": "image-to-video",
+    "actual_model": "kling-v3-pro",
+    "actual_mode": "image-to-video"
+   }
+  },
+  "home-drill": {
+   "model_matches_expected": {
+    "repeats": [
+     {
+      "repeat": 1,
+      "run_id": "evalrun_ee4db4806a384871a6be5564a164ed33",
+      "service_passed": true,
+      "service_score": 1.0,
+      "service_label": "pass",
+      "grader_label": "pass",
+      "reasons": []
+     },
+     {
+      "repeat": 2,
+      "run_id": "evalrun_9459493debb54861bf48f9b1a145a844",
+      "service_passed": true,
+      "service_score": 1.0,
+      "service_label": "pass",
+      "grader_label": "pass",
+      "reasons": []
+     },
+     {
+      "repeat": 3,
+      "run_id": "evalrun_7ef09e778b06470880d6fbb27d76b9c1",
+      "service_passed": true,
+      "service_score": 1.0,
+      "service_label": "pass",
+      "grader_label": "pass",
+      "reasons": []
+     }
+    ],
+    "label": "pass",
+    "agreement": "3/3 pass",
+    "label_counts": {
+     "pass": 3
+    },
+    "needs_human_review": false
+   },
+   "mode_matches_expected": {
+    "repeats": [
+     {
+      "repeat": 1,
+      "run_id": "evalrun_ee4db4806a384871a6be5564a164ed33",
+      "service_passed": true,
+      "service_score": 1.0,
+      "service_label": "pass",
+      "grader_label": "pass",
+      "reasons": []
+     },
+     {
+      "repeat": 2,
+      "run_id": "evalrun_9459493debb54861bf48f9b1a145a844",
+      "service_passed": true,
+      "service_score": 1.0,
+      "service_label": "pass",
+      "grader_label": "pass",
+      "reasons": []
+     },
+     {
+      "repeat": 3,
+      "run_id": "evalrun_7ef09e778b06470880d6fbb27d76b9c1",
+      "service_passed": true,
+      "service_score": 1.0,
+      "service_label": "pass",
+      "grader_label": "pass",
+      "reasons": []
+     }
+    ],
+    "label": "pass",
+    "agreement": "3/3 pass",
+    "label_counts": {
+     "pass": 3
+    },
+    "needs_human_review": false
+   },
+   "rationale_grounded": {
+    "repeats": [
+     {
+      "repeat": 1,
+      "run_id": "evalrun_ee4db4806a384871a6be5564a164ed33",
+      "service_passed": true,
+      "service_score": 1.0,
+      "service_label": "pass",
+      "grader_label": "grounded",
+      "reasons": [
+       "Check whether the rationale cites the brief attributes that determine the expected rule. The key drivers are stage=final, source=pim_image, physical_interaction=True, and the rule says complex physical interaction from a PIM image should go to Kling v3 Pro. The rationale matches the core brief attributes and expected routing rule.",
+       "Assess whether any extra justification invents requirements not present in the brief. The mention of 'US Data Zone' is not part of the provided attributes or expected rule, but it is an offering detail rather than a routing requirement. The image-to-video and SKU fidelity comments align with the PIM image context. No material invented requirement that changes the rule is introduced."
+      ]
+     },
+     {
+      "repeat": 2,
+      "run_id": "evalrun_9459493debb54861bf48f9b1a145a844",
+      "service_passed": true,
+      "service_score": 1.0,
+      "service_label": "pass",
+      "grader_label": "grounded",
+      "reasons": [
+       "The expected rule is driven by the brief attributes `source=pim_image` and `physical_interaction=True`, which point to an image-to-video model and specifically Kling v3 Pro for complex physical interaction. These cited attributes match the rule basis.",
+       "The rationale mentions the approved PIM hero image and complex physical interaction, both of which are brief attributes relevant to the expected routing decision. It also adds an offering note about US Data Zone, which is not part of the brief attributes or the expected rule. One extra note is present, but it does not change the core routing justification.",
+       "Because the rationale does cite the key attributes that actually drive the expected rule and does not invent a different requirement for the model choice, it is grounded. grounded"
+      ]
+     },
+     {
+      "repeat": 3,
+      "run_id": "evalrun_7ef09e778b06470880d6fbb27d76b9c1",
+      "service_passed": true,
+      "service_score": 1.0,
+      "service_label": "pass",
+      "grader_label": "grounded",
+      "reasons": [
+       "The expected rule is driven by the brief attributes showing source=pim_image and physical_interaction=True, which together map a complex physical interaction from a PIM image to Kling v3 Pro. The router named the correct model and cited the key driving attributes.",
+       "The rationale mentions approved PIM hero image and complex physical interaction, which are aligned with the brief. The US Data Zone note is extra, but it does not contradict or invent a requirement affecting the routing decision. The rationale is grounded in the brief attributes."
+      ]
+     }
+    ],
+    "label": "grounded",
+    "agreement": "3/3 grounded",
+    "label_counts": {
+     "grounded": 3
+    },
+    "needs_human_review": false
+   },
+   "case": {
+    "rule": "Complex physical interaction from a PIM image -> Kling v3 Pro",
+    "expected_model": "kling-v3-pro",
+    "expected_mode": "image-to-video",
+    "actual_model": "kling-v3-pro",
+    "actual_mode": "image-to-video"
+   }
+  },
+  "home-patio-layout": {
+   "model_matches_expected": {
+    "repeats": [
+     {
+      "repeat": 1,
+      "run_id": "evalrun_ee4db4806a384871a6be5564a164ed33",
+      "service_passed": true,
+      "service_score": 1.0,
+      "service_label": "pass",
+      "grader_label": "pass",
+      "reasons": []
+     },
+     {
+      "repeat": 2,
+      "run_id": "evalrun_9459493debb54861bf48f9b1a145a844",
+      "service_passed": true,
+      "service_score": 1.0,
+      "service_label": "pass",
+      "grader_label": "pass",
+      "reasons": []
+     },
+     {
+      "repeat": 3,
+      "run_id": "evalrun_7ef09e778b06470880d6fbb27d76b9c1",
+      "service_passed": true,
+      "service_score": 1.0,
+      "service_label": "pass",
+      "grader_label": "pass",
+      "reasons": []
+     }
+    ],
+    "label": "pass",
+    "agreement": "3/3 pass",
+    "label_counts": {
+     "pass": 3
+    },
+    "needs_human_review": false
+   },
+   "mode_matches_expected": {
+    "repeats": [
+     {
+      "repeat": 1,
+      "run_id": "evalrun_ee4db4806a384871a6be5564a164ed33",
+      "service_passed": true,
+      "service_score": 1.0,
+      "service_label": "pass",
+      "grader_label": "pass",
+      "reasons": []
+     },
+     {
+      "repeat": 2,
+      "run_id": "evalrun_9459493debb54861bf48f9b1a145a844",
+      "service_passed": true,
+      "service_score": 1.0,
+      "service_label": "pass",
+      "grader_label": "pass",
+      "reasons": []
+     },
+     {
+      "repeat": 3,
+      "run_id": "evalrun_7ef09e778b06470880d6fbb27d76b9c1",
+      "service_passed": true,
+      "service_score": 1.0,
+      "service_label": "pass",
+      "grader_label": "pass",
+      "reasons": []
+     }
+    ],
+    "label": "pass",
+    "agreement": "3/3 pass",
+    "label_counts": {
+     "pass": 3
+    },
+    "needs_human_review": false
+   },
+   "rationale_grounded": {
+    "repeats": [
+     {
+      "repeat": 1,
+      "run_id": "evalrun_ee4db4806a384871a6be5564a164ed33",
+      "service_passed": true,
+      "service_score": 1.0,
+      "service_label": "pass",
+      "grader_label": "grounded",
+      "reasons": [
+       "The brief explicitly says the scene requires exactly one table, exactly four matching chairs, centered placement, and two chairs on each long side, which matches a strict multi-object layout requirement. The key deciding attribute is strict_layout=True, supported by the prompt's precise object arrangement.",
+       "The router rationale cites strict adherence to multi-object / technical layout, which aligns with the expected rule. It does not introduce unrelated constraints beyond the brief attributes. The rationale is grounded in the brief and does not invent requirements."
+      ]
+     },
+     {
+      "repeat": 2,
+      "run_id": "evalrun_9459493debb54861bf48f9b1a145a844",
+      "service_passed": true,
+      "service_score": 1.0,
+      "service_label": "pass",
+      "grader_label": "grounded",
+      "reasons": [
+       "The brief explicitly signals strict_layout=True and describes an exact multi-object arrangement: one table, exactly four matching chairs, centered table, two chairs on each long side, with no extra furniture and no people. Those are the attributes that support routing to a model suited for strict multi-object layout. The rationale is grounded in the brief attributes that drive the expected rule.",
+       "The router rationale mentions strict adherence to multi-object/technical layout, which matches the brief\u2019s strict_layout and precise spatial constraints. It does not rely on unrelated attributes or invent requirements beyond the prompt. No invented requirement is introduced; the rationale aligns with the brief."
+      ]
+     },
+     {
+      "repeat": 3,
+      "run_id": "evalrun_7ef09e778b06470880d6fbb27d76b9c1",
+      "service_passed": true,
+      "service_score": 1.0,
+      "service_label": "pass",
+      "grader_label": "grounded",
+      "reasons": [
+       "The brief explicitly signals a strict multi-object layout, with exact counts and placement constraints for a table and chairs, plus no extras or people. These are the attributes that drive the expected rule to MiniMax H3 Max. The rationale cites the relevant layout strictness from the brief.",
+       "The rationale adds only that MiniMax H3 Max is suited for strict adherence to multi-object/technical layout, which matches the expected rule and does not introduce unrelated requirements beyond the brief. No invented requirement is introduced."
+      ]
+     }
+    ],
+    "label": "grounded",
+    "agreement": "3/3 grounded",
+    "label_counts": {
+     "grounded": 3
+    },
+    "needs_human_review": false
+   },
+   "case": {
+    "rule": "Strict multi-object layout -> MiniMax H3 Max",
+    "expected_model": "minimax-h3-max",
+    "expected_mode": "text-to-video",
+    "actual_model": "minimax-h3-max",
+    "actual_mode": "text-to-video"
+   }
+  },
+  "grocery-endcap": {
+   "model_matches_expected": {
+    "repeats": [
+     {
+      "repeat": 1,
+      "run_id": "evalrun_ee4db4806a384871a6be5564a164ed33",
+      "service_passed": true,
+      "service_score": 1.0,
+      "service_label": "pass",
+      "grader_label": "pass",
+      "reasons": []
+     },
+     {
+      "repeat": 2,
+      "run_id": "evalrun_9459493debb54861bf48f9b1a145a844",
+      "service_passed": true,
+      "service_score": 1.0,
+      "service_label": "pass",
+      "grader_label": "pass",
+      "reasons": []
+     },
+     {
+      "repeat": 3,
+      "run_id": "evalrun_7ef09e778b06470880d6fbb27d76b9c1",
+      "service_passed": true,
+      "service_score": 1.0,
+      "service_label": "pass",
+      "grader_label": "pass",
+      "reasons": []
+     }
+    ],
+    "label": "pass",
+    "agreement": "3/3 pass",
+    "label_counts": {
+     "pass": 3
+    },
+    "needs_human_review": false
+   },
+   "mode_matches_expected": {
+    "repeats": [
+     {
+      "repeat": 1,
+      "run_id": "evalrun_ee4db4806a384871a6be5564a164ed33",
+      "service_passed": true,
+      "service_score": 1.0,
+      "service_label": "pass",
+      "grader_label": "pass",
+      "reasons": []
+     },
+     {
+      "repeat": 2,
+      "run_id": "evalrun_9459493debb54861bf48f9b1a145a844",
+      "service_passed": true,
+      "service_score": 1.0,
+      "service_label": "pass",
+      "grader_label": "pass",
+      "reasons": []
+     },
+     {
+      "repeat": 3,
+      "run_id": "evalrun_7ef09e778b06470880d6fbb27d76b9c1",
+      "service_passed": true,
+      "service_score": 1.0,
+      "service_label": "pass",
+      "grader_label": "pass",
+      "reasons": []
+     }
+    ],
+    "label": "pass",
+    "agreement": "3/3 pass",
+    "label_counts": {
+     "pass": 3
+    },
+    "needs_human_review": false
+   },
+   "rationale_grounded": {
+    "repeats": [
+     {
+      "repeat": 1,
+      "run_id": "evalrun_ee4db4806a384871a6be5564a164ed33",
+      "service_passed": false,
+      "service_score": 0.0,
+      "service_label": "fail",
+      "grader_label": "ungrounded",
+      "reasons": [
+       "The brief attributes include volume=120, which supports the idea of a high-volume run and could justify a cheaper per-second/per-clip option. The rationale is grounded in the volume attribute that drives the expected high-volume promo rule.",
+       "However, the rationale adds 'per-SKU personalization viable' and 'Offering: Global Standard PayGo,' neither of which appear in the brief attributes or are needed to apply the expected rule. The rationale invents extra requirements not supported by the brief."
+      ]
+     },
+     {
+      "repeat": 2,
+      "run_id": "evalrun_9459493debb54861bf48f9b1a145a844",
+      "service_passed": true,
+      "service_score": 1.0,
+      "service_label": "pass",
+      "grader_label": "grounded",
+      "reasons": [
+       "The expected routing rule is driven by the brief's high volume (120 clips) in a weekly promo context, which points to the lower per-second-rate model. The brief also indicates the source is an approved image, matching image-to-video.  The key attributes supporting the rule are volume=120 and source=pim_image.",
+       "The router's rationale cites high volume and cost viability, which aligns with the expected rule's emphasis on high-volume promos. It does not introduce conflicting constraints or ignore the relevant brief attributes. The rationale is grounded in the brief attributes that drive the routing decision."
+      ]
+     },
+     {
+      "repeat": 3,
+      "run_id": "evalrun_7ef09e778b06470880d6fbb27d76b9c1",
+      "service_passed": false,
+      "service_score": 0.0,
+      "service_label": "fail",
+      "grader_label": "ungrounded",
+      "reasons": [
+       "The brief attributes show a final-stage signage promo using a source image, with volume=120. The expected rule says high-volume weekly promos route to MiniMax H3 Max Turbo, specifically because it is the half-rate option for H3 Max. The chosen model name matches the expected rule.",
+       "However, the router rationale cites 'per-SKU personalization viable' and 'Global Standard PayGo,' which are not part of the brief attributes or the stated expected rule. The only relevant driving attribute in the brief is volume=120, and the rationale introduces extra requirements not needed to justify the routing. The rationale is not fully grounded in the provided brief attributes."
+      ]
+     }
+    ],
+    "label": "split",
+    "agreement": "2/3 ungrounded",
+    "label_counts": {
+     "ungrounded": 2,
+     "grounded": 1
+    },
+    "needs_human_review": true
+   },
+   "case": {
+    "rule": "High-volume weekly promos -> MiniMax H3 Max Turbo (half the H3 Max per-second rate)",
+    "expected_model": "minimax-h3-max-turbo",
+    "expected_mode": "image-to-video",
+    "actual_model": "minimax-h3-max-turbo",
+    "actual_mode": "image-to-video"
+   }
+  },
+  "electronics-text-audio": {
+   "model_matches_expected": {
+    "repeats": [
+     {
+      "repeat": 1,
+      "run_id": "evalrun_ee4db4806a384871a6be5564a164ed33",
+      "service_passed": true,
+      "service_score": 1.0,
+      "service_label": "pass",
+      "grader_label": "pass",
+      "reasons": []
+     },
+     {
+      "repeat": 2,
+      "run_id": "evalrun_9459493debb54861bf48f9b1a145a844",
+      "service_passed": true,
+      "service_score": 1.0,
+      "service_label": "pass",
+      "grader_label": "pass",
+      "reasons": []
+     },
+     {
+      "repeat": 3,
+      "run_id": "evalrun_7ef09e778b06470880d6fbb27d76b9c1",
+      "service_passed": true,
+      "service_score": 1.0,
+      "service_label": "pass",
+      "grader_label": "pass",
+      "reasons": []
+     }
+    ],
+    "label": "pass",
+    "agreement": "3/3 pass",
+    "label_counts": {
+     "pass": 3
+    },
+    "needs_human_review": false
+   },
+   "mode_matches_expected": {
+    "repeats": [
+     {
+      "repeat": 1,
+      "run_id": "evalrun_ee4db4806a384871a6be5564a164ed33",
+      "service_passed": true,
+      "service_score": 1.0,
+      "service_label": "pass",
+      "grader_label": "pass",
+      "reasons": []
+     },
+     {
+      "repeat": 2,
+      "run_id": "evalrun_9459493debb54861bf48f9b1a145a844",
+      "service_passed": true,
+      "service_score": 1.0,
+      "service_label": "pass",
+      "grader_label": "pass",
+      "reasons": []
+     },
+     {
+      "repeat": 3,
+      "run_id": "evalrun_7ef09e778b06470880d6fbb27d76b9c1",
+      "service_passed": true,
+      "service_score": 1.0,
+      "service_label": "pass",
+      "grader_label": "pass",
+      "reasons": []
+     }
+    ],
+    "label": "pass",
+    "agreement": "3/3 pass",
+    "label_counts": {
+     "pass": 3
+    },
+    "needs_human_review": false
+   },
+   "rationale_grounded": {
+    "repeats": [
+     {
+      "repeat": 1,
+      "run_id": "evalrun_ee4db4806a384871a6be5564a164ed33",
+      "service_passed": true,
+      "service_score": 1.0,
+      "service_label": "pass",
+      "grader_label": "grounded",
+      "reasons": [
+       "The expected rule is driven by the brief being a text brief with final render and synchronized audio, which maps to LTX-2.5 Pro. The core routing condition is explicitly supported by the brief attributes.",
+       "The router rationale repeats that same rule and does not add any extra constraints beyond a generic offering note. No invented requirements appear to affect the decision."
+      ]
+     },
+     {
+      "repeat": 2,
+      "run_id": "evalrun_9459493debb54861bf48f9b1a145a844",
+      "service_passed": true,
+      "service_score": 1.0,
+      "service_label": "pass",
+      "grader_label": "grounded",
+      "reasons": [
+       "The brief attributes that determine routing are stage=final, source=text, and needs_audio=True, which match the expected rule for a text brief with final render and synchronized audio. The expected routing target is LTX-2.5 Pro.",
+       "The router rationale cites the same key rule trigger and does not introduce any extra requirement affecting the decision; 'Global Standard PayGo' is just an offering note, not a routing criterion. The rationale is grounded in the brief attributes and expected rule."
+      ]
+     },
+     {
+      "repeat": 3,
+      "run_id": "evalrun_7ef09e778b06470880d6fbb27d76b9c1",
+      "service_passed": true,
+      "service_score": 1.0,
+      "service_label": "pass",
+      "grader_label": "grounded",
+      "reasons": [
+       "The expected rule is determined by the brief attributes stage=final, source=text, and needs_audio=True, which together map to a final text brief with synchronized audio requiring LTX-2.5 Pro. These are the relevant attributes driving the rule.",
+       "The router rationale says only that it is a text brief and final render with synchronized audio, which matches the expected decision logic. The extra phrase \"Offering: Global Standard PayGo\" is not part of the rule and does not change the grounding assessment. The rationale cites the correct driving attributes and does not invent a contradictory requirement."
+      ]
+     }
+    ],
+    "label": "grounded",
+    "agreement": "3/3 grounded",
+    "label_counts": {
+     "grounded": 3
+    },
+    "needs_human_review": false
+   },
+   "case": {
+    "rule": "Text brief, final render with synchronized audio -> LTX-2.5 Pro",
+    "expected_model": "ltx-2.5-pro",
+    "expected_mode": "text-to-video",
+    "actual_model": "ltx-2.5-pro",
+    "actual_mode": "text-to-video"
+   }
+  },
+  "draft-no-audio": {
+   "model_matches_expected": {
+    "repeats": [
+     {
+      "repeat": 1,
+      "run_id": "evalrun_ee4db4806a384871a6be5564a164ed33",
+      "service_passed": true,
+      "service_score": 1.0,
+      "service_label": "pass",
+      "grader_label": "pass",
+      "reasons": []
+     },
+     {
+      "repeat": 2,
+      "run_id": "evalrun_9459493debb54861bf48f9b1a145a844",
+      "service_passed": true,
+      "service_score": 1.0,
+      "service_label": "pass",
+      "grader_label": "pass",
+      "reasons": []
+     },
+     {
+      "repeat": 3,
+      "run_id": "evalrun_7ef09e778b06470880d6fbb27d76b9c1",
+      "service_passed": true,
+      "service_score": 1.0,
+      "service_label": "pass",
+      "grader_label": "pass",
+      "reasons": []
+     }
+    ],
+    "label": "pass",
+    "agreement": "3/3 pass",
+    "label_counts": {
+     "pass": 3
+    },
+    "needs_human_review": false
+   },
+   "mode_matches_expected": {
+    "repeats": [
+     {
+      "repeat": 1,
+      "run_id": "evalrun_ee4db4806a384871a6be5564a164ed33",
+      "service_passed": true,
+      "service_score": 1.0,
+      "service_label": "pass",
+      "grader_label": "pass",
+      "reasons": []
+     },
+     {
+      "repeat": 2,
+      "run_id": "evalrun_9459493debb54861bf48f9b1a145a844",
+      "service_passed": true,
+      "service_score": 1.0,
+      "service_label": "pass",
+      "grader_label": "pass",
+      "reasons": []
+     },
+     {
+      "repeat": 3,
+      "run_id": "evalrun_7ef09e778b06470880d6fbb27d76b9c1",
+      "service_passed": true,
+      "service_score": 1.0,
+      "service_label": "pass",
+      "grader_label": "pass",
+      "reasons": []
+     }
+    ],
+    "label": "pass",
+    "agreement": "3/3 pass",
+    "label_counts": {
+     "pass": 3
+    },
+    "needs_human_review": false
+   },
+   "rationale_grounded": {
+    "repeats": [
+     {
+      "repeat": 1,
+      "run_id": "evalrun_ee4db4806a384871a6be5564a164ed33",
+      "service_passed": true,
+      "service_score": 1.0,
+      "service_label": "pass",
+      "grader_label": "grounded",
+      "reasons": [
+       "The brief attributes that drive the expected rule are stage=draft, source=text, and needs_audio=False, which support a drafting/request-for-fast-non-audio route. The rationale correctly points to a fast tier and includes MiniMax H3 Max Turbo, which matches the expected fast-tier behavior. The rationale uses the key brief attributes that matter for the rule.",
+       "The rationale also adds an unrelated cost/plan claim: 'lowest-cost' and 'Offering: Global Standard PayGo.' These are not present in the brief attributes and are not needed to justify the expected rule, but they do not change the core route selection here. It contains some extra unsupported detail, but no invented requirement that affects the routing decision."
+      ]
+     },
+     {
+      "repeat": 2,
+      "run_id": "evalrun_9459493debb54861bf48f9b1a145a844",
+      "service_passed": true,
+      "service_score": 1.0,
+      "service_label": "pass",
+      "grader_label": "grounded",
+      "reasons": [
+       "The expected routing rule is driven by the brief being a draft for A/B testing/drafting, with no audio needed. That supports a fast, low-cost tier choice and does not require other features to be mentioned. The key attributes are stage=draft and needs_audio=False, which align with the expected fast-tier routing.",
+       "The rationale cites drafting/A-B testing and a lowest-cost fast tier, which is consistent with the expected rule. However, it also adds \u201cOffering: Global Standard PayGo,\u201d which is not part of the brief attributes or expected rule. The added offering detail is extra and not needed, but it does not override the grounded core reasoning."
+      ]
+     },
+     {
+      "repeat": 3,
+      "run_id": "evalrun_7ef09e778b06470880d6fbb27d76b9c1",
+      "service_passed": true,
+      "service_score": 1.0,
+      "service_label": "pass",
+      "grader_label": "grounded",
+      "reasons": [
+       "The expected rule is driven by the brief attributes stage=draft, source=text, and needs_audio=False, which indicate a drafting/text-to-video request that should use a fast tier without audio. The router\u2019s choice of MiniMax H3 Max Turbo matches that part of the rule. The selected model is consistent with the brief attributes that determine routing.",
+       "The rationale also mentions \"lowest-cost fast tier\" and \"Offering: Global Standard PayGo,\" but these are not present in the brief attributes or expected rule. However, they do not contradict the requested fast-tier/no-audio behavior, so they are extra but not rule-breaking claims. No invented requirement changes the routing decision.",
+       "Since the rationale cites the drafting fast-tier logic tied to the brief and the model choice aligns with it, the rationale is grounded. Label grounded."
+      ]
+     }
+    ],
+    "label": "grounded",
+    "agreement": "3/3 grounded",
+    "label_counts": {
+     "grounded": 3
+    },
+    "needs_human_review": false
+   },
+   "case": {
+    "rule": "Drafting / A-B testing -> fast tier (Turbo first without audio)",
+    "expected_model": "minimax-h3-max-turbo",
+    "expected_mode": "text-to-video",
+    "actual_model": "minimax-h3-max-turbo",
+    "actual_mode": "text-to-video"
+   }
+  },
+  "draft-with-audio": {
+   "model_matches_expected": {
+    "repeats": [
+     {
+      "repeat": 1,
+      "run_id": "evalrun_ee4db4806a384871a6be5564a164ed33",
+      "service_passed": true,
+      "service_score": 1.0,
+      "service_label": "pass",
+      "grader_label": "pass",
+      "reasons": []
+     },
+     {
+      "repeat": 2,
+      "run_id": "evalrun_9459493debb54861bf48f9b1a145a844",
+      "service_passed": true,
+      "service_score": 1.0,
+      "service_label": "pass",
+      "grader_label": "pass",
+      "reasons": []
+     },
+     {
+      "repeat": 3,
+      "run_id": "evalrun_7ef09e778b06470880d6fbb27d76b9c1",
+      "service_passed": true,
+      "service_score": 1.0,
+      "service_label": "pass",
+      "grader_label": "pass",
+      "reasons": []
+     }
+    ],
+    "label": "pass",
+    "agreement": "3/3 pass",
+    "label_counts": {
+     "pass": 3
+    },
+    "needs_human_review": false
+   },
+   "mode_matches_expected": {
+    "repeats": [
+     {
+      "repeat": 1,
+      "run_id": "evalrun_ee4db4806a384871a6be5564a164ed33",
+      "service_passed": true,
+      "service_score": 1.0,
+      "service_label": "pass",
+      "grader_label": "pass",
+      "reasons": []
+     },
+     {
+      "repeat": 2,
+      "run_id": "evalrun_9459493debb54861bf48f9b1a145a844",
+      "service_passed": true,
+      "service_score": 1.0,
+      "service_label": "pass",
+      "grader_label": "pass",
+      "reasons": []
+     },
+     {
+      "repeat": 3,
+      "run_id": "evalrun_7ef09e778b06470880d6fbb27d76b9c1",
+      "service_passed": true,
+      "service_score": 1.0,
+      "service_label": "pass",
+      "grader_label": "pass",
+      "reasons": []
+     }
+    ],
+    "label": "pass",
+    "agreement": "3/3 pass",
+    "label_counts": {
+     "pass": 3
+    },
+    "needs_human_review": false
+   },
+   "rationale_grounded": {
+    "repeats": [
+     {
+      "repeat": 1,
+      "run_id": "evalrun_ee4db4806a384871a6be5564a164ed33",
+      "service_passed": true,
+      "service_score": 1.0,
+      "service_label": "pass",
+      "grader_label": "grounded",
+      "reasons": [
+       "The brief attributes include stage=draft and needs_audio=True, which are the key cues that support the expected rule pointing to a drafting workflow with synchronized audio. The rationale correctly uses the brief's draft/audio attributes to justify LTX-2.5 Fast.",
+       "The rationale also mentions lowest-cost fast tier and Global Standard PayGo, which are not driving requirements in the expected rule and introduce extra business considerations not present in the brief. Some added context is unnecessary, but it does not contradict the brief-driven rule.",
+       "Because the core justification matches the brief attributes that determine the expected routing decision, this is grounded. grounded"
+      ]
+     },
+     {
+      "repeat": 2,
+      "run_id": "evalrun_9459493debb54861bf48f9b1a145a844",
+      "service_passed": true,
+      "service_score": 1.0,
+      "service_label": "pass",
+      "grader_label": "grounded",
+      "reasons": [
+       "The expected rule is based on the brief attribute that the stage is draft and audio is needed, which maps specifically to Drafting with synchronized audio -> LTX-2.5 Fast. The router correctly references the key driving attributes: draft stage and needs_audio=True.",
+       "The rationale also mentions lowest-cost fast tier and Global Standard PayGo, which are not part of the expected rule and introduce extra business logic not supported by the brief attributes. Those additions are extraneous, but they do not override the core grounded reason.",
+       "Because the rationale cites the actual relevant attributes that drive the expected routing decision and does not contradict them, it is grounded. grounded"
+      ]
+     },
+     {
+      "repeat": 3,
+      "run_id": "evalrun_7ef09e778b06470880d6fbb27d76b9c1",
+      "service_passed": true,
+      "service_score": 1.0,
+      "service_label": "pass",
+      "grader_label": "grounded",
+      "reasons": [
+       "The expected rule is driven by the brief attributes stage=draft and needs_audio=True, which map to drafting with synchronized audio and therefore LTX-2.5 Fast. The core routing justification should reference draft plus audio requirements.",
+       "The router rationale mentions drafting and audio requested in draft, which matches the key brief attributes. The extra A/B testing and lowest-cost fast tier language is not the main driver of the expected rule but does not contradict it. The rationale is grounded in the relevant attributes and does not invent a conflicting requirement."
+      ]
+     }
+    ],
+    "label": "grounded",
+    "agreement": "3/3 grounded",
+    "label_counts": {
+     "grounded": 3
+    },
+    "needs_human_review": false
+   },
+   "case": {
+    "rule": "Drafting with synchronized audio -> LTX-2.5 Fast",
+    "expected_model": "ltx-2.5-fast",
+    "expected_mode": "text-to-video",
+    "actual_model": "ltx-2.5-fast",
+    "actual_mode": "text-to-video"
+   }
+  },
+  "pim-strict-layout": {
+   "model_matches_expected": {
+    "repeats": [
+     {
+      "repeat": 1,
+      "run_id": "evalrun_ee4db4806a384871a6be5564a164ed33",
+      "service_passed": true,
+      "service_score": 1.0,
+      "service_label": "pass",
+      "grader_label": "pass",
+      "reasons": []
+     },
+     {
+      "repeat": 2,
+      "run_id": "evalrun_9459493debb54861bf48f9b1a145a844",
+      "service_passed": true,
+      "service_score": 1.0,
+      "service_label": "pass",
+      "grader_label": "pass",
+      "reasons": []
+     },
+     {
+      "repeat": 3,
+      "run_id": "evalrun_7ef09e778b06470880d6fbb27d76b9c1",
+      "service_passed": true,
+      "service_score": 1.0,
+      "service_label": "pass",
+      "grader_label": "pass",
+      "reasons": []
+     }
+    ],
+    "label": "pass",
+    "agreement": "3/3 pass",
+    "label_counts": {
+     "pass": 3
+    },
+    "needs_human_review": false
+   },
+   "mode_matches_expected": {
+    "repeats": [
+     {
+      "repeat": 1,
+      "run_id": "evalrun_ee4db4806a384871a6be5564a164ed33",
+      "service_passed": true,
+      "service_score": 1.0,
+      "service_label": "pass",
+      "grader_label": "pass",
+      "reasons": []
+     },
+     {
+      "repeat": 2,
+      "run_id": "evalrun_9459493debb54861bf48f9b1a145a844",
+      "service_passed": true,
+      "service_score": 1.0,
+      "service_label": "pass",
+      "grader_label": "pass",
+      "reasons": []
+     },
+     {
+      "repeat": 3,
+      "run_id": "evalrun_7ef09e778b06470880d6fbb27d76b9c1",
+      "service_passed": true,
+      "service_score": 1.0,
+      "service_label": "pass",
+      "grader_label": "pass",
+      "reasons": []
+     }
+    ],
+    "label": "pass",
+    "agreement": "3/3 pass",
+    "label_counts": {
+     "pass": 3
+    },
+    "needs_human_review": false
+   },
+   "rationale_grounded": {
+    "repeats": [
+     {
+      "repeat": 1,
+      "run_id": "evalrun_ee4db4806a384871a6be5564a164ed33",
+      "service_passed": true,
+      "service_score": 1.0,
+      "service_label": "pass",
+      "grader_label": "grounded",
+      "reasons": [
+       "The brief attributes that matter for the expected rule are the strict multi-object layout requirements: stage=final, source=pim_image, channel=signage, strict_layout=True, and the prompt\u2019s exact three-bundle left-to-right endcap layout. These support routing to a model optimized for strict layout adherence. The rationale correctly cites the layout constraint that drives the rule.",
+       "The added phrase 'Offering: Global Standard PayGo' is not part of the brief attributes or the expected rule and appears to be an invented or irrelevant requirement for this routing decision. The rationale includes extraneous content beyond the brief-driven rule."
+      ]
+     },
+     {
+      "repeat": 2,
+      "run_id": "evalrun_9459493debb54861bf48f9b1a145a844",
+      "service_passed": true,
+      "service_score": 1.0,
+      "service_label": "pass",
+      "grader_label": "grounded",
+      "reasons": [
+       "The brief attributes emphasize a final-stage signage image source with strict_layout=True and no audio or physical interaction, which directly supports a model suited for strict multi-object layout adherence. The expected rule is grounded in the brief attributes.",
+       "The router rationale cites strict adherence to multi-object / technical layout, which matches the brief prompt's requirement for exactly three bundles left to right and does not rely on the unrelated 'Global Standard PayGo' offer text. The rationale is aligned with the deciding attributes and does not invent a new requirement."
+      ]
+     },
+     {
+      "repeat": 3,
+      "run_id": "evalrun_7ef09e778b06470880d6fbb27d76b9c1",
+      "service_passed": true,
+      "service_score": 1.0,
+      "service_label": "pass",
+      "grader_label": "grounded",
+      "reasons": [
+       "The brief attributes indicate a final-stage signage image with strict_layout=True and a request for exactly three bundles left to right, which is the key cue for a model that follows precise multi-object spatial arrangement. The expected rule is driven by strict multi-object layout adherence.",
+       "The router\u2019s rationale explicitly references strict adherence to multi-object / technical layout and maps that to MiniMax H3 Max, which matches the layout-driven expectation. The extra phrase 'Global Standard PayGo' is an offering detail, not a requirement that changes the routing logic. The rationale cites the correct brief-driven attribute and does not invent a new requirement affecting the decision."
+      ]
+     }
+    ],
+    "label": "grounded",
+    "agreement": "3/3 grounded",
+    "label_counts": {
+     "grounded": 3
+    },
+    "needs_human_review": false
+   },
+   "case": {
+    "rule": "Strict adherence to multi-object layout -> MiniMax H3 Max",
+    "expected_model": "minimax-h3-max",
+    "expected_mode": "image-to-video",
+    "actual_model": "minimax-h3-max",
+    "actual_mode": "image-to-video"
+   }
+  }
+ },
+ "negative_control": {
+  "source_clip": "lto-hero-kling",
+  "reference_sku": "CTP-DRL-20V-BL",
+  "expected_label": "mismatch",
+  "observed": "mismatch",
+  "agreement": "3/3 mismatch",
+  "expected_behavior_met": true
+ },
+ "image_input_spikes": [
+  {
+   "grader_deployment": "brand-qa-vision (gpt-5.4-mini 2026-03-17)",
+   "eval_id": "eval_5b46a97db5884737a8f10fee6ebaf0f2",
+   "run_id": "evalrun_1b8f4d68c60b47b4bb63ba7cbde6dd26",
+   "status": "failed",
+   "error": "Image inputs are not supported for grader model: brand-qa-vision. Try again with a vision model."
+  },
+  {
+   "grader_deployment": "temporary gpt-5-mini 2025-08-07 (custom deployment name, deleted)",
+   "eval_id": "eval_ea6a751601da4effb24298a8d74051d9",
+   "run_id": "evalrun_ef2b2061ab974146a846e17fe533bb02",
+   "status": "failed",
+   "error": "Image inputs are not supported for grader model: <deployment>. Try again with a vision model."
+  },
+  {
+   "grader_deployment": "temporary gpt-5-mini 2025-08-07 (canonical deployment name, deleted)",
+   "eval_id": "eval_f21a5e601de5477b82544c185674de4c",
+   "run_id": "evalrun_0ef8fe50c7e049cb9adc2c26b51d4a3f",
+   "status": "failed",
+   "error": "Image inputs are not supported for grader model: gpt-5-mini. Try again with a vision model."
+  }
+ ],
+ "cost": {
+  "assumed_usd_per_m_input": 1.0,
+  "assumed_usd_per_m_output": 5.0,
+  "input_tokens": 78716,
+  "output_tokens": 18273,
+  "spike_reservation_usd": 0.05,
+  "estimated_usd_this_run": 0.2201,
+  "cap_usd": 5.0,
+  "pre_run_estimate_usd": 0.6522,
+  "as_logged_during_run_usd": 0.347,
+  "correction": "the run-time ledger also summed the duplicate 'azure_ai_evaluation' usage rows; recomputed from model rows only (Stage A + grader model)",
+  "stage_a_tokens": [
+   17537,
+   5130
+  ],
+  "stage_b_tokens": [
+   61179,
+   13143
+  ],
+  "usage_not_reported_by_service": [
+   "audio_signal:evalrun_65fac372081044489028999acea31ae6"
+  ]
+ },
+ "operational_status": "ok",
+ "superseded_audio_runs": {
+  "diagnosis": "The cloud python-grader sandbox passes item values as strings; the first grader compared them numerically (str > float raises TypeError) so every row was rejected as invalid user input. Isolated with zero-token single-row probes; fixed by explicit float/bool coercion.",
+  "runs": [
+   {
+    "eval_id": "eval_59b30a3c55594e8d9db5539d793698a7",
+    "run_id": "evalrun_65fac372081044489028999acea31ae6",
+    "status": "failed",
+    "error": "All examples failed due to invalid user input; please check the individual sample outputs for details."
+   },
+   {
+    "eval_id": "eval_6b8e87f1f2784b4b895f39754d935912",
+    "run_id": "evalrun_8b280b72e49c4b8a8b80ee627651c249",
+    "status": "failed",
+    "error": "All examples failed due to invalid user input; please check the individual sample outputs for details."
+   }
+  ]
+ }
+}

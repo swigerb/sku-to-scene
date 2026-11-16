@@ -33,7 +33,11 @@ brief to the right **fal video model in Microsoft Foundry** — `Kling v3 Pro`, 
 - **Automated QA is a screening aid, not approval.** Recorded verdicts: **2 pass / 6 fail**; every clip still
   needs human sign-off (`publish_approved` is false).
 - **Costs are estimates** (preview list price × requested seconds), not Azure bills.
-- Foundry Evaluations is **not** integrated yet — see the [plan](docs/foundry-evaluations-plan.md).
+- **AI evaluations (Foundry Evals v1) were run** over the cached clips, a negative control and the router's
+  decisions. They use a disclosed two-stage design (vision observations, then cloud text graders), sit next to the
+  original verdicts and never change them. See [Foundry Evaluations](docs/foundry-evaluations-plan.md).
+- **Human review blocks the Northwind hero:** its native café/frothing audio is loud and does not match the
+  picture. Draft concept #2 has no audio track (not requested).
 
 ## The agents
 
@@ -92,7 +96,7 @@ Step-by-step: [foundry-setup](docs/foundry-setup.md). No `FAL_KEY` is used; auth
 | [Governance](docs/governance.md) | fal data handling, fail-closed QA, provenance |
 | [Live validation](docs/live-validation.md) | Measured smoke runs, cache, QA results, spend |
 | [Verification & troubleshooting](docs/verification.md) | Remaining limitations, recovery, bug-report template |
-| [Foundry Evaluations plan](docs/foundry-evaluations-plan.md) | Phased plan (not yet implemented) |
+| [Foundry Evaluations](docs/foundry-evaluations-plan.md) | Executed v1 runs, results, cost, opt-in runner, next phases |
 | [ComfyUI](docs/comfyui.md) | Optional visual track |
 
 ## Sources

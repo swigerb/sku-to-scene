@@ -204,3 +204,24 @@ footer { display: flex; gap: 12px; align-items: center; max-width: 1240px; margi
 }
 
 .card > .pill { align-self: flex-start; justify-self: start; width: fit-content; }
+
+.draft button.choose[aria-pressed="true"] { background: var(--cp-success); border-color: var(--cp-success); color: var(--cp-accent-fg); }
+.draft.dim:hover, .draft.dim:focus-within { opacity: 0.9; }
+.audio-note { font-size: 0.85rem; margin: 0; padding: 6px 8px; border-radius: 0.5rem; background: var(--cp-surface-soft); color: var(--cp-text-muted); }
+.audio-note.none { border-left: 3px solid var(--cp-warning); }
+.audio-note b { color: var(--cp-text); }
+.blocker { margin: 8px 0; padding: 8px 10px; border-left: 4px solid var(--cp-danger); background: var(--cp-surface-soft); border-radius: 0.5rem; font-size: 0.9rem; }
+.method, .why { margin-top: 16px; }
+.method ol, .why ul { margin: 0 0 8px; padding-left: 20px; }
+.method li, .why li { margin: 4px 0; }
+.evals-table td .hint { margin: 2px 0 0; font-size: 0.78rem; }
+.warn-text { color: var(--cp-warning) !important; font-weight: 700; }
+details.card { margin-top: 16px; }
+details.card summary { cursor: pointer; font-weight: 700; }
+.clip-detail { border-top: 1px solid var(--cp-border); padding-top: 8px; margin-top: 8px; }
+.clip-detail h4, .finding h4 { margin: 4px 0; }
+.reps { font-size: 0.82rem; padding-left: 20px; }
+.reps ul { margin: 2px 0 6px; padding-left: 18px; color: var(--cp-text-muted); }
+.findings { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 12px; }
+.finding.blocking { border-left: 4px solid var(--cp-danger); }
+.finding p { margin: 4px 0; }

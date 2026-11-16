@@ -26,8 +26,10 @@ the operational wrapper described below.
     `CONTENT_SAFETY_ENDPOINT` is set, as a pre-publish gate for digital signage.
   - **Vision evaluation:** `qa.py` scores logo integrity, label legibility, product fidelity (against the
     **approved catalog reference image**) and prompt adherence with an Azure OpenAI vision deployment.
-  - **Foundry Evaluations:** not integrated. The current QA calls vision and Content Safety directly; it is not
-    Foundry Evaluations. See the phased [Foundry Evaluations plan](foundry-evaluations-plan.md).
+  - **Foundry Evaluations:** the per-clip QA above calls vision and Content Safety directly; it is not Foundry
+    Evaluations. A separate, opt-in **Foundry Evals v1** run scores the cached clips, a negative control and the
+    routing decisions. It uses a disclosed two-stage design and never changes QA verdicts or approvals. See
+    [Foundry Evaluations](foundry-evaluations-plan.md).
 - **No-spend rehearsal:** `SKU2SCENE_MODE=mock` plus `SKU2SCENE_QA_EVALUATORS=off` makes no generation or QA
   calls; the browser demo makes no cloud calls at all. See [verification.md](verification.md).
 
@@ -53,7 +55,8 @@ Live smoke generation and authenticated downloads were exercised on all five var
 This validates transport, not enterprise compliance. Azure OpenAI vision scoring and Azure AI Content Safety
 were also exercised on sampled authentic frames. VLM scores are AI screening judgments, not ground-truth
 measurements of SKU fidelity; the full clip and its audio still require human review. Content Safety's sampled
-image categories are not a full-video safety guarantee. Foundry Evaluations is still not integrated.
+image categories are not a full-video safety guarantee. Foundry Evals v1 results are AI screening evidence too;
+human review found the Northwind hero's native audio unsuitable (a publication blocker).
 No generated clip is approved for publication.
 
 The manifest also labels a **negative control**: an authentic coffee clip was intentionally screened against

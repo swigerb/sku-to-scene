@@ -39,6 +39,7 @@
       <a href="#scenarios">Scenarios</a>
       <a href="#routing">Routing &amp; cost</a>
       <a href="#qa">QA evidence</a>
+      <a href="#evals">AI evaluations</a>
     </nav>
     <button class="ghost" id="theme-toggle" type="button" aria-label="Toggle light or dark theme">Theme</button>
   </header>
@@ -156,6 +157,16 @@
         </table>
       </div>
       <div class="card neg" id="neg-control"></div>
+      <p class="hint">Why so many fails? See <a href="#evals">AI evaluations</a> for a per-clip explanation and stage-aware re-evaluation.</p>
+    </section>
+
+    <section id="evals" class="panel">
+      <p class="eyebrow">Microsoft Foundry Evaluations</p>
+      <h2>AI evaluations of the cached renders</h2>
+      <p class="lede small">Recorded results from real Foundry Evals runs over the eight cached clips, a negative control and the
+        router's decisions. They are shown next to, not instead of, the original QA verdicts above. This page replays
+        the results; it runs no evaluations.</p>
+      <div id="evals-body"></div>
     </section>
   </main>
 

@@ -30,15 +30,72 @@
   const verdictPill = (v) => h("span", { class: `pill ${v === "pass" ? "pass" : v === "fail" ? "fail" : "warn"}` },
     v === "pass" ? "QA screening: pass" : v === "fail" ? "QA screening: fail" : `QA: ${v || "not evaluated"}`);
 
+  // Presentation-only playback level for the Kling hero: its native track peaks at +2.0 dBTP and a reviewer found
+  // the ambience too loud. This lowers loudness only; the file and its native audio are unchanged.
+  const PRESENTATION_VOLUME = { "lto-hero-kling": 0.5 };
+  let EV = null; // sanitized Foundry Evals results (evaluations/foundry-evals-v1.json)
+  let HR = null; // human-review findings (evaluations/human-review.json)
+
   function video(clip, opts = {}) {
     const el = h("video", {
       src: clip.file, controls: true, playsinline: true, preload: "metadata", loop: opts.loop,
-      muted: !soundOn(), "aria-label": `${clip.model_name} render of ${clip.sku}${clip.concept ? `, ${clip.concept}` : ""}`,
+      "data-clip": clip.id, "data-variant": opts.variant,
+      "aria-label": `${clip.model_name} render of ${clip.sku}${clip.concept ? `, ${clip.concept}` : ""}` +
+        (clip.has_audio ? "" : " (no audio track)"),
     });
     el.muted = !soundOn();
+    if (PRESENTATION_VOLUME[clip.id]) el.volume = PRESENTATION_VOLUME[clip.id];
     return el;
   }
   const soundOn = () => $("#sound") && $("#sound").checked;
+
+  // One player at a time; the Sound toggle and each player's native mute control stay in sync.
+  let syncingMute = false;
+  function setSound(on) {
+    $("#sound").checked = on;
+    syncingMute = true;
+    document.querySelectorAll("video").forEach((v) => { v.muted = !on; });
+    syncingMute = false;
+  }
+  document.addEventListener("play", (e) => {
+    if (!(e.target instanceof HTMLVideoElement)) return;
+    document.querySelectorAll("video").forEach((v) => { if (v !== e.target && !v.paused) v.pause(); });
+  }, true);
+  document.addEventListener("volumechange", (e) => {
+    if (syncingMute || !(e.target instanceof HTMLVideoElement)) return;
+    if (e.target.muted === !soundOn()) return;
+    setSound(!e.target.muted);
+  }, true);
+
+  const evalCheck = (clipId, check) => (EV && EV.media && EV.media[clipId] ? EV.media[clipId].checks[check] : null);
+  const finding = (id) => (HR ? HR.findings.find((f) => f.id === id) : null);
+  const GOOD = new Set(["pass", "match", "consistent", "grounded"]);
+  const SOFT = new Set(["partial", "split"]);
+  function labelPill(label, text, expectedBad) {
+    const cls = expectedBad ? "pass" : GOOD.has(label) ? "pass" : SOFT.has(label) ? "warn" : "fail";
+    return h("span", { class: `pill ${cls}` }, text);
+  }
+  function evalPill(chk, name, expectedBad) {
+    if (!chk) return null;
+    if (!chk.applicable) return h("span", { class: "pill", title: chk.na_reason }, `${name}: N/A`);
+    return labelPill(chk.label, `${name}: ${chk.label} (${chk.agreement})`, expectedBad);
+  }
+
+  function audioNote(c) {
+    const a = evalCheck(c.id, "audio_signal");
+    const m = a && a.measurements;
+    if (!c.has_audio) {
+      return h("p", { class: "audio-note none" }, h("b", {}, "No recorded audio track. "),
+        `Audio was ${String(c.audio || "").startsWith("native") ? "requested" : "not requested"} for this ${c.model_name} render and the file has no audio stream, so the Sound toggle cannot add one.`);
+    }
+    const level = m ? ` ${m.integrated_lufs} LUFS, true peak ${m.true_peak_dbtp > 0 ? "+" : ""}${m.true_peak_dbtp} dBTP.` : "";
+    if (String(c.audio || "").startsWith("native")) {
+      return h("p", { class: "audio-note" }, h("b", {}, "Native audio requested."), level,
+        PRESENTATION_VOLUME[c.id] ? ` Played here at ${PRESENTATION_VOLUME[c.id] * 100}% volume (presentation only; original file unchanged).` : "");
+    }
+    return h("p", { class: "audio-note" }, h("b", {}, "Unrequested model audio track."), level,
+      " Not reviewed for meaning.");
+  }
 
   function kv(rows) {
     return h("dl", { class: "kv" }, rows.filter(Boolean).flatMap(([k, v]) => [h("dt", {}, k), h("dd", {}, v)]));
@@ -64,10 +121,15 @@
     try { localStorage.setItem("s2s-theme", next); } catch (_) { /* storage unavailable */ }
   });
 
-  fetch("data.json").then((r) => {
-    if (!r.ok) throw new Error(`data.json ${r.status}`);
-    return r.json();
-  }).then(init).catch((err) => {
+  const optionalJson = (url) => fetch(url).then((r) => (r.ok ? r.json() : null)).catch(() => null);
+  Promise.all([
+    fetch("data.json").then((r) => {
+      if (!r.ok) throw new Error(`data.json ${r.status}`);
+      return r.json();
+    }),
+    optionalJson("evaluations/foundry-evals-v1.json"),
+    optionalJson("evaluations/human-review.json"),
+  ]).then(([data, ev, hr]) => { EV = ev; HR = hr; init(data); }).catch((err) => {
     $("#main").prepend(h("p", { class: "notice" }, `Could not load demo data (${err.message}).`));
   });
 
@@ -79,9 +141,8 @@
     initScenarios(data, clips, products);
     initRouting(data, modelName);
     initQa(data, clips, products);
-    $("#sound").addEventListener("change", () => {
-      document.querySelectorAll("video").forEach((v) => { v.muted = !soundOn(); });
-    });
+    initEvals(data, clips);
+    $("#sound").addEventListener("change", () => setSound(soundOn()));
   }
 
   // ---------- LTO walkthrough ----------
@@ -116,13 +177,24 @@
     function renderDrafts() {
       $("#drafts").replaceChildren(...lto.drafts.map((id) => {
         const c = clips[id];
+        const v = video(c, { loop: true, variant: c.variant });
+        v.addEventListener("play", () => { if (selected !== c.variant) choose(c.variant, true); });
         return h("article", { class: "card draft vertical", "data-variant": c.variant },
           h("h3", {}, `#${c.variant} · ${c.concept}`),
-          video(c, { loop: true }),
+          v,
           h("p", { class: "meta" }, h("b", {}, c.model_name), ` · ${c.mode} · ${c.aspect_ratio}`),
           h("p", { class: "meta" }, `Recorded: ${secs(c.accepted_to_completed_s)} accepted→completed · est. ${usd(c.estimate_usd)}`),
-          verdictPill(c.qa.verdict),
-          h("button", { type: "button", onclick: () => choose(c.variant, true) }, `Choose concept #${c.variant}`));
+          audioNote(c),
+          c.variant === lto.hero_variant && !c.has_audio && hero.has_audio
+            ? h("p", { class: "hint" }, `The recorded ${hero.model_name} hero for this concept is a separate render that did request native audio.`)
+            : null,
+          h("div", {},
+            verdictPill(c.qa.verdict),
+            evalPill(evalCheck(c.id, "concept_adherence"), "AI eval · concept")),
+          h("p", { class: "hint" }, "Original QA applies final-brand checks to a text-to-video concept, so drafts fail by design. " +
+            "The AI evaluation judges concept adherence instead; see AI evaluations."),
+          h("button", { type: "button", class: "choose", "aria-pressed": "false", onclick: () => choose(c.variant, true) },
+            `Choose concept #${c.variant}`));
       }));
     }
 
@@ -134,6 +206,9 @@
         const on = Number(el.dataset.variant) === variant;
         el.classList.toggle("selected", on);
         el.classList.toggle("dim", !on);
+        const b = el.querySelector("button.choose");
+        b.setAttribute("aria-pressed", String(on));
+        b.textContent = on ? `✓ Concept #${el.dataset.variant} selected` : `Choose concept #${el.dataset.variant}`;
       });
       const concept = lto.concepts[variant - 1];
       log("presenter", `selects concept #${variant} (${concept.title}).`);
@@ -147,6 +222,7 @@
       if (variant === lto.hero_variant) {
         log("@foundry-router", `upgrade → ${hero.model_name} ${hero.mode} from the approved hero image, native audio.`);
         log("@brand-qa", `recorded verdict: ${hero.qa.verdict} (automated screening; human sign-off required).`);
+        const blocker = finding("hero-audio-semantic-mismatch");
         out.className = "hero-out vertical";
         out.replaceChildren(
           h("div", {}, video(hero)),
@@ -155,16 +231,24 @@
             h("h3", {}, `#${variant} · ${hero.concept}`),
             verdictPill(hero.qa.verdict),
             h("span", { class: "pill" }, "Human sign-off required"),
+            h("div", {},
+              evalPill(evalCheck(hero.id, "product_identity"), "AI eval · identity"),
+              evalPill(evalCheck(hero.id, "brand_marks"), "AI eval · brand marks"),
+              evalPill(evalCheck(hero.id, "audio_signal"), "Audio signal")),
+            blocker ? h("div", { class: "blocker", role: "note" },
+              h("b", {}, `Publication blocker (${blocker.source}): `), blocker.observation, " ",
+              h("span", { class: "hint" }, blocker.mitigation_in_demo)) : null,
             kv([
               ["Model", `${hero.model_name} (${hero.mode})`],
               ["Source", "Approved PIM hero image (start frame)"],
-              ["Audio", hero.has_audio ? "Native audio requested; audio stream present" : "No audio stream"],
+              ["Audio", audioNote(hero)],
               ["Recorded latency", `${secs(hero.accepted_to_completed_s)} accepted→completed`],
               ["Estimate", `${usd(hero.estimate_usd)} (preview list price × requested seconds)`],
               ["Request ID", h("span", { class: "mono" }, hero.request_id)],
               ["Rendered", hero.rendered_at],
             ]),
-            h("p", { class: "hint" }, "Turn on Sound above to hear the native audio track. Review the full clip and audio before any approval.")));
+            h("p", { class: "hint" }, "Turn on Sound (or unmute the player) to hear the native track. Signal checks measure loudness and peaks only; " +
+              "whether the sounds match the picture needs a human listener.")));
       } else {
         const concept = lto.concepts[variant - 1];
         log("@foundry-router", `no recorded hero exists for concept #${variant}; nothing is generated in this replay.`);
@@ -231,6 +315,10 @@
               h("div", {}, h("p", { class: "hint" }, "Input"), pim),
               h("div", {}, h("p", { class: "hint" }, "Recorded Foundry render"), video(c))),
             verdictPill(c.qa.verdict),
+            h("div", {},
+              evalPill(evalCheck(c.id, "concept_adherence"), "AI eval · concept"),
+              evalPill(evalCheck(c.id, "product_identity"), "identity"),
+              evalPill(evalCheck(c.id, "brand_marks"), "brand marks")),
             kv([
               ["Model", `${c.model_name} · ${c.mode} · ${c.aspect_ratio}`],
               ["Recorded latency", `${secs(c.accepted_to_completed_s)} accepted→completed`],
@@ -308,5 +396,135 @@
           ["Takeaway", "The evaluator rejected an obvious product mismatch, as expected. This shows the fail path works; it is not a calibration."],
         ]));
     }
+  }
+
+  // ---------- AI evaluations (recorded Foundry Evals runs) ----------
+  const MEDIA_CHECKS = [
+    ["concept_adherence", "Concept adherence", "visual"],
+    ["product_identity", "Product identity", "visual"],
+    ["brand_marks", "Brand marks", "visual"],
+    ["audio_signal", "Audio signal", "audio signal"],
+  ];
+  const WHY_FAIL = {
+    "lto-draft-1": "Concept draft scored against final-brand checks (logo/label/product) it was never meant to meet.",
+    "lto-draft-2": "Concept draft scored against final-brand checks it was never meant to meet.",
+    "lto-draft-3": "Concept draft scored against final-brand checks it was never meant to meet.",
+    "hero-home-kling": "Prompt adherence 0.72 vs 0.75 threshold: job-site scene and tracking motion not clearly shown.",
+    "hero-patio-h3max": "Text-to-video with no PIM input: no FABRIKAM label rendered, so logo and label checks score 0.",
+    "hero-grocery-turbo": "Genuine product failure: the bundle omits the thermometer and honey from the approved PIM image.",
+  };
+
+  function repeatsDetail(chk) {
+    const reps = chk.repeats || chk.cloud || [];
+    return h("ol", { class: "reps" }, reps.map((r) => h("li", {},
+      h("span", { class: "mono" }, r.run_id), " · grader ", h("b", {}, r.grader_label || "n/a"),
+      ` · service ${r.service_label} (score ${r.service_score})`,
+      r.reasons && r.reasons.length ? h("ul", {}, r.reasons.map((t) => h("li", {}, t))) : null)));
+  }
+
+  function initEvals(data, clips) {
+    const root = $("#evals-body");
+    if (!EV) {
+      root.replaceChildren(h("p", { class: "notice" }, "Evaluation results are not available in this build."));
+      return;
+    }
+    const totalRuns = Object.values(EV.runs).reduce((n, r) => n + r.runs.length, 0);
+    const completed = Object.values(EV.runs).reduce((n, r) => n + r.runs.filter((x) => x.status === "completed").length, 0);
+    const neg = EV.negative_control;
+    root.replaceChildren(
+      h("div", { class: "qa-summary" },
+        h("div", { class: "stat" }, h("b", {}, `${completed} / ${totalRuns}`),
+          `Foundry Evals runs completed (+${EV.superseded_audio_runs.runs.length} failed audio runs superseded)`),
+        h("div", { class: "stat" }, h("b", {}, `${EV.repeats}×`), "repeats per check"),
+        h("div", { class: "stat" }, h("b", {}, neg.expected_behavior_met ? "rejected" : "MISSED"), `negative control (${neg.agreement})`),
+        h("div", { class: "stat" }, h("b", {}, usd(EV.cost.estimated_usd_this_run)), `estimated spend (cap ${usd(EV.cost.cap_usd)})`)),
+
+      h("div", { class: "card method" },
+        h("h3", {}, "How these evaluations work"),
+        h("ol", {},
+          h("li", {}, h("b", {}, "Stage A, vision observation: "), `the brand-qa-vision deployment describes ${EV.frames_per_clip} sampled frames per clip next to the approved PIM reference. It writes neutral observations, not scores.`),
+          h("li", {}, h("b", {}, "Stage B, Foundry Evals: "), "text graders in Microsoft Foundry score those observations against stage-aware rubrics, three repeats each. Routing decisions are evaluated separately, and a Python grader checks audio signal measurements."),
+          h("li", {}, h("b", {}, "Why two stages: "), `${EV.image_input_spikes.length} native image-input grader spikes were rejected by the service ("${EV.image_input_spikes[0].error}"). Visual checks therefore depend on Stage A's text observations and can miss details a direct visual judge would catch.`)),
+        h("p", { class: "hint" }, "Scope: visual checks judge frames, not motion or full clips. The audio check measures stream, loudness and true peak only; " +
+          "it cannot tell whether sounds match the picture. None of this replaces human review, and none of it changes the original QA verdicts.")),
+
+      h("div", { class: "card why" },
+        h("h3", {}, "Why does the original QA show so many fails?"),
+        h("p", {}, "The original @brand-qa screen applies one set of final-brand thresholds to every clip. Six of eight fail, for different reasons:"),
+        h("ul", {}, Object.entries(WHY_FAIL).map(([id, why]) => h("li", {}, h("b", {}, clips[id] ? (clips[id].concept || id) : id), `: ${why}`))),
+        h("p", { class: "hint" }, "The AI evaluations below separate concept adherence from final-brand fidelity and mark checks that do not apply as N/A. " +
+          "Concept adherence is 'partial' for all eight clips: the Foundry Evals service reports any non-passing label as 'fail' (score 0), so the grader's own label is shown here, with the service label alongside.")),
+
+      h("div", { class: "table-wrap" },
+        h("table", { class: "evals-table" },
+          h("caption", {}, "Media checks: grader label (agreement across repeats). Hover N/A for the reason."),
+          h("thead", {}, h("tr", {}, h("th", { scope: "col" }, "Clip"), h("th", { scope: "col" }, "Stage"),
+            MEDIA_CHECKS.map(([, name, scope]) => h("th", { scope: "col" }, name, h("div", { class: "hint" }, scope))))),
+          h("tbody", {}, Object.entries(EV.media).map(([id, m]) => h("tr", {},
+            h("th", { scope: "row" }, id, h("div", { class: "hint" }, clips[id] ? (clips[id].concept || clips[id].sku) : "cold brew frames vs drill reference")),
+            h("td", {}, m.stage),
+            MEDIA_CHECKS.map(([key]) => {
+              const chk = m.checks[key];
+              if (!chk) return h("td", {}, "n/a");
+              const expectedBad = id === "negative-control" && key === "product_identity" && chk.label === "mismatch";
+              if (!chk.applicable) return h("td", {}, h("span", { class: "pill" }, "N/A"), h("div", { class: "hint" }, chk.na_reason));
+              const svc = [...new Set((chk.repeats || chk.cloud || []).map((r) => r.service_label))];
+              return h("td", {}, labelPill(chk.label, `${chk.label} (${chk.agreement})`, expectedBad),
+                svc.length && svc.join() !== chk.label ? h("div", { class: "hint" }, `service label: ${svc.join("/")}`) : null,
+                chk.needs_human_review ? h("div", { class: "hint warn-text" }, "Needs human review") : null,
+                expectedBad ? h("div", { class: "hint" }, "Expected: control rejected") : null);
+            })))))),
+
+      h("details", { class: "card" },
+        h("summary", {}, "Per-check reasons, observations and run IDs"),
+        Object.entries(EV.media).map(([id, m]) => h("div", { class: "clip-detail" },
+          h("h4", {}, id),
+          m.observation ? h("p", { class: "hint" }, h("b", {}, "Stage A observation: "), m.observation.scene_summary, " ", m.observation.comparison_notes) : null,
+          MEDIA_CHECKS.filter(([key]) => m.checks[key] && m.checks[key].applicable).map(([key, name]) => {
+            const chk = m.checks[key];
+            return h("div", {}, h("b", {}, `${name}: ${chk.label} (${chk.agreement})`),
+              chk.scope ? h("span", { class: "hint" }, ` · ${chk.scope}`) : null,
+              chk.local ? h("p", { class: "hint" }, `Local ffmpeg check: ${chk.local.label}${chk.local.reasons.length ? ` (${chk.local.reasons.join("; ")})` : ""}`) : null,
+              repeatsDetail(chk));
+          })))),
+
+      h("h3", { class: "sub" }, "Routing evaluation (@foundry-router)"),
+      h("div", { class: "table-wrap" },
+        h("table", {},
+          h("caption", {}, "Recorded routing decisions vs expected rules"),
+          h("thead", {}, h("tr", {}, ["Case", "Rule", "Expected", "Actual", "Model", "Mode", "Rationale grounded"].map((t) => h("th", { scope: "col" }, t)))),
+          h("tbody", {}, Object.entries(EV.routing).map(([id, r]) => h("tr", {},
+            h("th", { scope: "row" }, id), h("td", {}, r.case.rule),
+            h("td", {}, `${r.case.expected_model} · ${r.case.expected_mode}`),
+            h("td", {}, `${r.case.actual_model} · ${r.case.actual_mode}`),
+            ["model_matches_expected", "mode_matches_expected", "rationale_grounded"].map((k) =>
+              h("td", {}, labelPill(r[k].label, `${r[k].label} (${r[k].agreement})`)))))))),
+
+      HR ? h("div", {},
+        h("h3", { class: "sub" }, "Human review findings"),
+        h("div", { class: "findings" }, HR.findings.map((f) => h("article", { class: `card finding ${f.severity === "publication blocker" ? "blocking" : ""}` },
+          h("p", { class: "eyebrow" }, `${f.severity} · ${f.status}`),
+          h("h4", {}, f.clip || f.case),
+          h("p", {}, f.observation),
+          f.measured_signal ? h("p", { class: "hint" }, f.measured_signal) : null,
+          f.handling || f.mitigation_in_demo ? h("p", { class: "hint" }, f.handling || f.mitigation_in_demo) : null,
+          h("p", { class: "hint" }, `Source: ${f.source}`))))) : null,
+
+      h("details", { class: "card" },
+        h("summary", {}, "Run evidence, versions and cost"),
+        h("div", { class: "table-wrap" }, h("table", {},
+          h("thead", {}, h("tr", {}, ["Eval", "Eval ID", "Dataset", "Run ID", "Status", "Passed / total"].map((t) => h("th", { scope: "col" }, t)))),
+          h("tbody", {}, Object.entries(EV.runs).flatMap(([name, r]) => r.runs.map((x) => h("tr", {},
+            h("td", {}, name), h("td", { class: "mono" }, r.eval_id), h("td", {}, `${r.dataset.kind}, ${r.dataset.rows} rows`),
+            h("td", { class: "mono" }, x.run_id), h("td", {}, x.status),
+            h("td", {}, x.result_counts ? `${x.result_counts.passed} / ${x.result_counts.total}` : "n/a"))))))),
+        kv([
+          ["Grader model", EV.grader_model.join(", ")],
+          ["Versions", Object.entries(EV.versions).map(([k, v]) => `${k}=${v}`).join(" · ")],
+          ["Hashes", h("span", { class: "mono" }, Object.entries(EV.hashes).filter(([k]) => k !== "note").map(([k, v]) => `${k}: ${v}`).join(" · "))],
+          ["Cost", `${usd(EV.cost.estimated_usd_this_run)} estimated (${EV.cost.input_tokens.toLocaleString()} input + ${EV.cost.output_tokens.toLocaleString()} output tokens at an assumed $${EV.cost.assumed_usd_per_m_input}/M input, $${EV.cost.assumed_usd_per_m_output}/M output, plus a ${usd(EV.cost.spike_reservation_usd)} spike reservation). ${EV.cost.correction}`],
+          ["Superseded audio runs", `${EV.superseded_audio_runs.runs.length} failed runs kept as evidence. ${EV.superseded_audio_runs.diagnosis}`],
+          ["Recorded", EV.created_at],
+        ])));
   }
 })();

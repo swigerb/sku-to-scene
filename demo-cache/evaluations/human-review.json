@@ -1,0 +1,57 @@
+{
+ "schema": "sku2scene.human-review.v1",
+ "note": "Human findings and evaluator conflicts that automated checks must not resolve on their own. Nothing here changes the historical QA verdicts in demo-cache/manifest.json or the catalog.",
+ "findings": [
+  {
+   "id": "hero-audio-semantic-mismatch",
+   "clip": "lto-hero-kling",
+   "source": "human review (presenter, browser playback)",
+   "severity": "publication blocker",
+   "status": "open",
+   "observation": "Coffee-shop ambience is very loud and the frothing sound does not match what is on screen.",
+   "measured_signal": "Integrated -24.6 LUFS, true peak +2.0 dBTP: the audio-signal-v1 check fails on clipping risk (both the local ffmpeg check and the Foundry Evals Python grader). Signal checks cannot judge whether sounds match the picture.",
+   "mitigation_in_demo": "The browser demo plays this clip at 50% volume and labels it. That reduces loudness only; it does not fix the mismatch. The original native-audio file is unchanged.",
+   "resolution_options": [
+    "Re-render with explicit audio cues (no frothing; low cafe ambience) under a live, cost-capped, human-approved run.",
+    "Replace the track in post-production with licensed or approved audio, keeping the native original as evidence.",
+    "Publish without audio."
+   ]
+  },
+  {
+   "id": "draft-2-no-audio",
+   "clip": "lto-draft-2",
+   "source": "manifest + ffprobe",
+   "severity": "informational",
+   "status": "explained",
+   "observation": "Concept #2 is silent because the file has no audio stream. Audio was not requested for this LTX-2.5 Fast draft and source_media.has_audio=false. The Sound toggle cannot add a track. Only the Kling v3 Pro hero requested native audio.",
+   "note": "The MiniMax H3 Max Turbo drafts (#1, #3) contain audio the brief did not request. Draft #3 is very quiet (-42.8 LUFS)."
+  },
+  {
+   "id": "drill-reference-vs-brand-rule",
+   "clip": "hero-home-kling",
+   "source": "Foundry Evals brand_marks (3 repeats) + human check of the approved PIM image",
+   "severity": "needs human decision",
+   "status": "open",
+   "observation": "The grader answered violation, consistent, consistent. The violation cites the catalog rule 'CONTOSO PRO wordmark on yellow housing', but the approved drill PIM image is black/teal. The reference image and the written brand rule conflict.",
+   "handling": "Shown as 'split', not majority-voted into approval. The historical catalog is unchanged. A brand owner must decide which source is authoritative."
+  },
+  {
+   "id": "grocery-qa-vs-eval-disagreement",
+   "clip": "hero-grocery-turbo",
+   "source": "original @brand-qa (direct vision) vs Foundry Evals product_identity (two-stage)",
+   "severity": "needs human decision",
+   "status": "open",
+   "observation": "Original QA scored product fidelity 0.18 (fail). The two-stage evaluation judged identity 'match' 3/3 from text observations. Text observations can miss visual detail that direct frame scoring caught, or the original score may be too strict.",
+   "handling": "Neither verdict overrides the other. Review the full clip against the reference image."
+  },
+  {
+   "id": "grocery-routing-rationale-grader",
+   "case": "grocery-endcap",
+   "source": "Foundry Evals routing rationale_grounded (3 repeats)",
+   "severity": "grader calibration",
+   "status": "open",
+   "observation": "Model and mode were correct in 3/3 repeats (MiniMax H3 Max Turbo, image-to-video). The rationale grader marked 2/3 'ungrounded' for phrases like 'per-SKU personalization viable' and offering context, although the high-volume rule is correct.",
+   "handling": "Treated as a grader-calibration finding, not a routing defect. No router change."
+  }
+ ]
+}

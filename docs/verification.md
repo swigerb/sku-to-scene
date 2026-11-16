@@ -40,7 +40,7 @@ versioned with the repository. For a cached clip's recorded verdict, use that cl
 
 Applicability: the patio product has no PIM image and no visible logo, so logo/label checks score 0. The
 current rubric treats that as a fail (fail-closed). Do not lower thresholds or rewrite the manifest to change
-it; a future versioned rubric can mark checks as not applicable (see
+it; the Foundry Evals v1 rubric marks such checks N/A with a reason, without changing the original verdict (see
 [foundry-evaluations-plan.md](foundry-evaluations-plan.md)).
 
 ## Verifying what automation cannot
@@ -51,6 +51,18 @@ it; a future versioned rubric can mark checks as not applicable (see
 2. **Audio semantics and sync.** The manifest proves only that an audio stream exists (`media.has_audio`).
    Listen with headphones: does the sound match the brief (ice, pour, ambience), is it in sync, is there speech
    or music you did not ask for? Check the stream with `ffprobe -hide_banner demo-cache\lto-hero-kling.mp4`.
+   Recorded measurements (`ffmpeg -af ebur128=peak=true`, signal only, not meaning):
+
+   | Clip | Audio | Integrated | True peak | Finding |
+   | --- | --- | --- | --- | --- |
+   | `lto-hero-kling` | requested, mono AAC | −24.6 LUFS | +2.0 dBTP | **Publication blocker (human):** loud café ambience, frothing does not match the picture; clipping risk |
+   | `lto-draft-1` | not requested, present | −25.6 LUFS | −11.6 dBTP | Unreviewed model audio |
+   | `lto-draft-2` | not requested, **no stream** | — | — | Silence is the file, not the Sound toggle |
+   | `lto-draft-3` | not requested, present | −42.8 LUFS | −24.5 dBTP | Very quiet, unreviewed |
+
+   The browser demo plays the hero at 50% volume. That is mitigation only and does not fix the mismatch.
+   Fixing it requires one of: a re-render with a revised audio cue, a reviewed edited mix (keeping the native
+   original, labelled), or publishing without audio. Each needs human sign-off.
 3. **Content Safety coverage.** Severities cover sampled frames and image categories only, not audio or every
    frame. Treat zero severity as "nothing found in samples", not a full-video guarantee.
 4. **ComfyUI.** The nodes have been exercised only by direct Python calls in mock mode. Safe offline check

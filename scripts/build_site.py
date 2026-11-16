@@ -1,7 +1,8 @@
 """Build the static browser demo into a curated directory (default: _site/) for GitHub Pages.
 
 Only an explicit allowlist is published: the site shell (site/), brand marks (assets/brand), approved product
-images (assets/products), the cached authentic Foundry renders (demo-cache/*.mp4) and a data.json derived from
+images (assets/products), the cached authentic Foundry renders (demo-cache/*.mp4), sanitized evaluation results
+(demo-cache/evaluations/) and a data.json derived from
 public repo data (demo-cache/manifest.json, catalog/, briefs/, model registry). The repo root, .env, .sku2scene/
 run outputs and anything else are never copied. The page makes no cloud calls.
 
@@ -23,6 +24,8 @@ from sku_to_scene import models  # noqa: E402
 from sku_to_scene.lto import CONCEPTS  # noqa: E402
 
 ALLOWED_SUFFIXES = {".html", ".css", ".js", ".json", ".png", ".mp4", ".nojekyll"}
+# Sanitized Foundry Evals results and human-review findings (written by scripts/run_foundry_evals.py / by hand).
+EVAL_FILES = ("foundry-evals-v1.json", "human-review.json")
 SCENARIOS = [
     {"vertical": "apparel", "title": "Apparel & Home Decor", "accounts": "Gap, TJX, Target, Costco",
      "use_case": "PDP image-to-video lookbook: animate the approved studio shot with fabric movement.",
@@ -158,6 +161,12 @@ def build(out: Path) -> Path:
     data = build_data()
     for c in data["clips"]:
         shutil.copy2(REPO / "demo-cache" / Path(c["file"]).name, out / c["file"])
+    (out / "evaluations").mkdir()
+    for name in EVAL_FILES:
+        src = REPO / "demo-cache" / "evaluations" / name
+        doc = json.loads(src.read_text(encoding="utf-8"))
+        (out / "evaluations" / name).write_text(json.dumps(doc, separators=(",", ":"), allow_nan=False),
+                                                 encoding="utf-8")
     (out / "data.json").write_text(json.dumps(data, indent=1), encoding="utf-8")
     (out / ".nojekyll").write_text("", encoding="utf-8")
     verify(out)
