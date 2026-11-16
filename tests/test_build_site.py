@@ -102,7 +102,15 @@ def test_site_artifact_is_curated_and_truthful(tmp_path):
     for name in ("foundry-evals-v1.json", "human-review.json"):
         assert json.loads((out / "evaluations" / name).read_text(encoding="utf-8"))
     assert len(data["clips"]) >= 8
-    assert all((out / c["file"]).is_file() for c in data["clips"])
+    for c in data["clips"]:
+        if c["withheld_reason"]:
+            assert c["file"] is None and c["original_file"] is None, c["id"]
+            assert not list((out / "media").glob(f"{c['id']}.*")), f"withheld media {c['id']} was published"
+        else:
+            assert (out / c["file"]).is_file(), c["id"]
+    for a in data["accounts"]:
+        played = data["clips"][[c["id"] for c in data["clips"]].index(a["recorded_clip"])]
+        assert played["file"] and not played["withheld_reason"], f"{a['id']} has no playable example"
     hero = next(c for c in data["clips"] if c["id"] == data["lto"]["hero_clip"])
     # Only the recorded variant may claim a hero render.
     assert data["lto"]["hero_variant"] == hero["variant"] == 2

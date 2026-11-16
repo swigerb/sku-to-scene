@@ -219,6 +219,10 @@ setImmediate(() => {
   assert.match(status(), /Step 2 of 5/);
   assert.equal(cards().length, 3);
   assert.ok(noWithheldPlayers(stage), "withheld account attempts are not guided preview players");
+  for (const a of input.data.accounts.filter((x) => x.area === "qsr" && x.id !== "northwind")) {
+    assert.ok(stage.querySelectorAll("article").some((c) => c.dataset.account === a.id && !c.dataset.learning && c.querySelector("video")),
+      `QSR: ${a.fictional_brand} has a playable recorded example`);
+  }
   assert.ok(cards().every((c) => pills(c).length === 1 && /sign-off required|blocked|decision|Awaiting human review/.test(text(pills(c)[0]))),
     "each visible draft shows its publication readiness outside Inspect evidence");
   assert.equal(selectButtons().length, 0, "the compare step offers no selection");
@@ -325,6 +329,13 @@ setImmediate(() => {
     accounts.forEach((a) => assert.ok(text(stage).includes(a.fictional_brand) && text(stage).includes(a.real_company), a.id));
     next.click();
     assert.ok(noWithheldPlayers(stage), `${area}: withheld attempts remain evidence, not previews`);
+    const areaCards = stage.querySelectorAll("article").filter((c) => c.dataset.account);
+    accounts.forEach((a) => assert.ok(areaCards.some((c) => c.dataset.account === a.id && !c.dataset.learning && c.querySelector("video")),
+      `${area}: ${a.fictional_brand} has a playable recorded example`));
+    areaCards.filter((c) => c.dataset.learning).forEach((c) => {
+      assert.match(text(c), /QA learning example — failed screening; not approved/);
+      assert.match(text(c), /Automated screening: did not pass/);
+    });
     const example = stage.querySelector("video");
     example.play();
     assert.equal(next.disabled, false);

@@ -1,6 +1,46 @@
 {
-  "sku_id": "CCM-MEAL-01", "brand": "coho-corner", "stage": "draft", "source": "text",
-  "channel": "tiktok", "duration": 6,
+  "sku_id": "CCM-MEAL-01",
+  "brand": "coho-corner",
+  "stage": "draft",
+  "source": "text",
+  "channel": "tiktok",
+  "duration": 6,
   "reroll_prompt": "Silent fictional retail-food concept, six seconds, vertical. Extreme clarity on one UNWRAPPED toasted sandwich with visible bread and filling, held by plain metal tongs above a completely blank kraft paper bag. A pair of gloved hands lowers the sandwich into the bag at a simple plum-and-cream counter under warm night lighting. Only hands and food, no people visible. Every surface and paper item is entirely blank. NO stickers, wrappers, product labels, printed markings, logos, letters, numbers, menus, signs, UI, badges, symbols, mascots, prices, real trade dress or soundtrack.",
-  "prompt": "Silent fictional convenience-store concept, six seconds. A hot grab-and-go food parcel is lifted with tongs from a clean heated case into a plain kraft bag with plum-and-cream accents, then handed across a bright counter to gloved courier hands at night. Frame hands only. Plain neutral store interior. No writing on the bag or store. No logos, signage, text, prices, phone UI, mascots, slogans, faces in close-up, striped store livery or real trade dress. No soundtrack."
+  "prompt": "Silent fictional convenience-store concept, six seconds. A hot grab-and-go food parcel is lifted with tongs from a clean heated case into a plain kraft bag with plum-and-cream accents, then handed across a bright counter to gloved courier hands at night. Frame hands only. Plain neutral store interior. No writing on the bag or store. No logos, signage, text, prices, phone UI, mascots, slogans, faces in close-up, striped store livery or real trade dress. No soundtrack.",
+  "brief_version": 5,
+  "simplified_prompt": "Silent fictional convenience-food concept, six seconds, vertical. One freshly toasted hot sandwich, cut in half to show its filling, rests on a small square of plain cream paper on a smooth cream counter. Beside it stands an upright plain kraft paper bag: only its folded top edge is solid plum; the rest of the bag is uniform plain kraft paper with no patch, panel, window, sticker, tag or label of any kind. Soft steam rises. Behind them is only a smooth, softly blurred deep-plum backdrop. Warm evening light, gentle slow push-in. No utensils. Every surface is completely blank: no writing, letters, numbers, stickers, labels, barcodes, logos, symbols, signage, prices, phone UI, mascots, slogans or real trade dress. No people, hands or faces. No soundtrack.",
+  "prompt_history": [
+    {
+      "version": 1,
+      "prompt_key": "prompt",
+      "clip": "account-coho-draft"
+    },
+    {
+      "version": 2,
+      "prompt_key": "reroll_prompt",
+      "clip": "account-coho-draft-r1"
+    },
+    {
+      "version": 3,
+      "prompt_key": "simplified_prompt",
+      "clip": "account-coho-draft-s1",
+      "reason": "Simplified one-shot product scene with gentle camera movement, fewer objects and no hands, handoffs or text-bearing store environments. v1 showed a printed sticker on the parcel; v2 handled food with tongs and gloved hands and drew a Content Safety Violence severity 2 flag.",
+      "prompt": "Silent fictional convenience-food concept, six seconds, vertical. One freshly toasted hot sandwich, cut in half to show its filling, rests on a small sheet of plain cream paper next to an upright plain kraft paper bag with a plum folded top, on a clean cream counter. Soft steam rises. Warm evening light with a dark softly blurred background. Gentle slow push-in. No tongs, utensils, food case, store interior or stripes. Every surface is completely blank: no writing, letters, numbers, stickers, labels, barcodes, logos, symbols, signage, prices, phone UI, mascots, slogans or real trade dress. No people, hands or faces. No soundtrack.",
+      "superseded": true
+    },
+    {
+      "version": 4,
+      "prompt_key": "simplified_prompt",
+      "clip": "account-coho-draft-s2",
+      "reason": "Refined simplified scene with explicit brand-palette accents and fewer staging objects. s1 (simplified v3) was safe and text-free but failed prompt adherence 0.18: no plum accent and a kitchen-like background.",
+      "prompt": "Silent fictional convenience-food concept, six seconds, vertical. One freshly toasted hot sandwich, cut in half to show its filling, rests on a small square of plain cream paper on a smooth cream counter. Beside it stands an upright plain kraft paper bag whose folded top is wrapped in a solid plum paper band. Soft steam rises. Behind them is only a smooth, softly blurred deep-plum backdrop: no kitchen, sinks, faucets, equipment, tiles, shelves, food case or store interior. Warm evening light, gentle slow push-in. No tongs or utensils. Every surface is completely blank: no writing, letters, numbers, stickers, labels, barcodes, logos, symbols, signage, prices, phone UI, mascots, slogans or real trade dress. No people, hands or faces. No soundtrack.",
+      "superseded": true
+    },
+    {
+      "version": 5,
+      "prompt_key": "simplified_prompt",
+      "clip": "account-coho-draft-s3",
+      "reason": "Final targeted simplified retry. s2 (v4) matched the plum palette and backdrop but QA failed label legibility 0.08 and fidelity 0.78 because of a blank plum patch on the bag."
+    }
+  ]
 }

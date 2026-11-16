@@ -157,8 +157,20 @@ def build_data() -> dict:
         for a in accounts
         for e in a.get("excluded_clips", [])
     }
+    learning = {
+        e["id"]: e["note"]
+        for a in accounts
+        for e in a.get("learning_clips", [])
+    }
     for c in clips:
         c["withheld_reason"] = exclusions.get(c["id"])
+        c["learning_note"] = learning.get(c["id"])
+        if c["withheld_reason"]:
+            # Withheld attempts stay as screening evidence only; their media is never published.
+            c["file"] = None
+            c["original_file"] = None
+    if set(learning) & set(exclusions):
+        raise SystemExit("a withheld clip cannot also be a learning example")
 
     drafts = [ids[f"lto-draft-{i}"] for i in (1, 2, 3)]
     for i, d in enumerate(drafts, start=1):
@@ -177,6 +189,13 @@ def build_data() -> dict:
         if selected in ids and selected not in excluded:
             a["draft_clips"] = [selected]
             a["recorded_clip"] = selected
+        elif selected and a["planned_clip"]:
+            raise SystemExit(f"{a['id']}: selected example {selected} is missing or withheld")
+        for e in a.get("learning_clips", []):
+            if e["id"] not in ids or ids[e["id"]]["account"] != a["id"] or e["id"] == selected:
+                raise SystemExit(f"{a['id']}: invalid learning example {e['id']}")
+            if ids[e["id"]]["qa"]["verdict"] == "pass":
+                raise SystemExit(f"{e['id']}: a passing clip is not a QA learning example")
         a["brief"] = None
         if a["brief_file"]:
             doc = json.loads((REPO / "briefs" / a["brief_file"]).read_text(encoding="utf-8"))
@@ -233,6 +252,8 @@ def build(out: Path) -> Path:
         shutil.copy2(f, out / "products" / f.name)
     data = build_data()
     for c in data["clips"]:
+        if not c["file"]:
+            continue
         shutil.copy2(REPO / "demo-cache" / Path(c["file"]).name, out / c["file"])
         if c["original_file"]:
             shutil.copy2(REPO / "demo-cache" / Path(c["original_file"]).name, out / c["original_file"])

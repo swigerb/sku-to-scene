@@ -24,25 +24,25 @@ The gallery lists every account in its area. The sun/moon control explicitly cho
 | Area / fictional example | Representative account | Presenter talk track |
 | --- | --- | --- |
 | QSR · Northwind Coffee | Starbucks | Seasonal launch: compare the original three drafts; explicitly select #2, then discuss the unresolved native-audio blocker. |
-| QSR · Tailspin Burger Co. | McDonald's | Value-bundle brief for vertical social; LTX-2.5 Fast is routed for fast silent iteration. No recording yet. |
-| QSR · Coho Corner Market | 7-Eleven | Fresh grab-and-go brief; MiniMax H3 Max Turbo keeps local promo volume affordable. No recording yet. |
+| QSR · Tailspin Burger Co. | McDonald's | Value-bundle meal on vertical social; LTX-2.5 Fast iterates quickly. Show the simplified pass, then the earlier two-box learning example. |
+| QSR · Coho Corner Market | 7-Eleven | Fresh grab-and-go on Turbo for local volume. Third simplified brief passed; two safe misses are learning examples, two attempts withheld. |
 | Apparel · Fabrikam | Gap | The existing approved-image jacket lookbook anchors product-led storytelling; screening pass is not approval. |
-| Apparel · VanArsdel Finds | TJX | Treasure-hunt newness: short discovery videos for a frequently changing assortment. No recording yet. |
-| Apparel · Tailwind Traders | Target | Owned-brand home-decor newness for in-store screens and retail media. No recording yet. |
-| Apparel · Wide World Wholesale | Costco | Club-pack private-label value on member-first media. No recording yet. |
+| Apparel · VanArsdel Finds | TJX | Treasure-hunt newness: short discovery videos for a changing assortment. Silent draft passed screening; awaiting human review. |
+| Apparel · Tailwind Traders | Target | Owned-brand home-decor newness for screens and retail media. Screening passed; read the reviewer note on wall marks. |
+| Apparel · Wide World Wholesale | Costco | Club-pack private-label value on member media. Screening passed; reviewer note flags carton/shelf markings; re-roll withheld. |
 | Home · Alpine Pro Supply | The Home Depot | The existing Contoso Pro drill render explores professional product context; show its prompt-adherence failure. |
 | Home · Zava DIY | Lowe's | The existing Fabrikam Home patio preview tests layout constraints, not approved PIM fidelity. |
-| Home · Southridge Electronics | Best Buy | Litware Ultrabook 14 brief explains why H3 Max is routed for strict placement. No recording yet. |
-| Home · Proseware Workplace Supply | Staples | Small-business workspace kit with explicit left-to-right layout on H3 Max. No recording yet. |
+| Home · Southridge Electronics | Best Buy | Litware Ultrabook 14 on H3 Max for strict placement. Screening passed; reviewer note: items appear out of order. |
+| Home · Proseware Workplace Supply | Staples | Strict four-item layout on H3 Max. Be candid: the best attempt still fails fidelity (0.72); three attempts withheld. A human decides. |
 | Grocery · Woodgrove Wellness | Walgreens | An existing wellness-bundle screen is calm and educational, with no medical claims; show its missing-product findings. |
-| Grocery · Best For You Market | Kroger | Private-label holiday meal prep for the weekly circular, routed to Turbo for volume. No recording yet. |
-| Grocery · Munson's Markets | Albertsons | Multi-banner localized weekly deal; no identity or loyalty data is used. No recording yet. |
+| Grocery · Best For You Market | Kroger | Private-label holiday meal prep on Turbo. The re-roll passed; the first attempt is withheld (Content Safety flag). Reviewer note: utensils. |
+| Grocery · Munson's Markets | Albertsons | Localized weekly deal; no identity or loyalty data. Simplified basket passed; the tinted-bottle re-roll is a learning example. |
 
 Sources, publication/access dates, briefs, model choices and list-price estimates are in
-[`catalog/accounts.json`](../catalog/accounts.json). The nine new examples are planned silent drafts that have
-not been generated; say "brief only" and never show another clip in their place. Once recorded they will be
-preview-only and **Awaiting human review — not approved**, and **Not yet evaluated** until a separate
-Foundry Evaluations run covers them. The original **2/8 screening pass rate**, coffee-hero sound mismatch
+[`catalog/accounts.json`](../catalog/accounts.json). Every account plays a recorded example. The nine new
+examples are silent exploratory drafts: preview-only, **Awaiting human review — not approved**, and **Not yet
+evaluated** by Foundry Evaluations. Say so, and point to the QA learning examples as the gate working, not as
+content. Withheld attempts are evidence only ([verification](verification.md#account-drafts)). The original **2/8 screening pass rate**, coffee-hero sound mismatch
 and silent concept #2 remain visible.
 
 Fictional brands and products. Real company names identify representative retail segments and cite public

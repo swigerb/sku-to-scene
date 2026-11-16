@@ -63,11 +63,48 @@ def test_original_qa_and_evaluations_are_immutable():
         assert hashlib.sha256(raw).hexdigest() == expected
 
 
-def test_new_account_drafts_are_planned_not_published_before_research():
+def test_every_account_resolves_to_playable_media_with_honest_qa():
     manifest = json.loads((REPO / "demo-cache" / "manifest.json").read_text())
-    ids = {c["id"] for c in manifest["clips"]}
-    assert len(manifest["clips"]) == 8
-    planned = [a["planned_clip"] for a in accounts() if a["planned_clip"]]
-    assert len(planned) == 9
-    assert not ids & set(planned)
-    assert not list((REPO / "demo-cache").glob("account-*.mp4"))
+    clips = {c["id"]: c for c in manifest["clips"]}
+    assert len(clips) == len(manifest["clips"]), "manifest IDs are unique (append-only)"
+    for a in accounts():
+        chosen = a.get("replacement_clip") or a["planned_clip"] or a["recorded_clip"]
+        assert chosen in clips, f"{a['id']} has no recorded example"
+        assert (REPO / "demo-cache" / clips[chosen]["file"]).is_file(), chosen
+        excluded = {e["id"] for e in a.get("excluded_clips", [])}
+        assert chosen not in excluded
+        for e in a.get("excluded_clips", []):
+            assert e["id"] in clips and e["reason"], e
+            assert not (REPO / "demo-cache" / clips[e["id"]]["file"]).exists(), f"withheld media {e['id']} is in the repo"
+        for e in a.get("learning_clips", []):
+            c = clips[e["id"]]
+            assert c["qa"]["verdict"] == "fail" and e["note"], e["id"]
+            assert e["id"] not in excluded and e["id"] != chosen
+            assert (REPO / "demo-cache" / c["file"]).is_file()
+        if a["planned_clip"]:
+            c = clips[chosen]
+            assert c["account"] == a["id"] and c["stage"] == "draft"
+            assert c["hero_eligible"] is False and c["human_signoff_required"] is True
+            assert c["source_image"] is None and a["hero_clip"] is None
+            attempts = [x for x in clips.values() if x.get("account") == a["id"]]
+            # Every paid attempt stays visible as evidence: chosen, learning example or withheld.
+            shown = {chosen} | excluded | {e["id"] for e in a.get("learning_clips", [])}
+            assert {x["id"] for x in attempts} == shown, a["id"]
+
+
+def test_simplified_replacements_keep_prompt_history():
+    clips = {c["id"]: c for c in json.loads((REPO / "demo-cache" / "manifest.json").read_text())["clips"]}
+    for a in accounts():
+        attempts = [c for c in clips.values() if c.get("account") == a["id"] and re.search(r"-s\d+$", c["id"])]
+        if not attempts:
+            continue
+        brief = json.loads((REPO / "briefs" / a["brief_file"]).read_text(encoding="utf-8"))
+        history = brief["prompt_history"]
+        assert brief["brief_version"] == history[-1]["version"]
+        assert history[0]["prompt_key"] == "prompt" and brief["prompt"]
+        for c in attempts:
+            assert c["reroll_reason"] == "simplified-brief" and c["replacement_for"] in clips
+            entry = next(h for h in history if h["clip"] == c["id"])
+            assert c["brief_version"] == entry["version"]
+            text = entry.get("prompt") or brief[entry["prompt_key"]]
+            assert c["prompt"] == text, c["id"]

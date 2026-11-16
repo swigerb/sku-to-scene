@@ -61,9 +61,12 @@ brief to the right **fal video model in Microsoft Foundry** — `Kling v3 Pro`, 
   original verdicts and never change them. See [Foundry Evaluations](docs/foundry-evaluations-plan.md).
 - **Human review blocks the Northwind hero:** its native café/frothing audio is loud and does not match the
   picture. Draft concept #2 has no audio track (not requested).
-- **Nine new account examples are briefs only for now.** Their silent text-to-video drafts are planned but not
-  yet generated; the guides show **No recording yet** and never substitute another clip. When recorded, they
-  will be preview-only (no approved PIM hero) and **Awaiting human review — not approved**.
+- **All 14 fictional accounts have a playable recorded example.** The nine new ones are silent text-to-video
+  exploratory drafts: preview-only (no approved PIM hero), **Awaiting human review — not approved** and
+  **Not yet evaluated** by Foundry Evaluations. Eight passed automated screening; Proseware's best attempt
+  still fails (product fidelity 0.72) and is labelled as a failed draft. Safe failed attempts appear as
+  **QA learning examples**; attempts with on-screen text, real-brand logos or trade dress, or Content Safety
+  flags are withheld (evidence only, media not published). See [verification](docs/verification.md#account-drafts).
   The original eight clips and v1 evidence are unchanged.
 
 **Fictional brands and products. Real company names identify representative retail segments and cite public

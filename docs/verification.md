@@ -49,16 +49,62 @@ it; the Foundry Evals v1 rubric marks such checks N/A with a reason, without cha
   Home cards should open those guides; `#guide` must still open coffee. Every area lists all of its fictional
   accounts and their public citations. No real company name belongs in a fictional brand/product field.
 - Step deliberately. Playing a preview must not select it. Only Northwind concept #2 and the existing
-  approved-PIM heroes are selectable. Text-only patio and all new account drafts are preview-only.
+  approved-PIM heroes are selectable. Text-only patio, all new account drafts and QA learning examples are preview-only.
   Switching area, step or view and restarting must pause replaced or hidden media.
 - Check the sun/moon radios by pointer, Tab, arrows, Home and End. Exactly one is selected. A valid
   `scoutTheme` query overrides the saved `s2s-theme`, then the system preference is the fallback.
 - New clips display **Awaiting human review — not approved** if the valid review record has no finding for
   that clip. A failed/malformed review-file load instead displays **Human-review evidence unavailable**.
   The original coffee-audio publication blocker, concept #2 silence and 2/8 screening baseline remain unchanged.
-- Accounts whose `planned_clip` has no manifest record show **No recording yet** and no player. When new drafts
-  are recorded they use no approved PIM reference, stay preview-only, and show **Not yet evaluated** until a
-  separate Foundry Evaluations run covers them.
+- Every account plays one recorded example. New drafts use no approved PIM reference, stay preview-only, and
+  show **Not yet evaluated** until a separate Foundry Evaluations run covers them. Learning examples carry
+  **QA learning example — failed screening; not approved**; withheld attempts have no player anywhere.
+
+## Account drafts
+
+Twenty-two silent text-to-video attempts cover the nine new fictional accounts. Each row is an authentic
+Foundry render screened by `@brand-qa` (two sampled frames, Azure OpenAI vision against the brand rules, and
+Content Safety). The verdicts and scores are the recorded ones; nothing was relabelled. Estimates use preview
+list price × requested seconds (6 s each): **$7.62 of the $8 generation cap**, not an Azure bill.
+
+- The first 14 attempts (initial + one re-roll) were rendered before the public-source research was final.
+  The four gap accounts (Tailspin, Coho, Proseware, Munson) were then re-briefed as simplified one-shot scenes
+  with fewer objects, gentle camera moves and no text-bearing environments (`-s1` to `-s3`). Each brief keeps
+  its earlier prompts in `prompt_history`, and each manifest record stores its `brief_version`.
+- **Playable example:** the one clip shown per account. Eight passed screening. Proseware's best attempt still
+  fails product fidelity and is shown as a failed draft.
+- Four passing examples (Tailwind, Wide World, Southridge, Best For You) also show a **Reviewer note** from an
+  additional agent frame review. Their recorded screening pass is unchanged; a human decides.
+- **QA learning example:** safe and text-free, but failed screening. Shown only to explain what the gate caught.
+- **Withheld:** on-screen text, a real-brand logo or design resemblance, or a Content Safety flag. The media is
+  not published; the request and screening evidence remain here and in the site's QA table.
+- No new Foundry Evaluations run covers these drafts, so the site shows **Not yet evaluated**. No human review
+  has approved any of them.
+
+| Clip | Model | Estimate | Request ID | QA (fidelity / adherence) | Disposition |
+| --- | --- | --- | --- | --- | --- |
+| `account-tailspin-draft` | ltx-2.5-fast | $0.54 | `5f58d22c-daca-44b5-9693-d6470c1d39a2` | fail (0.35 / 0.40) | QA learning example |
+| `account-coho-draft` | minimax-h3-max-turbo | $0.24 | `f924196a-237f-430b-8104-02fcc01d3133` | fail (0.40 / 0.15) | Withheld: Prohibited printed packaging text in sampled frames. |
+| `account-vanarsdel-draft` | minimax-h3-max-turbo | $0.24 | `275b8c72-c692-42f6-9fce-5cf0df3fd1d7` | pass (0.93 / 0.78) | **Playable example** |
+| `account-tailwind-draft` | ltx-2.5-fast | $0.54 | `14fe8d78-dbf5-4cb9-a5f3-12a7b08376c4` | pass (0.92 / 0.88) | **Playable example** |
+| `account-wide-world-draft` | minimax-h3-max-turbo | $0.24 | `cacd055a-3289-40a8-9332-fd58ecc860be` | pass (0.92 / 0.98) | **Playable example** |
+| `account-southridge-draft` | minimax-h3-max | $0.48 | `60f7be4e-6a0e-4e78-b381-f81608b089c0` | pass (0.98 / 0.96) | **Playable example** |
+| `account-proseware-draft` | minimax-h3-max | $0.48 | `44fd2967-501e-4d83-80e9-8e0fb28e3d46` | fail (0.40 / 0.35) | Withheld: Prohibited brand-like packaging text in sampled frames. |
+| `account-best-for-you-draft` | minimax-h3-max-turbo | $0.24 | `23a926ac-ec14-4e9b-a84b-d70f7cf31f1d` | fail (0.92 / 0.88) | Withheld: Content Safety flagged a sampled frame (Violence severity 2). Withheld pending human assessment. |
+| `account-munson-draft` | minimax-h3-max-turbo | $0.24 | `ef6ee9fd-a65c-4f18-b19a-4796bda6f866` | fail (0.55 / 0.35) | Withheld: Additional agent frame review found visible shelf/signage text. |
+| `account-coho-draft-r1` | minimax-h3-max-turbo | $0.24 | `4ec1703e-6006-4bb8-87d0-aed9e354c3f4` | fail (0.92 / 0.78) | Withheld: Content Safety flagged a sampled frame (Violence severity 2). Withheld pending human assessment. |
+| `account-proseware-draft-r1` | minimax-h3-max | $0.48 | `d9c4c1e9-01f4-420b-8757-31805a02ac28` | fail (0.35 / 0.25) | Withheld: Visible third-party computer logo in the background. |
+| `account-wide-world-draft-r1` | minimax-h3-max-turbo | $0.24 | `a5481167-5d0c-4b70-b4d9-7a80eac64644` | fail (0.78 / 0.74) | Withheld: Product-fidelity failure; additional agent review found background rack labels and four bottles instead of six. |
+| `account-munson-draft-r1` | minimax-h3-max-turbo | $0.24 | `0a64488f-2c9a-41d9-a685-77fe05eff9ad` | fail (0.72 / 0.78) | QA learning example |
+| `account-best-for-you-draft-r1` | minimax-h3-max-turbo | $0.24 | `222530a6-13d7-4710-8a2e-9f63bdec954d` | pass (0.92 / 0.78) | **Playable example** |
+| `account-tailspin-draft-s1` | ltx-2.5-fast | $0.54 | `d5429d37-e4b1-40de-9c10-04995c418895` | pass (0.98 / 0.96) | **Playable example** |
+| `account-coho-draft-s1` | minimax-h3-max-turbo | $0.24 | `65d6a50b-e1f2-4fab-b1b4-c5bcdb4ed53c` | fail (0.92 / 0.18) | QA learning example |
+| `account-proseware-draft-s1` | minimax-h3-max | $0.48 | `d3ed5e81-dfbe-41e7-b441-b7363e63c107` | fail (0.62 / 0.58) | QA learning example |
+| `account-munson-draft-s1` | minimax-h3-max-turbo | $0.24 | `999dbba9-2616-4daf-bbed-d2c691d22eab` | pass (0.98 / 0.96) | **Playable example** |
+| `account-coho-draft-s2` | minimax-h3-max-turbo | $0.24 | `129bc61c-22f4-4468-b766-2117a70b7ad5` | fail (0.78 / 0.84) | QA learning example |
+| `account-proseware-draft-s2` | minimax-h3-max | $0.48 | `cdd4e4d5-2e03-487c-b3d9-c5dc8263eedb` | fail (0.72 / 0.18) | Withheld: Office chair closely resembles a well-known designer chair (real trade-dress risk). |
+| `account-coho-draft-s3` | minimax-h3-max-turbo | $0.24 | `0d8530c6-e943-482c-a3a0-20651689fb67` | pass (0.92 / 0.88) | **Playable example** |
+| `account-proseware-draft-s3` | minimax-h3-max | $0.48 | `c7202825-5765-4c82-a292-f6106afe9fed` | fail (0.72 / 0.78) | **Playable example** |
 
 ## Verifying what automation cannot
 

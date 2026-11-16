@@ -398,15 +398,30 @@
       h("p", { class: "hint" }, a.hero_clip ? "Recorded PIM hero available; human sign-off still required."
         : "Preview only — no approved PIM hero recorded."),
       recorded ? readinessPill(recorded) : h("span", { class: "pill warn" }, a.excluded_clips?.length ? "Recording withheld — not approved" : "No recording yet"),
-      a.excluded_clips?.length ? h("p", { class: "hint" }, "Withheld recordings: ", a.excluded_clips.map((c) => c.reason).join(" "),
-        " Original request and screening evidence are retained in Technical evidence.") : null,
+      a.review_note ? h("p", { class: "hint review-note" }, h("b", {}, "Reviewer note: "), a.review_note) : null,
+      a.excluded_clips?.length ? h("p", { class: "hint" }, `Withheld attempts (${a.excluded_clips.length}): `, a.excluded_clips.map((c) => c.reason).join(" "),
+        " Their request and screening evidence are retained in Technical evidence; the media is not published.") : null,
       withPreview && a.planned_clip && recorded ? [
-        h("p", { class: "hint" }, "Silent draft · Awaiting human review"),
+        h("p", { class: "hint" }, "Exploratory silent draft · Awaiting human review — not approved"),
         video(recorded, { title: `${a.fictional_brand} preview` }),
         verdictPill(recorded.qa.verdict),
         inspect("Inspect evidence", audioNote(recorded), h("p", {}, "Not yet evaluated."),
           h("ul", {}, recorded.qa.findings.map((f) => h("li", {}, f)))),
-      ] : null);
+      ] : null,
+      withPreview ? learningOf(a, clips).map((c) => learningCard(a, c)) : null);
+  }
+
+  // Safe attempts that failed automated screening, shown only to explain what the QA gate caught.
+  const learningOf = (a, clips) => (a.learning_clips || []).map((e) => clips[e.id]).filter((c) => c && c.file);
+  const LEARNING_LABEL = "QA learning example — failed screening; not approved";
+  function learningCard(a, c) {
+    return h("div", { class: "learning", "data-learning": c.id },
+      h("p", {}, h("span", { class: "pill fail" }, LEARNING_LABEL)),
+      h("p", { class: "hint" }, c.learning_note),
+      video(c, { title: `${a.fictional_brand} QA learning example` }),
+      inspect("Inspect evidence", verdictPill(c.qa.verdict), audioNote(c),
+        h("ul", {}, c.qa.findings.map((f) => h("li", {}, f))),
+        kv([["Model", c.model_name], ["Request ID", h("span", { class: "mono" }, c.request_id)]])));
   }
 
   // ---------- guided demo (presenter-controlled; no timers, no auto-scroll, no auto-selection) ----------
@@ -429,7 +444,8 @@
     const areaAccounts = () => data.accounts.filter((a) => a.area === area);
     const extraRecords = () => areaAccounts().filter((a) => a.id !== "northwind").flatMap((a) => {
       const ids = a.draft_clips.length ? a.draft_clips : a.recorded_clip ? [a.recorded_clip] : [];
-      return ids.filter((id) => clips[id]).map((id) => ({ account: a, clip: clips[id] }));
+      return [...ids.filter((id) => clips[id] && clips[id].file).map((id) => ({ account: a, clip: clips[id] })),
+        ...learningOf(a, clips).map((c) => ({ account: a, clip: c, learning: true }))];
     });
     const isCoffee = () => area === "qsr";
     const chosenHero = () => chosenRecord ? chosenRecord.clip : hero;
@@ -519,11 +535,11 @@
     }
 
     function recordedCard(record, selectable) {
-      const { account: a, clip: c } = record;
-      const v = track(video(c, { loop: true, title: `${a.fictional_brand} preview` }));
+      const { account: a, clip: c, learning } = record;
+      const v = track(video(c, { loop: true, title: `${a.fictional_brand} ${learning ? "QA learning example" : "preview"}` }));
       players[c.id] = v;
       v.addEventListener("play", () => { state.preview = c.id; updateControls(); });
-      const eligible = a.hero_clip === c.id && !!c.source_image;
+      const eligible = !learning && a.hero_clip === c.id && !!c.source_image;
       const chosen = state.selected === a.id;
       const choose = eligible && selectable ? h("button", {
         class: "select", type: "button", "aria-pressed": String(chosen), onclick: () => {
@@ -538,11 +554,14 @@
           updateControls();
         },
       }, chosen ? `${a.fictional_brand} selected` : `Select ${a.fictional_brand}`) : null;
-      return h("article", { class: `card draft${c.aspect_ratio === "9:16" ? " vertical" : ""}${chosen ? " selected" : ""}`, "data-account": a.id },
-        h("h4", {}, a.fictional_brand),
-        h("div", {}, h("span", { class: "pill" }, eligible ? "Recorded PIM hero available · no separate draft recorded"
-          : c.account ? "Silent draft · Awaiting human review" : "Text-only recording · no PIM hero"),
-          readinessPill(c)),
+      return h("article", { class: `card draft${c.aspect_ratio === "9:16" ? " vertical" : ""}${chosen ? " selected" : ""}`,
+        "data-account": a.id, "data-learning": learning ? c.id : null },
+        h("h4", {}, learning ? `${a.fictional_brand} · earlier attempt` : a.fictional_brand),
+        h("div", {}, learning ? h("span", { class: "pill fail" }, LEARNING_LABEL)
+          : h("span", { class: "pill" }, eligible ? "Recorded PIM hero available · no separate draft recorded"
+            : c.account ? "Silent draft · Awaiting human review" : "Text-only recording · no PIM hero"),
+          c.account ? verdictPill(c.qa.verdict) : null, readinessPill(c)),
+        learning ? h("p", { class: "hint" }, c.learning_note) : a.review_note ? h("p", { class: "hint review-note" }, h("b", {}, "Reviewer note: "), a.review_note) : null,
         v,
         h("button", { class: "ghost preview", type: "button", onclick: () => { state.preview = c.id; togglePlay(v); } }, `Preview ${a.fictional_brand}`),
         choose || (selectable ? h("p", { class: "hint" }, "Preview only — no approved PIM hero recorded.") : null),
@@ -804,8 +823,9 @@
     const base = [
       stat(`${pass} of ${original.length}`, "original recorded clips passed automated screening"),
       stat(String(all.length), "need human sign-off before publication"),
-      stat(String(data.accounts.filter((a) => a.planned_clip && !a.recorded_clip).length),
-        "new account examples not yet generated; briefs only"),
+      stat(`${data.accounts.filter((a) => a.recorded_clip && clips[a.recorded_clip] && clips[a.recorded_clip].file).length} of ${data.accounts.length}`,
+        "fictional accounts have a playable recorded example"),
+      stat(String(all.filter((c) => c.withheld_reason).length), "attempts withheld; evidence only, media not published"),
     ];
     const box = $("#readiness-summary");
     if (!hrAvailable()) {
@@ -946,7 +966,8 @@
       h("thead", {}, h("tr", {}, ["Clip", "Model", "Verdict", ...CHECKS.map((c) => CHECK_LABEL[c]), "Safety max", "Request ID"].map((t) => h("th", { scope: "col" }, t)))),
       h("tbody", {}, all.map((c) => h("tr", {},
         h("th", { scope: "row" }, c.id, h("div", { class: "hint" }, c.concept || products[c.sku].name),
-          c.withheld_reason ? h("p", {}, h("b", {}, "Withheld from primary demo: "), c.withheld_reason) : null,
+          c.withheld_reason ? h("p", {}, h("b", {}, "Withheld; media not published: "), c.withheld_reason) : null,
+          c.learning_note ? h("p", {}, h("b", {}, `${LEARNING_LABEL}: `), c.learning_note) : null,
           c.account ? inspect("Screening findings", h("ul", {}, c.qa.findings.map((f) => h("li", {}, f)))) : null),
         h("td", {}, c.model_name),
         h("td", {}, h("span", { class: `pill ${c.qa.verdict === "pass" ? "pass" : "fail"}` }, c.qa.verdict)),

@@ -1,5 +1,5 @@
 {
-  "_note": "Fictional brands and products. Real company names identify representative retail segments and cite public sources only; no affiliation, endorsement, trademarks, or customer data. New account text-to-video drafts are planned (planned_clip) and not yet generated; they will be preview-only, never PIM heroes. Account needs and sources are provisional pending the public-source research review.",
+  "_note": "Fictional brands and products. Real company names identify representative retail segments and cite public sources only; no affiliation, endorsement, trademarks, or customer data. New account clips are silent text-to-video exploratory drafts: preview-only, never PIM heroes, and awaiting human review. Failed or withheld attempts stay listed as evidence.",
   "accounts": [
     {
       "id": "northwind",
@@ -28,6 +28,12 @@
         {
           "publisher": "Starbucks investor relations",
           "url": "https://investor.starbucks.com/news/financial-releases/news-details/2026/Starbucks-Reports-Q4-and-Full-Fiscal-Year-2026-Results/",
+          "published": "2026-10",
+          "accessed": "2026-11-16"
+        },
+        {
+          "publisher": "CNBC",
+          "url": "https://www.cnbc.com/2026/10/29/starbucks-sbux-q4-2026-earnings.html",
           "published": "2026-10",
           "accessed": "2026-11-16"
         }
@@ -59,6 +65,13 @@
           "published": "2026-11",
           "accessed": "2026-11-16"
         }
+      ],
+      "replacement_clip": "account-tailspin-draft-s1",
+      "learning_clips": [
+        {
+          "id": "account-tailspin-draft",
+          "note": "Two wrapped teal blocks instead of the requested burger, fries and drink. Safe and text-free; the simplified one-shot brief fixed it."
+        }
       ]
     },
     {
@@ -86,6 +99,33 @@
           "url": "https://www.cspdailynews.com/company-news/seven-i-ceo-sets-2026-priorities-convenience-retail",
           "published": "2026-01",
           "accessed": "2026-11-16"
+        },
+        {
+          "publisher": "Global Store News",
+          "url": "https://www.gsnnews.com/mauricio-leyva-7-eleven-ceo/",
+          "published": "2026-07",
+          "accessed": "2026-11-16"
+        }
+      ],
+      "replacement_clip": "account-coho-draft-s3",
+      "excluded_clips": [
+        {
+          "id": "account-coho-draft",
+          "reason": "Prohibited printed packaging text in sampled frames."
+        },
+        {
+          "id": "account-coho-draft-r1",
+          "reason": "Content Safety flagged a sampled frame (Violence severity 2). Withheld pending human assessment."
+        }
+      ],
+      "learning_clips": [
+        {
+          "id": "account-coho-draft-s1",
+          "note": "Simplified brief: safe and text-free, but a kitchen-like background and no plum accent (prompt adherence 0.18)."
+        },
+        {
+          "id": "account-coho-draft-s2",
+          "note": "Plum backdrop and band matched, but QA flagged a blank plum patch on the bag as an unrequested label area."
         }
       ]
     },
@@ -171,7 +211,8 @@
           "published": "2026-08",
           "accessed": "2026-11-16"
         }
-      ]
+      ],
+      "review_note": "Additional agent frame review found apparent writing-like wall marks. Recorded screening pass unchanged; human review required."
     },
     {
       "id": "wide-world",
@@ -205,7 +246,14 @@
           "published": "2026-09",
           "accessed": "2026-11-16"
         }
-      ]
+      ],
+      "excluded_clips": [
+        {
+          "id": "account-wide-world-draft-r1",
+          "reason": "Product-fidelity failure; additional agent review found background rack labels and four bottles instead of six."
+        }
+      ],
+      "review_note": "Additional agent frame review found carton markings and shelf/bottle labels despite the blank-packaging brief. Recorded screening pass unchanged; human review required."
     },
     {
       "id": "alpine",
@@ -291,7 +339,8 @@
           "published": "2026-08",
           "accessed": "2026-11-16"
         }
-      ]
+      ],
+      "review_note": "Additional agent frame review found headphones, laptop and mouse in a different order than requested. Recorded screening pass unchanged; human review required."
     },
     {
       "id": "proseware",
@@ -319,7 +368,29 @@
           "published": "2026-09",
           "accessed": "2026-11-16"
         }
-      ]
+      ],
+      "replacement_clip": "account-proseware-draft-s3",
+      "excluded_clips": [
+        {
+          "id": "account-proseware-draft",
+          "reason": "Prohibited brand-like packaging text in sampled frames."
+        },
+        {
+          "id": "account-proseware-draft-r1",
+          "reason": "Visible third-party computer logo in the background."
+        },
+        {
+          "id": "account-proseware-draft-s2",
+          "reason": "Office chair closely resembles a well-known designer chair (real trade-dress risk)."
+        }
+      ],
+      "learning_clips": [
+        {
+          "id": "account-proseware-draft-s1",
+          "note": "Simplified brief: safe and text-free, but extra staging furniture and a static camera (fidelity 0.62, adherence 0.58)."
+        }
+      ],
+      "review_note": "Best available example still fails automated screening (product fidelity 0.72: box colours read blue/purple rather than indigo). Shown as a failed draft, not approved."
     },
     {
       "id": "woodgrove",
@@ -341,6 +412,12 @@
       "planned_clip": null,
       "need": "Renewed focus on stores and shopping experience, including relaunched in-store digital screens.",
       "sources": [
+        {
+          "publisher": "Chain Drug Review",
+          "url": "https://chaindrugreview.com/walgreens-turns-the-page-to-next-chapter-as-private-company-with-new-leadership/",
+          "published": "2026-04",
+          "accessed": "2026-11-16"
+        },
         {
           "publisher": "Modern Retail",
           "url": "https://www.modernretail.co/marketing/walgreens-says-its-focused-on-higher-peforming-ad-placements-as-it-tries-again-with-digital-screens/",
@@ -375,7 +452,15 @@
           "published": "2026-10",
           "accessed": "2026-11-16"
         }
-      ]
+      ],
+      "replacement_clip": "account-best-for-you-draft-r1",
+      "excluded_clips": [
+        {
+          "id": "account-best-for-you-draft",
+          "reason": "Content Safety flagged a sampled frame (Violence severity 2). Withheld pending human assessment."
+        }
+      ],
+      "review_note": "Additional agent frame review found utensils expressly excluded by the revised prompt. Recorded screening pass unchanged; human review required."
     },
     {
       "id": "munson",
@@ -402,6 +487,19 @@
           "url": "https://www.fool.com/earnings/call-transcripts/2026/10/13/albertsons-aci-q2-2026-earnings-call-transcript/",
           "published": "2026-10",
           "accessed": "2026-11-16"
+        }
+      ],
+      "replacement_clip": "account-munson-draft-s1",
+      "excluded_clips": [
+        {
+          "id": "account-munson-draft",
+          "reason": "Additional agent frame review found visible shelf/signage text."
+        }
+      ],
+      "learning_clips": [
+        {
+          "id": "account-munson-draft-r1",
+          "note": "Safe re-roll that failed product fidelity (0.72): tinted rather than clear bottle. Replaced by the simplified one-shot brief."
         }
       ]
     }
