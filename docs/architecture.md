@@ -2,28 +2,7 @@
 
 ## Flow
 
-```mermaid
-flowchart LR
-  subgraph Copilot["GitHub Copilot app (Squad team, Fusion routing)"]
-    M["@retail-merchandiser<br/>SKU + channel → scene brief"]
-    R["@foundry-router<br/>route + cost guardrails"]
-    Q["@brand-qa<br/>frames + reference → verdict"]
-  end
-  PIM[("catalog/ PIM mock<br/>assets/products/")] --> M
-  M --> R
-  R -->|MCP: sku-to-scene| S["Local MCP server<br/>(Python, stdio)"]
-  CLI["sku2scene CLI<br/>(presenter fallback)"] --> S
-  Comfy["ComfyUI nodes<br/>(visual track)"] --> S
-  S -->|mock: replay| Cache[("demo-cache/<br/>Authentic Foundry renders")]
-  S -->|cache miss only| Placeholder["Local SIMULATED placeholder"]
-  S -->|live: Entra ID| F["Microsoft Foundry<br/>/providers/falai/v1/..."]
-  F --> K[Kling v3 Pro] & L[LTX-2.5 Fast/Pro] & X[MiniMax H3 Max/Turbo]
-  S --> Ledger[("run + cost ledger")]
-  S --> Q
-  Q -->|fail: bounded re-roll| R
-  Q -.optional.-> AOAI["Azure OpenAI vision<br/>+ AI Content Safety"]
-  Cache --> Site["Static browser replay<br/>(GitHub Pages)"]
-```
+![SKU to Scene architecture: the PIM catalog feeds @retail-merchandiser, then @foundry-router and the local MCP server, also called by the sku2scene CLI and ComfyUI. Live mode uses Entra ID to call Microsoft Foundry fal models: Kling v3 Pro, LTX-2.5 Fast/Pro and MiniMax H3 Max/Turbo. Mock mode replays authentic demo-cache renders to the GitHub Pages browser demo, with simulated placeholders only on cache misses. The server records a run and cost ledger and calls @brand-qa for a verdict, with bounded re-rolls through the router and optional Azure OpenAI vision and AI Content Safety.](images/sku-to-scene-architecture.png)
 
 ## Three surfaces, three levels of "live"
 
