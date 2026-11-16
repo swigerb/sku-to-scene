@@ -68,8 +68,9 @@ source `fallback`, so the demo never claims Fusion is guaranteed. In the Copilot
 ## Static demo site
 
 `site/` holds the browser app (`index.html`, `app.css`, `app.js`). `scripts/build_site.py --out _site` builds a
-curated artifact: only the app files, brand assets, the four product images, the eight cached MP4s and a
-`data.json` derived from `demo-cache/manifest.json` and the catalog. It refuses non-`foundry` clips and never
+curated artifact: only the app files, brand assets, the four product images, the eight cached MP4s, the recorded
+overview with its poster and captions, sanitized evaluation and human-review evidence, and a `data.json`
+derived from `demo-cache/manifest.json` and the catalog. It refuses non-`foundry` clips and never
 copies `.env`, `.sku2scene/` or the repository root. `.github/workflows/pages.yml` deploys it to GitHub Pages.
 
 Preview locally:

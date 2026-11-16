@@ -1,5 +1,20 @@
 # 15-minute executive demo script
 
+## Recorded browser walkthrough
+
+The browser demo replays existing recordings; it does not generate video or run fresh evaluations.
+Optionally open **Watch overview** for the captioned introduction, then choose **Start guided demo**.
+Use **Next** and **Previous** deliberately, with **Play/Pause** for playback; the guide does not advance on a timer.
+Previewing a draft does not choose it. Explicitly choose **concept #2** to continue to its available recorded
+hero; concepts #1 and #3 have no recorded hero.
+
+Open **Technical evidence** to inspect model routing, original QA and recorded evaluations separately.
+Keep each clip's publication status visible: AI screening is not human approval, and the recorded human
+publication blockers remain unresolved. If human-review evidence is unavailable, treat every clip as not approved.
+Return to the guide or explore the scenario gallery without implying that cached playback is a live cloud run.
+
+## CLI and agent pitch
+
 **Setup:** GitHub Copilot app open on this repo, with the Squad team loaded (`@retail-merchandiser`,
 `@foundry-router`, `@brand-qa`). Before you start:
 
