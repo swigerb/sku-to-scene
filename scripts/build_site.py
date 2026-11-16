@@ -200,6 +200,13 @@ def build_data() -> dict:
         if a["brief_file"]:
             doc = json.loads((REPO / "briefs" / a["brief_file"]).read_text(encoding="utf-8"))
             a["brief"] = doc.get("presenter_prompt") or doc["prompt"]
+        if a["planned_clip"] and selected in ids and selected not in excluded:
+            recorded = ids[selected]
+            a.update(brief=recorded["prompt"], model=recorded["model"], model_name=recorded["model_name"],
+                     tier=recorded["price_key"], duration=recorded["requested_duration_s"],
+                     aspect_ratio=recorded["aspect_ratio"], estimate_usd=recorded["estimate_usd"])
+            if recorded["model"] != m.key:
+                a["why"] = f"Recorded replacement on {recorded['model_name']} ({recorded['mode']}); inspect its QA evidence."
         if a["hero_clip"] and not ids[a["hero_clip"]]["source_image"]:
             raise SystemExit(f"{a['id']} cannot claim an approved-PIM hero without a reference image")
 

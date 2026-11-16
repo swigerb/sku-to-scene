@@ -5,7 +5,7 @@ from pathlib import Path
 
 import pytest
 
-from scripts.render_accounts import generation_cap
+from scripts.render_accounts import check_budget, generation_cap, override_render, plan, reservation_total
 from sku_to_scene import catalog
 from sku_to_scene.models import get_model
 from sku_to_scene.payloads import build_payload
@@ -19,15 +19,77 @@ FORBIDDEN = COMPANIES | {"Lucerne"}
 
 def test_completion_budget_is_scoped_to_proseware_and_does_not_change_default():
     assert generation_cap(False, ["coho"], None) == 8
-    assert generation_cap(True, ["proseware"], None) == pytest.approx(7.62 + 1.50)
+    assert generation_cap(True, ["proseware"], None) == pytest.approx(7.62 + 2.50)
     for selected, reroll in [(None, None), (["coho"], None), (["proseware", "coho"], None),
                              (["proseware"], ["account-proseware-draft"])]:
         with pytest.raises(ValueError, match="only for"):
             generation_cap(True, selected, reroll)
+    assert generation_cap(False, ["southridge"], None, True) == pytest.approx(11.22)
+    with pytest.raises(ValueError, match="only for"):
+        generation_cap(True, ["southridge"], None, True)
+    with pytest.raises(ValueError, match="only for"):
+        generation_cap(False, ["proseware"], None, True)
 
 
 def accounts():
     return json.loads((REPO / "catalog" / "accounts.json").read_text(encoding="utf-8"))["accounts"]
+
+
+def test_replacement_route_estimate_and_conservative_completion_budget():
+    job = next(j for j in plan() if j["account"]["id"] == "proseware")
+    override_render(job, "ltx-2.5-pro", "720p")
+    assert job["account"]["model"] == "ltx-2.5-pro"
+    assert job["account"]["tier"] == "720p"
+    assert job["estimate"]["estimate_high_usd"] == pytest.approx(0.72)
+    journal = {"earlier": {"estimate_usd": 7.62},
+               "s4": {"estimate_usd": 0.48, "reserved_usd": 0.536}}
+    assert reservation_total(journal) == pytest.approx(8.156)
+    assert check_budget(journal, [job["estimate"]], 9.12) == pytest.approx(0.72)
+    override_render(job, "ltx-2.5-pro", "1080p")
+    with pytest.raises(SystemExit, match="nothing submitted"):
+        check_budget(journal, [job["estimate"]], 9.12)
+    with pytest.raises(ValueError):
+        override_render(job, "ltx-2.5-pro", "768P")
+    override_render(job, "minimax-h3-max", "768P")
+    journal["s5"] = {"estimate_usd": 0.72, "reserved_usd": 0.72}
+    for suffix in ("s6", "s7"):
+        assert check_budget(journal, [job["estimate"]], 10.12) == pytest.approx(0.536)
+        journal[suffix] = {"estimate_usd": 0.48, "reserved_usd": 0.536}
+    with pytest.raises(SystemExit, match="nothing submitted"):
+        check_budget(journal, [job["estimate"]], 10.12)
+
+
+def test_southridge_high_reserve_prevents_a_third_attempt():
+    job = next(j for j in plan() if j["account"]["id"] == "southridge")
+    scoped = {}
+    for suffix in ("s1", "s2"):
+        assert check_budget(scoped, [job["estimate"]], 1.10) == pytest.approx(0.536)
+        scoped[suffix] = {"estimate_usd": 0.48, "reserved_usd": 0.536}
+    with pytest.raises(SystemExit, match="nothing submitted"):
+        check_budget(scoped, [job["estimate"]], 1.10)
+
+
+def test_realism_selection_uses_measured_gate_and_preserves_agent_rejections():
+    evidence = REPO / "demo-cache" / "qa"
+    control = json.loads((evidence / "proseware-s5-v3.json").read_text())
+    assert control["v1_qa"]["verdict"] == "fail"
+    assert control["v1_qa"]["measured"] is True
+    assert control["v1_qa"]["sampled_frame_count"] == 4
+    selected = json.loads((evidence / "proseware-s7-v1.json").read_text())
+    assert selected["qa"]["evaluator_version"] == "brand-qa-vision-v1"
+    assert selected["qa"]["verdict"] == "pass" and selected["qa"]["measured"] is True
+    assert selected["qa"]["sampled_frame_count"] == 4
+    assert len(selected["qa"]["content_safety"]) == 4
+    assert selected["agent_review"]["decision"] == "selected_for_human_review"
+    assert selected["agent_review"]["human_approval"] is False
+    a = {a["id"]: a for a in accounts()}
+    assert a["proseware"]["replacement_clip"] == selected["clip"]
+    for account, name in (("proseware", "proseware-s6-v1.json"), ("southridge", "southridge-s2-v1.json")):
+        rejected = json.loads((evidence / name).read_text())
+        assert rejected["qa"]["verdict"] == "pass", "preserve AI pass separately from agent rejection"
+        assert rejected["agent_review"]["decision"] == "withheld"
+        assert rejected["clip"] in {c["id"] for c in a[account]["excluded_clips"]}
+        assert rejected["clip"] != a[account].get("replacement_clip", a[account]["planned_clip"])
 
 
 def test_representative_accounts_are_grounded_fiction_and_supported():

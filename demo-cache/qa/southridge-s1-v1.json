@@ -1,0 +1,318 @@
+{
+  "schema_version": 1,
+  "clip": "account-southridge-draft-s1",
+  "is_negative_control": false,
+  "generation_request_id": "ecae61a5-ebbd-4ec2-9d62-d2f7e4ff0bdc",
+  "qa_source_sha256": "e5f502b34c0c936c2d879e120481f1dd57586a3bbbec75d1ad4ef26e9b298a6f",
+  "evaluated_at": "2026-11-16T23:23:51.417816+00:00",
+  "qa": {
+    "evaluator": "azure-openai-vision",
+    "measured": true,
+    "scores": {
+      "logo_integrity": 1,
+      "label_legibility": 1,
+      "product_fidelity": 0.72,
+      "prompt_adherence": 0.18
+    },
+    "thresholds": {
+      "logo_integrity": 0.8,
+      "label_legibility": 0.7,
+      "product_fidelity": 0.8,
+      "prompt_adherence": 0.7
+    },
+    "findings": [
+      "No visible logos, signage, price numbers, or on-screen text.",
+      "Laptop screen appears to show a plain gradient with no interface or symbols.",
+      "The three devices are not arranged in a clear left-to-right row as requested; the headphones are centered but the mouse is far right and the laptop is angled, making the row less exact.",
+      "The laptop is open and silver, and the headphones and mouse appear unbranded.",
+      "Background includes a mug, bookshelves, and plant consistent with the scene brief."
+    ],
+    "hallucinated_objects": [
+      "coffee mug",
+      "bookshelves",
+      "plant",
+      "window"
+    ],
+    "content_safety": [
+      {
+        "frame": "frame_01.png",
+        "categories": [
+          {
+            "category": "Hate",
+            "severity": 0
+          },
+          {
+            "category": "SelfHarm",
+            "severity": 0
+          },
+          {
+            "category": "Sexual",
+            "severity": 0
+          },
+          {
+            "category": "Violence",
+            "severity": 0
+          }
+        ]
+      },
+      {
+        "frame": "frame_02.png",
+        "categories": [
+          {
+            "category": "Hate",
+            "severity": 0
+          },
+          {
+            "category": "SelfHarm",
+            "severity": 0
+          },
+          {
+            "category": "Sexual",
+            "severity": 0
+          },
+          {
+            "category": "Violence",
+            "severity": 0
+          }
+        ]
+      },
+      {
+        "frame": "frame_03.png",
+        "categories": [
+          {
+            "category": "Hate",
+            "severity": 0
+          },
+          {
+            "category": "SelfHarm",
+            "severity": 0
+          },
+          {
+            "category": "Sexual",
+            "severity": 0
+          },
+          {
+            "category": "Violence",
+            "severity": 0
+          }
+        ]
+      },
+      {
+        "frame": "frame_04.png",
+        "categories": [
+          {
+            "category": "Hate",
+            "severity": 0
+          },
+          {
+            "category": "SelfHarm",
+            "severity": 0
+          },
+          {
+            "category": "Sexual",
+            "severity": 0
+          },
+          {
+            "category": "Violence",
+            "severity": 0
+          }
+        ]
+      }
+    ],
+    "verdict": "fail",
+    "failed_checks": [
+      "product_fidelity",
+      "prompt_adherence"
+    ],
+    "publish_approved": false,
+    "reroll": {
+      "model": "ltx-2.5-pro",
+      "mode": "text-to-video",
+      "reason": "quality threshold failed; re-roll on the higher-fidelity tier"
+    },
+    "automated_checks_passed": false,
+    "human_signoff_required": true,
+    "sampled_frame_count": 4,
+    "evaluator_version": "brand-qa-vision-v1",
+    "check_evidence": null
+  },
+  "v1_qa": {
+    "evaluator": "azure-openai-vision",
+    "measured": true,
+    "scores": {
+      "logo_integrity": 1,
+      "label_legibility": 1,
+      "product_fidelity": 0.72,
+      "prompt_adherence": 0.18
+    },
+    "thresholds": {
+      "logo_integrity": 0.8,
+      "label_legibility": 0.7,
+      "product_fidelity": 0.8,
+      "prompt_adherence": 0.7
+    },
+    "findings": [
+      "No visible logos, signage, price numbers, or on-screen text.",
+      "Laptop screen appears to show a plain gradient with no interface or symbols.",
+      "The three devices are not arranged in a clear left-to-right row as requested; the headphones are centered but the mouse is far right and the laptop is angled, making the row less exact.",
+      "The laptop is open and silver, and the headphones and mouse appear unbranded.",
+      "Background includes a mug, bookshelves, and plant consistent with the scene brief."
+    ],
+    "hallucinated_objects": [
+      "coffee mug",
+      "bookshelves",
+      "plant",
+      "window"
+    ],
+    "content_safety": [
+      {
+        "frame": "frame_01.png",
+        "categories": [
+          {
+            "category": "Hate",
+            "severity": 0
+          },
+          {
+            "category": "SelfHarm",
+            "severity": 0
+          },
+          {
+            "category": "Sexual",
+            "severity": 0
+          },
+          {
+            "category": "Violence",
+            "severity": 0
+          }
+        ]
+      },
+      {
+        "frame": "frame_02.png",
+        "categories": [
+          {
+            "category": "Hate",
+            "severity": 0
+          },
+          {
+            "category": "SelfHarm",
+            "severity": 0
+          },
+          {
+            "category": "Sexual",
+            "severity": 0
+          },
+          {
+            "category": "Violence",
+            "severity": 0
+          }
+        ]
+      },
+      {
+        "frame": "frame_03.png",
+        "categories": [
+          {
+            "category": "Hate",
+            "severity": 0
+          },
+          {
+            "category": "SelfHarm",
+            "severity": 0
+          },
+          {
+            "category": "Sexual",
+            "severity": 0
+          },
+          {
+            "category": "Violence",
+            "severity": 0
+          }
+        ]
+      },
+      {
+        "frame": "frame_04.png",
+        "categories": [
+          {
+            "category": "Hate",
+            "severity": 0
+          },
+          {
+            "category": "SelfHarm",
+            "severity": 0
+          },
+          {
+            "category": "Sexual",
+            "severity": 0
+          },
+          {
+            "category": "Violence",
+            "severity": 0
+          }
+        ]
+      }
+    ],
+    "verdict": "fail",
+    "failed_checks": [
+      "product_fidelity",
+      "prompt_adherence"
+    ],
+    "publish_approved": false,
+    "reroll": {
+      "model": "ltx-2.5-pro",
+      "mode": "text-to-video",
+      "reason": "quality threshold failed; re-roll on the higher-fidelity tier"
+    },
+    "automated_checks_passed": false,
+    "human_signoff_required": true,
+    "sampled_frame_count": 4,
+    "evaluator_version": "brand-qa-vision-v1",
+    "check_evidence": null
+  },
+  "usage": {
+    "qa_allowance_usd": 0.5,
+    "calls": [
+      {
+        "kind": "vision",
+        "status": 200,
+        "request_id": "32d893dc-1ae4-4624-b3da-12ab63a1fe10",
+        "usage": {
+          "prompt_tokens": 4893,
+          "completion_tokens": 156,
+          "total_tokens": 5049
+        }
+      },
+      {
+        "kind": "content_safety",
+        "status": 200,
+        "request_id": "1a381ca1-513d-434f-9e36-c7f82f891c5f"
+      },
+      {
+        "kind": "content_safety",
+        "status": 200,
+        "request_id": "21c864d5-c54e-4bbf-a986-b1eda4532a0b"
+      },
+      {
+        "kind": "content_safety",
+        "status": 200,
+        "request_id": "47b2547c-da79-4d92-873f-3403a28f91a4"
+      },
+      {
+        "kind": "content_safety",
+        "status": 200,
+        "request_id": "55d9f229-0f3e-404a-aaff-07b141812e6f"
+      }
+    ],
+    "billed_qa_usd": null,
+    "note": "Bounded QA calls; allowance is not a quoted or billed price."
+  },
+  "required_items": null,
+  "prompt": "Six-second silent photographic product video, landscape 16:9. A realistic lived-in home office with a natural oak desk, visible fine wood grain, soft window daylight, subtle shadows and gently out-of-focus plain bookshelves and a small green plant in the background. Three separate unbranded devices form a single clear row on the desk, exactly LEFT TO RIGHT: a silver 14-inch aluminum ultrabook at the left, charcoal over-ear headphones standing upright in the middle, a small charcoal computer mouse at the right. The laptop is already open at 110 degrees and stays still. Its screen contains ONLY a soft neutral grey-to-teal gradient, with absolutely no interface, text, icons, menus, taskbar or symbols. The silver laptop lid is blank. The headphones and mouse are blank. A plain ivory coffee mug sits farther back and to the left of the laptop, separate from the three-device row. Keep every device and the mug completely visible with generous margins and no overlap. Locked-off static camera, natural perspective and realistic product proportions; no cuts, opening animation, orbit or push-in. No hands, people or faces. No visible writing on books, packaging or surfaces; book spines face away from the camera. No logos, signage, labels, numbers, branding, recognizable product trade dress or soundtrack.",
+  "sample_timestamps_s": [
+    0.75,
+    2.25,
+    3.75,
+    5.25
+  ],
+  "presentation_sha256": "09a5b7e324ed99b2ed494f692f6d5c3269418e8d6c9bf2d93fa7c1111175b670",
+  "human_signoff_required": true,
+  "publish_approved": false
+}

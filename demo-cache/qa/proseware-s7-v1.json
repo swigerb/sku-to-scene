@@ -1,0 +1,312 @@
+{
+  "schema_version": 1,
+  "clip": "account-proseware-draft-s7",
+  "is_negative_control": false,
+  "agent_review": {
+    "decision": "selected_for_human_review",
+    "observations": "Four frames show a cylindrical French press and mug, spray bottle and folded cloth, generic rectangular mesh task chair with lumbar pad, armrests and five-spoke caster base, and paper stack. Correct left-to-right groups, muted grey-indigo/ivory boxes, full framing and no visible writing. Real wood floor, daylight and material detail improve realism. Window and brick wall differ from the requested bare wall; exact colour and full-video review remain human tasks.",
+    "human_approval": false
+  },
+  "generation_request_id": "c7f3a745-2490-498b-936b-398ac6721e00",
+  "qa_source_sha256": "e5f502b34c0c936c2d879e120481f1dd57586a3bbbec75d1ad4ef26e9b298a6f",
+  "evaluated_at": "2026-11-16T23:23:04.565495+00:00",
+  "qa": {
+    "evaluator": "azure-openai-vision",
+    "measured": true,
+    "scores": {
+      "logo_integrity": 1,
+      "label_legibility": 1,
+      "product_fidelity": 0.86,
+      "prompt_adherence": 0.78
+    },
+    "thresholds": {
+      "logo_integrity": 0.8,
+      "label_legibility": 0.7,
+      "product_fidelity": 0.8,
+      "prompt_adherence": 0.7
+    },
+    "findings": [
+      "No visible logos, signage, price numbers, or on-screen text.",
+      "Four product groups are arranged left to right with clear gaps: coffee press/mug, spray bottle/cloth, chair, paper stack.",
+      "Packaging appears blank and mostly plain indigo/ivory as requested.",
+      "Chair is present and generally matches the required task-chair concept, but the back shape and proportions are not a perfect match to the specified rectangular mesh-back design.",
+      "The scene is a real small office-like interior with pale wall, wood floor, and daylight.",
+      "Minor prompt mismatch: the chair is centered prominently and the overall composition is not a strict wide-margin product row; the paper stack and chair placement feel slightly off from the exact staged layout."
+    ],
+    "hallucinated_objects": [
+      "window frame",
+      "brick wall texture"
+    ],
+    "content_safety": [
+      {
+        "frame": "frame_01.png",
+        "categories": [
+          {
+            "category": "Hate",
+            "severity": 0
+          },
+          {
+            "category": "SelfHarm",
+            "severity": 0
+          },
+          {
+            "category": "Sexual",
+            "severity": 0
+          },
+          {
+            "category": "Violence",
+            "severity": 0
+          }
+        ]
+      },
+      {
+        "frame": "frame_02.png",
+        "categories": [
+          {
+            "category": "Hate",
+            "severity": 0
+          },
+          {
+            "category": "SelfHarm",
+            "severity": 0
+          },
+          {
+            "category": "Sexual",
+            "severity": 0
+          },
+          {
+            "category": "Violence",
+            "severity": 0
+          }
+        ]
+      },
+      {
+        "frame": "frame_03.png",
+        "categories": [
+          {
+            "category": "Hate",
+            "severity": 0
+          },
+          {
+            "category": "SelfHarm",
+            "severity": 0
+          },
+          {
+            "category": "Sexual",
+            "severity": 0
+          },
+          {
+            "category": "Violence",
+            "severity": 0
+          }
+        ]
+      },
+      {
+        "frame": "frame_04.png",
+        "categories": [
+          {
+            "category": "Hate",
+            "severity": 0
+          },
+          {
+            "category": "SelfHarm",
+            "severity": 0
+          },
+          {
+            "category": "Sexual",
+            "severity": 0
+          },
+          {
+            "category": "Violence",
+            "severity": 0
+          }
+        ]
+      }
+    ],
+    "verdict": "pass",
+    "failed_checks": [],
+    "publish_approved": false,
+    "automated_checks_passed": true,
+    "human_signoff_required": true,
+    "sampled_frame_count": 4,
+    "evaluator_version": "brand-qa-vision-v1",
+    "check_evidence": null
+  },
+  "v1_qa": {
+    "evaluator": "azure-openai-vision",
+    "measured": true,
+    "scores": {
+      "logo_integrity": 1,
+      "label_legibility": 1,
+      "product_fidelity": 0.86,
+      "prompt_adherence": 0.78
+    },
+    "thresholds": {
+      "logo_integrity": 0.8,
+      "label_legibility": 0.7,
+      "product_fidelity": 0.8,
+      "prompt_adherence": 0.7
+    },
+    "findings": [
+      "No visible logos, signage, price numbers, or on-screen text.",
+      "Four product groups are arranged left to right with clear gaps: coffee press/mug, spray bottle/cloth, chair, paper stack.",
+      "Packaging appears blank and mostly plain indigo/ivory as requested.",
+      "Chair is present and generally matches the required task-chair concept, but the back shape and proportions are not a perfect match to the specified rectangular mesh-back design.",
+      "The scene is a real small office-like interior with pale wall, wood floor, and daylight.",
+      "Minor prompt mismatch: the chair is centered prominently and the overall composition is not a strict wide-margin product row; the paper stack and chair placement feel slightly off from the exact staged layout."
+    ],
+    "hallucinated_objects": [
+      "window frame",
+      "brick wall texture"
+    ],
+    "content_safety": [
+      {
+        "frame": "frame_01.png",
+        "categories": [
+          {
+            "category": "Hate",
+            "severity": 0
+          },
+          {
+            "category": "SelfHarm",
+            "severity": 0
+          },
+          {
+            "category": "Sexual",
+            "severity": 0
+          },
+          {
+            "category": "Violence",
+            "severity": 0
+          }
+        ]
+      },
+      {
+        "frame": "frame_02.png",
+        "categories": [
+          {
+            "category": "Hate",
+            "severity": 0
+          },
+          {
+            "category": "SelfHarm",
+            "severity": 0
+          },
+          {
+            "category": "Sexual",
+            "severity": 0
+          },
+          {
+            "category": "Violence",
+            "severity": 0
+          }
+        ]
+      },
+      {
+        "frame": "frame_03.png",
+        "categories": [
+          {
+            "category": "Hate",
+            "severity": 0
+          },
+          {
+            "category": "SelfHarm",
+            "severity": 0
+          },
+          {
+            "category": "Sexual",
+            "severity": 0
+          },
+          {
+            "category": "Violence",
+            "severity": 0
+          }
+        ]
+      },
+      {
+        "frame": "frame_04.png",
+        "categories": [
+          {
+            "category": "Hate",
+            "severity": 0
+          },
+          {
+            "category": "SelfHarm",
+            "severity": 0
+          },
+          {
+            "category": "Sexual",
+            "severity": 0
+          },
+          {
+            "category": "Violence",
+            "severity": 0
+          }
+        ]
+      }
+    ],
+    "verdict": "pass",
+    "failed_checks": [],
+    "publish_approved": false,
+    "automated_checks_passed": true,
+    "human_signoff_required": true,
+    "sampled_frame_count": 4,
+    "evaluator_version": "brand-qa-vision-v1",
+    "check_evidence": null
+  },
+  "usage": {
+    "qa_allowance_usd": 0.5,
+    "calls": [
+      {
+        "kind": "vision",
+        "status": 200,
+        "request_id": "81079788-6724-4d51-81b7-93eaa82dda6c",
+        "usage": {
+          "prompt_tokens": 4996,
+          "completion_tokens": 202,
+          "total_tokens": 5198
+        }
+      },
+      {
+        "kind": "content_safety",
+        "status": 200,
+        "request_id": "498c0215-817c-40e2-934e-6db95804eec6"
+      },
+      {
+        "kind": "content_safety",
+        "status": 200,
+        "request_id": "a7bad13e-04c4-484c-9e79-046b36c8b09b"
+      },
+      {
+        "kind": "content_safety",
+        "status": 200,
+        "request_id": "b59fc935-6735-4c37-915d-e70e8354badf"
+      },
+      {
+        "kind": "content_safety",
+        "status": 200,
+        "request_id": "e8e6d2fa-b99e-4f54-bd71-3522aa74ee51"
+      }
+    ],
+    "billed_qa_usd": null,
+    "note": "Bounded QA calls; allowance is not a quoted or billed price."
+  },
+  "required_items": [
+    "One stainless French coffee press with a cylindrical vessel and a plunger lid.",
+    "One plain ivory ceramic mug.",
+    "One transparent unlabelled cleaning spray bottle.",
+    "One folded cleaning cloth made of fabric, not a bag or packet.",
+    "One office task chair with a five-spoke star base on casters, matching the design requested by the prompt.",
+    "One stack of loose blank white printer paper with visible sheet edges."
+  ],
+  "prompt": "Silent fictional small-office supply kit, six seconds, wide 16:9. Photographic live-action appearance in a real small office: subtly textured pale-grey painted wall, light natural oak floor with fine wood grain, soft window daylight from outside the shot, natural shadows and realistic material detail. Exactly four product groups stand in one straight row from left to right with clear gaps: (1) a cylindrical stainless French coffee press with a visible plunger lid and a plain ivory ceramic mug together on a plain box; (2) a clear unlabelled spray bottle with a folded fabric cleaning cloth on a plain ivory box; (3) one ordinary unbranded ergonomic task chair with a simple RECTANGULAR charcoal mesh back, a small adjustable horizontal lumbar pad, a thick rectangular fabric-padded seat, two straight adjustable armrests and a plain five-spoke star base on casters, on the floor; (4) a neat stack of loose blank white printer paper with visible sheet edges on a plain box. The chair has conventional straight rectangular forms, not a rounded oval mesh shell or a sculpted designer frame. The boxes under groups 1 and 4 are matte, muted, dark dusty grey-indigo (#44416F), desaturated, not royal blue or saturated violet. The middle box and mug are warm ivory (#F6F4EF). All packaging is blank. Locked-off static camera: no pan, orbit, push-in or cuts. Wide framing with generous empty margin on both sides; every prop and every chair wheel remains fully in frame throughout. The objects stay stationary at realistic scale. No other furniture, electronics, plants, windows or wall art in view. No writing, letters, numbers, stickers, labels, barcodes, logos, symbols, signage, prices, UI, mascots, slogans or real trade dress. No people, hands or faces. No soundtrack.",
+  "sample_timestamps_s": [
+    0.75,
+    2.25,
+    3.75,
+    5.25
+  ],
+  "presentation_sha256": "0c624a416786e7779657a173565c8f5c6f4519486217074bdf78ed3388cf60b2",
+  "human_signoff_required": true,
+  "publish_approved": false
+}

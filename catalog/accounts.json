@@ -340,7 +340,19 @@
           "accessed": "2026-11-16"
         }
       ],
-      "review_note": "Additional agent frame review found headphones, laptop and mouse in a different order than requested. Recorded screening pass unchanged; human review required."
+      "excluded_clips": [
+        {
+          "id": "account-southridge-draft-s2",
+          "reason": "Automated screening passed, but agent visual review rejected the mouse standing upright on its end as an unrealistic product artifact. Original selected clip is unchanged."
+        }
+      ],
+      "learning_clips": [
+        {
+          "id": "account-southridge-draft-s1",
+          "note": "Photographic home-office attempt; standard screening failed fidelity 0.72 and adherence 0.18 on the angled device layout. Retained as a failed learning example, not approval."
+        }
+      ],
+      "review_note": "Selected original: headphones, laptop and mouse appear in a different order than requested. Recorded pass is unchanged. Two realistic-room replacements did not qualify: one failed screening; one passed but depicts an unnatural upright mouse. Human review required."
     },
     {
       "id": "proseware",
@@ -349,7 +361,7 @@
       "fictional_brand": "Proseware Workplace Supply",
       "sku": "PWS-KIT-01",
       "brief_file": "account-proseware.json",
-      "use_case": "Small-business workplace-kit sequence with explicit left-to-right object placement.",
+      "use_case": "Photographic small-office kit in a real room, with explicit left-to-right object placement.",
       "model": "minimax-h3-max",
       "tier": "768P",
       "duration": 6,
@@ -369,7 +381,7 @@
           "accessed": "2026-11-16"
         }
       ],
-      "replacement_clip": "account-proseware-draft-s3",
+      "replacement_clip": "account-proseware-draft-s7",
       "excluded_clips": [
         {
           "id": "account-proseware-draft",
@@ -382,19 +394,31 @@
         {
           "id": "account-proseware-draft-s2",
           "reason": "Office chair closely resembles a well-known designer chair (real trade-dress risk)."
+        },
+        {
+          "id": "account-proseware-draft-s6",
+          "reason": "Automated screening passed, but agent inspection flagged the recognizable rounded mesh-chair design as a trade-dress risk. Verdict retained; media withheld."
         }
       ],
       "learning_clips": [
         {
           "id": "account-proseware-draft-s1",
           "note": "Simplified brief: safe and text-free, but extra staging furniture and a static camera (fidelity 0.62, adherence 0.58)."
-            },
-            {
-              "id": "account-proseware-draft-s4",
-              "note": "Completion attempt: no visible writing; Content Safety severity 0 on both sampled frames. Screening still failed fidelity 0.55 and adherence 0.35 (paper interpreted as boxed). The judge also called the explicitly requested mug and cloth extra objects; human calibration is needed, not a threshold override. Earlier s3 remains the selected failed example."
+        },
+        {
+          "id": "account-proseware-draft-s3",
+          "note": "Earlier selected example failed fidelity 0.72: saturated blue/purple packaging rather than muted indigo. Historical verdict preserved; replaced by s7."
+        },
+        {
+          "id": "account-proseware-draft-s4",
+          "note": "Completion attempt: no visible writing; Content Safety severity 0 on both sampled frames. Screening still failed fidelity 0.55 and adherence 0.35 (paper interpreted as boxed). The judge also called the explicitly requested mug and cloth extra objects; human calibration is needed, not a threshold override. Historical failed example; s7 is now selected."
+        },
+        {
+          "id": "account-proseware-draft-s5",
+          "note": "Known-bad LTX Pro control: four-frame v1 screening failed fidelity 0.72 and adherence 0.68. Agent inspection found a changed coffee-press shape, bag-like cloth, incorrect chair base and cropped props. Lenient v2 and errored v3 diagnostics did not override this failure. s7 is now selected; this is a learning example, not approval."
         }
       ],
-      "review_note": "Best available example still fails automated screening (product fidelity 0.72: box colours read blue/purple rather than indigo). Shown as a failed draft, not approved."
+      "review_note": "s7 passed four-frame v1 screening (fidelity 0.86, adherence 0.78) and agent inspection of the kit, generic task chair, muted palette, order and framing. The same rubric failed s5. Added window/brick-wall detail differs from the prompt; exact brand colour and full-video review still require human sign-off. Not approved."
     },
     {
       "id": "woodgrove",

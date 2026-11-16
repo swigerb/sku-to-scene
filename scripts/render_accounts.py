@@ -2,11 +2,13 @@
 
 --simplified renders the versioned one-shot ``simplified_prompt`` for named gap accounts as -s1, -s2 ...
 replacement attempts; earlier attempts and their QA evidence stay in the manifest unchanged.
---proseware-completion applies the separately authorized $1.50 extension only to that account.
+--proseware-completion applies the separately authorized $2.50 high-reserve extension only to that account.
+--southridge-completion adds a separately bounded $1.10 high-reserve allowance for that account.
 
 The original cache entries are never replaced. A local reservation journal prevents a second submit after
 an interrupted/uncertain attempt. Recover recorded request IDs rather than submitting again. QA is paid,
-explicitly enabled only inside this process, sampled at two frames per clip. No automatic re-rolls or evals.
+explicitly enabled only inside this process, sampled at two frames per clip (four for completion).
+No automatic re-rolls or evals.
 """
 from __future__ import annotations
 
@@ -51,12 +53,39 @@ def write_json(path: Path, doc: dict) -> None:
     pending.replace(path)
 
 
-def generation_cap(completion: bool, simplified: list[str] | None, reroll: list[str] | None) -> float:
+def generation_cap(completion: bool, simplified: list[str] | None, reroll: list[str] | None,
+                   southridge_completion: bool = False) -> float:
+    if southridge_completion:
+        if completion or simplified != ["southridge"] or reroll:
+            raise ValueError("Southridge authorization is only for --simplified southridge.")
+        return 11.22  # Prior $7.62 + $2.50 Proseware + $1.10 Southridge.
     if completion:
         if simplified != ["proseware"] or reroll:
             raise ValueError("Completion authorization is only for --simplified proseware.")
-        return 9.12  # Prior $7.62 reservations + explicitly authorized $1.50 completion ceiling.
+        return 10.12  # Prior $7.62 reservations + $2.50 aggregate completion high-reserve ceiling.
     return 8.0
+
+
+def override_render(job: dict, model: str, resolution: str) -> None:
+    """Validate the effective route and recompute its estimate before any reservation."""
+    a = {**job["account"], "model": get_model(model).key, "tier": resolution}
+    m = get_model(a["model"])
+    payload = build_payload(m, "text-to-video", m.default_deployment, job["brief"]["prompt"],
+                            duration=a["duration"], resolution=resolution, aspect_ratio=a["aspect_ratio"],
+                            audio=False)
+    job["account"] = a
+    job["estimate"] = estimate_cost(m, payload["duration"], payload.get("resolution"), audio=False).to_dict()
+
+
+def reservation_total(journal: dict) -> float:
+    return sum(v.get("reserved_usd", v["estimate_usd"]) for v in journal.values())
+
+
+def check_budget(journal: dict, estimates: list[dict], cap: float) -> float:
+    total = sum(e["estimate_high_usd"] for e in estimates)
+    if reservation_total(journal) + total > cap + 1e-9:
+        raise SystemExit(f"Plan would exceed the ${cap:.2f} total generation cap; nothing submitted.")
+    return total
 
 
 def main() -> int:
@@ -68,9 +97,15 @@ def main() -> int:
     ap.add_argument("--simplified", nargs="+", metavar="ACCOUNT",
                     help="account IDs whose versioned simplified_prompt replaces missing/unusable examples")
     ap.add_argument("--proseware-completion", action="store_true",
-                    help="explicit authorization for up to $1.50 beyond the prior $7.62, Proseware only")
+                    help="explicit authorization for up to $2.50 beyond the prior $7.62, Proseware only")
+    ap.add_argument("--model", help="replacement model; requires --simplified and --resolution")
+    ap.add_argument("--resolution", help="replacement resolution; requires --simplified and --model")
+    ap.add_argument("--southridge-completion", action="store_true",
+                    help="separate $1.10 high-reserve allowance, Southridge only")
     args = ap.parse_args()
-    cap = generation_cap(args.proseware_completion, args.simplified, args.reroll)
+    if (args.model or args.resolution) and not (args.model and args.resolution and args.simplified):
+        ap.error("A model override requires --simplified, --model and --resolution together.")
+    cap = generation_cap(args.proseware_completion, args.simplified, args.reroll, args.southridge_completion)
     jobs = plan()
     if args.simplified and args.reroll:
         raise SystemExit("Choose either --reroll or --simplified.")
@@ -94,6 +129,8 @@ def main() -> int:
             j["account"] = {**j["account"], "planned_clip": f"{base}-s{n}"}
             j["replacement_for"] = prior[-1]
             j["brief"]["prompt"] = j["brief"]["simplified_prompt"]
+            if args.model:
+                override_render(j, args.model, args.resolution)
         args.reason = "simplified-brief"
     if args.reroll:
         if not args.reason:
@@ -106,17 +143,26 @@ def main() -> int:
             j["account"] = {**j["account"], "planned_clip": base + "-r1"}
             j["replacement_for"] = base
             j["brief"]["prompt"] = j["brief"].get("reroll_prompt", j["brief"]["prompt"])
-    total = sum(j["estimate"]["estimate_usd"] for j in jobs)
+    total = sum(j["estimate"]["estimate_high_usd"] for j in jobs)
     for j in jobs:
         print(j["account"]["planned_clip"], f"${j['estimate']['estimate_usd']:.4f}", flush=True)
-    print(f"Generation estimate ${total:.4f}; batch cap $6 / cumulative cap ${cap:.2f}.", flush=True)
+    print(f"High generation reserve ${total:.4f}; batch cap $6 / cumulative cap ${cap:.2f}.", flush=True)
     if total > 6:
         raise SystemExit("Plan exceeds initial generation cap; nothing submitted.")
     journal_file = get_settings().data_dir / "account-draft-reservations.json"
-    spent = sum(v["estimate_usd"] for v in json.loads(journal_file.read_text()).values()) if journal_file.exists() else 0.0
+    journal = json.loads(journal_file.read_text()) if journal_file.exists() else {}
+    if args.proseware_completion:
+        # s4 predates high-estimate reservations; retain its estimate but reserve the recorded upper bound.
+        prior = journal.get("account-proseware-draft-s4")
+        if prior:
+            s4 = next(c for c in load_manifest(get_settings())["clips"] if c["id"] == "account-proseware-draft-s4")
+            prior["reserved_usd"] = s4["estimate"]["estimate_high_usd"]
+    spent = reservation_total(journal)
     print(f"Reserved so far ${spent:.4f}; after this plan ${spent + total:.4f} of the ${cap:.2f} total cap.", flush=True)
-    if spent + total > cap:
-        raise SystemExit(f"Plan would exceed the ${cap:.2f} total generation cap; nothing submitted.")
+    check_budget(journal, [j["estimate"] for j in jobs], cap)
+    if args.southridge_completion:
+        scoped = {k: v for k, v in journal.items() if k.startswith("account-southridge-draft-s")}
+        check_budget(scoped, [j["estimate"] for j in jobs], 1.10)
     if not (args.execute and args.yes):
         return 0
     settings = get_settings()
@@ -126,7 +172,6 @@ def main() -> int:
         raise SystemExit("Vision and Content Safety configuration required before generating.")
     journal_path = settings.data_dir / "account-draft-reservations.json"
     journal_path.parent.mkdir(parents=True, exist_ok=True)
-    journal = json.loads(journal_path.read_text()) if journal_path.exists() else {}
     manifest_path = settings.cache_dir / "manifest.json"
     for j in jobs:
         a, brief = j["account"], j["brief"]
@@ -145,10 +190,9 @@ def main() -> int:
                 raise SystemExit(f"{clip_id}: prior job incomplete; recover its existing request, do not resubmit.")
             print(clip_id, "resuming completed request", job["request_id"], flush=True)
         else:
-            reserved = sum(v["estimate_usd"] for v in journal.values())
-            if reserved + j["estimate"]["estimate_usd"] > cap:
-                raise SystemExit(f"Total reserved generation would exceed ${cap:.2f}; nothing submitted.")
-            journal[clip_id] = {"estimate_usd": j["estimate"]["estimate_usd"], "status": "reserved"}
+            check_budget(journal, [j["estimate"]], cap)
+            journal[clip_id] = {"estimate_usd": j["estimate"]["estimate_usd"],
+                                "reserved_usd": j["estimate"]["estimate_high_usd"], "status": "reserved"}
             write_json(journal_path, journal)
             job = generate_video(
                 a["model"], brief["prompt"], duration=a["duration"], aspect_ratio=a["aspect_ratio"],
@@ -181,7 +225,9 @@ def main() -> int:
                 raise SystemExit(f"{clip_id}: presentation duration differs from the requested duration.")
         os.environ["SKU2SCENE_QA_EVALUATORS"] = "auto"
         screening = qa.evaluate(job_id=job["job_id"], video_path=str(preview), sku=a["sku"],
-                                brand=brief["brand"], prompt=brief["prompt"], frames=2, settings=settings)
+                                brand=brief["brand"], prompt=brief["prompt"],
+                                frames=4 if (args.proseware_completion or args.southridge_completion) else 2,
+                                settings=settings)
         # Fail-closed evidence is recorded, never relabelled as approval or silently re-rolled.
         journal[clip_id].update(status="screened", qa_verdict=screening["verdict"])
         write_json(journal_path, journal)

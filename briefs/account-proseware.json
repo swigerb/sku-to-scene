@@ -5,10 +5,18 @@
   "source": "text",
   "channel": "signage",
   "duration": 6,
+  "qa_required_items": [
+    "One stainless French coffee press with a cylindrical vessel and a plunger lid.",
+    "One plain ivory ceramic mug.",
+    "One transparent unlabelled cleaning spray bottle.",
+    "One folded cleaning cloth made of fabric, not a bag or packet.",
+    "One office task chair with a five-spoke star base on casters, matching the design requested by the prompt.",
+    "One stack of loose blank white printer paper with visible sheet edges."
+  ],
   "reroll_prompt": "Silent fictional workplace-kit concept, six seconds. Wide fixed view of a small empty office. One plain indigo-and-white delivery cart rolls in. On its shelf, a single plain indigo box opens. Reveal UNPACKAGED objects arranged exactly left to right: stainless coffee press with a plain mug; transparent unlabelled cleaning bottle with a blank cloth; ergonomic charcoal office chair; loose blank white printer paper. No retail product packets or coffee bags. Every surface completely blank, no printed or embossed markings anywhere. No logos, letters, writing, labels, numbers, stickers, signs, slogans, UI, button props, people, faces, real trade dress or soundtrack.",
   "prompt": "Silent fictional workplace-supply concept, six seconds. One delivery cart rolls into a small empty office. Plain indigo-and-white boxes open, revealing a coffee kit, sealed cleaning supplies, an ergonomic chair and printer paper. Arrange exactly left to right: coffee kit, cleaning supplies, chair, printer paper. Smooth wide shot, clean even lighting. Boxes and products have no labels or symbols. No logos, signage, writing, prices, phone UI, mascots, slogans, button props, faces in close-up or real trade dress. No soundtrack.",
-  "brief_version": 6,
-  "simplified_prompt": "Six-second silent studio product video, landscape 16:9. One complete small-office supply kit, four large isolated groups in a single straight row, left to right: stainless French coffee press with a plain ivory mug; transparent unlabelled cleaning spray bottle with folded ivory cloth; simple generic charcoal task chair with padded back and seat; neat stack of blank ivory printer paper. All four groups visible in full throughout, spaced apart on a seamless warm ivory floor and background. No boxes, pedestals, tables or extra objects. A tiny slow camera push-in, no object movement or transformations. Soft neutral daylight, accurate stainless steel, transparent glass, ivory paper and charcoal upholstery. Every surface blank and unmarked. No writing, letters, numbers, labels, barcodes, logos, symbols, signage, real brands or recognizable designer furniture. No people, hands or soundtrack.",
+  "brief_version": 9,
+  "simplified_prompt": "Silent fictional small-office supply kit, six seconds, wide 16:9. Photographic live-action appearance in a real small office: subtly textured pale-grey painted wall, light natural oak floor with fine wood grain, soft window daylight from outside the shot, natural shadows and realistic material detail. Exactly four product groups stand in one straight row from left to right with clear gaps: (1) a cylindrical stainless French coffee press with a visible plunger lid and a plain ivory ceramic mug together on a plain box; (2) a clear unlabelled spray bottle with a folded fabric cleaning cloth on a plain ivory box; (3) one ordinary unbranded ergonomic task chair with a simple RECTANGULAR charcoal mesh back, a small adjustable horizontal lumbar pad, a thick rectangular fabric-padded seat, two straight adjustable armrests and a plain five-spoke star base on casters, on the floor; (4) a neat stack of loose blank white printer paper with visible sheet edges on a plain box. The chair has conventional straight rectangular forms, not a rounded oval mesh shell or a sculpted designer frame. The boxes under groups 1 and 4 are matte, muted, dark dusty grey-indigo (#44416F), desaturated, not royal blue or saturated violet. The middle box and mug are warm ivory (#F6F4EF). All packaging is blank. Locked-off static camera: no pan, orbit, push-in or cuts. Wide framing with generous empty margin on both sides; every prop and every chair wheel remains fully in frame throughout. The objects stay stationary at realistic scale. No other furniture, electronics, plants, windows or wall art in view. No writing, letters, numbers, stickers, labels, barcodes, logos, symbols, signage, prices, UI, mascots, slogans or real trade dress. No people, hands or faces. No soundtrack.",
   "prompt_history": [
     {
       "version": 1,
@@ -48,7 +56,31 @@
       "version": 6,
       "prompt_key": "simplified_prompt",
       "clip": "account-proseware-draft-s4",
-      "reason": "User-authorized completion attempt. Remove the colored packaging that failed fidelity in s3; retain all four kit groups and their order required by the unchanged brand and SKU rubric. One neutral seamless studio shot, no staging objects."
+      "reason": "User-authorized completion attempt. Remove the colored packaging that failed fidelity in s3; retain all four kit groups and their order required by the unchanged brand and SKU rubric. One neutral seamless studio shot, no staging objects.",
+      "prompt": "Six-second silent studio product video, landscape 16:9. One complete small-office supply kit, four large isolated groups in a single straight row, left to right: stainless French coffee press with a plain ivory mug; transparent unlabelled cleaning spray bottle with folded ivory cloth; simple generic charcoal task chair with padded back and seat; neat stack of blank ivory printer paper. All four groups visible in full throughout, spaced apart on a seamless warm ivory floor and background. No boxes, pedestals, tables or extra objects. A tiny slow camera push-in, no object movement or transformations. Soft neutral daylight, accurate stainless steel, transparent glass, ivory paper and charcoal upholstery. Every surface blank and unmarked. No writing, letters, numbers, labels, barcodes, logos, symbols, signage, real brands or recognizable designer furniture. No people, hands or soundtrack.",
+      "superseded": true
+    },
+    {
+      "version": 7,
+      "prompt_key": "simplified_prompt",
+      "clip": "account-proseware-draft-s5",
+      "reason": "Correct the v6 no-boxes conflict with the unchanged brand rule requiring plain indigo/white packaging. Distinguish four groups from six product props and three packaging boxes. Use the existing LTX-2.5 Pro text route at 720p, a stationary tableau and four-frame standard screening; preserve all earlier verdicts.",
+      "prompt": "A six-second silent product-catalog video, landscape 16:9, locked-off front-facing wide camera. One small-office supply kit arranged in exactly FOUR separated product GROUPS in a straight left-to-right row. There are exactly SIX product props in total, supported by THREE plain closed rectangular packaging boxes. Group 1 at far left: one stainless-steel French coffee press and one plain ivory ceramic mug, together on one matte muted indigo box. Group 2 at center left: one transparent unlabelled cleaning spray bottle and one folded ivory cleaning cloth, together on one matte ivory box. Group 3 at center right: one generic charcoal task chair with a simple padded rectangular back, padded seat and basic five-wheel base, standing on the floor, no box beneath it. Group 4 at far right: one stack of loose blank white printer paper with clearly visible fine sheet edges, resting on one matte muted indigo box. The mug and cloth belong to the kit; the three boxes are its packaging. All six product props and all three boxes remain fully visible, separated and stationary from first frame to last. Boxes are completely blank: muted dark indigo (#44416F) and warm ivory (#F6F4EF), with no bright blue or saturated violet. Seamless neutral light-grey floor and background, soft neutral daylight, realistic materials, no coloured lighting. No camera movement, cuts, opening boxes, transformations or added objects. No other furniture, electronics, plants or decor. No text, letters, numbers, labels, barcodes, logos, symbols, markings, signage, real brands or recognizable designer furniture. No people, hands or soundtrack.",
+      "superseded": true
+    },
+    {
+      "version": 8,
+      "prompt_key": "simplified_prompt",
+      "clip": "account-proseware-draft-s6",
+      "reason": "Return to s3 composition and H3 Max, correcting the saturated boxes and side-chair identity. Real office surfaces and window daylight, muted brand palette, ergonomic task chair and static wide framing. Standard v1 gate must fail the known-bad s5 control; independent inspection remains required.",
+      "prompt": "Silent fictional small-office supply kit, six seconds, wide 16:9. Photographic live-action appearance in a real small office: subtly textured pale-grey painted wall, light natural oak floor with fine wood grain, soft window daylight from outside the shot, natural shadows and realistic material detail. Exactly four product groups stand in one straight row from left to right with clear gaps: (1) a cylindrical stainless French coffee press with a visible plunger lid and a plain ivory ceramic mug together on a plain box; (2) a clear unlabelled spray bottle with a folded fabric cleaning cloth on a plain ivory box; (3) one generic ergonomic charcoal mesh office task chair with adjustable lumbar back, armrests and a five-spoke star base on casters, on the floor; (4) a neat stack of loose blank white printer paper with visible sheet edges on a plain box. The boxes under groups 1 and 4 are matte, muted, dark dusty grey-indigo (#44416F), desaturated, not royal blue or saturated violet. The middle box and mug are warm ivory (#F6F4EF). All packaging is blank. Locked-off static camera: no pan, orbit, push-in or cuts. Wide framing with generous empty margin on both sides; every prop and every chair wheel remains fully in frame throughout. The objects stay stationary at realistic scale. No other furniture, electronics, plants, windows or wall art in view. No writing, letters, numbers, stickers, labels, barcodes, logos, symbols, signage, prices, UI, mascots, slogans or real trade dress. No people, hands or faces. No soundtrack.",
+      "superseded": true
+    },
+    {
+      "version": 9,
+      "prompt_key": "simplified_prompt",
+      "clip": "account-proseware-draft-s7",
+      "reason": "Second and final authorized H3 realism attempt. s6 passed screening but agent inspection flagged its recognizable rounded mesh-chair design. Retain the room, kit, palette and static framing; specify ordinary rectangular mesh/fabric chair geometry instead. No threshold or scoring changes."
     }
   ]
 }
