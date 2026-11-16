@@ -5,7 +5,10 @@
       "args": [
         "scripts/run_mcp_server.py"
       ],
-      "env": {},
+      "env": {
+        "SKU2SCENE_MODE": "mock",
+        "SKU2SCENE_QA_EVALUATORS": "off"
+      },
       "type": "local",
       "tools": [
         "*"

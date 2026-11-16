@@ -7,7 +7,7 @@
 - [ ] Provision the endpoints: `Kling v3 Pro` (US Data Zone), `LTX-2.5 Fast`, `LTX-2.5 Pro`, `MiniMax H3 Max`
       and `MiniMax H3 Max Turbo` (Global Standard). Verify region and quota; tiers 1–4 = 2 RPM. See
       [foundry-setup.md](foundry-setup.md).
-- [ ] Assign Cognitive Services User to the presenter identity; run `sku2scene readiness --check-auth`.
+- [ ] Assign **Foundry User** on the account to the presenter identity; run `sku2scene readiness --check-auth`.
 - [ ] Optional: deploy an Azure OpenAI vision model and a Content Safety resource for measured QA.
 
 ## Review the cached renders (T-1 week)
@@ -23,8 +23,13 @@
 
 ## Day of (T-1 hour)
 
+- [ ] Open the browser demo, <https://swigerb.github.io/sku-to-scene/>, and press **▶ Replay walkthrough**. It is the zero-risk
+      fallback: static cached media, no cloud calls.
 - [ ] Run `pip install -e ".[dev]"` into `.venv`, then `pytest -q`.
-- [ ] `python scripts\verify_mcp_stdio.py` must print PASS. Restart the Copilot app so it picks up `.mcp.json`.
+- [ ] Confirm rehearsal is no-spend: the `sku-to-scene` MCP server runs with `SKU2SCENE_MODE=mock` and
+      `SKU2SCENE_QA_EVALUATORS=off` (set in `.mcp.json`; process env overrides `.env`).
+- [ ] `python scripts\verify_mcp_stdio.py` must print PASS. Restart the `sku-to-scene` MCP server (or the
+      Copilot app) so it picks up `.mcp.json`.
 - [ ] Copilot app: open the repo, confirm the `sku-to-scene` MCP tools are listed, and set the model to
       **Auto → Fusion (High)** (or the Squad fallback).
 - [ ] Rehearse `sku2scene demo lto --step drafts` / `--step hero --select 2`; clear `.sku2scene/` afterwards for

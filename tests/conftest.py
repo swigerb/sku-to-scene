@@ -36,6 +36,7 @@ def settings(tmp_path, monkeypatch, rehearsal_cache):
               "AZURE_OPENAI_API_KEY", "CONTENT_SAFETY_ENDPOINT", "CONTENT_SAFETY_KEY"):
         monkeypatch.setenv(k, "")
     monkeypatch.setenv("SKU2SCENE_MODE", "mock")
+    monkeypatch.setenv("SKU2SCENE_QA_EVALUATORS", "on")  # tests mock evaluators; ambient rehearsal "off" must not leak
     monkeypatch.setenv("SKU2SCENE_DATA_DIR", str(tmp_path / "data"))
     monkeypatch.setenv("SKU2SCENE_MOCK_LATENCY_SCALE", "0")
     monkeypatch.setenv("SKU2SCENE_CACHE_DIR", str(rehearsal_cache))

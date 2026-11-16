@@ -111,6 +111,19 @@ def test_real_qa_uses_persisted_prompt_and_requires_human_signoff(vision, settin
     assert "video" not in stored and "reference_image" not in stored
 
 
+def test_rehearsal_switch_blocks_cloud_evaluators(vision, monkeypatch):
+    monkeypatch.setenv("CONTENT_SAFETY_ENDPOINT", "https://safety.example.com")
+    monkeypatch.setenv("SKU2SCENE_QA_EVALUATORS", "off")
+
+    def no_network(*_a, **_k):
+        raise AssertionError("cloud evaluator called while SKU2SCENE_QA_EVALUATORS=off")
+
+    monkeypatch.setattr(qa.httpx, "post", no_network)
+    result = qa.evaluate(video_path=str(vision), sku="NWC-LTO-PCB-16")
+    assert result["verdict"] == "manual_review" and not result["measured"]
+    assert result["content_safety"] is None and not result["publish_approved"]
+
+
 def test_malformed_content_safety_is_error_not_approval(vision, monkeypatch):
     monkeypatch.setenv("CONTENT_SAFETY_ENDPOINT", "https://safety.example.com")
     monkeypatch.setenv("CONTENT_SAFETY_KEY", "test")

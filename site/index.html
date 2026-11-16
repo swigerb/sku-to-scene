@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>SKU to Scene: AI-directed retail video demo</title>
+  <meta name="description" content="Replay of an agent-orchestrated retail video supply chain using fal video models on Microsoft Foundry. Recorded renders only; no live generation in the browser.">
+  <script>
+    (() => {
+      let stored = null;
+      try { stored = localStorage.getItem("s2s-theme"); } catch (_) { /* storage unavailable */ }
+      const param = new URLSearchParams(window.location.search).get("scoutTheme");
+      const theme = param || stored ||
+        (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+      document.documentElement.setAttribute("data-theme", theme);
+    })();
+  </script>
+  <link rel="icon" type="image/png" href="brand/favicon-light-48.png" media="(prefers-color-scheme: light)">
+  <link rel="icon" type="image/png" href="brand/favicon-dark-48.png" media="(prefers-color-scheme: dark)">
+  <link rel="apple-touch-icon" href="brand/icon-light-192.png">
+  <link rel="stylesheet" href="app.css">
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+  <header class="topbar">
+    <a class="brand" href="#top" aria-label="SKU to Scene home">
+      <img class="logo logo-light" src="brand/logo-horizontal-light.png" alt="SKU to Scene" width="840" height="176">
+      <img class="logo logo-dark" src="brand/logo-horizontal-dark.png" alt="SKU to Scene" width="840" height="176">
+    </a>
+    <nav aria-label="Sections">
+      <a href="#lto">LTO walkthrough</a>
+      <a href="#scenarios">Scenarios</a>
+      <a href="#routing">Routing &amp; cost</a>
+      <a href="#qa">QA evidence</a>
+    </nav>
+    <button class="ghost" id="theme-toggle" type="button" aria-label="Toggle light or dark theme">Theme</button>
+  </header>
+
+  <main id="main">
+    <section class="hero" id="top">
+      <div>
+        <p class="eyebrow">Microsoft Foundry · fal video models · GitHub Copilot agents</p>
+        <h1>AI-directed retail video at enterprise scale</h1>
+        <p class="lede">Turn approved PIM imagery and merchandising briefs into channel-ready video. Three Copilot agents
+          route each brief to <strong>Kling v3 Pro</strong>, <strong>LTX-2.5 Fast/Pro</strong> or
+          <strong>MiniMax H3 Max/Turbo</strong> by latency, budget, audio need and source asset.</p>
+        <div class="agents">
+          <div class="agent"><span class="tag">@retail-merchandiser</span><span>SKU + channel → scene brief, camera and audio cues</span></div>
+          <div class="agent"><span class="tag">@foundry-router</span><span>Guardrails → model choice, cost estimate, dispatch</span></div>
+          <div class="agent"><span class="tag">@brand-qa</span><span>Frames vs. approved reference → fail-closed verdict, bounded re-roll</span></div>
+        </div>
+      </div>
+      <img class="hero-mark logo-light" src="brand/logo-light-512.png" alt="" width="512" height="512">
+      <img class="hero-mark logo-dark" src="brand/logo-dark-512.png" alt="" width="512" height="512">
+    </section>
+
+    <aside class="notice" role="note">
+      <strong>Replay, not live generation.</strong> Every video here is an authentic Foundry render recorded earlier
+      (request IDs and timings in the evidence panels). This page makes <em>no</em> cloud calls and renders nothing new.
+      fal models on Foundry are a <strong>preview</strong> processed outside Microsoft facilities under fal's terms.
+      Automated QA is screening only: <strong>human sign-off is required</strong> before publishing anything.
+    </aside>
+
+    <section id="lto" class="panel">
+      <div class="section-head">
+        <div>
+          <p class="eyebrow">Primary demo path · QSR limited-time offer</p>
+          <h2>Draft fast, pick a concept, render the hero</h2>
+        </div>
+        <div class="controls" role="group" aria-label="Replay controls">
+          <button type="button" id="replay-play">▶ Replay walkthrough</button>
+          <button type="button" class="ghost" id="replay-reset">↺ Reset</button>
+          <label class="inline"><input type="checkbox" id="sound"> Sound</label>
+        </div>
+      </div>
+
+      <ol class="steps" aria-label="Walkthrough steps">
+        <li data-step="1" class="active">1 · Brief</li>
+        <li data-step="2">2 · Three drafts</li>
+        <li data-step="3">3 · Presenter picks</li>
+        <li data-step="4">4 · Hero render</li>
+      </ol>
+
+      <div class="lto-grid">
+        <div class="card brief" id="brief-card"></div>
+        <div class="card log-card">
+          <h3>Agent narration</h3>
+          <p class="hint">Scripted replay of the recorded flow. Timings shown are the recorded measurements.</p>
+          <ol class="log" id="log" aria-live="polite"></ol>
+        </div>
+      </div>
+
+      <h3 class="sub">Fast-tier drafts <span class="hint">· choose a concept to continue</span></h3>
+      <div class="drafts" id="drafts"></div>
+
+      <div class="hero-out" id="hero-out" hidden></div>
+    </section>
+
+    <section id="scenarios" class="panel">
+      <p class="eyebrow">Four RCG workflows</p>
+      <h2>Approved PIM image in, routed render out</h2>
+      <div class="tabs" role="tablist" aria-label="Retail scenarios" id="scenario-tabs"></div>
+      <div id="scenario-body" role="tabpanel"></div>
+    </section>
+
+    <section id="routing" class="panel">
+      <p class="eyebrow">@foundry-router</p>
+      <h2>Model routing and cost guardrails</h2>
+      <div class="routing-grid">
+        <div class="card">
+          <h3>Routing rules</h3>
+          <ul class="rules">
+            <li><b>Drafting / A-B testing</b> → LTX-2.5 Fast or MiniMax H3 Max Turbo (Turbo for volume)</li>
+            <li><b>Approved hero image + native audio</b> → Kling v3 Pro image-to-video</li>
+            <li><b>Strict multi-object layout</b> → MiniMax H3 Max</li>
+            <li><b>Text brief + synchronized audio, final quality</b> → LTX-2.5 Pro</li>
+            <li><b>Budget caps</b> reserve the worst-case duration; unsupported settings are rejected or rerouted, never sent (LTX has no 1:1, so square PDP uses a documented crop policy).</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>Per-clip estimate</h3>
+          <form id="calc" class="calc">
+            <label>Model <select id="calc-model"></select></label>
+            <label>Tier <select id="calc-tier"></select></label>
+            <label>Seconds <input id="calc-sec" type="number" min="1" max="20" step="1" value="6"></label>
+            <label>Clips <input id="calc-n" type="number" min="1" max="10000" step="1" value="1"></label>
+          </form>
+          <p class="big" id="calc-out" aria-live="polite"></p>
+          <p class="hint">Preview list price × requested seconds. An estimate, not a bill. MiniMax output can run ~0.7 s longer than requested.</p>
+        </div>
+      </div>
+      <div class="table-wrap">
+        <table class="models" id="models-table">
+          <caption>The five fal variants on Microsoft Foundry (preview list prices, USD per generated second)</caption>
+        </table>
+      </div>
+    </section>
+
+    <section id="qa" class="panel">
+      <p class="eyebrow">@brand-qa</p>
+      <h2>Recorded QA evidence</h2>
+      <p class="lede small">Azure OpenAI vision scored sampled frames against the approved catalog reference and brand rules;
+        Azure AI Content Safety analysed the same frames. Any score below its threshold fails. Results are AI screening,
+        not ground truth, and never publication approval.</p>
+      <div class="qa-summary" id="qa-summary"></div>
+      <div class="table-wrap">
+        <table class="qa-table" id="qa-table">
+          <caption>All eight cached clips: measured scores vs. brand thresholds</caption>
+        </table>
+      </div>
+      <div class="card neg" id="neg-control"></div>
+    </section>
+  </main>
+
+  <footer>
+    <img class="foot-icon logo-light" src="brand/icon-light-192.png" alt="" width="40" height="40">
+    <img class="foot-icon logo-dark" src="brand/icon-dark-192.png" alt="" width="40" height="40">
+    <p>All brands and products are fictional (Northwind Coffee, Contoso Pro, Fabrikam, Woodgrove Wellness); product images are AI-generated.
+      Prices are preview list prices. Source, setup and governance:
+      <a href="https://github.com/swigerb/sku-to-scene">github.com/swigerb/sku-to-scene</a>. MIT licensed.</p>
+  </footer>
+  <script src="app.js"></script>
+</body>
+</html>

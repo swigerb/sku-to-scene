@@ -107,6 +107,11 @@ def recommend_reroll(job: dict[str, Any], has_image: bool) -> dict[str, Any]:
     }
 
 
+def cloud_evaluators_enabled() -> bool:
+    """False when SKU2SCENE_QA_EVALUATORS=off: rehearsal QA makes no Azure calls even if credentials are set."""
+    return os.environ.get("SKU2SCENE_QA_EVALUATORS", "auto").strip().lower() not in {"off", "0", "false", "none"}
+
+
 def evaluate(
     job_id: str | None = None,
     video_path: str | None = None,
@@ -139,7 +144,11 @@ def evaluate(
         "job_id": job_id, "video": str(vp), "brand": guide["display_name"], "thresholds": thresholds,
         "frames": [str(f) for f in frame_files], "sampled_frame_count": len(frame_files), "content_safety": None,
     }
-    if os.environ.get("AZURE_OPENAI_ENDPOINT") and os.environ.get("AZURE_OPENAI_VISION_DEPLOYMENT") and frame_files:
+    cloud = cloud_evaluators_enabled()
+    if not cloud:
+        result["cloud_evaluators"] = "disabled (SKU2SCENE_QA_EVALUATORS=off)"
+    if cloud and os.environ.get("AZURE_OPENAI_ENDPOINT") and os.environ.get("AZURE_OPENAI_VISION_DEPLOYMENT") \
+            and frame_files:
         try:
             v = _vision_scores(frame_files, guide, prompt, sku_rec, CHECKS)
             if not isinstance(v, dict):
@@ -164,8 +173,13 @@ def evaluate(
             )
         else:
             result.update(evaluator="not-evaluated", measured=False, scores={}, findings=[],
-                          disclaimer="No vision evaluator configured; manual review required.")
-    if os.environ.get("CONTENT_SAFETY_ENDPOINT") and frame_files:
+                          disclaimer="No vision evaluator configured or enabled; manual review required.")
+        if cached and cached.get("qa"):
+            # Recorded measurement for this exact cached clip, kept separate from this fresh (unmeasured) result.
+            result["recorded_qa"] = {"source": "demo-cache/manifest.json", "clip": cached["id"],
+                                     "verdict": cached["qa"].get("verdict"),
+                                     "evaluated_at": cached.get("qa_evaluated_at")}
+    if cloud and os.environ.get("CONTENT_SAFETY_ENDPOINT") and frame_files:
         try:
             result["content_safety"] = _content_safety(frame_files)
         except Exception as exc:  # noqa: BLE001

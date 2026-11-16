@@ -26,8 +26,10 @@ the operational wrapper described below.
     `CONTENT_SAFETY_ENDPOINT` is set, as a pre-publish gate for digital signage.
   - **Vision evaluation:** `qa.py` scores logo integrity, label legibility, product fidelity (against the
     **approved catalog reference image**) and prompt adherence with an Azure OpenAI vision deployment.
-  - **Foundry Evaluations:** the QA rubric is designed to be lifted into a Foundry evaluation run for regression
-    testing of prompts and models. That is a next step; it isn't wired up in this repo.
+  - **Foundry Evaluations:** not integrated. The current QA calls vision and Content Safety directly; it is not
+    Foundry Evaluations. See the phased [Foundry Evaluations plan](foundry-evaluations-plan.md).
+- **No-spend rehearsal:** `SKU2SCENE_MODE=mock` plus `SKU2SCENE_QA_EVALUATORS=off` makes no generation or QA
+  calls; the browser demo makes no cloud calls at all. See [verification.md](verification.md).
 
 ## QA fails closed
 

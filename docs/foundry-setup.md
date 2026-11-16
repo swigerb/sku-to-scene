@@ -105,7 +105,7 @@ responses, where acceptance is uncertain. Check the original request before manu
 ## Verified status and remaining prerequisites
 
 All five model variants completed live smoke generation and returned downloaded MP4s using Entra authentication.
-See the README for measured wall times and the cache manifest for individual rendered-clip provenance.
+See [live-validation.md](live-validation.md) for measured wall times and the cache manifest for individual rendered-clip provenance.
 This does not verify every supported mode, resolution, duration, region or deployment offering.
 
 | Observation | Next owner |
