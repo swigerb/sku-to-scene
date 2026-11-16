@@ -2,7 +2,8 @@
 
 Only an explicit allowlist is published: the site shell (site/), brand marks (assets/brand), approved product
 images (assets/products), the cached authentic Foundry renders (demo-cache/*.mp4), sanitized evaluation results
-(demo-cache/evaluations/) and a data.json derived from
+(demo-cache/evaluations/), the 720p overview video and WebVTT captions (assets/sizzle/) with its poster, and a
+data.json derived from
 public repo data (demo-cache/manifest.json, catalog/, briefs/, model registry). The repo root, .env, .sku2scene/
 run outputs and anything else are never copied. The page makes no cloud calls.
 
@@ -21,27 +22,38 @@ from pathlib import Path
 REPO = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(REPO / "src"))
 
-from sku_to_scene import models  # noqa: E402
+from sku_to_scene import models, payloads  # noqa: E402
 from sku_to_scene.lto import CONCEPTS  # noqa: E402
 
-ALLOWED_SUFFIXES = {".html", ".css", ".js", ".json", ".png", ".mp4", ".nojekyll"}
+ALLOWED_SUFFIXES = {".html", ".css", ".js", ".json", ".png", ".mp4", ".vtt", ".nojekyll"}
 # Sanitized Foundry Evals results and human-review findings (written by scripts/run_foundry_evals.py / by hand).
 EVAL_FILES = ("foundry-evals-v1.json", "human-review.json")
+# Same-origin 720p web copy of the release media-v1 overview video plus WebVTT captions (see assets/sizzle/SOURCE.md).
+SIZZLE_FILES = ("sku-to-scene-sizzle-720p.mp4", "sku-to-scene-sizzle.vtt")
+# Ordered for the guided story; "label"/"story" are plain-language, "title"/"use_case"/"why" keep the technical framing.
 SCENARIOS = [
-    {"vertical": "apparel", "title": "Apparel & Home Decor", "accounts": "Gap, TJX, Target, Costco",
-     "use_case": "PDP image-to-video lookbook: animate the approved studio shot with fabric movement.",
-     "why": "Kling v3 Pro keeps SKU fidelity from the approved PIM image while adding fabric physics and camera motion.",
-     "clips": ["hero-apparel-kling"]},
-    {"vertical": "qsr", "title": "QSR, Coffee & C-Store", "accounts": "McDonald's, Starbucks, 7-Eleven",
+    {"vertical": "qsr", "title": "QSR, Coffee & C-Store", "label": "Coffee, QSR & convenience",
+     "story": "Compare seasonal offer concepts quickly, then review one recorded final video.",
+     "accounts": "McDonald's, Starbucks, 7-Eleven",
      "use_case": "Rapid LTO social ads: iterate cheap drafts, then render the winner with native audio.",
      "why": "Fast tiers (LTX-2.5 Fast, MiniMax Turbo) for drafts; Kling v3 Pro image-to-video + audio for the hero.",
      "clips": ["lto-hero-kling"]},
+    {"vertical": "apparel", "title": "Apparel & Home Decor", "label": "Apparel & lifestyle",
+     "story": "Bring an approved product image to life for product pages and lookbooks.",
+     "accounts": "Gap, TJX, Target, Costco",
+     "use_case": "PDP image-to-video lookbook: animate the approved studio shot with fabric movement.",
+     "why": "Kling v3 Pro keeps SKU fidelity from the approved PIM image while adding fabric physics and camera motion.",
+     "clips": ["hero-apparel-kling"]},
     {"vertical": "home-improvement", "title": "Home Improvement & Electronics",
+     "label": "Home improvement & electronics",
+     "story": "Show products in use while checking product details and layout.",
      "accounts": "The Home Depot, Lowe's, Best Buy, Staples",
      "use_case": "In-context previews: products on a job site or in a styled outdoor scene.",
      "why": "Kling v3 Pro handles physical interaction; MiniMax H3 Max follows strict multi-object layout prompts.",
      "clips": ["hero-home-kling", "hero-patio-h3max"]},
-    {"vertical": "grocery-pharmacy", "title": "Grocery & Pharmacy", "accounts": "Kroger, Albertsons, Walgreens",
+    {"vertical": "grocery-pharmacy", "title": "Grocery & Pharmacy", "label": "Grocery, pharmacy & consumer goods",
+     "story": "Explore lower-cost variations for frequent local promotions.",
+     "accounts": "Kroger, Albertsons, Walgreens",
      "use_case": "High-volume weekly circulars and digital endcaps, localized at scale.",
      "why": "MiniMax H3 Max Turbo is half the per-second rate of H3 Max, so high-SKU personalization is affordable.",
      "clips": ["hero-grocery-turbo"]},
@@ -71,6 +83,30 @@ def _qa(q: dict) -> dict:
         "reroll": q.get("reroll"), "automated_checks_passed": q.get("automated_checks_passed"),
         "human_signoff_required": q.get("human_signoff_required"), "publish_approved": q.get("publish_approved"),
     }
+
+
+def _duration_constraints(m: models.ModelSpec) -> dict:
+    """Per price tier, the durations the real payload validator accepts (default FPS), so the page can't drift."""
+    if m.duration_range:
+        lo, hi = m.duration_range
+        return {"duration_range": [lo, hi], "durations_by_tier": None, "default_duration": m.default_duration}
+    by_tier = {}
+    for tier in m.price_per_second:
+        ok = []
+        for d in m.durations:
+            if d == "auto":
+                continue
+            try:
+                if m.key.startswith("ltx"):
+                    payloads._ltx_duration(m, d, tier, 25)
+                else:
+                    payloads._kling_duration(m, d)
+            except payloads.PayloadError:
+                continue
+            ok.append(int(d))
+        by_tier[tier] = ok
+    return {"duration_range": None, "durations_by_tier": by_tier, "default_duration": m.default_duration,
+            "supports_auto": "auto" in m.durations}
 
 
 def build_data() -> dict:
@@ -126,7 +162,7 @@ def build_data() -> dict:
         "models": [{
             "key": m.key, "name": m.display_name, "modes": list(m.modes), "offering": m.offering,
             "price_per_second_usd": dict(m.price_per_second), "native_audio": m.native_audio,
-            "speed_tier": m.speed_tier, "strengths": list(m.strengths),
+            "speed_tier": m.speed_tier, "strengths": list(m.strengths), **_duration_constraints(m),
         } for m in models.REGISTRY.values()],
         "clips": clips,
         "lto": {
@@ -173,6 +209,11 @@ def build(out: Path) -> Path:
         doc = json.loads(src.read_text(encoding="utf-8"))
         (out / "evaluations" / name).write_text(json.dumps(doc, separators=(",", ":"), allow_nan=False),
                                                  encoding="utf-8")
+    (out / "sizzle").mkdir()
+    for name in SIZZLE_FILES:
+        shutil.copy2(REPO / "assets" / "sizzle" / name, out / "sizzle" / name)
+    shutil.copy2(REPO / "docs" / "images" / "sku-to-scene-sizzle-thumbnail.png",
+                 out / "sizzle" / "sku-to-scene-sizzle-poster.png")
     (out / "data.json").write_text(json.dumps(data, indent=1), encoding="utf-8")
     (out / ".nojekyll").write_text("", encoding="utf-8")
     verify(out)

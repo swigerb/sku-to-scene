@@ -48,7 +48,10 @@ brief to the right **fal video model in Microsoft Foundry** — `Kling v3 Pro`, 
 ## What you're looking at
 
 - **The browser demo** replays eight **cached, authentic Foundry renders** with their recorded QA evidence. It
-  makes no cloud calls and generates nothing new. Only the recorded Variant #2 has a Kling hero render.
+  makes no cloud calls and generates nothing new. Start with **Watch overview** (the narrated video with
+  captions), **Start guided demo** (step-by-step, with Previous/Next/Play/Restart/Fullscreen) or **Explore
+  scenarios**. Previewing a draft never selects it; only the recorded Variant #2 has a Kling hero render, and
+  the page says so before you choose.
 - **Automated QA is a screening aid, not approval.** Recorded verdicts: **2 pass / 6 fail**; every clip still
   needs human sign-off (`publish_approved` is false).
 - **Costs are estimates** (preview list price × requested seconds), not Azure bills.

@@ -57,7 +57,7 @@ it; the Foundry Evals v1 rubric marks such checks N/A with a reason, without cha
    | --- | --- | --- | --- | --- |
    | `lto-hero-kling` | requested, mono AAC | −24.6 LUFS | +2.0 dBTP | **Publication blocker (human):** loud café ambience, frothing does not match the picture; clipping risk |
    | `lto-draft-1` | not requested, present | −25.6 LUFS | −11.6 dBTP | Unreviewed model audio |
-   | `lto-draft-2` | not requested, **no stream** | — | — | Silence is the file, not the Sound toggle |
+   | `lto-draft-2` | not requested, **no stream** | — | — | Silence is the file, not the player |
    | `lto-draft-3` | not requested, present | −42.8 LUFS | −24.5 dBTP | Very quiet, unreviewed |
 
    The browser demo plays the hero at 50% volume. That is mitigation only and does not fix the mismatch.
@@ -90,7 +90,9 @@ it; the Foundry Evals v1 rubric marks such checks N/A with a reason, without cha
 | Clip looks wrong but QA passed | Frame sampling missed it, or the VLM misjudged | Treat human review as authoritative; file a bug with evidence; do not publish. |
 | QA fails on a check that cannot apply | Rubric applicability gap (for example patio logo) | Leave the verdict; note it for the versioned rubric. Never tune thresholds to pass. |
 | Mock rehearsal shows `pass`/`fail` instead of `manual_review` | Cloud evaluators enabled via `.env` | Set `SKU2SCENE_QA_EVALUATORS=off` and restart the MCP server. |
-| Browser demo shows no video | Stale cache or blocked autoplay | Hard-refresh; press play; videos start muted (use the Sound toggle). |
+| Browser demo shows no video | Stale cache or blocked autoplay | Hard-refresh; press play on the video itself. A "Playback didn't start" message names the browser's reason. |
+| Browser demo says "Human-review evidence unavailable" | `human-review.json` failed to load or is malformed | Treat publication as blocked. Rebuild the site from `main`; check `demo-cache/evaluations/human-review.json` is valid. Don't present the page as showing all blockers. |
+| Calculator says a duration isn't supported | That model/tier doesn't accept it (for example LTX Fast at 1440p/2160p caps at 10 s) | Pick a listed duration; lists come from the payload validator. Clip counts must be whole numbers ≥ 1. |
 
 ### Isolate, then recover
 
