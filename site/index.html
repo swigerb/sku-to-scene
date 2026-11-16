@@ -8,18 +8,14 @@
   <script>
     (() => {
       const param = new URLSearchParams(window.location.search).get("scoutTheme");
-      const theme =
-        param || (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
-      document.documentElement.setAttribute("data-theme", theme);
-    })();
-  </script>
-  <script>
-    (() => {
-      if (new URLSearchParams(window.location.search).get("scoutTheme")) return;
+      let stored;
       try {
-        const stored = localStorage.getItem("s2s-theme");
-        if (stored) document.documentElement.setAttribute("data-theme", stored);
+        stored = localStorage.getItem("s2s-theme");
       } catch (_) { /* storage unavailable */ }
+      const valid = (value) => value === "light" || value === "dark";
+      const theme = valid(param) ? param : valid(stored) ? stored
+        : window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+      document.documentElement.setAttribute("data-theme", theme);
     })();
   </script>
   <link rel="icon" type="image/png" href="brand/favicon-light-48.png" media="(prefers-color-scheme: light)">
@@ -40,7 +36,19 @@
       <a href="#scenarios" data-view="scenarios">Scenario gallery</a>
       <a href="#evidence" data-view="evidence">Technical evidence</a>
     </nav>
-    <button class="ghost" id="theme-toggle" type="button" aria-label="Toggle light or dark theme">Theme</button>
+    <div class="theme-toggle" id="theme-toggle" role="radiogroup" aria-label="Color theme">
+      <button id="theme-light" type="button" role="radio" aria-checked="true" tabindex="0" aria-label="Light theme" title="Light theme">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true" focusable="false">
+          <circle cx="12" cy="12" r="4"></circle>
+          <path d="M12 2v2m0 16v2M2 12h2m16 0h2M4.93 4.93l1.42 1.42m11.3 11.3 1.42 1.42M4.93 19.07l1.42-1.42m11.3-11.3 1.42-1.42"></path>
+        </svg>
+      </button>
+      <button id="theme-dark" type="button" role="radio" aria-checked="false" tabindex="-1" aria-label="Dark theme" title="Dark theme">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true" focusable="false">
+          <path d="M20.9 13A9 9 0 0 1 11 3.1 9 9 0 1 0 20.9 13Z"></path>
+        </svg>
+      </button>
+    </div>
   </header>
 
   <main id="main">
@@ -93,8 +101,9 @@
     </dialog>
 
     <section id="guide" class="panel view" data-view="guide" aria-labelledby="guide-heading">
-      <p class="eyebrow">Guided demo · Seasonal coffee offer</p>
+      <p class="eyebrow" id="guide-area-label">Guided demo · QSR, Coffee &amp; Convenience</p>
       <h2 id="guide-heading" tabindex="-1">Draft ideas fast, choose a concept, review the recorded hero</h2>
+      <nav class="area-guides" id="guide-areas" aria-label="Guided demo areas"></nav>
       <div class="guide" id="guide-wrap">
         <div class="guide-bar" role="group" aria-label="Guided demo controls">
           <button type="button" class="ghost" id="guide-prev">←<span class="long"> Previous</span></button>
@@ -175,7 +184,7 @@
         <div class="qa-summary" id="qa-summary"></div>
         <div class="table-wrap">
           <table class="qa-table" id="qa-table">
-            <caption>All eight recorded clips: measured scores vs. brand thresholds</caption>
+            <caption>Recorded clips: measured scores vs. per-brand thresholds (original eight plus account drafts)</caption>
           </table>
         </div>
         <div class="card neg" id="neg-control"></div>
@@ -187,6 +196,8 @@
           negative control and the router's decisions. They sit next to, not instead of, the original screening
           verdicts. This page replays the results; it runs no evaluations.</p>
         <div id="evals-body"></div>
+        <p class="notice">New account drafts: <strong>Not yet evaluated</strong> in Foundry Evaluations. Their
+          direct frame screening and Content Safety results are separate; no v2 run is claimed.</p>
       </details>
     </section>
 
@@ -207,8 +218,10 @@
         <a href="https://github.com/swigerb/sku-to-scene/blob/main/docs/foundry-setup.md">Plan a scoped pilot</a>
         (with the <a href="https://github.com/swigerb/sku-to-scene/blob/main/docs/governance.md">governance caveats</a>)
       </p>
-      <p>All brands and products are fictional (Northwind Coffee, Contoso Pro, Fabrikam, Woodgrove Wellness); product
-        images are AI-generated. Prices are preview list prices. MIT licensed.</p>
+      <p id="fictional-brands"></p>
+      <p>Fictional brands and products. Real company names identify representative retail segments and cite public
+        sources only; no affiliation, endorsement, trademarks, or customer data. Product images are AI-generated.
+        Prices are preview list prices. MIT licensed.</p>
     </div>
   </footer>
   <script src="app.js"></script>

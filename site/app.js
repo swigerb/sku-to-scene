@@ -83,6 +83,9 @@
       };
     }
     const mine = findingsFor(clip.id);
+    if (!mine.length) {
+      return { level: "awaiting", title: "Awaiting human review — not approved.", text: "No human review has been recorded for this clip. Automated screening is not approval." };
+    }
     const blockers = mine.filter(isBlocker);
     if (blockers.length) {
       return { level: "blocked", title: "Publication blocked.", text: `${blockers.map((f) => f.observation).join(" ")} Human sign-off required.` };
@@ -101,6 +104,7 @@
   const READINESS_PILL = {
     unavailable: ["fail", "Review evidence unavailable"], blocked: ["fail", "Publication blocked"],
     decision: ["warn", "Needs a human decision"], review: ["", "Not approved: sign-off required"],
+    awaiting: ["warn", "Awaiting human review — not approved"],
   };
   function readinessPill(clip) {
     const r = readiness(clip);
@@ -164,6 +168,13 @@
   }
 
   function audioNote(c) {
+    if (c.presentation_audio_removed) {
+      return h("p", { class: "audio-note none" }, h("b", {}, "Silent presentation edit. "),
+        "The model returned an unexpected audio stream; it was removed here, not requested or validated. ",
+        h("a", { href: c.original_file }, "Original-audio rendition retained"), ". Original source retained locally.",
+        c.presentation_trimmed_to_s ? ` Video trimmed to ${c.presentation_trimmed_to_s} seconds for presentation.` : "",
+        c.qa_sampled_from ? " Recorded QA samples come from the retained untrimmed rendition." : "");
+    }
     if (!c.has_audio) {
       return h("p", { class: "audio-note none" }, h("b", {}, "No recorded audio track. "),
         `Audio was ${String(c.audio || "").startsWith("native") ? "requested" : "not requested"} for this ${c.model_name} render and the file has no audio stream, so the Sound toggle cannot add one.`);
@@ -203,11 +214,28 @@
   }
 
   // ---------- page chrome: theme, mobile menu, evidence anchors, overview ----------
-  $("#theme-toggle").addEventListener("click", () => {
-    const next = document.documentElement.getAttribute("data-theme") === "dark" ? "light" : "dark";
-    document.documentElement.setAttribute("data-theme", next);
-    try { localStorage.setItem("s2s-theme", next); } catch (_) { /* storage unavailable */ }
+  const themes = ["light", "dark"];
+  const themeButtons = themes.map((name) => $(`#theme-${name}`));
+  function setTheme(name, persist = false) {
+    document.documentElement.setAttribute("data-theme", name);
+    themeButtons.forEach((b, i) => {
+      b.setAttribute("aria-checked", String(themes[i] === name));
+      b.setAttribute("tabindex", themes[i] === name ? "0" : "-1");
+    });
+    if (persist) {
+      try { localStorage.setItem("s2s-theme", name); } catch (_) { /* storage unavailable */ }
+    }
+  }
+  themeButtons.forEach((b, i) => b.addEventListener("click", () => setTheme(themes[i], true)));
+  $("#theme-toggle").addEventListener("keydown", (e) => {
+    const active = document.documentElement.getAttribute("data-theme") === "dark" ? 1 : 0;
+    const i = { ArrowRight: 1 - active, ArrowLeft: 1 - active, ArrowUp: 1 - active, ArrowDown: 1 - active, Home: 0, End: 1 }[e.key];
+    if (i === undefined) return;
+    e.preventDefault();
+    setTheme(themes[i], true);
+    themeButtons[i].focus();
   });
+  setTheme(document.documentElement.getAttribute("data-theme") === "dark" ? "dark" : "light");
 
   const menu = $("#menu-toggle");
   function setMenu(open) {
@@ -230,7 +258,9 @@
   const VIEW_HEADINGS = { home: "#hero-title", guide: "#guide-heading", scenarios: "#scenarios-heading", evidence: "#evidence-heading" };
   const VIEW_ALIASES = { "": "home", top: "home", routing: "evidence", qa: "evidence", evals: "evidence" };
   let currentView = null;
+  let routeGuide = () => {};
   function viewFor(id) {
+    if (id.startsWith("guide/")) return "guide";
     if (id === "main") return currentView || "home"; // the skip link stays in the current view
     if (VIEWS[id]) return id;
     if (id in VIEW_ALIASES) return VIEW_ALIASES[id];
@@ -251,6 +281,7 @@
       if (a.dataset.view === name) a.setAttribute("aria-current", "page"); else a.removeAttribute("aria-current");
     });
     currentView = name;
+    if (name === "guide") routeGuide(id.split("/")[1] || "qsr");
     openDetails(id);
     const target = id && typeof document.getElementById === "function" ? document.getElementById(id) : null;
     if (target && target.tagName === "DETAILS") {
@@ -310,9 +341,11 @@
       alert.hidden = false;
     }
     initLanding(data, clips, products);
-    const gallery = initScenarios(data, clips, products);
-    initEntry(data, clips, products, gallery);
-    initGuide(data, clips, products);
+    initScenarios(data, clips, products);
+    initEntry(data, clips, products);
+    routeGuide = initGuide(data, clips, products);
+    if (viewFor(hashId()) === "guide") routeGuide(hashId().split("/")[1] || "qsr");
+    $("#fictional-brands").textContent = `Fictional retail examples: ${data.accounts.map((a) => a.fictional_brand).join(", ")}.`;
     initReadinessSummary(data, clips);
     initRouting(data);
     initQa(data, clips, products);
@@ -336,15 +369,44 @@
       readinessBox(hero));
   }
 
-  function initEntry(data, clips, products, gallery) {
-    $("#entry-grid").replaceChildren(...data.scenarios.map((s, i) => {
+  function initEntry(data, clips, products) {
+    $("#entry-grid").replaceChildren(...data.scenarios.map((s) => {
       const c = clips[s.clips[0]];
       const img = c.source_image || products[c.sku].image;
-      return h("a", { class: "entry-card card", href: "#scenarios", onclick: () => { showView("scenarios", false); gallery.select(i, true); } },
+      const dest = `guide/${s.guide}`;
+      return h("a", { class: "entry-card card", href: `#${dest}`, onclick: () => showView(dest, true) },
         img ? h("img", { src: img, alt: "" }) : null,
         h("span", { class: "entry-title" }, s.label || s.title),
         h("span", { class: "hint" }, s.story || s.use_case));
     }));
+  }
+
+  function accountCard(a, clips, withPreview = false) {
+    const recorded = a.recorded_clip && clips[a.recorded_clip];
+    return h("article", { class: "card account-card", "data-account": a.id },
+      h("h3", {}, a.fictional_brand),
+      a.sources.length
+        ? h("p", { class: "hint" }, `Inspired by publicly reported priorities of ${a.real_company}. `,
+          a.sources.map((s, i) => h("a", { href: s.url }, `${i ? " · " : ""}${s.publisher} (${s.published})`)))
+        : h("p", { class: "hint" }, `Representative account: ${a.real_company}. Public-source brief pending.`),
+      a.need ? h("p", {}, h("b", {}, "Public priority: "), a.need) : null,
+      h("p", {}, h("b", {}, "Video need: "), a.use_case || "Account-specific brief pending public-source review."),
+      recorded && recorded.source_image ? h("img", { class: "guide-reference", src: recorded.source_image, alt: `Approved reference for ${a.fictional_brand}'s recorded product` }) : null,
+      a.brief ? h("blockquote", {}, a.brief) : null,
+      kv([["Channel", `${a.channel} · ${a.aspect_ratio}`], ["Routed model", a.model_name],
+        ["Why", a.why], ["Estimate", `${usd(a.estimate_usd)} for ${a.duration} s (${a.tier}); list-price estimate, not a bill`]]),
+      h("p", { class: "hint" }, a.hero_clip ? "Recorded PIM hero available; human sign-off still required."
+        : "Preview only — no approved PIM hero recorded."),
+      recorded ? readinessPill(recorded) : h("span", { class: "pill warn" }, a.excluded_clips?.length ? "Recording withheld — not approved" : "No recording yet"),
+      a.excluded_clips?.length ? h("p", { class: "hint" }, "Withheld recordings: ", a.excluded_clips.map((c) => c.reason).join(" "),
+        " Original request and screening evidence are retained in Technical evidence.") : null,
+      withPreview && a.planned_clip && recorded ? [
+        h("p", { class: "hint" }, "Silent draft · Awaiting human review"),
+        video(recorded, { title: `${a.fictional_brand} preview` }),
+        verdictPill(recorded.qa.verdict),
+        inspect("Inspect evidence", audioNote(recorded), h("p", {}, "Not yet evaluated."),
+          h("ul", {}, recorded.qa.findings.map((f) => h("li", {}, f)))),
+      ] : null);
   }
 
   // ---------- guided demo (presenter-controlled; no timers, no auto-scroll, no auto-selection) ----------
@@ -362,11 +424,25 @@
       { key: "review", title: "Review and sign-off" },
     ];
     const state = { step: 0, selected: null, preview: drafts[0].variant };
+    let area = "qsr";
+    let chosenRecord = null;
+    const areaAccounts = () => data.accounts.filter((a) => a.area === area);
+    const extraRecords = () => areaAccounts().filter((a) => a.id !== "northwind").flatMap((a) => {
+      const ids = a.draft_clips.length ? a.draft_clips : a.recorded_clip ? [a.recorded_clip] : [];
+      return ids.filter((id) => clips[id]).map((id) => ({ account: a, clip: clips[id] }));
+    });
+    const isCoffee = () => area === "qsr";
+    const chosenHero = () => chosenRecord ? chosenRecord.clip : hero;
+    const chosenProduct = () => chosenRecord ? products[chosenRecord.clip.sku] : product;
     let players = {};
     let selectButton = null;
     const stage = $("#guide-stage");
     const prev = $("#guide-prev"), next = $("#guide-next"), play = $("#guide-play");
     const full = $("#guide-full"), wrap = $("#guide-wrap");
+    const areaLinks = data.scenarios.map((s) => h("a", {
+      href: `#guide/${s.guide}`, onclick: () => showView(`guide/${s.guide}`, true),
+    }, s.title));
+    $("#guide-areas").replaceChildren(...areaLinks);
 
     const canEnter = (i) => i <= 2 || state.selected !== null;
     const chips = STEPS.map((s, i) => h("button", { type: "button", class: "chip", onclick: () => go(i) }, `${i + 1} · ${s.title}`));
@@ -442,8 +518,67 @@
           h("div", {}, verdictPill(c.qa.verdict), evalPill(evalCheck(c.id, "concept_adherence"), "AI eval · concept"))));
     }
 
+    function recordedCard(record, selectable) {
+      const { account: a, clip: c } = record;
+      const v = track(video(c, { loop: true, title: `${a.fictional_brand} preview` }));
+      players[c.id] = v;
+      v.addEventListener("play", () => { state.preview = c.id; updateControls(); });
+      const eligible = a.hero_clip === c.id && !!c.source_image;
+      const chosen = state.selected === a.id;
+      const choose = eligible && selectable ? h("button", {
+        class: "select", type: "button", "aria-pressed": String(chosen), onclick: () => {
+          pausePlayers(v);
+          chosenRecord = record;
+          state.selected = a.id;
+          stage.querySelectorAll("button.select").forEach((b) => b.setAttribute("aria-pressed", "false"));
+          stage.querySelectorAll("article.draft").forEach((card) => card.classList.toggle("selected", card.dataset.account === a.id));
+          choose.setAttribute("aria-pressed", "true");
+          choose.textContent = `${a.fictional_brand} selected`;
+          $("#guide-status").textContent = `${a.fictional_brand} selected. Press Next to review its recorded hero.`;
+          updateControls();
+        },
+      }, chosen ? `${a.fictional_brand} selected` : `Select ${a.fictional_brand}`) : null;
+      return h("article", { class: `card draft${c.aspect_ratio === "9:16" ? " vertical" : ""}${chosen ? " selected" : ""}`, "data-account": a.id },
+        h("h4", {}, a.fictional_brand),
+        h("div", {}, h("span", { class: "pill" }, eligible ? "Recorded PIM hero available · no separate draft recorded"
+          : c.account ? "Silent draft · Awaiting human review" : "Text-only recording · no PIM hero"),
+          readinessPill(c)),
+        v,
+        h("button", { class: "ghost preview", type: "button", onclick: () => { state.preview = c.id; togglePlay(v); } }, `Preview ${a.fictional_brand}`),
+        choose || (selectable ? h("p", { class: "hint" }, "Preview only — no approved PIM hero recorded.") : null),
+        inspect("Inspect evidence", verdictPill(c.qa.verdict), audioNote(c),
+          evalCheck(c.id, "concept_adherence") ? evalPill(evalCheck(c.id, "concept_adherence"), "AI eval · concept")
+            : h("p", {}, "Not yet evaluated."),
+          kv([["Model", c.model_name], ["Request ID", h("span", { class: "mono" }, c.request_id)]])));
+    }
+    function previews(selectable) {
+      return h("div", { class: "stage-media drafts" },
+        isCoffee() ? drafts.map((c) => draftCard(c, selectable)) : null,
+        extraRecords().map((r) => recordedCard(r, selectable)),
+        areaAccounts().filter((a) => !a.recorded_clip && !a.draft_clips.length).map((a) =>
+          h("article", { class: "card", "data-account": a.id }, h("h4", {}, a.fictional_brand),
+            h("p", {}, a.excluded_clips?.length ? ["Recordings withheld from the primary demo. ",
+              h("a", { href: "#qa" }, "Inspect the retained screening evidence.")]
+              : "No recording yet. No video has been generated for this example."),
+            h("p", { class: "hint" }, "Preview only — no approved PIM hero recorded."))));
+    }
+    function generalHero(review) {
+      const c = chosenHero(), p = chosenProduct();
+      players.hero = track(video(c, { title: "recorded hero", label: p.name }));
+      return [
+        h("div", { class: `stage-media${c.aspect_ratio === "9:16" ? " vertical" : ""}` },
+          !review && c.source_image ? h("figure", {}, h("img", { class: "guide-reference", src: c.source_image, alt: `Approved product image: ${p.name}` }),
+            h("figcaption", {}, "Approved product image → recorded video")) : null, players.hero),
+        notes(review ? "@brand-qa + human reviewer" : "@foundry-router", review ? "Review and sign-off" : `Recorded hero: ${chosenRecord.account.fictional_brand}`,
+          h("p", {}, `Recorded ${c.model_name} ${c.mode}; no generation occurs in this browser.`),
+          verdictPill(c.qa.verdict), readinessBox(c), audioNote(c),
+          evalCheck(c.id, "product_identity") ? evalPill(evalCheck(c.id, "product_identity"), "AI eval · identity") : h("p", {}, "Not yet evaluated."),
+          inspect("Inspect evidence", kv([["Estimate", usd(c.estimate_usd)], ["Request ID", h("span", { class: "mono" }, c.request_id)]])),
+          h("a", { href: "#evidence" }, "Inspect all technical evidence"))];
+    }
     function select(variant) {
       pausePlayers(players[variant]);
+      chosenRecord = null;
       state.selected = variant;
       if (selectButton) {
         selectButton.setAttribute("aria-pressed", "true");
@@ -456,36 +591,36 @@
     const draftPasses = drafts.filter((c) => c.qa.verdict === "pass").length;
     const RENDER = {
       brief: () => [
-        h("div", { class: "stage-media brief" },
-          h("img", { src: product.image, alt: `Approved product image: ${product.name}` }),
-          h("div", {}, h("span", { class: "pill auth" }, "Approved product image"), h("span", { class: "pill" }, "Vertical social ad (9:16)"),
-            h("span", { class: "pill" }, product.brand))),
-        notes("@retail-merchandiser", "Start from an approved product and a short brief",
-          h("p", {}, "The merchandiser agent reads the product record and the presenter's request, then writes three short scene concepts with camera and sound cues."),
-          h("blockquote", {}, lto.presenter_prompt),
-          inspect("Technical detail", kv([
+        h("div", { class: "account-grid" }, areaAccounts().map((a) => accountCard(a, clips))),
+        notes("@retail-merchandiser", "Start from a product and a short brief",
+          h("p", {}, "Choose the area, inspect the fictional account briefs, and move through the recordings deliberately. Sources describe public priorities, not customer data."),
+          isCoffee() ? h("blockquote", {}, lto.presenter_prompt) : null,
+          isCoffee() ? inspect("Technical detail", kv([
             ["Product ID (SKU)", lto.sku], ["Channel", lto.channel], ["Image status (PIM)", product.image_status],
-          ]))),
+          ])) : null),
       ],
       drafts: () => [
-        h("div", { class: "stage-media drafts" }, drafts.map((c) => draftCard(c, false))),
+        previews(false),
         notes("@foundry-router", "Compare quick, low-cost drafts",
           h("p", {}, "The router sends early ideas to fast, lower-cost video models so the team can compare concepts before paying for a final render."),
           h("p", {}, "Watching a draft never chooses it. Preview as many as you like."),
-          h("p", { class: "hint" }, `${draftPasses === 0 ? "None" : `${draftPasses} of ${drafts.length}`} of these recorded drafts passed the final-brand screen; concept #2, for example, has garbled lettering. ` +
-            "Drafts are for comparing ideas; that is an observation about these clips, not a rule that drafts must fail.")),
+          isCoffee() ? h("p", { class: "hint" }, `${draftPasses === 0 ? "None" : `${draftPasses} of ${drafts.length}`} of the three coffee drafts passed the final-brand screen; concept #2, for example, has garbled lettering. ` +
+            "Drafts are for comparing ideas; that is an observation about these clips, not a rule that drafts must fail.") : h("p", { class: "hint" }, "Existing PIM heroes are labelled as recorded examples, not invented draft runs. New text-only drafts cannot unlock a hero.")),
       ],
       select: () => {
         selectButton = null;
         return [
-          h("div", { class: "stage-media drafts" }, drafts.map((c) => draftCard(c, true))),
+          previews(true),
           notes("Presenter", "Choose a concept",
-            h("p", {}, `Only concept #${lto.hero_variant} (${heroConcept.title}) has a recorded hero render in this replay. The other concepts are preview only.`),
+            h("p", {}, isCoffee() ? `Only concept #${lto.hero_variant} (${heroConcept.title}) has a recorded hero render in this replay. The other concepts are preview only.`
+              : "Only an existing recorded PIM hero can be selected. Text-only previews have no approved PIM hero recorded."),
             h("p", {}, "This page can't generate video. In live mode, choosing another concept would start a new, billable Foundry job."),
-            h("p", { class: "hint" }, state.selected ? `Concept #${state.selected} is selected.` : "Select the concept to continue.")),
+            h("p", { class: "hint" }, state.selected ? isCoffee() ? `Concept #${state.selected} is selected.`
+              : `${chosenRecord.account.fictional_brand} is selected.` : "Select the concept to continue.")),
         ];
       },
       hero: () => {
+        if (!isCoffee()) return generalHero(false);
         players.hero = track(video(hero, { label: product.name, title: "recorded hero" }));
         return [
           h("div", { class: "stage-media vertical" }, players.hero),
@@ -511,6 +646,7 @@
         ];
       },
       review: () => {
+        if (!isCoffee()) return generalHero(true);
         players.hero = track(video(hero, { label: product.name, title: "recorded hero" }));
         const blocker = findingsFor(hero.id).find(isBlocker);
         return [
@@ -529,7 +665,7 @@
       pausePlayers();
       players = {};
       const step = STEPS[state.step];
-      stage.replaceChildren(h("div", { class: `stage stage-${step.key}` }, ...RENDER[step.key]()));
+      stage.replaceChildren(h("div", { class: `stage stage-${step.key}${step.key === "brief" ? " stage-accounts" : ""}` }, ...RENDER[step.key]()));
       $("#guide-status").textContent = `Step ${state.step + 1} of ${STEPS.length}: ${step.title}`;
       updateControls();
       const active = document.activeElement;
@@ -546,7 +682,8 @@
     function restart() {
       state.step = 0;
       state.selected = null;
-      state.preview = drafts[0].variant;
+      chosenRecord = null;
+      state.preview = isCoffee() ? drafts[0].variant : extraRecords()[0]?.clip.id;
       render();
     }
 
@@ -578,6 +715,15 @@
       full.textContent = document.fullscreenElement ? "Exit fullscreen" : "Fullscreen";
     });
     render();
+    return (key) => {
+      const s = data.scenarios.find((item) => item.guide === key) || data.scenarios[0];
+      if (s.guide !== area) {
+        area = s.guide;
+        restart();
+      }
+      $("#guide-area-label").textContent = `Guided demo · ${s.title}`;
+      areaLinks.forEach((a, i) => a.setAttribute("aria-current", String(data.scenarios[i].guide === area)));
+    };
   }
 
   // ---------- scenario gallery ----------
@@ -641,6 +787,8 @@
       const s = data.scenarios[i];
       panel.replaceChildren(
         h("p", { class: "lede small" }, s.story || s.use_case, " ", h("span", { class: "hint" }, `Examples: ${s.accounts}.`)),
+        h("p", {}, h("a", { href: `#guide/${s.guide}`, onclick: () => showView(`guide/${s.guide}`, true) }, `Start ${s.title} guided demo`)),
+        h("div", { class: "account-grid" }, data.accounts.filter((a) => a.area === s.guide).map((a) => accountCard(a, clips, true))),
         h("div", { class: `scenario${s.clips.length === 1 ? " single" : ""}` }, s.clips.map((id) => card(clips[id], s))));
     }
     select(0, false);
@@ -650,11 +798,14 @@
   // ---------- readiness summary (always visible in the evidence section) ----------
   function initReadinessSummary(data, clips) {
     const all = data.clips;
-    const pass = all.filter((c) => c.qa.verdict === "pass").length;
+    const original = all.filter((c) => !c.account);
+    const pass = original.filter((c) => c.qa.verdict === "pass").length;
     const stat = (big, text) => h("div", { class: "stat" }, h("b", {}, big), text);
     const base = [
-      stat(`${pass} of ${all.length}`, "recorded clips passed automated screening"),
+      stat(`${pass} of ${original.length}`, "original recorded clips passed automated screening"),
       stat(String(all.length), "need human sign-off before publication"),
+      stat(`${data.accounts.filter((a) => a.planned_clip && !a.recorded_clip && a.excluded_clips?.length).length} / ${data.accounts.filter((a) => a.planned_clip).length}`,
+        "new account examples withheld from primary playback; briefs and evidence retained"),
     ];
     const box = $("#readiness-summary");
     if (!hrAvailable()) {
@@ -785,15 +936,18 @@
     const pass = all.filter((c) => c.qa.verdict === "pass").length;
     const sev = all.map((c) => c.qa.content_safety_max_severity).filter((s) => s !== null);
     $("#qa-summary").replaceChildren(
+      h("div", { class: "stat" }, h("b", {}, "2 / 8"), "original clips passed; baseline unchanged"),
       h("div", { class: "stat" }, h("b", {}, `${pass} / ${all.length}`), "passed automated screening"),
-      h("div", { class: "stat" }, h("b", {}, `${all.length - pass}`), "failed at least one threshold"),
+      h("div", { class: "stat" }, h("b", {}, `${all.filter((c) => c.qa.verdict === "fail").length}`), "failed at least one threshold"),
       h("div", { class: "stat" }, h("b", {}, sev.length ? String(Math.max(...sev)) : "n/a"), "max Content Safety severity"),
       h("div", { class: "stat" }, h("b", {}, `${all.filter((c) => c.qa.human_signoff_required).length}`), "require human sign-off"));
 
     $("#qa-table").append(
       h("thead", {}, h("tr", {}, ["Clip", "Model", "Verdict", ...CHECKS.map((c) => CHECK_LABEL[c]), "Safety max", "Request ID"].map((t) => h("th", { scope: "col" }, t)))),
       h("tbody", {}, all.map((c) => h("tr", {},
-        h("th", { scope: "row" }, c.id, h("div", { class: "hint" }, c.concept || products[c.sku].name)),
+        h("th", { scope: "row" }, c.id, h("div", { class: "hint" }, c.concept || products[c.sku].name),
+          c.withheld_reason ? h("p", {}, h("b", {}, "Withheld from primary demo: "), c.withheld_reason) : null,
+          c.account ? inspect("Screening findings", h("ul", {}, c.qa.findings.map((f) => h("li", {}, f)))) : null),
         h("td", {}, c.model_name),
         h("td", {}, h("span", { class: `pill ${c.qa.verdict === "pass" ? "pass" : "fail"}` }, c.qa.verdict)),
         CHECKS.map((k) => scoreCell(c.qa, k)),

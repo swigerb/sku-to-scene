@@ -113,6 +113,22 @@ button:hover, .button:hover { background: var(--cp-accent-hover); }
 button.ghost, .button.ghost { background: var(--cp-surface); color: var(--cp-accent); }
 button.ghost:hover, .button.ghost:hover { background: var(--cp-accent-soft); }
 button[disabled] { opacity: 0.5; cursor: not-allowed; }
+.theme-toggle {
+  display: inline-flex; gap: 4px; padding: 4px; border-radius: 999px;
+  background: var(--cp-bg-elevated); border: 1px solid var(--cp-border-strong); flex-shrink: 0;
+}
+.theme-toggle button {
+  display: grid; place-items: center; padding: 6px; min-width: 32px; min-height: 32px;
+  border-radius: 999px; background: var(--cp-bg-elevated); color: var(--cp-text-secondary);
+  border: 1px solid var(--cp-bg-elevated);
+}
+.theme-toggle svg { width: 20px; height: 20px; }
+.theme-toggle button[aria-checked="true"] { background: var(--cp-surface); border-color: var(--cp-accent); color: var(--cp-accent); }
+.theme-toggle button:hover { background: var(--cp-surface-soft); }
+.theme-toggle button:focus-visible { outline-offset: 3px; border-radius: 999px; }
+@media (pointer: coarse), (max-width: 640px) {
+  .theme-toggle button { min-width: 44px; min-height: 44px; }
+}
 
 main { max-width: 1240px; margin: 0 auto; padding: 0 24px 48px; }
 h1 { font-size: clamp(1.9rem, 4vw, 2.9rem); line-height: 1.12; margin: 6px 0 12px; }
@@ -180,6 +196,14 @@ dialog.overview::backdrop { background: var(--cp-overlay); }
 .guide:fullscreen .guide-bar { top: 0; margin: 0 -24px; padding: 12px 24px; border-radius: 0; }
 .guide-status { font-weight: 700; margin-left: auto; }
 .guide-clip { margin: 0; }
+.area-guides { display: flex; flex-wrap: wrap; margin: 0 0 16px; gap: 8px; }
+.area-guides a { padding: 6px 12px; border: 1px solid var(--cp-border-strong); border-radius: 0.625rem; background: var(--cp-surface); }
+.area-guides a[aria-current="true"] { color: var(--cp-accent); border-color: var(--cp-accent); }
+.account-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr)); gap: 12px; }
+.account-card { display: grid; align-content: start; gap: 8px; min-width: 0; }
+.account-card p { margin: 0; }
+.account-card blockquote { overflow-wrap: anywhere; }
+.stage-accounts { grid-template-columns: 1fr; }
 .steps { display: flex; gap: 8px; list-style: none; padding: 0; margin: 16px 0; flex-wrap: wrap; }
 .steps .chip { padding: 6px 12px; border-radius: 999px; border: 1px solid var(--cp-border); color: var(--cp-text-secondary); font-weight: 600; font-size: 0.88rem; background: var(--cp-surface); }
 .steps .chip[aria-current="step"] { border-color: var(--cp-accent); color: var(--cp-accent); background: var(--cp-accent-soft); }
@@ -190,6 +214,8 @@ dialog.overview::backdrop { background: var(--cp-overlay); }
 .stage-title { font-size: 1.25rem; margin: 0; }
 .stage-media.brief { display: grid; grid-template-columns: 220px 1fr; gap: 16px; align-items: start; }
 .stage-media.brief img { width: 100%; border-radius: 0.625rem; border: 1px solid var(--cp-border); background: var(--cp-surface-soft); }
+.guide-reference { max-width: 260px; width: 100%; border-radius: 0.625rem; }
+.stage-media figure { margin: 0 0 12px; }
 .stage-media.vertical video { max-height: 520px; aspect-ratio: 9 / 16; object-fit: contain; }
 blockquote { margin: 0; padding-left: 12px; border-left: 3px solid var(--cp-border-strong); color: var(--cp-text-secondary); font-size: 0.92rem; }
 .drafts { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }

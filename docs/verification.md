@@ -14,7 +14,7 @@ Set `SKU2SCENE_QA_EVALUATORS=off` too (the repository MCP configs already do).
 
 ## Recorded QA outcomes
 
-All eight cached clips are authentic Foundry renders. Scores are AI screening judgments, not ground truth.
+The original eight cached clips are authentic Foundry renders. Scores are AI screening judgments, not ground truth.
 Thresholds differ by brand. The current definitions are in [catalog/brands.json](../catalog/brands.json),
 versioned with the repository. For a cached clip's recorded verdict, use that clip's `qa.thresholds` in
 [demo-cache/manifest.json](../demo-cache/manifest.json), not a later catalog revision.
@@ -29,7 +29,7 @@ versioned with the repository. For a cached clip's recorded verdict, use that cl
 
 | Clip | Model | Verdict | Failed checks | What a human should check |
 | --- | --- | --- | --- | --- |
-| `lto-draft-1` | MiniMax H3 Max Turbo (T2V) | fail | all four | Draft: warped/blurred logo, partly legible label (expected for text-only drafts) |
+| `lto-draft-1` | MiniMax H3 Max Turbo (T2V) | fail | all four | Measured warped/blurred logo and partly legible label; not a rule that text-only drafts must fail |
 | `lto-draft-2` | LTX-2.5 Fast (T2V) | fail | all four | Distorted, unreadable cup label; drink colour differs from the PIM image |
 | `lto-draft-3` | MiniMax H3 Max Turbo (T2V) | fail | all four | Different (invented) brand mark on the cup |
 | `lto-hero-kling` | Kling v3 Pro (I2V, audio) | **pass** | none | Logo/label across all frames; requested street scene only partly shown; audio cue alignment |
@@ -42,6 +42,82 @@ Applicability: the patio product has no PIM image and no visible logo, so logo/l
 current rubric treats that as a fail (fail-closed). Do not lower thresholds or rewrite the manifest to change
 it; the Foundry Evals v1 rubric marks such checks N/A with a reason, without changing the original verdict (see
 [foundry-evaluations-plan.md](foundry-evaluations-plan.md)).
+
+## Area-guide and account-preview checks
+
+- Open `#guide/qsr`, `#guide/apparel`, `#guide/home` and `#guide/grocery`, including in a narrow iframe.
+  Home cards should open those guides; `#guide` must still open coffee. Every area lists all of its fictional
+  accounts and their public citations. No real company name belongs in a fictional brand/product field.
+- Step deliberately. Playing a preview must not select it. Only Northwind concept #2 and the existing
+  approved-PIM heroes are selectable. Text-only patio and all new account drafts are preview-only.
+  Switching area, step or view and restarting must pause replaced or hidden media.
+- Check the sun/moon radios by pointer, Tab, arrows, Home and End. Exactly one is selected. A valid
+  `scoutTheme` query overrides the saved `s2s-theme`, then the system preference is the fallback.
+- New clips display **Awaiting human review — not approved** if the valid review record has no finding for
+  that clip. A failed/malformed review-file load instead displays **Human-review evidence unavailable**.
+  The original coffee-audio publication blocker, concept #2 silence and 2/8 screening baseline remain unchanged.
+- New text-only drafts use no approved PIM reference. Their unchanged per-brand thresholds screen sampled
+  frames for the fictional rules; no-logo/plain-packaging requirements differ from original branded product
+  references. See each appended manifest record's measured scores, findings and Content Safety severities.
+  No new Foundry Evaluations run was performed: **Not yet evaluated** is distinct from direct vision screening.
+- For any **Silent presentation edit**, verify the displayed file has no audio stream and the original-audio
+  rendition remains available. Unexpected model audio is not a native-audio capability claim. Its removal
+  is a disclosed local edit, not a new generation or a fix for semantic audio quality.
+
+### Account recording attempts
+
+Nine initial six-second requests total **$3.24** at repository list prices. One permitted re-roll each for
+Coho, Proseware, Wide World, Munson and Best For You adds **$1.44**, totaling **$4.68 estimated generation**,
+not invoice-confirmed Azure spend.
+No further generation is authorized by this record. Direct screening used fourteen vision requests and
+twenty-eight Content Safety image analyses (two sampled frames per attempt); token-level charges and actual
+Azure billing were not returned by the runner, so an exact QA charge cannot be substantiated here.
+No new Foundry Evaluations run was submitted.
+
+| Clip | Request ID | Generation estimate |
+| --- | --- | ---: |
+| `account-tailspin-draft` | `5f58d22c-daca-44b5-9693-d6470c1d39a2` | $0.54 |
+| `account-coho-draft` | `f924196a-237f-430b-8104-02fcc01d3133` | $0.24 |
+| `account-vanarsdel-draft` | `275b8c72-c692-42f6-9fce-5cf0df3fd1d7` | $0.24 |
+| `account-tailwind-draft` | `14fe8d78-dbf5-4cb9-a5f3-12a7b08376c4` | $0.54 |
+| `account-wide-world-draft` | `cacd055a-3289-40a8-9332-fd58ecc860be` | $0.24 |
+| `account-southridge-draft` | `60f7be4e-6a0e-4e78-b381-f81608b089c0` | $0.48 |
+| `account-proseware-draft` | `44fd2967-501e-4d83-80e9-8e0fb28e3d46` | $0.48 |
+| `account-best-for-you-draft` | `23a926ac-ec14-4e9b-a84b-d70f7cf31f1d` | $0.24 |
+| `account-munson-draft` | `ef6ee9fd-a65c-4f18-b19a-4796bda6f866` | $0.24 |
+| `account-coho-draft-r1` | `4ec1703e-6006-4bb8-87d0-aed9e354c3f4` | $0.24 |
+| `account-proseware-draft-r1` | `d9c4c1e9-01f4-420b-8757-31805a02ac28` | $0.48 |
+| `account-wide-world-draft-r1` | `a5481167-5d0c-4b70-b4d9-7a80eac64644` | $0.24 |
+| `account-munson-draft-r1` | `0a64488f-2c9a-41d9-a685-77fe05eff9ad` | $0.24 |
+| `account-best-for-you-draft-r1` | `222530a6-13d7-4710-8a2e-9f63bdec954d` | $0.24 |
+
+Screening: **5 pass / 9 fail** across fourteen new attempts, with no human publication approvals.
+`@brand-qa` additionally inspected the retained 28 frames locally, without more service calls. Its observations
+are separate from measured scores: passing scores were not rewritten to hide disagreements.
+
+Only the VanArsdel draft remains in primary playback, still awaiting human review. Eight other new examples
+are withheld, with their briefs, request evidence and original scores retained:
+
+| Example | Why withheld / bounded re-roll outcome |
+| --- | --- |
+| Tailspin | Wrong product bundle; adherence alone does not qualify for a re-roll. |
+| Coho | Initial printed text; its one re-roll has a sampled Violence severity 2 flag. |
+| Tailwind | Apparent writing-like background marks need human assessment despite a recorded pass; no speculative re-roll. |
+| Wide World | Initial labels/markings despite a recorded pass; re-roll still has rack labels and wrong bottle count. |
+| Southridge | Additional agent review found a different object order despite a recorded pass; no adherence-only re-roll. |
+| Proseware | Initial brand-like text; re-roll has third-party computer logos. |
+| Best For You | Initial sampled Violence severity 2 flag; re-roll passed measured screening but includes expressly excluded utensils. |
+| Munson | Initial shelf/signage text; re-roll fails product fidelity. A visible bottle contradicts an initial recorded finding, which is preserved. |
+
+Both severity 2 results are service flags needing human assessment, not definitive unsafe-content findings.
+The three later re-rolls have zero severities in their sampled image categories; that does not establish
+full-video safety or negate the initial flags. All five re-roll chains are exhausted. No further paid work
+was performed to chase a pass.
+
+The two LTX presentations are natively six seconds and silent. MiniMax returned roughly 6.58 seconds with an
+unexpected audio stream; displayed copies were locally made silent and re-encoded to **6.000 seconds**.
+The full-length original-audio renditions are retained. `qa_sampled_from` identifies those untrimmed renditions:
+the recorded QA was sampled before the presentation-only trim, not rerun or relabelled afterward.
 
 ## Verifying what automation cannot
 

@@ -47,12 +47,13 @@ brief to the right **fal video model in Microsoft Foundry** — `Kling v3 Pro`, 
 
 ## What you're looking at
 
-- **The browser demo** replays eight **cached, authentic Foundry renders** with their recorded QA evidence. It
+- **The browser demo** replays **cached, authentic Foundry renders** with their recorded QA evidence. It
   makes no cloud calls and generates nothing new. Start with **Watch overview** (the narrated video with
   captions), **Start guided demo** (step-by-step, with Previous/Next/Play/Restart/Fullscreen) or **Explore
-  scenarios**. Previewing a draft never selects it; only the recorded Variant #2 has a Kling hero render, and
-  the page says so before you choose.
-- **Automated QA is a screening aid, not approval.** Recorded verdicts: **2 pass / 6 fail**; every clip still
+  scenarios**. Each of the four RCG areas has its own deliberate guide and fictional account briefs. Previewing
+  never selects; only Northwind concept #2 has the recorded coffee hero. Other areas offer their existing PIM
+  heroes; new text-only drafts are preview-only. Light/dark theme choices are explicit and remembered.
+- **Automated QA is a screening aid, not approval.** Original eight verdicts: **2 pass / 6 fail**; every clip still
   needs human sign-off (`publish_approved` is false).
 - **Costs are estimates** (preview list price × requested seconds), not Azure bills.
 - **AI evaluations (Foundry Evals v1) were run** over the cached clips, a negative control and the router's
@@ -60,6 +61,16 @@ brief to the right **fal video model in Microsoft Foundry** — `Kling v3 Pro`, 
   original verdicts and never change them. See [Foundry Evaluations](docs/foundry-evaluations-plan.md).
 - **Human review blocks the Northwind hero:** its native café/frothing audio is loud and does not match the
   picture. Draft concept #2 has no audio track (not requested).
+- **New account drafts are silent presentations awaiting human review.** They have recorded frame screening
+  and Content Safety checks, but no new Foundry Evaluations run. Any audio-removed edit is labelled and its
+  original-audio rendition is retained. Only the new VanArsdel preview remains in primary playback:
+  eight other new examples are withheld for screening or additional agent-review findings.
+  Their briefs, unchanged scores and failed/disputed evidence remain visible; no claim of approval is made.
+  [Attempt IDs, estimates and limitations](docs/verification.md#account-recording-attempts).
+  The original eight clips and v1 evidence are unchanged.
+
+**Fictional brands and products. Real company names identify representative retail segments and cite public
+sources only; no affiliation, endorsement, trademarks, or customer data.**
 
 ## The agents
 
@@ -71,15 +82,26 @@ brief to the right **fal video model in Microsoft Foundry** — `Kling v3 Pro`, 
 
 ## Why five model variants matter
 
-| RCG vertical | Representative accounts* | Use case | Foundry model(s) |
+| Area | Representative account | Fictional example | Video need / model |
 | --- | --- | --- | --- |
-| Apparel & Home Decor | Gap, TJX, Target, Costco | PDP image-to-video lookbooks | **Kling v3 Pro** (I2V) |
-| QSR, Coffee & C-Store | McDonald's, Starbucks, 7-Eleven | Rapid LTO social ads with sound | **LTX-2.5 Fast → Pro** / **Kling v3 Pro** |
-| Home Improvement & Electronics | The Home Depot, Lowe's, Best Buy, Staples | In-context and assembly previews | **Kling v3 Pro + MiniMax H3 Max** |
-| Grocery & Pharmacy | Kroger, Albertsons, Walgreens | High-volume weekly circulars and endcaps | **MiniMax H3 Max Turbo** (half H3 Max's per-second rate) |
+| QSR / coffee / convenience | Starbucks | Northwind Coffee | Seasonal launch: three drafts → recorded Kling hero |
+| QSR / coffee / convenience | McDonald's | Tailspin Burger Co. | Value-bundle creative / LTX-2.5 Fast |
+| QSR / coffee / convenience | 7-Eleven | Coho Corner Market | Fresh-food handoff / MiniMax Turbo |
+| Apparel / home decor | Gap | Fabrikam | Approved jacket lookbook / Kling |
+| Apparel / home decor | TJX | VanArsdel Finds | Changing assortment discovery / Turbo |
+| Apparel / home decor | Target | Tailwind Traders | Home-decor newness / LTX Fast |
+| Apparel / home decor | Costco | Wide World Wholesale | Warehouse essentials / Turbo |
+| Home / electronics | The Home Depot | Alpine Pro Supply | Contoso Pro drill in context / Kling |
+| Home / electronics | Lowe's | Zava DIY | Fabrikam Home patio layout / H3 Max (text-only preview) |
+| Home / electronics | Best Buy | Southridge Electronics | Litware laptop content / H3 Max |
+| Home / electronics | Staples | Proseware Workplace Supply | Workplace-kit arrangement / H3 Max |
+| Grocery / pharmacy | Walgreens | Woodgrove Wellness | Calm seasonal wellness screen / Turbo |
+| Grocery / pharmacy | Kroger | Best For You Market | Weekly meal inspiration / Turbo |
+| Grocery / pharmacy | Albertsons | Munson's Markets | Localized grocery basket / Turbo |
 
-\*Illustrative account types only. All demo brands are fictional (Northwind Coffee, Contoso Pro, Fabrikam,
-Woodgrove Wellness). Routing rules and prices: [model-routing](docs/model-routing.md).
+Each example is inspired by the qualitative public priorities cited in
+[`catalog/accounts.json`](catalog/accounts.json), not an assertion about a relationship or private plans.
+Routing rules and prices: [model-routing](docs/model-routing.md).
 
 ## Quickstart (no Azure, no spend)
 

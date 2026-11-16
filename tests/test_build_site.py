@@ -12,6 +12,8 @@ REPO = Path(__file__).resolve().parents[1]
 
 HR_MODES = ("hr-404", "hr-network", "hr-malformed-json", "hr-malformed-data",
             "hr-null-finding", "hr-empty-finding", "hr-unknown-severity")
+THEME_MODES = ("theme-url-light", "theme-url-dark", "theme-stored-light", "theme-stored-dark",
+               "theme-system-dark", "theme-invalid", "theme-storage-blocked")
 # Each mutation removes a real safeguard from the shipped app.js; the harness must name the broken behavior.
 MUTATIONS = {
     "tier-invalidation": ('tSel.addEventListener("change", () => { fillDurations(); calc(); });',
@@ -35,10 +37,11 @@ def _harness_input(out):
         "data": json.loads((out / "data.json").read_text(encoding="utf-8")),
         "ev": json.loads((out / "evaluations" / "foundry-evals-v1.json").read_text(encoding="utf-8")),
         "hr": json.loads((out / "evaluations" / "human-review.json").read_text(encoding="utf-8")),
+        "theme_script": re.search(r"<script>(.*?)</script>", (out / "index.html").read_text(encoding="utf-8"), re.S)[1],
     })
 
 
-@pytest.mark.parametrize("mode,mutation", [("ok", None), *((m, None) for m in HR_MODES),
+@pytest.mark.parametrize("mode,mutation", [("ok", None), *((m, None) for m in HR_MODES + THEME_MODES),
                                            *((None, m) for m in MUTATIONS)])
 def test_browser_demo_behaviour(tmp_path, mode, mutation):
     node = shutil.which("node")
@@ -62,7 +65,7 @@ def test_browser_demo_behaviour(tmp_path, mode, mutation):
         assert expected in result.stderr
     else:
         assert result.returncode == 0, result.stdout + result.stderr
-        assert ("guided demo, tabs and calculator passed" if mode == "ok" else f"human-review {mode} handled") in result.stdout
+        assert (f"human-review {mode} handled" if mode in HR_MODES else "guided demo, tabs and calculator passed") in result.stdout
 
 
 def test_duration_constraints_come_from_the_payload_validator(tmp_path):
@@ -98,7 +101,7 @@ def test_site_artifact_is_curated_and_truthful(tmp_path):
     data = json.loads((out / "data.json").read_text(encoding="utf-8"))
     for name in ("foundry-evals-v1.json", "human-review.json"):
         assert json.loads((out / "evaluations" / name).read_text(encoding="utf-8"))
-    assert len(data["clips"]) == 8
+    assert len(data["clips"]) >= 8
     assert all((out / c["file"]).is_file() for c in data["clips"])
     hero = next(c for c in data["clips"] if c["id"] == data["lto"]["hero_clip"])
     # Only the recorded variant may claim a hero render.
@@ -106,6 +109,31 @@ def test_site_artifact_is_curated_and_truthful(tmp_path):
     blob = json.dumps(data).lower()
     for leaked in ("services.ai.azure.com", "cognitiveservices.azure.com", "tenant", "subscription"):
         assert leaked not in blob
+
+
+def test_disqualified_account_attempts_remain_evidence_not_previews(tmp_path):
+    data = json.loads((_load_builder().build(tmp_path / "site") / "data.json").read_text(encoding="utf-8"))
+    clips = {c["id"]: c for c in data["clips"]}
+    measured = {c["id"]: c["qa"] for c in json.loads((REPO / "demo-cache" / "manifest.json").read_text())["clips"]}
+    for c in data["clips"]:
+        if c["account"]:
+            assert c["media_duration_s"] == pytest.approx(6, abs=0.05)
+            assert c["has_audio"] is False
+    for a in data["accounts"]:
+        for excluded in a.get("excluded_clips", []):
+            c = clips[excluded["id"]]
+            assert c["withheld_reason"] == excluded["reason"]
+            assert c["qa"]["verdict"] == measured[c["id"]]["verdict"]
+            assert c["qa"]["scores"] == measured[c["id"]]["scores"]
+            assert c["id"] not in a["draft_clips"]
+            assert c["id"] != a["recorded_clip"]
+        if a["planned_clip"] and a["recorded_clip"]:
+            c = clips[a["recorded_clip"]]
+            assert not c["source_image"]
+            assert c["has_audio"] is False
+            assert a["hero_clip"] is None
+            if c["presentation_audio_removed"]:
+                assert c["original_file"]
 
 
 def test_generated_asset_versions_follow_published_content(tmp_path, monkeypatch):
@@ -207,3 +235,18 @@ def test_status_and_secondary_text_meet_wcag_aa(tmp_path, selector):
     for rule in re.findall(r"([^{}]+)\{([^}]*)\}", css):
         if "pill" in rule[0] or "readiness" in rule[0] or "calc-error" in rule[0] or ".issue" in rule[0]:
             assert not re.search(r"(?<![-\w])color:\s*var\(--cp-(success|warning|danger)\)", rule[1]), rule[0].strip()
+
+
+def test_theme_segment_semantics_and_indicator_contrast(tmp_path):
+    out = _load_builder().build(tmp_path / "site")
+    html = (out / "index.html").read_text(encoding="utf-8")
+    css = (out / "app.css").read_text(encoding="utf-8")
+    assert 'id="theme-toggle" role="radiogroup" aria-label="Color theme"' in html
+    for name in ("Light", "Dark"):
+        assert f'aria-label="{name} theme" title="{name} theme"' in html
+    assert html.count('role="radio"') == 2
+    assert ".theme-toggle button:focus-visible" in css
+    assert "min-width: 44px; min-height: 44px" in css
+    for selector in (":root", 'html[data-theme="dark"]'):
+        t = _theme_tokens(css, selector)
+        assert _contrast(t["accent"], t["surface"]) >= 3

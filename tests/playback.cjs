@@ -11,6 +11,12 @@ const mode = process.argv[3] || "ok";
 const roots = new Map();
 const documentListeners = {};
 const requests = [];
+const storage = new Map();
+if (mode === "theme-url-light" || mode === "theme-stored-dark") storage.set("s2s-theme", "dark");
+if (mode === "theme-url-dark" || mode === "theme-stored-light") storage.set("s2s-theme", "light");
+if (mode === "theme-invalid") storage.set("s2s-theme", "broken");
+const search = mode === "theme-url-light" ? "?scoutTheme=light" : mode === "theme-url-dark" ? "?scoutTheme=dark"
+  : mode === "theme-invalid" ? "?scoutTheme=broken" : "";
 
 class Element {
   constructor(tag) {
@@ -116,9 +122,15 @@ const context = vm.createContext({
   Node: Element,
   HTMLVideoElement: { [Symbol.hasInstance]: (x) => x instanceof Element && x.tag === "video" },
   window: {
-    location: { hash: "" },
+    location: { hash: "", search },
+    matchMedia: () => ({ matches: ["theme-url-light", "theme-stored-light", "theme-system-dark", "theme-storage-blocked"].includes(mode) }),
     addEventListener: (name, fn) => { (windowListeners[name] ??= []).push(fn); },
     scrollTo: () => {},
+  },
+  URLSearchParams,
+  localStorage: {
+    getItem: (key) => { if (mode === "theme-storage-blocked") throw new Error("blocked"); return storage.get(key); },
+    setItem: (key, value) => { if (mode === "theme-storage-blocked") throw new Error("blocked"); storage.set(key, value); },
   },
   fetch: async (url, options) => {
     requests.push({ url, options });
@@ -135,6 +147,7 @@ const context = vm.createContext({
   setTimeout: () => { throw new Error("the guided demo must not use timers"); },
   setInterval: () => { throw new Error("the guided demo must not use timers"); },
 });
+vm.runInContext(input.theme_script, context);
 vm.runInContext(fs.readFileSync(process.argv[2] || "site/app.js", "utf8"), context);
 
 setImmediate(() => {
@@ -155,7 +168,24 @@ setImmediate(() => {
   };
   const pills = (root) => root.querySelectorAll("span.pill").filter((s) => s.attrs["data-readiness"]);
   assert.deepEqual(shown(), ["home"], "the landing view is shown alone on load");
-  if (mode !== "ok") {
+  const expectedTheme = ["theme-url-dark", "theme-stored-dark", "theme-system-dark", "theme-storage-blocked"].includes(mode) ? "dark" : "light";
+  assert.equal(document.documentElement.getAttribute("data-theme"), expectedTheme, `${mode}: URL > storage > system`);
+  const themeButtons = [$("#theme-light"), $("#theme-dark")];
+  const themeChoice = () => themeButtons.map((b) => b.getAttribute("aria-checked"));
+  assert.deepEqual(themeChoice(), expectedTheme === "light" ? ["true", "false"] : ["false", "true"]);
+  $("#theme-dark").click();
+  assert.equal(document.documentElement.getAttribute("data-theme"), "dark");
+  assert.deepEqual(themeChoice(), ["false", "true"], "theme has exactly one selected option");
+  $("#theme-toggle").dispatch("keydown", { key: "Home" });
+  assert.equal(document.activeElement, $("#theme-light"));
+  assert.deepEqual(themeButtons.map((b) => b.getAttribute("tabindex")), ["0", "-1"]);
+  $("#theme-toggle").dispatch("keydown", { key: "End" });
+  assert.equal(document.activeElement, $("#theme-dark"));
+  $("#theme-toggle").dispatch("keydown", { key: "ArrowRight" });
+  assert.deepEqual(themeChoice(), ["true", "false"], "theme arrow wraps and selects");
+  assert.equal(document.activeElement, $("#theme-light"));
+  if (mode !== "theme-storage-blocked") assert.equal(storage.get("s2s-theme"), "light", "theme selection persists");
+  if (mode.startsWith("hr-")) {
     assert.equal($("#review-alert").hidden, false, "unavailable alert is shown");
     assert.match(text($("#review-alert")), /Human-review evidence unavailable/);
     assert.match(text($("#readiness-summary")), /Human-review evidence unavailable/);
@@ -163,7 +193,7 @@ setImmediate(() => {
     assert.doesNotMatch(text(heroRoot()), /Publication blocked|Human sign-off required\./, "unavailable must not show a reviewed state");
     assert.match(text(heroRoot()), /Human-review evidence unavailable/);
     $("#guide-next").click();
-    assert.ok(pills($("#guide-stage")).length === 3 && pills($("#guide-stage")).every((s) => s.attrs["data-readiness"] === "unavailable"),
+    assert.ok(pills($("#guide-stage")).length >= 3 && pills($("#guide-stage")).every((s) => s.attrs["data-readiness"] === "unavailable"),
       "every visible draft says review evidence is unavailable");
     console.log(`human-review ${mode} handled`);
     return;
@@ -177,16 +207,19 @@ setImmediate(() => {
   const stage = $("#guide-stage");
   const status = () => text($("#guide-status"));
   const prev = $("#guide-prev"), next = $("#guide-next"), play = $("#guide-play");
-  const cards = () => stage.querySelectorAll("article").filter((a) => a.classList.contains("draft"));
+  const cards = () => stage.querySelectorAll("article").filter((a) => a.classList.contains("draft") && a.dataset.variant);
   const vid = (i) => cards()[i].querySelector("video");
   const selectButtons = () => stage.querySelectorAll("button.select");
+  const withheld = new Set(input.data.clips.filter((c) => c.withheld_reason).map((c) => c.id));
+  const noWithheldPlayers = (root) => root.querySelectorAll("video").every((v) => !withheld.has(v.dataset.clip));
 
   assert.match(status(), /Step 1 of 5: Brief/);
   assert.ok(prev.disabled && play.disabled, "brief step has no previous step or video");
   next.click();
   assert.match(status(), /Step 2 of 5/);
   assert.equal(cards().length, 3);
-  assert.ok(cards().every((c) => pills(c).length === 1 && /sign-off required|blocked|decision/.test(text(pills(c)[0]))),
+  assert.ok(noWithheldPlayers(stage), "withheld account attempts are not guided preview players");
+  assert.ok(cards().every((c) => pills(c).length === 1 && /sign-off required|blocked|decision|Awaiting human review/.test(text(pills(c)[0]))),
     "each visible draft shows its publication readiness outside Inspect evidence");
   assert.equal(selectButtons().length, 0, "the compare step offers no selection");
   assert.equal(play.textContent, "Play");
@@ -199,6 +232,7 @@ setImmediate(() => {
   assert.ok(vid(2).paused, "Pause drives the last previewed draft");
 
   next.click();
+  assert.ok(noWithheldPlayers(stage), "QSR: withheld attempts remain evidence, not previews");
   assert.match(status(), /Step 3 of 5: Choose a concept/);
   assert.ok(next.disabled, "Next waits for a selection");
   assert.equal(selectButtons().length, 1, "only the recorded hero concept is selectable");
@@ -279,9 +313,49 @@ setImmediate(() => {
   assert.deepEqual(shown(), ["home"]);
   const entry = $("#entry-grid").children[2];
   entry.click();
-  assert.deepEqual(shown(), ["scenarios"], "a scenario card opens the gallery view");
-  assert.equal($("#scenario-tabs").children[2].getAttribute("aria-selected"), "true", "on the chosen scenario");
-  assert.equal(document.activeElement, $("#scenario-tabs").children[2], "with focus on its tab");
+  assert.deepEqual(shown(), ["guide"], "a scenario card opens its area guide");
+  assert.match(text($("#guide-area-label")), /Home Improvement/);
+  assert.equal(document.activeElement, $("#guide-heading"), "with focus on the guide heading");
+  for (const [area, heroId] of [["apparel", "hero-apparel-kling"], ["home", "hero-home-kling"], ["grocery", "hero-grocery-turbo"]]) {
+    navigate(`#guide/${area}`);
+    assert.deepEqual(shown(), ["guide"], `#guide/${area} opens the guide`);
+    const accounts = input.data.accounts.filter((a) => a.area === area);
+    assert.match(status(), /Step 1 of 5/);
+    assert.equal(stage.querySelectorAll("article.account-card").length, accounts.length, `${area} lists every account brief`);
+    accounts.forEach((a) => assert.ok(text(stage).includes(a.fictional_brand) && text(stage).includes(a.real_company), a.id));
+    next.click();
+    assert.ok(noWithheldPlayers(stage), `${area}: withheld attempts remain evidence, not previews`);
+    const example = stage.querySelector("video");
+    example.play();
+    assert.equal(next.disabled, false);
+    next.click();
+    assert.ok(example.paused, `${area}: leaving drafts pauses media`);
+    assert.ok(next.disabled, `${area}: hero waits for an explicit choice`);
+    const choices = stage.querySelectorAll("button.select");
+    assert.equal(choices.length, 1, `${area}: only the PIM hero is selectable`);
+    assert.match(text(stage), /Preview only — no approved PIM hero recorded/);
+    const preview = stage.querySelector("video");
+    preview.play();
+    assert.ok(next.disabled, `${area}: playing never selects`);
+    choices[0].click();
+    next.click();
+    assert.equal(stage.querySelector("video").dataset.clip, heroId);
+    play.click();
+    const active = stage.querySelector("video");
+    next.click();
+    assert.ok(active.paused);
+    assert.match(text(stage), /sign-off|Publication blocked|human review/);
+    $("#guide-restart").click();
+    next.click(); next.click();
+    assert.ok(next.disabled, `${area}: restart clears selection`);
+    stage.querySelector("video").play();
+  }
+  const areaPlaying = stage.querySelector("video");
+  navigate("#guide");
+  assert.ok(areaPlaying.paused, "switching areas pauses incompatible players");
+  assert.match(text($("#guide-area-label")), /QSR/);
+  assert.match(status(), /Step 1 of 5/, "#guide still opens the coffee flow");
+  next.click();
   $("#scenario-tabs").children[0].click();
 
   // ---------- scenario tabs ----------
@@ -311,13 +385,18 @@ setImmediate(() => {
   assert.equal(selectedTab(), 0);
   assert.match(text(panel), /Coffee|seasonal/i);
   tabButtons[2].click();
-  assert.equal(panel.querySelectorAll("article").length, input.data.scenarios[2].clips.length);
+  assert.equal(panel.querySelectorAll("article.scenario-card").length, input.data.scenarios[2].clips.length);
+  assert.equal(panel.querySelectorAll("article.account-card").length, 4, "home gallery lists all four representative accounts");
   const single = input.data.scenarios.findIndex((s) => s.clips.length === 1);
   if (single >= 0) {
     tabButtons[single].click();
     assert.equal(panel.querySelectorAll("div").filter((d) => d.classList.contains("scenario"))[0].classList.contains("single"), true,
       "single-clip scenarios use the full-width layout");
   }
+  tabButtons.forEach((b) => {
+    b.click();
+    assert.ok(noWithheldPlayers(panel), "withheld attempts are never playable gallery cards");
+  });
 
   // ---------- cost estimate ----------
   const mSel = $("#calc-model"), tSel = $("#calc-tier"), choice = $("#calc-sec-choice");

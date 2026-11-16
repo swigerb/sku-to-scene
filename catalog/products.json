@@ -94,6 +94,55 @@
       "layout_constraints": ["table centered", "exactly four chairs", "umbrella closed", "no people"]
     },
     {
+      "sku": "TBC-BUNDLE-01", "name": "Tailspin Burger Co. Everyday Meal Bundle", "brand": "tailspin-burger",
+      "vertical": "qsr", "category": "Food / Meal Bundle", "image": null, "image_status": "none",
+      "attributes": {"contents": "burger, fries, drink in plain teal and cream packaging"},
+      "copy_points": [], "sensory_cues": ["light steam", "warm counter light"], "default_channels": ["tiktok"]
+    },
+    {
+      "sku": "CCM-MEAL-01", "name": "Coho Corner Market Grab-and-Go Meal", "brand": "coho-corner",
+      "vertical": "qsr", "category": "Food / Grab and Go", "image": null, "image_status": "none",
+      "attributes": {"packaging": "plain kraft bag, plum and cream accents"},
+      "copy_points": [], "sensory_cues": ["warm food", "bright night counter"], "default_channels": ["tiktok"]
+    },
+    {
+      "sku": "VAF-FINDS-01", "name": "VanArsdel Finds Home and Accessory Assortment", "brand": "vanarsdel-finds",
+      "vertical": "apparel", "category": "Home / Accessories", "image": null, "image_status": "none",
+      "attributes": {"contents": "ceramic vase, knit throw, leather-look tote with blank charcoal and blush tags"},
+      "copy_points": [], "sensory_cues": ["tactile discovery"], "default_channels": ["tiktok"]
+    },
+    {
+      "sku": "TWT-DECOR-01", "name": "Tailwind Traders Home Decor Collection", "brand": "tailwind-traders",
+      "vertical": "apparel", "category": "Home / Decor", "image": null, "image_status": "none",
+      "attributes": {"contents": "ceramic lamps, textured pillows, woven basket"},
+      "copy_points": [], "sensory_cues": ["soft daylight"], "default_channels": ["signage"]
+    },
+    {
+      "sku": "WWW-BULK-01", "name": "Wide World Wholesale Everyday Essentials", "brand": "wide-world",
+      "vertical": "apparel", "category": "Home / Bulk Essentials", "image": null, "image_status": "none",
+      "attributes": {"contents": "unbranded paper towels and sparkling water in slate and mustard packaging"},
+      "copy_points": [], "sensory_cues": ["natural warehouse light"], "default_channels": ["signage"]
+    },
+    {
+      "sku": "PWS-KIT-01", "name": "Proseware Workplace Supply Small Office Kit", "brand": "proseware-workplace",
+      "vertical": "home-improvement", "category": "Office / Workplace Kit", "image": null, "image_status": "none",
+      "attributes": {"contents": "coffee kit, cleaning supplies, ergonomic chair, printer paper"},
+      "copy_points": [], "sensory_cues": ["organized workspace"], "default_channels": ["signage"],
+      "layout_constraints": ["coffee kit, cleaning supplies, chair and printer paper left to right"]
+    },
+    {
+      "sku": "BFY-MEAL-01", "name": "Best For You Market Holiday Meal Kit", "brand": "best-for-you",
+      "vertical": "grocery-pharmacy", "category": "Grocery / Meal Kit", "image": null, "image_status": "none",
+      "attributes": {"packaging": "plain terracotta and olive meal-kit box"},
+      "copy_points": [], "sensory_cues": ["warm kitchen light", "holiday dinner"], "default_channels": ["signage"]
+    },
+    {
+      "sku": "MUN-BASKET-01", "name": "Munson's Markets Neighborhood Basket", "brand": "munsons-markets",
+      "vertical": "grocery-pharmacy", "category": "Grocery / Meal Essentials", "image": null, "image_status": "none",
+      "attributes": {"contents": "bakery loaf, pantry pasta, olive oil", "basket": "deep green and oat"},
+      "copy_points": [], "sensory_cues": ["warm local market"], "default_channels": ["tiktok"]
+    },
+    {
       "sku": "LTW-LT14-SLV",
       "name": "Litware Ultrabook 14 (Silver)",
       "brand": "litware",
