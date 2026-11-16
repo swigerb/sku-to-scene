@@ -4,13 +4,15 @@ Every clip produced here is an ffmpeg Ken Burns pan over an approved product sti
 background for text-only SKUs) with a burned-in "SIMULATED PREVIEW - not a Foundry render" banner.
 Audio, where present, is a synthetic brown-noise bed - NOT model-generated audio.
 `rehearsal_qa` values are scripted so presenters can rehearse the QA/re-roll branch; they are not
-measurements. Replace these clips with real renders via scripts/precache.py once endpoints exist.
+measurements. The shipped cache already contains authentic Foundry renders. This script refuses to
+overwrite any Foundry entry unless --force is passed, which replaces the clips and manifest evidence.
 
-Usage:  python scripts/build_placeholders.py
+Usage:  python scripts/build_placeholders.py [--force]
 """
 
 from __future__ import annotations
 
+import argparse
 import json
 import sys
 from pathlib import Path
@@ -69,7 +71,17 @@ CLIPS = [
 ]
 
 
-def main() -> int:
+def main(argv: list[str] | None = None) -> int:
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--force", action="store_true", help="Overwrite authentic Foundry clips and manifest evidence")
+    args = parser.parse_args(argv)
+    manifest_path = CACHE / "manifest.json"
+    if manifest_path.exists() and not args.force:
+        existing = json.loads(manifest_path.read_text(encoding="utf-8"))
+        if any(c.get("provenance") == "foundry" for c in existing.get("clips", [])):
+            print("Refusing to overwrite authentic Foundry clips and manifest evidence. "
+                  "Pass --force only to intentionally replace them with simulated placeholders.", file=sys.stderr)
+            return 1
     if not have_ffmpeg():
         print("ffmpeg is required to build placeholders", file=sys.stderr)
         return 1

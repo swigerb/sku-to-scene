@@ -1,8 +1,34 @@
 import json
 from dataclasses import replace
 
-from scripts import precache
+import pytest
+
+from scripts import build_placeholders, precache
 from sku_to_scene.router import Brief, route
+
+
+@pytest.mark.parametrize("force", [False, True])
+def test_placeholders_protect_authentic_cache_unless_forced(tmp_path, monkeypatch, capsys, force):
+    manifest = tmp_path / "manifest.json"
+    evidence = '{"clips": [{"provenance": "foundry", "request_id": "keep-me"}], "validation": {}}'
+    manifest.write_text(evidence)
+    clip = tmp_path / "lto-draft-1.mp4"
+    clip.write_bytes(b"authentic render")
+    monkeypatch.setattr(build_placeholders, "CACHE", tmp_path)
+    monkeypatch.setattr(build_placeholders, "ROOT", tmp_path)
+    monkeypatch.setattr(build_placeholders, "CLIPS", build_placeholders.CLIPS[:1])
+    monkeypatch.setattr(build_placeholders, "have_ffmpeg", lambda: True)
+    monkeypatch.setattr(build_placeholders, "render_placeholder", lambda out, *_: out.write_bytes(b"simulated"))
+    monkeypatch.setattr(build_placeholders, "probe", lambda _: {"size_bytes": 9})
+
+    assert build_placeholders.main(["--force"] if force else []) == (0 if force else 1)
+    if force:
+        assert clip.read_bytes() == b"simulated"
+        assert json.loads(manifest.read_text())["clips"][0]["provenance"] == "simulated"
+    else:
+        assert clip.read_bytes() == b"authentic render"
+        assert manifest.read_text() == evidence
+        assert "Refusing to overwrite authentic Foundry clips" in capsys.readouterr().err
 
 
 def _setup(settings, tmp_path, monkeypatch):

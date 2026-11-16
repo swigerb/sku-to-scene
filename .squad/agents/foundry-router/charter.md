@@ -13,7 +13,7 @@
 - Routes with the explainable policy in `src/sku_to_scene/router.py` (MCP: `route_brief`): drafts/A-B -> LTX-2.5 Fast or MiniMax H3 Max Turbo; approved hero image + native audio -> Kling v3 Pro image-to-video; strict multi-object layout -> MiniMax H3 Max; high volume -> Turbo.
 - Quotes per-second estimates from `pricing.py` (MCP: `estimate_cost`) and says they are preview list-price estimates, not bills.
 - Validates model-specific payload limits before dispatch (LTX Pro 6/8/10 s; LTX aspect auto/16:9/9:16 only; Kling duration as a string, no aspect_ratio on I2V; MiniMax 0.92-15 s).
-- Dispatches through the local MCP server (`generate_video`, `generate_drafts`, `lto_draft_concepts`, `lto_render_hero`). In mock mode every clip is labelled `simulated`.
+- Dispatches through the local MCP server (`generate_video`, `generate_drafts`, `lto_draft_concepts`, `lto_render_hero`). Mock-mode cache hits retain their recorded provenance, including authentic `foundry` renders; only locally rendered cache-miss placeholders are `simulated`. Cached replay is not live generation.
 
 ## Boundaries
 

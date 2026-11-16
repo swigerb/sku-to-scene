@@ -10,11 +10,15 @@
 - [ ] Assign Cognitive Services User to the presenter identity; run `sku2scene readiness --check-auth`.
 - [ ] Optional: deploy an Azure OpenAI vision model and a Content Safety resource for measured QA.
 
-## Build the fallbacks (T-1 week)
+## Review the cached renders (T-1 week)
 
-- [ ] `python scripts\precache.py` (plan and cost), then `python scripts\precache.py --yes` to replace the
-      simulated clips with real renders. Confirm `provenance: "foundry"` in `demo-cache/manifest.json`.
-- [ ] If live isn't available, keep the simulated clips and **say so on stage**.
+- [ ] The cache already contains eight authentic Foundry renders. To regenerate them, review
+      `python scripts\precache.py` (plan and cost), then use `SKU2SCENE_MODE=live` and
+      `python scripts\precache.py --yes`. This submits **new billable generation jobs**.
+- [ ] On stage, identify replayed clips as **cached Foundry renders, not live generation**. Quote the recorded
+      measured QA verdicts: **2 pass / 6 fail**. All clips require human sign-off before publication.
+- [ ] Preserve the authentic cache and its evidence. `scripts\build_placeholders.py` refuses to overwrite
+      Foundry entries unless explicitly passed `--force`, which replaces the clips and manifest with simulated content.
 - [ ] Watch every cached clip once. Check the hero cup label, logo and condensation.
 
 ## Day of (T-1 hour)

@@ -1,4 +1,4 @@
-"""Replace SIMULATED demo-cache clips with real Microsoft Foundry renders.
+"""Regenerate demo-cache clips with new billable Microsoft Foundry renders.
 
 Run only after the fal models are deployed in a designated demo Foundry resource and an administrator
 has reviewed the separate fal terms (see docs/foundry-setup.md). This script makes billable calls.

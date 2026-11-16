@@ -63,7 +63,8 @@ flowchart LR
   R -->|MCP: sku-to-scene| S["Local MCP server<br/>(Python, stdio)"]
   CLI["sku2scene CLI<br/>(presenter fallback)"] --> S
   Comfy["ComfyUI nodes<br/>(visual track)"] --> S
-  S -->|mock| Cache[("demo-cache/<br/>SIMULATED clips")]
+  S -->|mock: replay| Cache[("demo-cache/<br/>Authentic Foundry renders")]
+  S -->|cache miss only| Placeholder["Local SIMULATED placeholder"]
   S -->|live: Entra ID| F["Microsoft Foundry<br/>/providers/falai/v1/..."]
   F --> K[Kling v3 Pro] & L[LTX-2.5 Fast/Pro] & X[MiniMax H3 Max/Turbo]
   S --> Ledger[("run + cost ledger")]
@@ -79,7 +80,7 @@ Requirements: Python 3.11+ and ffmpeg on `PATH` (for frame extraction and crops)
 ```powershell
 python -m venv .venv; .\.venv\Scripts\Activate.ps1
 pip install -e ".[dev]"
-pytest -q                                          # 54 tests, offline
+pytest -q                                          # offline tests
 
 sku2scene models                                   # the five models, routes, preview prices
 sku2scene route --brief briefs\qsr-lto-pumpkin-cold-brew.json
@@ -156,8 +157,9 @@ deliberately omit a `model:` field; model choice stays with Squad config and the
    `FOUNDRY_SUBSCRIPTION_ID` if the CLI default account is in another tenant. Subscription selection takes
    precedence and never changes the CLI default. Without either selector, auth uses `DefaultAzureCredential`.
    Assign **Foundry User** on the account. **A fal.ai `FAL_KEY` is not used.**
-4. `pip install -e ".[live]"`, run `sku2scene readiness --check-auth`, then
-   `python scripts/precache.py --yes` to replace the simulated clips with real renders, with provenance recorded.
+4. `pip install -e ".[live]"`, then run `sku2scene readiness --check-auth`.
+   With `SKU2SCENE_MODE=live`, `python scripts/precache.py --yes` regenerates the already-authentic cached
+   clips and records provenance. This submits **new billable generation jobs**; live mode and `--yes` are required.
 
 **Route prefix:** the Learn route list shows `/providers/falai/<model>/...`, but the Learn code samples and the
 ComfyUI article use `/providers/falai/v1/...`. The default is `providers/falai/v1`; override it with

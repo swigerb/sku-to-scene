@@ -1,5 +1,5 @@
 {
-  "_comment": "SKU to Scene two-tier LTO workflow (ComfyUI API format). Draft on LTX-2.5 Fast, then hero on Kling v3 Pro image-to-video from the approved cup image. Simulated unless SKU2SCENE_MODE=live.",
+  "_comment": "SKU to Scene two-tier LTO workflow (ComfyUI API format). Draft on LTX-2.5 Fast, then hero on Kling v3 Pro image-to-video from the approved cup image. Mock cache hits retain recorded provenance, including authentic Foundry renders; only cache-miss placeholders are simulated. Cached replay is not live generation. New billable generation requires SKU2SCENE_MODE=live.",
   "1": {
     "class_type": "LoadImage",
     "inputs": { "image": "nwc-pumpkin-cold-brew-hero.png" }

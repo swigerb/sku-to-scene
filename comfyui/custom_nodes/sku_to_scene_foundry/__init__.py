@@ -6,8 +6,9 @@ cost estimates as the automated pipeline ("ComfyUI + code parity").
 
 Install: copy or symlink this folder into ComfyUI/custom_nodes/ and `pip install -e <repo>[live]` into the
 ComfyUI Python environment. Live renders need SKU2SCENE_MODE=live and FOUNDRY_ENDPOINT (Entra ID via
-DefaultAzureCredential, scope https://cognitiveservices.azure.com/.default). Without them the nodes return
-clearly labelled simulated placeholders.
+DefaultAzureCredential, scope https://cognitiveservices.azure.com/.default). Mock mode replays cache hits
+with their recorded provenance, including authentic Foundry renders; only cache-miss placeholders are
+labelled simulated. Cached replay is not live generation.
 """
 from __future__ import annotations
 
