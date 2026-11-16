@@ -7,8 +7,8 @@
   "duration": 6,
   "reroll_prompt": "Silent fictional workplace-kit concept, six seconds. Wide fixed view of a small empty office. One plain indigo-and-white delivery cart rolls in. On its shelf, a single plain indigo box opens. Reveal UNPACKAGED objects arranged exactly left to right: stainless coffee press with a plain mug; transparent unlabelled cleaning bottle with a blank cloth; ergonomic charcoal office chair; loose blank white printer paper. No retail product packets or coffee bags. Every surface completely blank, no printed or embossed markings anywhere. No logos, letters, writing, labels, numbers, stickers, signs, slogans, UI, button props, people, faces, real trade dress or soundtrack.",
   "prompt": "Silent fictional workplace-supply concept, six seconds. One delivery cart rolls into a small empty office. Plain indigo-and-white boxes open, revealing a coffee kit, sealed cleaning supplies, an ergonomic chair and printer paper. Arrange exactly left to right: coffee kit, cleaning supplies, chair, printer paper. Smooth wide shot, clean even lighting. Boxes and products have no labels or symbols. No logos, signage, writing, prices, phone UI, mascots, slogans, button props, faces in close-up or real trade dress. No soundtrack.",
-  "brief_version": 5,
-  "simplified_prompt": "Silent fictional small-office supply kit, six seconds, wide 16:9. Exactly four items stand in one straight row from left to right against a plain pale-grey wall on a light wood floor, with nothing else in view: (1) a stainless coffee press and a plain white mug on a plain indigo box; (2) a clear unlabelled spray bottle with a folded grey cloth on a plain white box; (3) one basic, generic black task chair with a simple plain mesh back and plain padded seat; (4) a neat stack of plain white printer paper on a plain indigo box. Gentle slow push-in, even daylight. No other furniture, electronics, plants, windows or wall art. Every surface is completely blank: no writing, letters, numbers, stickers, labels, barcodes, logos, symbols, signage, prices, phone UI, mascots, slogans or real trade dress. No people, hands or faces. No soundtrack.",
+  "brief_version": 6,
+  "simplified_prompt": "Six-second silent studio product video, landscape 16:9. One complete small-office supply kit, four large isolated groups in a single straight row, left to right: stainless French coffee press with a plain ivory mug; transparent unlabelled cleaning spray bottle with folded ivory cloth; simple generic charcoal task chair with padded back and seat; neat stack of blank ivory printer paper. All four groups visible in full throughout, spaced apart on a seamless warm ivory floor and background. No boxes, pedestals, tables or extra objects. A tiny slow camera push-in, no object movement or transformations. Soft neutral daylight, accurate stainless steel, transparent glass, ivory paper and charcoal upholstery. Every surface blank and unmarked. No writing, letters, numbers, labels, barcodes, logos, symbols, signage, real brands or recognizable designer furniture. No people, hands or soundtrack.",
   "prompt_history": [
     {
       "version": 1,
@@ -40,7 +40,15 @@
       "version": 5,
       "prompt_key": "simplified_prompt",
       "clip": "account-proseware-draft-s3",
-      "reason": "Final targeted simplified retry. s2 (v4) was safe and text-free but QA failed fidelity 0.72 and adherence 0.18; its chair closely resembled a well-known designer office chair, so it is withheld."
+      "reason": "Final targeted simplified retry. s2 (v4) was safe and text-free but QA failed fidelity 0.72 and adherence 0.18; its chair closely resembled a well-known designer office chair, so it is withheld.",
+      "prompt": "Silent fictional small-office supply kit, six seconds, wide 16:9. Exactly four items stand in one straight row from left to right against a plain pale-grey wall on a light wood floor, with nothing else in view: (1) a stainless coffee press and a plain white mug on a plain indigo box; (2) a clear unlabelled spray bottle with a folded grey cloth on a plain white box; (3) one basic, generic black task chair with a simple plain mesh back and plain padded seat; (4) a neat stack of plain white printer paper on a plain indigo box. Gentle slow push-in, even daylight. No other furniture, electronics, plants, windows or wall art. Every surface is completely blank: no writing, letters, numbers, stickers, labels, barcodes, logos, symbols, signage, prices, phone UI, mascots, slogans or real trade dress. No people, hands or faces. No soundtrack.",
+      "superseded": true
+    },
+    {
+      "version": 6,
+      "prompt_key": "simplified_prompt",
+      "clip": "account-proseware-draft-s4",
+      "reason": "User-authorized completion attempt. Remove the colored packaging that failed fidelity in s3; retain all four kit groups and their order required by the unchanged brand and SKU rubric. One neutral seamless studio shot, no staging objects."
     }
   ]
 }

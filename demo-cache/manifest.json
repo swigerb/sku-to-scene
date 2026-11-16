@@ -4256,6 +4256,173 @@
         "status": "not_yet_evaluated",
         "reason": "No new Foundry Evaluations run; original v1 evidence is immutable."
       }
+    },
+    {
+      "id": "account-proseware-draft-s4",
+      "sku": "PWS-KIT-01",
+      "vertical": "home-improvement",
+      "model": "minimax-h3-max",
+      "mode": "text-to-video",
+      "aspect_ratio": "16:9",
+      "duration": 6,
+      "file": "account-proseware-draft-s4.mp4",
+      "provenance": "foundry",
+      "audio": "not requested; silent draft",
+      "media": {
+        "duration_s": 6.0,
+        "width": 1280,
+        "height": 732,
+        "has_audio": false,
+        "size_bytes": 517381
+      },
+      "elapsed_s": 17.88,
+      "accepted_to_completed_s": 13.45,
+      "processing": "H.264 display rendition; longest edge <=1280; CRF 28; metadata stripped; unexpected model audio removed for silent presentation; original-audio rendition retained; presentation trimmed to requested 6 seconds; re-encoded H.264 at 25 fps / CRF 20",
+      "source_media": {
+        "duration_s": 6.59,
+        "width": 1344,
+        "height": 768,
+        "has_audio": true,
+        "size_bytes": 4034465
+      },
+      "source_sha256": "9ea9d97da1208d95b95fafbf00310f93dd5979b77b65c5a9e0875032736727fe",
+      "source_image": null,
+      "prompt": "Six-second silent studio product video, landscape 16:9. One complete small-office supply kit, four large isolated groups in a single straight row, left to right: stainless French coffee press with a plain ivory mug; transparent unlabelled cleaning spray bottle with folded ivory cloth; simple generic charcoal task chair with padded back and seat; neat stack of blank ivory printer paper. All four groups visible in full throughout, spaced apart on a seamless warm ivory floor and background. No boxes, pedestals, tables or extra objects. A tiny slow camera push-in, no object movement or transformations. Soft neutral daylight, accurate stainless steel, transparent glass, ivory paper and charcoal upholstery. Every surface blank and unmarked. No writing, letters, numbers, labels, barcodes, logos, symbols, signage, real brands or recognizable designer furniture. No people, hands or soundtrack.",
+      "request_id": "51903f88-100b-437e-a933-cab7d18aeb1d",
+      "original_file": "account-proseware-draft-s4-original-audio.mp4",
+      "presentation_audio_removed": true,
+      "presentation_trimmed_to_s": 6,
+      "deployment": "minimax-h3-max",
+      "rendered_at": "2026-11-16T22:52:58.935925+00:00",
+      "estimate": {
+        "model": "minimax-h3-max",
+        "seconds": 6.0,
+        "resolution": "768P",
+        "price_key": "768P",
+        "usd_per_second": 0.08,
+        "estimate_usd": 0.48,
+        "estimate_high_usd": 0.536,
+        "caveats": [
+          "MiniMax output can run ~0.7 s longer than requested (high estimate includes it)",
+          "preview list price per generated second; not a billing guarantee"
+        ]
+      },
+      "qa": {
+        "evaluator": "azure-openai-vision",
+        "measured": true,
+        "scores": {
+          "logo_integrity": 0.95,
+          "label_legibility": 1.0,
+          "product_fidelity": 0.55,
+          "prompt_adherence": 0.35
+        },
+        "thresholds": {
+          "logo_integrity": 0.8,
+          "label_legibility": 0.7,
+          "product_fidelity": 0.8,
+          "prompt_adherence": 0.7
+        },
+        "findings": [
+          "No visible logos, signage, price numbers, or on-screen text.",
+          "Objects are arranged left to right in four groups, but the scene includes extra items beyond the prompt: a separate ivory mug and a folded cloth are present, and the cleaning bottle is not clearly unlabelled in a product-kit context.",
+          "The chair, spray bottle, coffee press, and paper stack are visible, but the paper appears as a boxed stack rather than loose blank sheets, and the overall composition does not fully match the requested isolated groups.",
+          "The prompt requested no boxes, pedestals, tables, or extra objects; a paper box is visible.",
+          "Background and lighting are studio-like and neutral, but the exact kit specification is only partially matched."
+        ],
+        "hallucinated_objects": [
+          "paper box",
+          "extra mug",
+          "folded cloth"
+        ],
+        "content_safety": [
+          {
+            "frame": "frame_01.png",
+            "categories": [
+              {
+                "category": "Hate",
+                "severity": 0
+              },
+              {
+                "category": "SelfHarm",
+                "severity": 0
+              },
+              {
+                "category": "Sexual",
+                "severity": 0
+              },
+              {
+                "category": "Violence",
+                "severity": 0
+              }
+            ]
+          },
+          {
+            "frame": "frame_02.png",
+            "categories": [
+              {
+                "category": "Hate",
+                "severity": 0
+              },
+              {
+                "category": "SelfHarm",
+                "severity": 0
+              },
+              {
+                "category": "Sexual",
+                "severity": 0
+              },
+              {
+                "category": "Violence",
+                "severity": 0
+              }
+            ]
+          }
+        ],
+        "verdict": "fail",
+        "failed_checks": [
+          "product_fidelity",
+          "prompt_adherence"
+        ],
+        "publish_approved": false,
+        "reroll": {
+          "model": "ltx-2.5-pro",
+          "mode": "text-to-video",
+          "reason": "quality threshold failed; re-roll on the higher-fidelity tier"
+        },
+        "automated_checks_passed": false,
+        "human_signoff_required": true,
+        "sampled_frame_count": 2
+      },
+      "qa_evaluated_at": "2026-11-16T22:52:58.935925+00:00",
+      "account": "proseware",
+      "stage": "draft",
+      "hero_eligible": false,
+      "human_signoff_required": true,
+      "replacement_for": "account-proseware-draft-s3",
+      "reroll_reason": "simplified-brief",
+      "brief_version": 6,
+      "completion_usage": {
+        "generation_estimate_usd": 0.48,
+        "generation_high_estimate_usd": 0.536,
+        "incremental_generation_ceiling_usd": 1.5,
+        "qa_budget_estimate_usd": 0.5,
+        "billed_cost_usd": null,
+        "vision": {
+          "request_id": "bdc0d3ef-68e3-4144-b722-bd75b33a5afb",
+          "prompt_tokens": 2558,
+          "completion_tokens": 205,
+          "total_tokens": 2763
+        },
+        "content_safety_requests": [
+          "45362f08-301f-4612-8c0d-a01bd3199e28",
+          "1e23f7c7-fac2-40ee-af3d-e9d401ec3a01"
+        ],
+        "note": "One vision call and two image-safety calls, all HTTP 200. Estimates are not invoiced Azure costs. Historical QA token usage was not captured."
+      },
+      "evaluations": {
+        "status": "not_yet_evaluated",
+        "reason": "No new Foundry Evaluations run; original v1 evidence is immutable."
+      }
     }
   ],
   "validation": {

@@ -2,6 +2,7 @@
 
 --simplified renders the versioned one-shot ``simplified_prompt`` for named gap accounts as -s1, -s2 ...
 replacement attempts; earlier attempts and their QA evidence stay in the manifest unchanged.
+--proseware-completion applies the separately authorized $1.50 extension only to that account.
 
 The original cache entries are never replaced. A local reservation journal prevents a second submit after
 an interrupted/uncertain attempt. Recover recorded request IDs rather than submitting again. QA is paid,
@@ -50,6 +51,14 @@ def write_json(path: Path, doc: dict) -> None:
     pending.replace(path)
 
 
+def generation_cap(completion: bool, simplified: list[str] | None, reroll: list[str] | None) -> float:
+    if completion:
+        if simplified != ["proseware"] or reroll:
+            raise ValueError("Completion authorization is only for --simplified proseware.")
+        return 9.12  # Prior $7.62 reservations + explicitly authorized $1.50 completion ceiling.
+    return 8.0
+
+
 def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument("--execute", action="store_true")
@@ -58,7 +67,10 @@ def main() -> int:
     ap.add_argument("--reason", choices=("text-or-logo", "trade-dress", "unsafe"))
     ap.add_argument("--simplified", nargs="+", metavar="ACCOUNT",
                     help="account IDs whose versioned simplified_prompt replaces missing/unusable examples")
+    ap.add_argument("--proseware-completion", action="store_true",
+                    help="explicit authorization for up to $1.50 beyond the prior $7.62, Proseware only")
     args = ap.parse_args()
+    cap = generation_cap(args.proseware_completion, args.simplified, args.reroll)
     jobs = plan()
     if args.simplified and args.reroll:
         raise SystemExit("Choose either --reroll or --simplified.")
@@ -97,14 +109,14 @@ def main() -> int:
     total = sum(j["estimate"]["estimate_usd"] for j in jobs)
     for j in jobs:
         print(j["account"]["planned_clip"], f"${j['estimate']['estimate_usd']:.4f}", flush=True)
-    print(f"Initial generation estimate ${total:.4f}; cap $6 initial / $8 including authorized re-rolls.", flush=True)
+    print(f"Generation estimate ${total:.4f}; batch cap $6 / cumulative cap ${cap:.2f}.", flush=True)
     if total > 6:
         raise SystemExit("Plan exceeds initial generation cap; nothing submitted.")
     journal_file = get_settings().data_dir / "account-draft-reservations.json"
     spent = sum(v["estimate_usd"] for v in json.loads(journal_file.read_text()).values()) if journal_file.exists() else 0.0
-    print(f"Reserved so far ${spent:.4f}; after this plan ${spent + total:.4f} of the $8 total cap.", flush=True)
-    if spent + total > 8:
-        raise SystemExit("Plan would exceed the $8 total generation cap; nothing submitted.")
+    print(f"Reserved so far ${spent:.4f}; after this plan ${spent + total:.4f} of the ${cap:.2f} total cap.", flush=True)
+    if spent + total > cap:
+        raise SystemExit(f"Plan would exceed the ${cap:.2f} total generation cap; nothing submitted.")
     if not (args.execute and args.yes):
         return 0
     settings = get_settings()
@@ -134,8 +146,8 @@ def main() -> int:
             print(clip_id, "resuming completed request", job["request_id"], flush=True)
         else:
             reserved = sum(v["estimate_usd"] for v in journal.values())
-            if reserved + j["estimate"]["estimate_usd"] > 8:
-                raise SystemExit("Total reserved generation would exceed $8; nothing submitted.")
+            if reserved + j["estimate"]["estimate_usd"] > cap:
+                raise SystemExit(f"Total reserved generation would exceed ${cap:.2f}; nothing submitted.")
             journal[clip_id] = {"estimate_usd": j["estimate"]["estimate_usd"], "status": "reserved"}
             write_json(journal_path, journal)
             job = generate_video(

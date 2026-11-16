@@ -33,7 +33,7 @@ The gallery lists every account in its area. The sun/moon control explicitly cho
 | Home · Alpine Pro Supply | The Home Depot | The existing Contoso Pro drill render explores professional product context; show its prompt-adherence failure. |
 | Home · Zava DIY | Lowe's | The existing Fabrikam Home patio preview tests layout constraints, not approved PIM fidelity. |
 | Home · Southridge Electronics | Best Buy | Litware Ultrabook 14 on H3 Max for strict placement. Screening passed; reviewer note: items appear out of order. |
-| Home · Proseware Workplace Supply | Staples | Strict four-item layout on H3 Max. Be candid: the best attempt still fails fidelity (0.72); three attempts withheld. A human decides. |
+| Home · Proseware Workplace Supply | Staples | Strict four-item layout on H3 Max. The selected attempt still fails fidelity (0.72); the final neutral-studio retry also failed and is a learning example. Three attempts withheld. A human decides. |
 | Grocery · Woodgrove Wellness | Walgreens | An existing wellness-bundle screen is calm and educational, with no medical claims; show its missing-product findings. |
 | Grocery · Best For You Market | Kroger | Private-label holiday meal prep on Turbo. The re-roll passed; the first attempt is withheld (Content Safety flag). Reviewer note: utensils. |
 | Grocery · Munson's Markets | Albertsons | Localized weekly deal; no identity or loyalty data. Simplified basket passed; the tinted-bottle re-roll is a learning example. |

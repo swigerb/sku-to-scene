@@ -62,10 +62,13 @@ it; the Foundry Evals v1 rubric marks such checks N/A with a reason, without cha
 
 ## Account drafts
 
-Twenty-two silent text-to-video attempts cover the nine new fictional accounts. Each row is an authentic
+Twenty-three silent text-to-video attempts cover the nine new fictional accounts. Each row is an authentic
 Foundry render screened by `@brand-qa` (two sampled frames, Azure OpenAI vision against the brand rules, and
 Content Safety). The verdicts and scores are the recorded ones; nothing was relabelled. Estimates use preview
-list price × requested seconds (6 s each): **$7.62 of the $8 generation cap**, not an Azure bill.
+list price × requested seconds (6 s each): **$8.10 total**, not an Azure bill.
+The first 22 attempts used $7.62 of the original $8 cap. A separately authorized completion
+ceiling added at most $1.50 for Proseware only ($9.12 cumulative); one $0.48 attempt was made,
+with a conservative duration-overrun estimate of $0.536. No further generation is planned.
 
 - The first 14 attempts (initial + one re-roll) were rendered before the public-source research was final.
   The four gap accounts (Tailspin, Coho, Proseware, Munson) were then re-briefed as simplified one-shot scenes
@@ -105,6 +108,21 @@ list price × requested seconds (6 s each): **$7.62 of the $8 generation cap**, 
 | `account-proseware-draft-s2` | minimax-h3-max | $0.48 | `cdd4e4d5-2e03-487c-b3d9-c5dc8263eedb` | fail (0.72 / 0.18) | Withheld: Office chair closely resembles a well-known designer chair (real trade-dress risk). |
 | `account-coho-draft-s3` | minimax-h3-max-turbo | $0.24 | `0d8530c6-e943-482c-a3a0-20651689fb67` | pass (0.92 / 0.88) | **Playable example** |
 | `account-proseware-draft-s3` | minimax-h3-max | $0.48 | `c7202825-5765-4c82-a292-f6106afe9fed` | fail (0.72 / 0.78) | **Playable example** |
+| `account-proseware-draft-s4` | minimax-h3-max | $0.48 | `51903f88-100b-437e-a933-cab7d18aeb1d` | fail (0.55 / 0.35) | QA learning example; s3 remains selected |
+
+The completion attempt removed colored packaging, retaining the unchanged four-component SKU and
+brand rubric. Its two sampled frames contained no visible writing and Content Safety returned severity 0
+in every category. The vision judge still failed fidelity and adherence, interpreting the paper as boxed.
+It also called the explicitly requested mug and cloth extra objects: this is a calibration concern,
+not grounds to alter the recorded verdict. The higher-scoring s3 remains the clearly failed selected draft.
+There are now six learning examples and eight withheld attempts; no historical output or verdict was replaced.
+
+Completion QA used one vision call (2,558 input + 205 output = **2,763 tokens**) and two
+Content Safety image calls, all HTTP 200. Their request IDs and token counts are recorded in
+the new manifest entry's `completion_usage`. The incremental QA allowance was approximately $0.50;
+no billed-cost response is supplied by these APIs, and historical QA token usage was not captured,
+so an actual cumulative Azure QA dollar total is unavailable. These are screening calls, not a new
+Foundry Evaluations run. Human approval remains mandatory.
 
 ## Verifying what automation cannot
 

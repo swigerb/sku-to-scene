@@ -3,6 +3,9 @@ import json
 import re
 from pathlib import Path
 
+import pytest
+
+from scripts.render_accounts import generation_cap
 from sku_to_scene import catalog
 from sku_to_scene.models import get_model
 from sku_to_scene.payloads import build_payload
@@ -12,6 +15,15 @@ COMPANIES = {"Walgreens", "McDonald's", "Starbucks", "Albertsons", "Gap", "Costc
              "Best Buy", "Target", "7-Eleven", "The Home Depot", "TJX", "Staples", "Lowe's"}
 # "Lucerne" is a real Albertsons private-label brand, so it is excluded as a fictional analog.
 FORBIDDEN = COMPANIES | {"Lucerne"}
+
+
+def test_completion_budget_is_scoped_to_proseware_and_does_not_change_default():
+    assert generation_cap(False, ["coho"], None) == 8
+    assert generation_cap(True, ["proseware"], None) == pytest.approx(7.62 + 1.50)
+    for selected, reroll in [(None, None), (["coho"], None), (["proseware", "coho"], None),
+                             (["proseware"], ["account-proseware-draft"])]:
+        with pytest.raises(ValueError, match="only for"):
+            generation_cap(True, selected, reroll)
 
 
 def accounts():

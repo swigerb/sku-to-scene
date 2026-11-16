@@ -388,6 +388,10 @@
         {
           "id": "account-proseware-draft-s1",
           "note": "Simplified brief: safe and text-free, but extra staging furniture and a static camera (fidelity 0.62, adherence 0.58)."
+            },
+            {
+              "id": "account-proseware-draft-s4",
+              "note": "Completion attempt: no visible writing; Content Safety severity 0 on both sampled frames. Screening still failed fidelity 0.55 and adherence 0.35 (paper interpreted as boxed). The judge also called the explicitly requested mug and cloth extra objects; human calibration is needed, not a threshold override. Earlier s3 remains the selected failed example."
         }
       ],
       "review_note": "Best available example still fails automated screening (product fidelity 0.72: box colours read blue/purple rather than indigo). Shown as a failed draft, not approved."
