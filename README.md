@@ -14,6 +14,25 @@
   <a href="docs/verification.md">Verification</a>
 </p>
 
+## Quick tour
+
+<div align="center">
+
+https://github.com/user-attachments/assets/54a3f1b5-cd44-4fe4-9893-df6bf100e777
+
+</div>
+
+<div align="center">
+  <sub><strong>2 min 54 s</strong> &nbsp;·&nbsp; Microsoft Ava AI narration &nbsp;·&nbsp; <a href="https://github.com/swigerb/sku-to-scene/releases/download/media-v1/sku-to-scene-sizzle.mp4">1080p60 original</a> &nbsp;·&nbsp; <a href="https://github.com/swigerb/sku-to-scene/releases/download/media-v1/sku-to-scene-sizzle.srt">Captions</a><br />
+  From approved product imagery to retail video concepts: QSR and coffee, apparel and lifestyle,
+  home improvement, grocery, pharmacy and consumer goods. See specialist Copilot agents,
+  explainable model routing, authentic recorded renders and visible quality evidence.<br />
+  Fictional brands; cached demo footage, not live generation. Original clip audio is muted.
+  Automated screening is not publication approval; human sign-off is required.
+  fal processing is preview, outside Microsoft facilities, and subject to the <a href="docs/governance.md">governance caveats</a>.
+  </sub>
+</div>
+
 SKU to Scene turns static product catalog assets (approved PIM imagery and text briefs) into channel-ready
 video through an **agent-orchestrated creative supply chain**. Three GitHub Copilot agents, run as a
 [Squad](https://github.com/bradygaster/squad) team with Copilot Fusion model routing, send each merchandising
