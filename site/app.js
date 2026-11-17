@@ -986,11 +986,11 @@
       const learning = inArea.filter((a) => a.curation === "learning");
       panel.replaceChildren(
         h("div", { class: "account-grid" }, inArea.filter((a) => a.curation !== "learning").map((a) => accountCard(a, clips, preview))),
-        learning.length ? h("details", { class: "learning-cases", "data-area": s.guide },
+        ...(learning.length ? [h("details", { class: "learning-cases", "data-area": s.guide },
           h("summary", {}, `Learning cases and known limitations (${learning.length})`),
           h("p", { class: "hint" }, "Original recordings retained to show what review caught. Each still needs a replacement; " +
             "they are not featured presentations, repaired examples or approvals."),
-          h("div", { class: "account-grid" }, learning.map((a) => accountCard(a, clips, preview)))) : null);
+          h("div", { class: "account-grid" }, learning.map((a) => accountCard(a, clips, preview))))] : []));
     }
     const featuredCount = data.accounts.filter((a) => a.curation !== "learning").length;
     const featuredAreas = new Set(data.accounts.filter((a) => a.curation !== "learning").map((a) => a.area)).size;

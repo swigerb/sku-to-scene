@@ -126,6 +126,22 @@ It also guards against literal null placeholders and excessively nested evaluati
 Inspect the expanded screenshots, including interpretation and historical tables, before review.
 This is not a CLS-only test or a claim of campaign approval.
 
+The shared-frame/footer refinement has a separate visual harness, using the previous PR6
+preview as its before baseline:
+
+```powershell
+node tests\shared-frame.cjs http://127.0.0.1:8772/ http://127.0.0.1:8774/ C:\path\to\frame-artifacts
+```
+
+It measures the normal 1240px shell, content/footer edges and header alignment for all five
+routes at 1366, 1440, 1920, 800 (tablet) and 390px in both themes. It records actual fullscreen
+entry/exit widths, all Northwind guide steps, the remaining examples at desktop/phone widths,
+keyboard/touch-target footer checks and optional-node placeholder checks for every gallery category.
+The output includes fixed-viewport, 100%-zoom five-page comparison sheets, full-page captures,
+footer crops in both themes, and `shared-frame-evidence.json`. `FRAME_MUTATION=wide-guide`
+or `FRAME_MUTATION=hidden-footer` deliberately changes the served CSS to prove the corresponding
+geometry/visibility assertions fail. Neither harness changes recordings or calls a cloud service.
+
 ## Recorded QA outcomes
 
 The original eight cached clips are authentic Foundry renders. Scores are AI screening judgments, not ground truth.
