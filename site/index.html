@@ -26,15 +26,18 @@
 <body>
   <a class="skip" href="#main">Skip to content</a>
   <header class="topbar" id="topbar">
+    <div class="topbar-inner page-shell">
     <a class="brand" href="#top" aria-label="SKU to Scene home">
       <img class="logo logo-light" src="brand/logo-horizontal-light.png" alt="SKU to Scene" width="840" height="176">
       <img class="logo logo-dark" src="brand/logo-horizontal-dark.png" alt="SKU to Scene" width="840" height="176">
     </a>
     <button class="ghost menu-toggle" id="menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav">Menu</button>
     <nav id="site-nav" aria-label="Sections">
+      <a href="#home" data-view="home">Home</a>
       <a href="#guide" data-view="guide">Guided demo</a>
       <a href="#scenarios" data-view="scenarios">Scenario gallery</a>
       <a href="#evidence" data-view="evidence">Technical evidence</a>
+      <a href="#about" data-view="about">About</a>
     </nav>
     <div class="theme-toggle" id="theme-toggle" role="radiogroup" aria-label="Color theme">
       <button id="theme-light" type="button" role="radio" aria-checked="true" tabindex="0" aria-label="Light theme" title="Light theme">
@@ -49,12 +52,12 @@
         </svg>
       </button>
     </div>
+    </div>
   </header>
 
-  <main id="main">
+  <main id="main" class="page-shell">
     <div id="review-alert" hidden></div>
-    <p class="global-disclosure">Fictional examples · Recorded replay · Human review required
-      <a href="#about-demo">About this demo</a></p>
+    <p class="global-disclosure">Fictional examples · Recorded replay · Human review required</p>
 
     <div class="view" id="view-home" data-view="home">
     <section class="hero" id="top" aria-labelledby="hero-title">
@@ -236,42 +239,101 @@
       </details>
 
       <details class="evidence" id="evals">
-        <summary>AI evaluations (Microsoft Foundry Evaluations)</summary>
+        <summary>AI evaluations</summary>
         <p class="hint" id="evals-context"></p>
         <p class="lede small">Recorded Foundry Evaluations results supplement, never replace, the original screening verdicts. No evaluations run here.</p>
         <div id="evals-body"></div>
       </details>
+      <section aria-labelledby="historical-heading">
+        <h3 id="historical-heading">Historical evidence</h3>
+        <p class="hint">Original source evaluations and all-run provenance, not results for the current presentation or campaign approval.</p>
+        <div id="historical-evals"></div>
+        <p><a href="evaluations/foundry-evals-v1.json" download>Download Foundry evaluation evidence</a> ·
+          <a href="evaluations/human-review.json" download>Download review notes and provenance</a> ·
+          <a href="evaluations/targeted-evals-v2.json" download>Download direct targeted reviews</a></p>
+      </section>
     </section>
 
-  </main>
-
-  <footer>
-      <p class="next-steps">
-        <a href="https://github.com/swigerb/sku-to-scene">Explore the source</a> ·
-        <a href="https://github.com/swigerb/sku-to-scene/blob/main/docs/demo-script.md">Read the presenter guide</a> ·
-        <a href="https://github.com/swigerb/sku-to-scene/blob/main/docs/foundry-setup.md">Plan a scoped pilot</a>
-        (with the <a href="https://github.com/swigerb/sku-to-scene/blob/main/docs/governance.md">governance caveats</a>)
-      </p>
-      <details id="about-demo" class="inspect">
-      <summary>About this demo</summary>
-      <p><a href="evaluations/curated-release-v1.json">Curated reference-preview scope v1</a>: eight featured
-        fictional-demo presentations and six learning cases that still need future remediation. Curation is not
-        full remediation and not customer-campaign approval.</p>
-      <p><a href="evaluations/demo-dispositions-v1.json">Versioned demo dispositions and asset hashes</a>.
-        These owner-delegated assistant decisions concern this fictional demo, not approval for customer campaigns.</p>
-      <p><a href="evaluations/selected-assets-v1.json">Final selected-asset manifest and unselected outcomes</a> ·
-        <a href="evaluations/targeted-evals-v2.json">Bounded direct re-evaluations (not Foundry Evals service runs)</a>.</p>
-      <p>Every product clip is an authentic Microsoft Foundry render recorded earlier; silent presentations are identified
-        derivatives with native originals retained. The original v1 narrated overview is an
-        edited compilation; its statements about the original eight clips are historical. This is recorded replay, with no live generation or evaluations.
-        fal models on Foundry are a <strong>preview</strong>, processed outside Microsoft facilities under fal's terms.
-        Automated screening is an aid: <strong>a person must sign off</strong> before anything is published.</p>
-      <p id="fictional-brands"></p>
+    <section id="about" class="panel view" data-view="about" aria-labelledby="about-heading">
+      <p class="eyebrow">About</p>
+      <h2 id="about-heading" tabindex="-1">About this demo</h2>
+      <div class="about-grid">
+      <section class="card about-section" aria-labelledby="about-scope">
+      <h3 id="about-scope">Overview and scope</h3>
+      <p class="lede small">SKU to Scene is a recorded fictional technical/reference preview: eight featured
+        presentations and six learning cases explore product imagery, creative briefs, model routing and review.</p>
+      <p>It does not generate video live or approve customer campaigns. Curation is not full remediation:
+        recorded findings, verdicts and unresolved limitations remain evidence, not publication permission.</p>
       <p>Fictional brands and products. Real company names identify representative retail segments and cite public
         sources only; no affiliation, endorsement, trademarks, or customer data. Product images are AI-generated.
-        Prices are preview list prices. MIT licensed.</p>
-      <details class="inspect"><summary>Public sources for the fictional examples</summary><div id="public-sources"></div></details>
+        Prices are preview list prices.</p>
+      <details class="inspect">
+        <summary>Versioned evidence and asset scope</summary>
+        <p><a href="evaluations/curated-release-v1.json">Curated reference-preview scope v1</a> ·
+          <a href="evaluations/demo-dispositions-v1.json">Versioned demo dispositions and asset hashes</a>.
+          These owner-delegated assistant decisions concern this fictional demo, not approval for customer campaigns.</p>
+        <p><a href="evaluations/selected-assets-v1.json">Selected-asset manifest and unselected outcomes</a> ·
+          <a href="evaluations/targeted-evals-v2.json">Bounded direct re-evaluations (not Foundry Evals service runs)</a> ·
+          <a href="#evidence">Technical evidence</a>.</p>
       </details>
+      </section>
+      <section class="card about-section" aria-labelledby="about-processing">
+      <h3 id="about-processing">Processing, governance and resources</h3>
+      <p>Every product clip is an authentic Microsoft Foundry render recorded earlier; silent presentations are identified
+        derivatives with native originals retained. The original v1 narrated overview is an edited compilation;
+        its statements about the original eight clips are historical. No live generation or evaluations run here.</p>
+      <p>fal models on Foundry are a <strong>preview</strong>, processed outside Microsoft facilities under
+        <a href="https://fal.ai/terms">fal's terms</a>. Automated screening is an aid:
+        <strong>a person must sign off</strong> before anything is published.
+        Read the <a href="https://github.com/swigerb/sku-to-scene/blob/main/docs/governance.md">governance caveats</a>
+        before planning a scoped pilot.</p>
+      <p><a href="https://github.com/swigerb/sku-to-scene/blob/main/LICENSE">MIT licensed</a>.
+        Explore the source, presenter guide and pilot setup in the resources below.</p>
+      <details class="inspect"><summary>Fictional examples and public sources</summary>
+        <p id="fictional-brands"></p>
+        <div id="public-sources"></div>
+      </details>
+      </section>
+      </div>
+    </section>
+  </main>
+
+  <footer class="page-shell">
+    <div class="footer-panel" id="footer-panel">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <img class="logo-light" src="brand/logo-horizontal-light.png" alt="SKU to Scene" width="840" height="176">
+          <img class="logo-dark" src="brand/logo-horizontal-dark.png" alt="SKU to Scene" width="840" height="176">
+          <p>Explore the workflow behind the creative.</p>
+        </div>
+        <a class="footer-resource" href="https://github.com/swigerb/sku-to-scene" target="_blank" rel="noopener noreferrer" aria-label="Source code (opens in a new tab)">
+          <svg class="footer-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="m8 6-6 6 6 6m8-12 6 6-6 6M14 3l-4 18"/></svg>
+          <svg class="footer-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M7 17 17 7M7 7h10v10"/></svg>
+          <strong>Source code</strong>
+          <p>Explore the agents, routing and reference implementation.</p>
+        </a>
+        <a class="footer-resource" href="https://github.com/swigerb/sku-to-scene/blob/main/docs/demo-script.md" target="_blank" rel="noopener noreferrer" aria-label="Presenter guide (opens in a new tab)">
+          <svg class="footer-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M3 4h18M5 4v13h14V4M12 17v4m-5 0 5-4 5 4M9 8l6 3-6 3z"/></svg>
+          <svg class="footer-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M7 17 17 7M7 7h10v10"/></svg>
+          <strong>Presenter guide</strong>
+          <p>Run a clear, repeatable retail walkthrough.</p>
+        </a>
+        <a class="footer-resource" href="https://github.com/swigerb/sku-to-scene/blob/main/docs/foundry-setup.md" target="_blank" rel="noopener noreferrer" aria-label="Pilot setup (opens in a new tab)">
+          <svg class="footer-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M7 3h10v4H7zM7 5H4v16h16V5h-3M8 12l2 2 5-5M8 18h8"/></svg>
+          <svg class="footer-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M7 17 17 7M7 7h10v10"/></svg>
+          <strong>Pilot setup</strong>
+          <p>Review prerequisites, costs and governance.</p>
+        </a>
+      </div>
+      <div class="footer-utility">
+        <nav class="utility-links" aria-label="Footer">
+          <a href="#about">About</a>
+          <a href="https://github.com/swigerb/sku-to-scene/blob/main/docs/governance.md" target="_blank" rel="noopener noreferrer">Governance</a>
+          <a href="https://github.com/swigerb/sku-to-scene/blob/main/LICENSE" target="_blank" rel="noopener noreferrer">MIT licence</a>
+        </nav>
+        <p>Fictional examples · Recorded replay</p>
+      </div>
+    </div>
   </footer>
   <script src="app.js"></script>
 </body>

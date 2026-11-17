@@ -39,8 +39,6 @@ MUTATIONS = {
                          'h("div", { class: "qa-summary" }, base));', "ok", "#readiness-summary has one shared denominator note"),
     "service-fail-note": ('svc.includes("fail") ? "The Foundry', 'true ? "The Foundry', "ok",
                           "the recorded-as-fail explanation appears only for a non-passing service result"),
-    "clip-toggle": ('        h("span", { class: "clip-toggle", "aria-hidden": "true" }),\n', "", "ok",
-                    "summary draws a visible expand/collapse affordance"),
     "gallery-exact-guide": ('href: `#guide/${a.area}/${a.id}` }, "Open guided demo"',
                             'href: `#guide/${a.area}` }, "Open guided demo"', "ok", "each gallery action targets the exact account"),
     "preview-close-pause": ("      previewPlayer?.pause();\n      body.replaceChildren();",
