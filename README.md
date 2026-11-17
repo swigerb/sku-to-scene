@@ -5,7 +5,8 @@
   </picture>
 </p>
 
-<p align="center"><strong>AI-Directed Retail Video at Enterprise Scale</strong></p>
+<p align="center"><strong>AI-Directed Retail Video for product catalogs</strong><br />
+<sub>Curated technical reference preview: not production-qualified and not approved for customer campaigns</sub></p>
 
 <p align="center">
   <a href="https://swigerb.github.io/sku-to-scene/"><strong>▶ Open the browser demo</strong></a> ·
@@ -15,6 +16,14 @@
 </p>
 
 ## Quick tour
+
+The video below is the **original recorded overview v1** (the browser's **Watch original overview v1 · 2:54**).
+Its footage, Ava narration, embedded captions and original-eight results are unchanged. Its statements about
+the original eight clips are historical, not claims about the curated preview. The browser's
+[versioned demo dispositions](demo-cache/evaluations/demo-dispositions-v1.json) identify selected presentation
+derivatives separately from native originals and historical screening, and the
+[curated reference-preview scope v1](demo-cache/evaluations/curated-release-v1.json) records which examples are
+featured and which are learning cases.
 
 <div align="center">
 
@@ -33,8 +42,8 @@ https://github.com/user-attachments/assets/54a3f1b5-cd44-4fe4-9893-df6bf100e777
   </sub>
 </div>
 
-SKU to Scene turns static product catalog assets (approved PIM imagery and text briefs) into channel-ready
-video through an **agent-orchestrated creative supply chain**. Three GitHub Copilot agents, run as a
+SKU to Scene shows how static product catalog assets (approved PIM imagery and text briefs) can become short
+retail video concepts through an **agent-orchestrated creative supply chain**; every output still needs review. Three GitHub Copilot agents, run as a
 [Squad](https://github.com/bradygaster/squad) team with Copilot Fusion model routing, send each merchandising
 brief to the right **fal video model in Microsoft Foundry** — `Kling v3 Pro`, `LTX-2.5 Fast`, `LTX-2.5 Pro`,
 `MiniMax H3 Max` or `MiniMax H3 Max Turbo` — based on latency, budget, audio needs and source asset.
@@ -48,25 +57,47 @@ brief to the right **fal video model in Microsoft Foundry** — `Kling v3 Pro`, 
 ## What you're looking at
 
 - **The browser demo** replays **cached, authentic Foundry renders** with their recorded QA evidence. It
-  makes no cloud calls and generates nothing new. Start with **Watch overview** (the narrated video with
-  captions), **Start guided demo** (step-by-step, with Previous/Next/Play/Restart/Fullscreen) or **Explore
-  scenarios**. Each of the four RCG areas has its own deliberate guide and fictional account briefs. Previewing
-  never selects; only Northwind concept #2 has the recorded coffee hero. Other areas offer their existing PIM
-  heroes; new text-only drafts are preview-only. Light/dark theme choices are explicit and remembered.
+  makes no cloud calls and generates nothing new. Start with **Watch original overview v1 · 2:54** (the narrated
+  video with captions), **Start guided demo** or **Explore scenarios**. One selected fictional account tells one story at a
+  time, with a compact brief and one active recording. Northwind has Brief → Concepts → Recorded result → Review;
+  the other examples skip Concepts because they have only one recording. Previewing never selects:
+  only explicit selection of Northwind concept #2 unlocks its recorded coffee hero. Text-only examples reach
+  review without pretending to have a PIM hero. The gallery features eight presentations by default; six learning
+  cases sit in a collapsed **Learning cases and known limitations** section within their categories. The
+  **Change example** control groups all 14 as Featured presentations and Learning cases; every default entry,
+  including `#guide/<area>`, opens a featured example, and direct links to learning cases state their unresolved defect.
+  The gallery uses compact recorded-poster cards and a single focused preview dialog; full briefs, public
+  sources and historical recordings are in details. Returning from a walkthrough restores the browsing context.
+  Technical evidence defaults to the current recording, with an explicit all-attempts scope.
+  Restart and Fullscreen are under Options; light/dark theme choices are explicit and remembered.
+- **This is a curated reference preview, not full remediation.** [Curated scope v1](demo-cache/evaluations/curated-release-v1.json)
+  features **8 fictional-demo presentations** (Northwind silent derivative, Tailspin, Coho, Fabrikam, VanArsdel,
+  Zava silent generic-layout derivative, Proseware with its explicit background variance, Munson). **6 learning
+  cases** (Alpine, Woodgrove, Southridge, Tailwind, Wide World, Best For You) keep their original recordings,
+  evidence and unresolved defects; each still needs a replacement. **6 replacement attempts were rejected and none
+  was selected**; they stay unpublished. These are different populations, not a total. No example has
+  customer-campaign approval, and `release_ready` in the dispositions keeps its full-remediation meaning (false).
 - **Automated QA is a screening aid, not approval.** Original eight verdicts: **2 pass / 6 fail**; every clip still
   needs human sign-off (`publish_approved` is false).
-- **Costs are estimates** (preview list price × requested seconds), not Azure bills.
+- **Costs are estimates** (preview list price × requested seconds), not Azure bills. The release pass's
+  **$3.7032** is conservative consumed reservations, not an Azure invoice.
 - **AI evaluations (Foundry Evals v1) were run** over the cached clips, a negative control and the router's
   decisions. They use a disclosed two-stage design (vision observations, then cloud text graders), sit next to the
   original verdicts and never change them. See [Foundry Evaluations](docs/foundry-evaluations-plan.md).
-- **Human review blocks the Northwind hero:** its native café/frothing audio is loud and does not match the
-  picture. Draft concept #2 has no audio track (not requested).
-- **All 14 fictional accounts have a playable recorded example.** The nine new ones are silent text-to-video
+  The later [targeted checks](demo-cache/evaluations/targeted-evals-v2.json) (Zava **partial**; a grocery
+  rationale and a deliberately unsupported control) are bounded direct Azure OpenAI evaluations, not Foundry
+  Evals service runs.
+- **Human review blocks the native Northwind hero:** its café/frothing audio is loud and does not match the
+  picture. The browser features a separately identified **silent presentation derivative** of that render;
+  removing the audio does not make the native audio acceptable and is not campaign approval. The retained native
+  original and its finding stay in source history. Draft concept #2 has no audio track (not requested).
+- **All 14 fictional accounts keep a playable recorded example; playable is not repaired.** The nine new ones are silent text-to-video
   exploratory drafts: preview-only (no approved PIM hero), **Awaiting human review — not approved** and
   **Not yet evaluated** by Foundry Evaluations. All nine selected new-account clips passed automated screening,
   including Proseware's realistic-office replacement. This does not erase review concerns: Southridge retains
   its original studio clip and order disclosure because neither realistic-room replacement qualified.
-  Safe failed attempts appear as **QA learning examples**; text, trade-dress, Content Safety and agent-observed
+  Safe failed earlier attempts appear as **QA learning examples** (a different idea from the six curated
+  learning cases, which are retained selected recordings); text, trade-dress, Content Safety and agent-observed
   product defects can withhold an attempt even when AI screening passed. Evidence stays visible.
   See [verification](docs/verification.md#account-drafts).
   The original eight clips and v1 evidence are unchanged.
@@ -92,22 +123,22 @@ physics and framing. Realistic-looking footage remains AI-generated and must be 
 
 ## Why five model variants matter
 
-| Area | Representative account | Fictional example | Video need / model |
-| --- | --- | --- | --- |
-| QSR / coffee / convenience | Starbucks | Northwind Coffee | Seasonal launch: three drafts → recorded Kling hero |
-| QSR / coffee / convenience | McDonald's | Tailspin Burger Co. | Value-bundle creative / LTX-2.5 Fast |
-| QSR / coffee / convenience | 7-Eleven | Coho Corner Market | Fresh-food handoff / MiniMax Turbo |
-| Apparel / home decor | Gap | Fabrikam | Approved jacket lookbook / Kling |
-| Apparel / home decor | TJX | VanArsdel Finds | Changing assortment discovery / Turbo |
-| Apparel / home decor | Target | Tailwind Traders | Home-decor newness / LTX Fast |
-| Apparel / home decor | Costco | Wide World Wholesale | Warehouse essentials / Turbo |
-| Home / electronics | The Home Depot | Alpine Pro Supply | Contoso Pro drill in context / Kling |
-| Home / electronics | Lowe's | Zava DIY | Fabrikam Home patio layout / H3 Max (text-only preview) |
-| Home / electronics | Best Buy | Southridge Electronics | Litware laptop content / H3 Max |
-| Home / electronics | Staples | Proseware Workplace Supply | Workplace-kit arrangement / H3 Max |
-| Grocery / pharmacy | Walgreens | Woodgrove Wellness | Calm seasonal wellness screen / Turbo |
-| Grocery / pharmacy | Kroger | Best For You Market | Weekly meal inspiration / Turbo |
-| Grocery / pharmacy | Albertsons | Munson's Markets | Localized grocery basket / Turbo |
+| Area | Representative account | Fictional example | Video need / model | Curated role |
+| --- | --- | --- | --- | --- |
+| QSR / coffee / convenience | Starbucks | Northwind Coffee | Seasonal launch: three drafts → recorded Kling hero | Featured |
+| QSR / coffee / convenience | McDonald's | Tailspin Burger Co. | Value-bundle creative / LTX-2.5 Fast | Featured |
+| QSR / coffee / convenience | 7-Eleven | Coho Corner Market | Fresh-food handoff / MiniMax Turbo | Featured |
+| Apparel / home decor | Gap | Fabrikam | Approved jacket lookbook / Kling | Featured |
+| Apparel / home decor | TJX | VanArsdel Finds | Changing assortment discovery / Turbo | Featured |
+| Apparel / home decor | Target | Tailwind Traders | Home-decor newness / LTX Fast | Learning case |
+| Apparel / home decor | Costco | Wide World Wholesale | Warehouse essentials / Turbo | Learning case |
+| Home / electronics | The Home Depot | Alpine Pro Supply | Contoso Pro drill in context / Kling | Learning case |
+| Home / electronics | Lowe's | Zava DIY | Fabrikam Home patio layout / H3 Max (text-only preview) | Featured |
+| Home / electronics | Best Buy | Southridge Electronics | Litware laptop content / H3 Max | Learning case |
+| Home / electronics | Staples | Proseware Workplace Supply | Workplace-kit arrangement / H3 Max | Featured |
+| Grocery / pharmacy | Walgreens | Woodgrove Wellness | Calm seasonal wellness screen / Turbo | Learning case |
+| Grocery / pharmacy | Kroger | Best For You Market | Weekly meal inspiration / Turbo | Learning case |
+| Grocery / pharmacy | Albertsons | Munson's Markets | Localized grocery basket / Turbo | Featured |
 
 Each example is inspired by the qualitative public priorities cited in
 [`catalog/accounts.json`](catalog/accounts.json), not an assertion about a relationship or private plans.
@@ -132,9 +163,10 @@ In the Copilot app, the `sku-to-scene` MCP server (`.mcp.json`) is preconfigured
 Preview the static site locally with `python scripts\build_site.py` and
 `python -m http.server 8765 --directory _site`.
 
-## Live mode (billable)
+## Live mode (optional, deliberate and billable)
 
-Live generation was validated once on all five variants ([record](docs/live-validation.md)). To use your own
+The browser demo and the recommended presenter path need no live calls. Live generation was validated once on
+all five variants ([record](docs/live-validation.md)). To use your own
 Foundry account: deploy the models, assign **Foundry User**, put your endpoint and tenant in an ignored `.env`,
 set `SKU2SCENE_MODE=live`, run `pip install -e ".[live]"` and `sku2scene readiness --check-auth`.
 Step-by-step: [foundry-setup](docs/foundry-setup.md). No `FAL_KEY` is used; auth is Entra ID.

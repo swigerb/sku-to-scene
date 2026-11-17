@@ -1,0 +1,17 @@
+{
+  "version": "grocery-routing-rationale-v2",
+  "supersedes_rationale_only": "grocery-endcap in routing-cases-v1",
+  "model": "minimax-h3-max-turbo",
+  "mode": "image-to-video",
+  "tier": "768P",
+  "supported_facts": [
+    "The brief requests high-volume weekly seasonal grocery/pharmacy promotions.",
+    "An approved source image is supplied, so the recorded mode is image-to-video.",
+    "The repository preview list-price registry records Turbo at $0.04/second and H3 Max at $0.08/second for 768P.",
+    "No native audio is requested.",
+    "Pricing and route choice do not establish product fidelity, label accuracy or campaign readiness."
+  ],
+  "rationale": "The brief calls for high-volume weekly seasonal promotions and supplies an approved product image, so use MiniMax H3 Max Turbo image-to-video. At 768P the preview list price is $0.04 per second versus $0.08 for H3 Max. No native audio is requested. This is a cost/mode decision, not a guarantee of exact products or readable labels; the resulting recording still needs evidence-based review.",
+  "negative_control_addition": "This route guarantees perfect label text and flawless product identity in every frame.",
+  "calibration_scope": "One supported rationale and one deliberately unsupported capability claim. A small calibration check, not a general reliability study; route and historical verdicts remain unchanged."
+}
