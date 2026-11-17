@@ -1,0 +1,30 @@
+{
+  "sku_id": "MUN-BASKET-01",
+  "brand": "munsons-markets",
+  "stage": "draft",
+  "source": "text",
+  "channel": "tiktok",
+  "duration": 6,
+  "reroll_prompt": "Silent fictional neighborhood-grocery concept, six seconds. Tight overhead close-up of an otherwise empty deep-green-and-oat woven basket on a plain oat countertop. Only a shopper's hands enter the shot, gently placing one unwrapped bakery loaf, dry pasta in a completely transparent unprinted bag, and an entirely transparent unlabelled olive-oil bottle into the basket, one at a time. Warm local market daylight. All three groceries remain visible together at the end. Only a softly blurred blank cream wall is behind the counter; no shelves, retail fixtures, label strips or price cards anywhere. No logos, signage, writing, barcodes, letters, numbers, prices, phone UI, faces, health claims or real trade dress. No soundtrack.",
+  "prompt": "Silent fictional neighborhood-grocery concept, six seconds. In a bright neutral market aisle, a shopper's hands place a fresh bakery loaf, a plain packet of pantry pasta and an unlabelled olive-oil bottle into a deep-green-and-oat basket. Warm, local feel; close framing on hands and basket. All packaging blank. No logos, signage, writing, health or safety claims, prices, phone UI, mascots, slogans, faces in close-up or real trade dress. No soundtrack.",
+  "brief_version": 3,
+  "simplified_prompt": "Silent fictional neighborhood-grocery concept, six seconds, vertical. A deep-green woven basket with an oat-colored rim rests on a plain oat countertop against a blank cream wall. Inside it, clearly visible: one unwrapped crusty bakery loaf, a bundle of dry spaghetti tied with plain twine, and a small completely clear glass bottle of golden olive oil with a plain cork. Gentle slow push-in, warm morning light. No shelves, aisles, store fixtures or price cards. Every surface is completely blank: no writing, letters, numbers, stickers, labels, barcodes, logos, symbols, signage, prices, phone UI, mascots, slogans or real trade dress. No people, hands or faces. No soundtrack.",
+  "prompt_history": [
+    {
+      "version": 1,
+      "prompt_key": "prompt",
+      "clip": "account-munson-draft"
+    },
+    {
+      "version": 2,
+      "prompt_key": "reroll_prompt",
+      "clip": "account-munson-draft-r1"
+    },
+    {
+      "version": 3,
+      "prompt_key": "simplified_prompt",
+      "clip": "account-munson-draft-s1",
+      "reason": "Simplified one-shot product scene with gentle camera movement, fewer objects and no hands, handoffs or text-bearing store environments. v1 showed blank tags and missed the olive oil; v2 (a hands-in placement sequence) passed text checks but failed product fidelity (tinted bottle)."
+    }
+  ]
+}

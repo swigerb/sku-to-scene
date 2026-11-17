@@ -1,0 +1,119 @@
+{
+  "version": "curated-reference-preview-20261117-v1",
+  "scope": "curated technical/reference preview",
+  "based_on": "demo-dispositions-20261117-v1",
+  "curated_reference_preview_ready": true,
+  "full_remediation_complete": false,
+  "unresolved_full_remediation": 6,
+  "customer_campaign_approved": false,
+  "withheld_media_published": false,
+  "thresholds_changed": false,
+  "rejections_reversed": false,
+  "note": "Curated reference-preview readiness is separate from full remediation and from customer-campaign approval. demo-dispositions release_ready=false keeps its full-remediation meaning: six selected examples still require replacement. No example is approved for a customer campaign.",
+  "featured": [
+    {
+      "account": "northwind",
+      "clip": "northwind-silent-presentation-v1",
+      "sha256": "b26506844ee747809079b79359def96778e995a1668364dc30df40beacad4067",
+      "status": "silent_presentation"
+    },
+    {
+      "account": "tailspin",
+      "clip": "account-tailspin-draft-s1",
+      "sha256": "a7124fd969f7182c7121af2c905498092198b96502be060de9d23a0c5107e511",
+      "status": "retained_illustration"
+    },
+    {
+      "account": "coho",
+      "clip": "account-coho-draft-s3",
+      "sha256": "3d46139bb61f16b42ca92acadf5a0362c07f0e2d6dc2fc715a4cfd3e16015064",
+      "status": "retained_illustration"
+    },
+    {
+      "account": "fabrikam",
+      "clip": "hero-apparel-kling",
+      "sha256": "a60403fba86116255e0bc6cd593a95c6520e13f383803c3fbd422ac858afbc4d",
+      "status": "retained_illustration"
+    },
+    {
+      "account": "vanarsdel",
+      "clip": "account-vanarsdel-draft",
+      "sha256": "9c193ea9488b8047a747c4315c22484a14fd6666f6b80472ff074223243a5f24",
+      "status": "retained_illustration"
+    },
+    {
+      "account": "zava",
+      "clip": "zava-silent-presentation-v1",
+      "sha256": "2d16522b0c8da31042e630e28b081840f70bbe72107aec8f68b66c71108aa41f",
+      "status": "silent_presentation"
+    },
+    {
+      "account": "proseware",
+      "clip": "account-proseware-draft-s7",
+      "sha256": "0c624a416786e7779657a173565c8f5c6f4519486217074bdf78ed3388cf60b2",
+      "status": "demo_variance"
+    },
+    {
+      "account": "munson",
+      "clip": "account-munson-draft-s1",
+      "sha256": "8efd86e909e897197ebae424c0f23fa909942bf47435d707dc8af9445effc08b",
+      "status": "retained_illustration"
+    }
+  ],
+  "learning_cases": [
+    {
+      "account": "alpine",
+      "clip": "hero-home-kling",
+      "sha256": "e1f4e846839c23ab8fbcd5b5f15a1cf6474e816188cdd2f6b5c6a4f523976931",
+      "status": "replacement_required",
+      "unresolved_defect": "Black/teal reference policy resolved; original prompt failure still needs replacement."
+    },
+    {
+      "account": "woodgrove",
+      "clip": "hero-grocery-turbo",
+      "sha256": "5a42dbca6714483fd6a62876be3d7290baaa27a836e24ca023a46252b0bde239",
+      "status": "replacement_required",
+      "unresolved_defect": "All products appear early; later cropping and weak pharmacy context require replacement."
+    },
+    {
+      "account": "southridge",
+      "clip": "account-southridge-draft",
+      "sha256": "46c2465b1f484385822a0f46bc0b81b0278b5f9a964e6cb7a0dd983d3e691202",
+      "status": "replacement_required",
+      "unresolved_defect": "Laptop/accessory order is wrong; replacement required."
+    },
+    {
+      "account": "tailwind",
+      "clip": "account-tailwind-draft",
+      "sha256": "ec45831fde57e11f7426c1dd191fede7c18f3a5f36d04e14f9ccf64a6cb1f03d",
+      "status": "replacement_required",
+      "unresolved_defect": "Writing-like wall marks remain; replacement required."
+    },
+    {
+      "account": "wide-world",
+      "clip": "account-wide-world-draft",
+      "sha256": "be2a77e5a2bf8575036e6704456b86608b44d8cca374012240218523d7cb1641",
+      "status": "replacement_required",
+      "unresolved_defect": "Carton and shelf/bottle markings remain; replacement required."
+    },
+    {
+      "account": "best-for-you",
+      "clip": "account-best-for-you-draft-r1",
+      "sha256": "9ca5c2b94ef8a936401056ccd3fadf43d90d3f374018105cf113ce1af161ba8e",
+      "status": "replacement_required",
+      "unresolved_defect": "Expressly excluded utensils remain; replacement required."
+    }
+  ],
+  "rejected_replacement_attempts": {
+    "count": 6,
+    "selected": 0,
+    "clips": [
+      "release-alpine-20261117-v1",
+      "release-woodgrove-20261117-v1",
+      "release-southridge-20261117-v1",
+      "release-tailwind-20261117-v1",
+      "release-wide-world-20261117-v1",
+      "release-best-for-you-20261117-v1"
+    ]
+  }
+}

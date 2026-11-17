@@ -37,6 +37,78 @@
       "must_not": ["medical claims", "medication being consumed on screen", "dosage text"],
       "thresholds": {"logo_integrity": 0.8, "label_legibility": 0.8, "product_fidelity": 0.85, "prompt_adherence": 0.7}
     },
+    "tailspin-burger": {
+      "display_name": "Tailspin Burger Co.", "palette": ["#287D83", "#F2E6D0"],
+      "logo": "None. Plain packaging with no text, logo or symbols.",
+      "voice": "Warm, practical food moments.",
+      "must": ["plain teal and cream packaging", "recognizable burger, fries and drink", "no on-screen text"],
+      "must_not": ["logos", "signage", "price numbers", "real trade dress", "unsafe food handling", "faces in close-up"],
+      "thresholds": {"logo_integrity": 0.8, "label_legibility": 0.7, "product_fidelity": 0.8, "prompt_adherence": 0.7}
+    },
+    "coho-corner": {
+      "display_name": "Coho Corner Market", "palette": ["#69485C", "#F2E6D0"],
+      "logo": "None. Plain kraft bag and unbranded case.",
+      "voice": "Fresh, convenient and local.",
+      "must": ["plain plum and cream accents", "recognizable grab-and-go food", "no on-screen text"],
+      "must_not": ["logos", "signage", "price numbers", "real trade dress", "unsafe food handling", "faces in close-up"],
+      "thresholds": {"logo_integrity": 0.8, "label_legibility": 0.7, "product_fidelity": 0.8, "prompt_adherence": 0.7}
+    },
+    "vanarsdel-finds": {
+      "display_name": "VanArsdel Finds", "palette": ["#414141", "#D7A7B3"],
+      "logo": "None. Blank charcoal and blush tags without text.",
+      "voice": "Curious, tactile discoveries.",
+      "must": ["recognizable vase, throw and tote", "blank tags", "no on-screen text"],
+      "must_not": ["logos", "designer labels", "signage", "price numbers", "real trade dress", "faces in close-up"],
+      "thresholds": {"logo_integrity": 0.8, "label_legibility": 0.7, "product_fidelity": 0.8, "prompt_adherence": 0.7}
+    },
+    "tailwind-traders": {
+      "display_name": "Tailwind Traders", "palette": ["#9AA78B", "#D8C8A9"],
+      "logo": "None. Unbranded home decor, no signage.",
+      "voice": "Calm, welcoming design.",
+      "must": ["sage and sand palette", "recognizable lamps, pillows and basket", "no on-screen text"],
+      "must_not": ["logos", "signage", "price numbers", "real trade dress", "faces in close-up"],
+      "thresholds": {"logo_integrity": 0.8, "label_legibility": 0.7, "product_fidelity": 0.8, "prompt_adherence": 0.7}
+    },
+    "wide-world": {
+      "display_name": "Wide World Wholesale", "palette": ["#586674", "#B59A39"],
+      "logo": "None. Plain slate and mustard packaging.",
+      "voice": "Useful everyday essentials.",
+      "must": ["unbranded bulk multipacks", "warehouse setting", "no on-screen text"],
+      "must_not": ["logos", "signage", "price numbers", "real trade dress", "faces in close-up"],
+      "thresholds": {"logo_integrity": 0.8, "label_legibility": 0.7, "product_fidelity": 0.8, "prompt_adherence": 0.7}
+    },
+    "southridge-electronics": {
+      "display_name": "Southridge Electronics", "palette": ["#383D42", "#3B8C88"],
+      "logo": "None. No wordmark, OS interface or labels in the generated draft.",
+      "voice": "Precise product discovery.",
+      "must": ["silver laptop, headphones and mouse in a left-to-right row", "abstract screen only", "no on-screen text"],
+      "must_not": ["logos", "signage", "price numbers", "real trade dress", "faces in close-up", "branded screen interfaces"],
+      "thresholds": {"logo_integrity": 0.8, "label_legibility": 0.7, "product_fidelity": 0.8, "prompt_adherence": 0.7}
+    },
+    "proseware-workplace": {
+      "display_name": "Proseware Workplace Supply", "palette": ["#44416F", "#F6F4EF"],
+      "logo": "None. Plain indigo and white boxes without text.",
+      "voice": "Reliable, organized workplace help.",
+      "must": ["coffee kit, cleaning supplies, chair and paper arranged left to right", "no on-screen text"],
+      "must_not": ["logos", "signage", "price numbers", "real trade dress", "faces in close-up", "slogans"],
+      "thresholds": {"logo_integrity": 0.8, "label_legibility": 0.7, "product_fidelity": 0.8, "prompt_adherence": 0.7}
+    },
+    "best-for-you": {
+      "display_name": "Best For You Market", "palette": ["#B26849", "#79774B"],
+      "logo": "None. Plain terracotta and olive meal-kit box.",
+      "voice": "Warm meal inspiration, no health claims.",
+      "must": ["recognizable dinner ingredients", "plain meal-kit box", "no on-screen text"],
+      "must_not": ["logos", "signage", "price numbers", "real trade dress", "faces in close-up", "health claims"],
+      "thresholds": {"logo_integrity": 0.8, "label_legibility": 0.7, "product_fidelity": 0.8, "prompt_adherence": 0.7}
+    },
+    "munsons-markets": {
+      "display_name": "Munson's Markets", "palette": ["#304F41", "#DACEB8"],
+      "logo": "None. Plain basket and unbranded packaging.",
+      "voice": "Warm neighborhood meal essentials.",
+      "must": ["bread, pasta and olive oil", "deep-green and oat basket", "no on-screen text"],
+      "must_not": ["logos", "signage", "price numbers", "real trade dress", "faces in close-up", "safety or health claims"],
+      "thresholds": {"logo_integrity": 0.8, "label_legibility": 0.7, "product_fidelity": 0.8, "prompt_adherence": 0.7}
+    },
     "litware": {
       "display_name": "Litware",
       "palette": ["#C0C4C8", "#0B1F33"],

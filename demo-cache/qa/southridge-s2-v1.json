@@ -1,0 +1,309 @@
+{
+  "schema_version": 1,
+  "clip": "account-southridge-draft-s2",
+  "is_negative_control": false,
+  "agent_review": {
+    "decision": "withheld",
+    "observations": "Recorded automated pass retained. Room, daylight and wood desk are photographic, and the devices are in order with blank gradient screen. However, the mouse stands upright on its rear edge in all four frames: an unnatural product artifact. Original selected clip and order disclosure retained; media preserved privately.",
+    "human_approval": false
+  },
+  "generation_request_id": "bf05e529-12ba-4916-a7bb-c87dd5c97f3b",
+  "qa_source_sha256": "e5f502b34c0c936c2d879e120481f1dd57586a3bbbec75d1ad4ef26e9b298a6f",
+  "evaluated_at": "2026-11-16T23:25:09.696614+00:00",
+  "qa": {
+    "evaluator": "azure-openai-vision",
+    "measured": true,
+    "scores": {
+      "logo_integrity": 1,
+      "label_legibility": 1,
+      "product_fidelity": 0.92,
+      "prompt_adherence": 0.78
+    },
+    "thresholds": {
+      "logo_integrity": 0.8,
+      "label_legibility": 0.7,
+      "product_fidelity": 0.8,
+      "prompt_adherence": 0.7
+    },
+    "findings": [
+      "No visible logos, wordmarks, signage, or on-screen text.",
+      "Laptop screen appears as a plain abstract gradient with no UI or icons.",
+      "Three devices are present in a left-to-right row: silver laptop, headphones, mouse.",
+      "Scene matches a realistic home office with oak desk, daylight, bookshelf, and plant.",
+      "The row is not perfectly straight/aligned as requested; headphones and mouse sit slightly offset relative to the laptop.",
+      "The laptop appears more like a generic modern laptop than a clearly specified 14-inch silver ultrabook, but overall product match is strong."
+    ],
+    "hallucinated_objects": [
+      "coffee mug",
+      "bookshelf books",
+      "plant",
+      "window curtain"
+    ],
+    "content_safety": [
+      {
+        "frame": "frame_01.png",
+        "categories": [
+          {
+            "category": "Hate",
+            "severity": 0
+          },
+          {
+            "category": "SelfHarm",
+            "severity": 0
+          },
+          {
+            "category": "Sexual",
+            "severity": 0
+          },
+          {
+            "category": "Violence",
+            "severity": 0
+          }
+        ]
+      },
+      {
+        "frame": "frame_02.png",
+        "categories": [
+          {
+            "category": "Hate",
+            "severity": 0
+          },
+          {
+            "category": "SelfHarm",
+            "severity": 0
+          },
+          {
+            "category": "Sexual",
+            "severity": 0
+          },
+          {
+            "category": "Violence",
+            "severity": 0
+          }
+        ]
+      },
+      {
+        "frame": "frame_03.png",
+        "categories": [
+          {
+            "category": "Hate",
+            "severity": 0
+          },
+          {
+            "category": "SelfHarm",
+            "severity": 0
+          },
+          {
+            "category": "Sexual",
+            "severity": 0
+          },
+          {
+            "category": "Violence",
+            "severity": 0
+          }
+        ]
+      },
+      {
+        "frame": "frame_04.png",
+        "categories": [
+          {
+            "category": "Hate",
+            "severity": 0
+          },
+          {
+            "category": "SelfHarm",
+            "severity": 0
+          },
+          {
+            "category": "Sexual",
+            "severity": 0
+          },
+          {
+            "category": "Violence",
+            "severity": 0
+          }
+        ]
+      }
+    ],
+    "verdict": "pass",
+    "failed_checks": [],
+    "publish_approved": false,
+    "automated_checks_passed": true,
+    "human_signoff_required": true,
+    "sampled_frame_count": 4,
+    "evaluator_version": "brand-qa-vision-v1",
+    "check_evidence": null
+  },
+  "v1_qa": {
+    "evaluator": "azure-openai-vision",
+    "measured": true,
+    "scores": {
+      "logo_integrity": 1,
+      "label_legibility": 1,
+      "product_fidelity": 0.92,
+      "prompt_adherence": 0.78
+    },
+    "thresholds": {
+      "logo_integrity": 0.8,
+      "label_legibility": 0.7,
+      "product_fidelity": 0.8,
+      "prompt_adherence": 0.7
+    },
+    "findings": [
+      "No visible logos, wordmarks, signage, or on-screen text.",
+      "Laptop screen appears as a plain abstract gradient with no UI or icons.",
+      "Three devices are present in a left-to-right row: silver laptop, headphones, mouse.",
+      "Scene matches a realistic home office with oak desk, daylight, bookshelf, and plant.",
+      "The row is not perfectly straight/aligned as requested; headphones and mouse sit slightly offset relative to the laptop.",
+      "The laptop appears more like a generic modern laptop than a clearly specified 14-inch silver ultrabook, but overall product match is strong."
+    ],
+    "hallucinated_objects": [
+      "coffee mug",
+      "bookshelf books",
+      "plant",
+      "window curtain"
+    ],
+    "content_safety": [
+      {
+        "frame": "frame_01.png",
+        "categories": [
+          {
+            "category": "Hate",
+            "severity": 0
+          },
+          {
+            "category": "SelfHarm",
+            "severity": 0
+          },
+          {
+            "category": "Sexual",
+            "severity": 0
+          },
+          {
+            "category": "Violence",
+            "severity": 0
+          }
+        ]
+      },
+      {
+        "frame": "frame_02.png",
+        "categories": [
+          {
+            "category": "Hate",
+            "severity": 0
+          },
+          {
+            "category": "SelfHarm",
+            "severity": 0
+          },
+          {
+            "category": "Sexual",
+            "severity": 0
+          },
+          {
+            "category": "Violence",
+            "severity": 0
+          }
+        ]
+      },
+      {
+        "frame": "frame_03.png",
+        "categories": [
+          {
+            "category": "Hate",
+            "severity": 0
+          },
+          {
+            "category": "SelfHarm",
+            "severity": 0
+          },
+          {
+            "category": "Sexual",
+            "severity": 0
+          },
+          {
+            "category": "Violence",
+            "severity": 0
+          }
+        ]
+      },
+      {
+        "frame": "frame_04.png",
+        "categories": [
+          {
+            "category": "Hate",
+            "severity": 0
+          },
+          {
+            "category": "SelfHarm",
+            "severity": 0
+          },
+          {
+            "category": "Sexual",
+            "severity": 0
+          },
+          {
+            "category": "Violence",
+            "severity": 0
+          }
+        ]
+      }
+    ],
+    "verdict": "pass",
+    "failed_checks": [],
+    "publish_approved": false,
+    "automated_checks_passed": true,
+    "human_signoff_required": true,
+    "sampled_frame_count": 4,
+    "evaluator_version": "brand-qa-vision-v1",
+    "check_evidence": null
+  },
+  "usage": {
+    "qa_allowance_usd": 0.5,
+    "calls": [
+      {
+        "kind": "vision",
+        "status": 200,
+        "request_id": "ec10e595-ea35-4d1c-8b3d-00fdd2295169",
+        "usage": {
+          "prompt_tokens": 4952,
+          "completion_tokens": 172,
+          "total_tokens": 5124
+        }
+      },
+      {
+        "kind": "content_safety",
+        "status": 200,
+        "request_id": "5ca4d13f-6aeb-4f29-9b99-c04699e6d8dd"
+      },
+      {
+        "kind": "content_safety",
+        "status": 200,
+        "request_id": "a21640dc-182d-493e-a0b0-77be5ac64bf9"
+      },
+      {
+        "kind": "content_safety",
+        "status": 200,
+        "request_id": "bb9d750d-3f3f-4da6-97ac-9c07807c01fc"
+      },
+      {
+        "kind": "content_safety",
+        "status": 200,
+        "request_id": "4f81111f-91a0-46e8-b6a5-e02b82424881"
+      }
+    ],
+    "billed_qa_usd": null,
+    "note": "Bounded QA calls; allowance is not a quoted or billed price."
+  },
+  "required_items": null,
+  "prompt": "Six-second silent photographic product video, landscape 16:9. A realistic lived-in home office with a natural oak desk, fine visible wood grain, soft window daylight, natural shadows, a softly blurred plain bookshelf and a small green plant behind the desk. The camera looks STRAIGHT ON at the desk, perpendicular to its front edge, with the desk edge horizontal across the image. Three unbranded devices are side by side in a perfectly straight horizontal row, not diagonal: LEFT a silver 14-inch aluminum laptop facing squarely toward the viewer, CENTER charcoal over-ear headphones standing upright, RIGHT a small ordinary symmetrical charcoal computer mouse. Their front edges align along the same horizontal line on the desk, with clear empty gaps and no overlap. The laptop sits entirely to the left of the headphones; the mouse sits entirely to the right of them. The laptop is open at 110 degrees and stays still. Its screen shows only a smooth neutral grey-to-teal gradient: no UI, text, icons, menus or symbols. Devices have blank unbranded surfaces. A plain ivory coffee mug sits behind and left of the laptop, outside the three-device row. Wide composition with generous empty space around every object; nothing cropped. Locked-off camera and stationary objects throughout, no orbit, pan, push-in, cuts or opening animation. Realistic product proportions, aluminum reflections, matte headphones and natural materials, not a CGI showroom. No people, hands or faces. No visible writing on books or background surfaces; book spines face away. No logos, labels, signage, numbers, branding, recognizable trade dress or soundtrack.",
+  "sample_timestamps_s": [
+    0.75,
+    2.25,
+    3.75,
+    5.25
+  ],
+  "presentation_sha256": "90fe414798bd76fec0f91886fea48e970663cc8feb1a23cf2f72b145372c618e",
+  "human_signoff_required": true,
+  "publish_approved": false
+}

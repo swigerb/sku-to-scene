@@ -1,0 +1,535 @@
+{
+  "_note": "Fictional brands and products. Real company names identify representative retail segments and cite public sources only; no affiliation, endorsement, trademarks, or customer data. New account clips are silent text-to-video exploratory drafts: preview-only, never PIM heroes, and awaiting human review. Failed or withheld attempts stay listed as evidence.",
+  "accounts": [
+    {
+      "id": "northwind",
+      "area": "qsr",
+      "real_company": "Starbucks",
+      "fictional_brand": "Northwind Coffee",
+      "sku": "NWC-LTO-PCB-16",
+      "brief_file": "qsr-lto-pumpkin-cold-brew.json",
+      "use_case": "Seasonal coffee offer: compare three concepts before reviewing a recorded image-to-video hero.",
+      "model": "ltx-2.5-fast",
+      "tier": "720p",
+      "duration": 6,
+      "aspect_ratio": "9:16",
+      "channel": "Vertical social",
+      "why": "Fast iteration for concepts; an approved product image supports the separate Kling hero.",
+      "draft_clips": [
+        "lto-draft-1",
+        "lto-draft-2",
+        "lto-draft-3"
+      ],
+      "recorded_clip": "lto-hero-kling",
+      "hero_clip": "lto-hero-kling",
+      "planned_clip": null,
+      "need": "Seasonal menu innovation and launch moments that drive culture.",
+      "sources": [
+        {
+          "publisher": "Starbucks investor relations",
+          "url": "https://investor.starbucks.com/news/financial-releases/news-details/2026/Starbucks-Reports-Q4-and-Full-Fiscal-Year-2026-Results/",
+          "published": "2026-10",
+          "accessed": "2026-11-16"
+        },
+        {
+          "publisher": "CNBC",
+          "url": "https://www.cnbc.com/2026/10/29/starbucks-sbux-q4-2026-earnings.html",
+          "published": "2026-10",
+          "accessed": "2026-11-16"
+        }
+      ]
+    },
+    {
+      "id": "tailspin",
+      "area": "qsr",
+      "real_company": "McDonald's",
+      "fictional_brand": "Tailspin Burger Co.",
+      "sku": "TBC-BUNDLE-01",
+      "brief_file": "account-tailspin.json",
+      "use_case": "Silent vertical value-bundle concept for social and digital-offer creative, with no price or app UI.",
+      "model": "ltx-2.5-fast",
+      "tier": "720p",
+      "duration": 6,
+      "aspect_ratio": "9:16",
+      "channel": "Vertical social",
+      "why": "Fast, low-cost concept iteration; planned silent text-to-video draft.",
+      "draft_clips": [],
+      "recorded_clip": null,
+      "hero_clip": null,
+      "planned_clip": "account-tailspin-draft",
+      "need": "Everyday value bundles and app-delivered digital offers.",
+      "sources": [
+        {
+          "publisher": "Motley Fool call transcript",
+          "url": "https://www.fool.com/earnings/call-transcripts/2026/11/04/mcdonalds-mcd-q3-2026-earnings-call-transcript/",
+          "published": "2026-11",
+          "accessed": "2026-11-16"
+        }
+      ],
+      "replacement_clip": "account-tailspin-draft-s1",
+      "learning_clips": [
+        {
+          "id": "account-tailspin-draft",
+          "note": "Two wrapped teal blocks instead of the requested burger, fries and drink. Safe and text-free; the simplified one-shot brief fixed it."
+        }
+      ]
+    },
+    {
+      "id": "coho",
+      "area": "qsr",
+      "real_company": "7-Eleven",
+      "fictional_brand": "Coho Corner Market",
+      "sku": "CCM-MEAL-01",
+      "brief_file": "account-coho.json",
+      "use_case": "Fresh grab-and-go handoff concept for a local convenience promotion.",
+      "model": "minimax-h3-max-turbo",
+      "tier": "768P",
+      "duration": 6,
+      "aspect_ratio": "9:16",
+      "channel": "Vertical social",
+      "why": "Lower-cost silent text-to-video for frequent convenience promotions.",
+      "draft_clips": [],
+      "recorded_clip": null,
+      "hero_clip": null,
+      "planned_clip": "account-coho-draft",
+      "need": "Fresh-food leadership, owned-brand growth and digital convenience and delivery.",
+      "sources": [
+        {
+          "publisher": "CSP Daily News",
+          "url": "https://www.cspdailynews.com/company-news/seven-i-ceo-sets-2026-priorities-convenience-retail",
+          "published": "2026-01",
+          "accessed": "2026-11-16"
+        },
+        {
+          "publisher": "Global Store News",
+          "url": "https://www.gsnnews.com/mauricio-leyva-7-eleven-ceo/",
+          "published": "2026-07",
+          "accessed": "2026-11-16"
+        }
+      ],
+      "replacement_clip": "account-coho-draft-s3",
+      "excluded_clips": [
+        {
+          "id": "account-coho-draft",
+          "reason": "Prohibited printed packaging text in sampled frames."
+        },
+        {
+          "id": "account-coho-draft-r1",
+          "reason": "Content Safety flagged a sampled frame (Violence severity 2). Withheld pending human assessment."
+        }
+      ],
+      "learning_clips": [
+        {
+          "id": "account-coho-draft-s1",
+          "note": "Simplified brief: safe and text-free, but a kitchen-like background and no plum accent (prompt adherence 0.18)."
+        },
+        {
+          "id": "account-coho-draft-s2",
+          "note": "Plum backdrop and band matched, but QA flagged a blank plum patch on the bag as an unrequested label area."
+        }
+      ]
+    },
+    {
+      "id": "fabrikam",
+      "area": "apparel",
+      "real_company": "Gap",
+      "fictional_brand": "Fabrikam",
+      "sku": "FAB-JKT-QLT-RST-M",
+      "brief_file": "apparel-pdp-lookbook.json",
+      "use_case": "Animate an approved jacket image for a product-page lookbook.",
+      "model": "kling-v3-pro",
+      "tier": "audio_on",
+      "duration": 5,
+      "aspect_ratio": "1:1",
+      "channel": "Product detail page",
+      "why": "Image-to-video anchors the fabric, silhouette and color to the approved product image.",
+      "draft_clips": [],
+      "recorded_clip": "hero-apparel-kling",
+      "hero_clip": "hero-apparel-kling",
+      "planned_clip": null,
+      "need": "Product-led, culturally relevant brand storytelling.",
+      "sources": [
+        {
+          "publisher": "Gap Inc. investor relations",
+          "url": "https://investors.gapinc.com/press-releases/news-details/2026/Gap-Inc--Reports-Second-Quarter-Fiscal-2026-Results/default.aspx",
+          "published": "2026-08",
+          "accessed": "2026-11-16"
+        }
+      ]
+    },
+    {
+      "id": "vanarsdel",
+      "area": "apparel",
+      "real_company": "TJX",
+      "fictional_brand": "VanArsdel Finds",
+      "sku": "VAF-FINDS-01",
+      "brief_file": "account-vanarsdel.json",
+      "use_case": "Short discovery sequence showing a changing assortment of home and accessory finds.",
+      "model": "minimax-h3-max-turbo",
+      "tier": "768P",
+      "duration": 6,
+      "aspect_ratio": "9:16",
+      "channel": "Vertical social",
+      "why": "Low-cost, silent text-to-video concepts for frequently refreshed merchandise.",
+      "draft_clips": [],
+      "recorded_clip": null,
+      "hero_clip": null,
+      "planned_clip": "account-vanarsdel-draft",
+      "need": "A rapidly changing assortment of quality goods at everyday value.",
+      "sources": [
+        {
+          "publisher": "TJX SEC filing via Last10K",
+          "url": "https://last10k.com/sec-filings/tjx/0000109198-26-000045.htm",
+          "published": "2026-08",
+          "accessed": "2026-11-16"
+        }
+      ]
+    },
+    {
+      "id": "tailwind",
+      "area": "apparel",
+      "real_company": "Target",
+      "fictional_brand": "Tailwind Traders",
+      "sku": "TWT-DECOR-01",
+      "brief_file": "account-tailwind.json",
+      "use_case": "Home-decor newness concept for an in-store screen or retail-media placement.",
+      "model": "ltx-2.5-fast",
+      "tier": "720p",
+      "duration": 6,
+      "aspect_ratio": "16:9",
+      "channel": "Digital signage",
+      "why": "Fast silent home-decor concept iteration before a product-specific hero.",
+      "draft_clips": [],
+      "recorded_clip": null,
+      "hero_clip": null,
+      "planned_clip": "account-tailwind-draft",
+      "need": "Style, design and newness with value, plus growing retail media and marketplace.",
+      "sources": [
+        {
+          "publisher": "Target corporate",
+          "url": "https://corporate.target.com/press/release/2026/08/target-corporation-reports-second-quarter-earnings",
+          "published": "2026-08",
+          "accessed": "2026-11-16"
+        }
+      ],
+      "review_note": "Additional agent frame review found apparent writing-like wall marks. Recorded screening pass unchanged; human review required."
+    },
+    {
+      "id": "wide-world",
+      "area": "apparel",
+      "real_company": "Costco",
+      "fictional_brand": "Wide World Wholesale",
+      "sku": "WWW-BULK-01",
+      "brief_file": "account-wide-world.json",
+      "use_case": "Bulk everyday essentials in a warehouse setting for product discovery and retail-media creative.",
+      "model": "minimax-h3-max-turbo",
+      "tier": "768P",
+      "duration": 6,
+      "aspect_ratio": "16:9",
+      "channel": "Digital signage",
+      "why": "Economical silent text-to-video for assortment and value concepts.",
+      "draft_clips": [],
+      "recorded_clip": null,
+      "hero_clip": null,
+      "planned_clip": "account-wide-world-draft",
+      "need": "Member-first retail media that helps move merchandise, plus growing digitally enabled shopping.",
+      "sources": [
+        {
+          "publisher": "Costco Retail Media via LinkedIn",
+          "url": "https://www.linkedin.com/pulse/transparency-trust-turnover-meet-costco-velocity-9ezfc/",
+          "published": "2026-02",
+          "accessed": "2026-11-16"
+        },
+        {
+          "publisher": "Costco investor relations",
+          "url": "https://investor.costco.com/news/news-details/2026/Costco-Wholesale-Corporation-Reports-Fourth-Quarter-and-Fiscal-Year-2026-Operating-Results/",
+          "published": "2026-09",
+          "accessed": "2026-11-16"
+        }
+      ],
+      "excluded_clips": [
+        {
+          "id": "account-wide-world-draft-r1",
+          "reason": "Product-fidelity failure; additional agent review found background rack labels and four bottles instead of six."
+        }
+      ],
+      "review_note": "Additional agent frame review found carton markings and shelf/bottle labels despite the blank-packaging brief. Recorded screening pass unchanged; human review required."
+    },
+    {
+      "id": "alpine",
+      "area": "home",
+      "real_company": "The Home Depot",
+      "fictional_brand": "Alpine Pro Supply",
+      "sku": "CTP-DRL-20V-BL",
+      "brief_file": "home-improvement-drill.json",
+      "use_case": "Show the Contoso Pro drill in a job-site scene based on an approved product image.",
+      "model": "kling-v3-pro",
+      "tier": "audio_on",
+      "duration": 6,
+      "aspect_ratio": "16:9",
+      "channel": "Digital signage",
+      "why": "An approved image anchors tool identity during physical interaction.",
+      "draft_clips": [],
+      "recorded_clip": "hero-home-kling",
+      "hero_clip": "hero-home-kling",
+      "planned_clip": null,
+      "need": "Serving professional contractors through an expanded Pro ecosystem, plus continued digital growth.",
+      "sources": [
+        {
+          "publisher": "Motley Fool call transcript",
+          "url": "https://www.fool.com/earnings/call-transcripts/2026/08/25/home-depot-hd-q2-2026-earnings-call-transcript/",
+          "published": "2026-08",
+          "accessed": "2026-11-16"
+        }
+      ]
+    },
+    {
+      "id": "zava",
+      "area": "home",
+      "real_company": "Lowe's",
+      "fictional_brand": "Zava DIY",
+      "sku": "FAB-HOME-PATIO-5PC",
+      "brief_file": "home-patio-layout.json",
+      "use_case": "Arrange a Fabrikam Home patio set under explicit multi-object layout constraints.",
+      "model": "minimax-h3-max",
+      "tier": "768P",
+      "duration": 6,
+      "aspect_ratio": "16:9",
+      "channel": "Digital signage",
+      "why": "Strict text-to-video layout; this recording has no approved PIM reference.",
+      "draft_clips": [
+        "hero-patio-h3max"
+      ],
+      "recorded_clip": "hero-patio-h3max",
+      "hero_clip": null,
+      "planned_clip": null,
+      "need": "Whole-home needs, growing professional services, online shopping and home services.",
+      "sources": [
+        {
+          "publisher": "Lowe's corporate",
+          "url": "https://corporate.lowes.com/newsroom/press-releases/lowes-reports-second-quarter-2026-sales-and-earnings-results-08-19-26",
+          "published": "2026-08",
+          "accessed": "2026-11-16"
+        }
+      ]
+    },
+    {
+      "id": "southridge",
+      "area": "home",
+      "real_company": "Best Buy",
+      "fictional_brand": "Southridge Electronics",
+      "sku": "LTW-LT14-SLV",
+      "brief_file": "account-southridge.json",
+      "use_case": "Product-content preview of a laptop and accessories under strict desk-layout constraints.",
+      "model": "minimax-h3-max",
+      "tier": "768P",
+      "duration": 6,
+      "aspect_ratio": "16:9",
+      "channel": "Digital signage",
+      "why": "Strict object placement for a silent electronics workspace concept.",
+      "draft_clips": [],
+      "recorded_clip": null,
+      "hero_clip": null,
+      "planned_clip": "account-southridge-draft",
+      "need": "Richer product content for growing ads, marketplace and emerging tech categories.",
+      "sources": [
+        {
+          "publisher": "Best Buy corporate",
+          "url": "https://corporate.bestbuy.com/2026/best-buy-reports-q2-fy27-results/",
+          "published": "2026-08",
+          "accessed": "2026-11-16"
+        }
+      ],
+      "excluded_clips": [
+        {
+          "id": "account-southridge-draft-s2",
+          "reason": "Automated screening passed, but agent visual review rejected the mouse standing upright on its end as an unrealistic product artifact. Original selected clip is unchanged."
+        }
+      ],
+      "learning_clips": [
+        {
+          "id": "account-southridge-draft-s1",
+          "note": "Photographic home-office attempt; standard screening failed fidelity 0.72 and adherence 0.18 on the angled device layout. Retained as a failed learning example, not approval."
+        }
+      ],
+      "review_note": "Selected original: headphones, laptop and mouse appear in a different order than requested. Recorded pass is unchanged. Two realistic-room replacements did not qualify: one failed screening; one passed but depicts an unnatural upright mouse. Human review required."
+    },
+    {
+      "id": "proseware",
+      "area": "home",
+      "real_company": "Staples",
+      "fictional_brand": "Proseware Workplace Supply",
+      "sku": "PWS-KIT-01",
+      "brief_file": "account-proseware.json",
+      "use_case": "Photographic small-office kit in a real room, with explicit left-to-right object placement.",
+      "model": "minimax-h3-max",
+      "tier": "768P",
+      "duration": 6,
+      "aspect_ratio": "16:9",
+      "channel": "Digital signage",
+      "why": "Strict multi-object placement for a silent small-business workspace concept.",
+      "draft_clips": [],
+      "recorded_clip": null,
+      "hero_clip": null,
+      "planned_clip": "account-proseware-draft",
+      "need": "Business-led workplace solutions with expert guidance and reliability.",
+      "sources": [
+        {
+          "publisher": "Business Wire via FinancialContent",
+          "url": "https://markets.financialcontent.com/wss/article/bizwire-2026-9-15-staples-marks-40-years-of-easy-with-new-brand-platform-challenging-businesses-to-stop-choosing-hard",
+          "published": "2026-09",
+          "accessed": "2026-11-16"
+        }
+      ],
+      "replacement_clip": "account-proseware-draft-s7",
+      "excluded_clips": [
+        {
+          "id": "account-proseware-draft",
+          "reason": "Prohibited brand-like packaging text in sampled frames."
+        },
+        {
+          "id": "account-proseware-draft-r1",
+          "reason": "Visible third-party computer logo in the background."
+        },
+        {
+          "id": "account-proseware-draft-s2",
+          "reason": "Office chair closely resembles a well-known designer chair (real trade-dress risk)."
+        },
+        {
+          "id": "account-proseware-draft-s6",
+          "reason": "Automated screening passed, but agent inspection flagged the recognizable rounded mesh-chair design as a trade-dress risk. Verdict retained; media withheld."
+        }
+      ],
+      "learning_clips": [
+        {
+          "id": "account-proseware-draft-s1",
+          "note": "Simplified brief: safe and text-free, but extra staging furniture and a static camera (fidelity 0.62, adherence 0.58)."
+        },
+        {
+          "id": "account-proseware-draft-s3",
+          "note": "Earlier selected example failed fidelity 0.72: saturated blue/purple packaging rather than muted indigo. Historical verdict preserved; replaced by s7."
+        },
+        {
+          "id": "account-proseware-draft-s4",
+          "note": "Completion attempt: no visible writing; Content Safety severity 0 on both sampled frames. Screening still failed fidelity 0.55 and adherence 0.35 (paper interpreted as boxed). The judge also called the explicitly requested mug and cloth extra objects; human calibration is needed, not a threshold override. Historical failed example; s7 is now selected."
+        },
+        {
+          "id": "account-proseware-draft-s5",
+          "note": "Known-bad LTX Pro control: four-frame v1 screening failed fidelity 0.72 and adherence 0.68. Agent inspection found a changed coffee-press shape, bag-like cloth, incorrect chair base and cropped props. Lenient v2 and errored v3 diagnostics did not override this failure. s7 is now selected; this is a learning example, not approval."
+        }
+      ],
+      "review_note": "s7 passed four-frame v1 screening (fidelity 0.86, adherence 0.78) and agent inspection of the kit, generic task chair, muted palette, order and framing. The same rubric failed s5. Added window/brick-wall detail differs from the prompt; exact brand colour and full-video review still require human sign-off. Not approved."
+    },
+    {
+      "id": "woodgrove",
+      "area": "grocery",
+      "real_company": "Walgreens",
+      "fictional_brand": "Woodgrove Wellness",
+      "sku": "WGW-BND-FLU-01",
+      "brief_file": "grocery-flu-season-endcap.json",
+      "use_case": "Seasonal wellness-bundle digital endcap without medical or efficacy claims.",
+      "model": "minimax-h3-max-turbo",
+      "tier": "768P",
+      "duration": 6,
+      "aspect_ratio": "16:9",
+      "channel": "Digital signage",
+      "why": "Lower-cost image-to-video for localized weekly promotional volume.",
+      "draft_clips": [],
+      "recorded_clip": "hero-grocery-turbo",
+      "hero_clip": "hero-grocery-turbo",
+      "planned_clip": null,
+      "need": "Renewed focus on stores and shopping experience, including relaunched in-store digital screens.",
+      "sources": [
+        {
+          "publisher": "Chain Drug Review",
+          "url": "https://chaindrugreview.com/walgreens-turns-the-page-to-next-chapter-as-private-company-with-new-leadership/",
+          "published": "2026-04",
+          "accessed": "2026-11-16"
+        },
+        {
+          "publisher": "Modern Retail",
+          "url": "https://www.modernretail.co/marketing/walgreens-says-its-focused-on-higher-peforming-ad-placements-as-it-tries-again-with-digital-screens/",
+          "published": "2026-09",
+          "accessed": "2026-11-16"
+        }
+      ]
+    },
+    {
+      "id": "best-for-you",
+      "area": "grocery",
+      "real_company": "Kroger",
+      "fictional_brand": "Best For You Market",
+      "sku": "BFY-MEAL-01",
+      "brief_file": "account-best-for-you.json",
+      "use_case": "Private-label-style meal preparation concept for weekly circular and retail-media creative.",
+      "model": "minimax-h3-max-turbo",
+      "tier": "768P",
+      "duration": 6,
+      "aspect_ratio": "16:9",
+      "channel": "Digital signage",
+      "why": "Low-cost silent concepts for weekly grocery promotions.",
+      "draft_clips": [],
+      "recorded_clip": null,
+      "hero_clip": null,
+      "planned_clip": "account-best-for-you-draft",
+      "need": "Fresh and meal solutions, owned-brand growth, retail media and eCommerce.",
+      "sources": [
+        {
+          "publisher": "Kroger investor relations",
+          "url": "https://ir.kroger.com/news/news-details/2026/Kroger-Outlines-Plan-to-Build-Americas-Favorite-Grocer-and-Introduces-New-Long-Term-Financial-Targets/default.aspx",
+          "published": "2026-10",
+          "accessed": "2026-11-16"
+        }
+      ],
+      "replacement_clip": "account-best-for-you-draft-r1",
+      "excluded_clips": [
+        {
+          "id": "account-best-for-you-draft",
+          "reason": "Content Safety flagged a sampled frame (Violence severity 2). Withheld pending human assessment."
+        }
+      ],
+      "review_note": "Additional agent frame review found utensils expressly excluded by the revised prompt. Recorded screening pass unchanged; human review required."
+    },
+    {
+      "id": "munson",
+      "area": "grocery",
+      "real_company": "Albertsons",
+      "fictional_brand": "Munson's Markets",
+      "sku": "MUN-BASKET-01",
+      "brief_file": "account-munson.json",
+      "use_case": "Neighborhood grocery basket concept for localized weekly offers and loyalty creative.",
+      "model": "minimax-h3-max-turbo",
+      "tier": "768P",
+      "duration": 6,
+      "aspect_ratio": "9:16",
+      "channel": "Vertical social",
+      "why": "Economical silent drafts for localized grocery promotions.",
+      "draft_clips": [],
+      "recorded_clip": null,
+      "hero_clip": null,
+      "planned_clip": "account-munson-draft",
+      "need": "Loyalty-driven personalized offers and digital growth, with reinvestment in prices and store experience.",
+      "sources": [
+        {
+          "publisher": "Motley Fool call transcript",
+          "url": "https://www.fool.com/earnings/call-transcripts/2026/10/13/albertsons-aci-q2-2026-earnings-call-transcript/",
+          "published": "2026-10",
+          "accessed": "2026-11-16"
+        }
+      ],
+      "replacement_clip": "account-munson-draft-s1",
+      "excluded_clips": [
+        {
+          "id": "account-munson-draft",
+          "reason": "Additional agent frame review found visible shelf/signage text."
+        }
+      ],
+      "learning_clips": [
+        {
+          "id": "account-munson-draft-r1",
+          "note": "Safe re-roll that failed product fidelity (0.72): tinted rather than clear bottle. Replaced by the simplified one-shot brief."
+        }
+      ]
+    }
+  ]
+}

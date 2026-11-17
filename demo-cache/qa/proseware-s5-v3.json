@@ -1,0 +1,295 @@
+{
+  "schema_version": 1,
+  "clip": "account-proseware-draft-s5",
+  "is_negative_control": true,
+  "generation_request_id": "897d8919-220f-41af-859d-98d7619c1592",
+  "qa_source_sha256": "e5f502b34c0c936c2d879e120481f1dd57586a3bbbec75d1ad4ef26e9b298a6f",
+  "evaluated_at": "2026-11-16T23:18:45.101661+00:00",
+  "qa": {
+    "evaluator": "azure-openai-vision",
+    "measured": false,
+    "scores": null,
+    "thresholds": {
+      "logo_integrity": 0.8,
+      "label_legibility": 0.7,
+      "product_fidelity": 0.8,
+      "prompt_adherence": 0.7
+    },
+    "findings": [],
+    "content_safety": [
+      {
+        "frame": "frame_01.png",
+        "categories": [
+          {
+            "category": "Hate",
+            "severity": 0
+          },
+          {
+            "category": "SelfHarm",
+            "severity": 0
+          },
+          {
+            "category": "Sexual",
+            "severity": 0
+          },
+          {
+            "category": "Violence",
+            "severity": 0
+          }
+        ]
+      },
+      {
+        "frame": "frame_02.png",
+        "categories": [
+          {
+            "category": "Hate",
+            "severity": 0
+          },
+          {
+            "category": "SelfHarm",
+            "severity": 0
+          },
+          {
+            "category": "Sexual",
+            "severity": 0
+          },
+          {
+            "category": "Violence",
+            "severity": 0
+          }
+        ]
+      },
+      {
+        "frame": "frame_03.png",
+        "categories": [
+          {
+            "category": "Hate",
+            "severity": 0
+          },
+          {
+            "category": "SelfHarm",
+            "severity": 0
+          },
+          {
+            "category": "Sexual",
+            "severity": 0
+          },
+          {
+            "category": "Violence",
+            "severity": 0
+          }
+        ]
+      },
+      {
+        "frame": "frame_04.png",
+        "categories": [
+          {
+            "category": "Hate",
+            "severity": 0
+          },
+          {
+            "category": "SelfHarm",
+            "severity": 0
+          },
+          {
+            "category": "Sexual",
+            "severity": 0
+          },
+          {
+            "category": "Violence",
+            "severity": 0
+          }
+        ]
+      }
+    ],
+    "verdict": "error",
+    "failed_checks": [],
+    "publish_approved": false,
+    "automated_checks_passed": false,
+    "human_signoff_required": true,
+    "sampled_frame_count": 4,
+    "evaluator_version": "brand-qa-vision-v3",
+    "evaluation_error": true
+  },
+  "v1_qa": {
+    "evaluator": "azure-openai-vision",
+    "measured": true,
+    "scores": {
+      "logo_integrity": 0.98,
+      "label_legibility": 1.0,
+      "product_fidelity": 0.72,
+      "prompt_adherence": 0.68
+    },
+    "thresholds": {
+      "logo_integrity": 0.8,
+      "label_legibility": 0.7,
+      "product_fidelity": 0.8,
+      "prompt_adherence": 0.7
+    },
+    "findings": [
+      "No visible logos, signage, price numbers, slogans, or on-screen text.",
+      "Visible arrangement is left-to-right and includes coffee press/mug, cleaning spray/cloth, chair, and paper stack.",
+      "Packaging boxes appear plain and unbranded, but the visible colors do not fully match the prompt's specified muted indigo and warm ivory exactly.",
+      "The chair is present and generic, but the scene shows only three apparent boxes and the leftmost mug/coffee press sit on a dark box; overall grouping is close but not exact to the prompt's four separated groups and three-box packaging structure.",
+      "All objects appear stationary in a locked-off product shot; however, the composition is not a perfect match to the exact catalog layout requested."
+    ],
+    "hallucinated_objects": [
+      "none"
+    ],
+    "content_safety": [
+      {
+        "frame": "frame_01.png",
+        "categories": [
+          {
+            "category": "Hate",
+            "severity": 0
+          },
+          {
+            "category": "SelfHarm",
+            "severity": 0
+          },
+          {
+            "category": "Sexual",
+            "severity": 0
+          },
+          {
+            "category": "Violence",
+            "severity": 0
+          }
+        ]
+      },
+      {
+        "frame": "frame_02.png",
+        "categories": [
+          {
+            "category": "Hate",
+            "severity": 0
+          },
+          {
+            "category": "SelfHarm",
+            "severity": 0
+          },
+          {
+            "category": "Sexual",
+            "severity": 0
+          },
+          {
+            "category": "Violence",
+            "severity": 0
+          }
+        ]
+      },
+      {
+        "frame": "frame_03.png",
+        "categories": [
+          {
+            "category": "Hate",
+            "severity": 0
+          },
+          {
+            "category": "SelfHarm",
+            "severity": 0
+          },
+          {
+            "category": "Sexual",
+            "severity": 0
+          },
+          {
+            "category": "Violence",
+            "severity": 0
+          }
+        ]
+      },
+      {
+        "frame": "frame_04.png",
+        "categories": [
+          {
+            "category": "Hate",
+            "severity": 0
+          },
+          {
+            "category": "SelfHarm",
+            "severity": 0
+          },
+          {
+            "category": "Sexual",
+            "severity": 0
+          },
+          {
+            "category": "Violence",
+            "severity": 0
+          }
+        ]
+      }
+    ],
+    "verdict": "fail",
+    "failed_checks": [
+      "product_fidelity",
+      "prompt_adherence"
+    ],
+    "publish_approved": false,
+    "reroll": {
+      "model": "kling-v3-pro",
+      "mode": "text-to-video",
+      "reason": "quality threshold failed; re-roll on the higher-fidelity tier"
+    },
+    "automated_checks_passed": false,
+    "human_signoff_required": true,
+    "sampled_frame_count": 4
+  },
+  "usage": {
+    "qa_allowance_usd": 0.5,
+    "calls": [
+      {
+        "kind": "vision",
+        "status": 200,
+        "request_id": "02b21423-43a4-4198-a651-a3bde093f598",
+        "usage": {
+          "prompt_tokens": 5437,
+          "completion_tokens": 1002,
+          "total_tokens": 6439
+        }
+      },
+      {
+        "kind": "content_safety",
+        "status": 200,
+        "request_id": "e573ad0c-a269-49a5-83c4-a2dbb1c5c327"
+      },
+      {
+        "kind": "content_safety",
+        "status": 200,
+        "request_id": "92e2a321-d4f9-4422-8fe0-fd6eb93876c6"
+      },
+      {
+        "kind": "content_safety",
+        "status": 200,
+        "request_id": "95d2bae9-eaf2-4a2c-8076-0d138b358118"
+      },
+      {
+        "kind": "content_safety",
+        "status": 200,
+        "request_id": "b07a2c4b-6bb8-4f86-b26f-8b2981f798d4"
+      }
+    ],
+    "billed_qa_usd": null,
+    "note": "Bounded QA calls; allowance is not a quoted or billed price."
+  },
+  "required_items": [
+    "One stainless French coffee press with a cylindrical vessel and a plunger lid.",
+    "One plain ivory ceramic mug.",
+    "One transparent unlabelled cleaning spray bottle.",
+    "One folded cleaning cloth made of fabric, not a bag or packet.",
+    "One office task chair with a five-spoke star base on casters, matching the design requested by the prompt.",
+    "One stack of loose blank white printer paper with visible sheet edges."
+  ],
+  "prompt": "A six-second silent product-catalog video, landscape 16:9, locked-off front-facing wide camera. One small-office supply kit arranged in exactly FOUR separated product GROUPS in a straight left-to-right row. There are exactly SIX product props in total, supported by THREE plain closed rectangular packaging boxes. Group 1 at far left: one stainless-steel French coffee press and one plain ivory ceramic mug, together on one matte muted indigo box. Group 2 at center left: one transparent unlabelled cleaning spray bottle and one folded ivory cleaning cloth, together on one matte ivory box. Group 3 at center right: one generic charcoal task chair with a simple padded rectangular back, padded seat and basic five-wheel base, standing on the floor, no box beneath it. Group 4 at far right: one stack of loose blank white printer paper with clearly visible fine sheet edges, resting on one matte muted indigo box. The mug and cloth belong to the kit; the three boxes are its packaging. All six product props and all three boxes remain fully visible, separated and stationary from first frame to last. Boxes are completely blank: muted dark indigo (#44416F) and warm ivory (#F6F4EF), with no bright blue or saturated violet. Seamless neutral light-grey floor and background, soft neutral daylight, realistic materials, no coloured lighting. No camera movement, cuts, opening boxes, transformations or added objects. No other furniture, electronics, plants or decor. No text, letters, numbers, labels, barcodes, logos, symbols, markings, signage, real brands or recognizable designer furniture. No people, hands or soundtrack.",
+  "sample_timestamps_s": [
+    0.75,
+    2.25,
+    3.75,
+    5.25
+  ],
+  "presentation_sha256": "a8bed305906be00d3f0353291d20439516a9b180cc159db652069a208c2e8cbb",
+  "human_signoff_required": true,
+  "publish_approved": false
+}

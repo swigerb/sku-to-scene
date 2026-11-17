@@ -1,0 +1,13 @@
+{
+  "version": "contoso-pro-v2",
+  "supersedes_for_new_work": "catalog/brands.json:contoso-pro",
+  "scope": "Fictional demo; owner-delegated correction based on the approved black/teal PIM reference. Historical screening and v1 rules remain unchanged.",
+  "reference": "assets/products/contoso-pro-20v-drill.png",
+  "display_name": "Contoso Pro",
+  "palette": ["black", "teal matching the approved PIM reference"],
+  "logo": "Intact CONTOSO PRO wordmark on the black/teal housing shown by the approved PIM reference; do not recolour it yellow.",
+  "voice": "Jobsite-tough, precise, safety-first.",
+  "must": ["safety glasses on any person operating a tool", "correct chuck and battery shape"],
+  "must_not": ["unsafe tool handling", "extra or missing tool parts"],
+  "thresholds": {"logo_integrity": 0.8, "label_legibility": 0.7, "product_fidelity": 0.85, "prompt_adherence": 0.75}
+}

@@ -1,0 +1,24 @@
+{
+  "sku_id": "TBC-BUNDLE-01",
+  "brand": "tailspin-burger",
+  "stage": "draft",
+  "source": "text",
+  "channel": "tiktok",
+  "duration": 6,
+  "prompt": "Silent fictional retail food concept, six seconds. Overhead tray on a warm counter: a burger in plain teal-and-cream wrap, a plain fries carton and a plain drink cup slide together into a bundle. Light steam, quick push-in, warm counter light. No writing or symbols on any packaging. No logos, signage, text, prices, phone UI, mascots, slogans, identifiable people, faces in close-up or real trade dress. Only teal and cream packaging. No soundtrack.",
+  "brief_version": 2,
+  "simplified_prompt": "Silent fictional quick-service meal concept, six seconds, vertical. One simple value meal sits together on a plain teal tray on a warm wooden counter: a clearly visible cheeseburger with sesame bun, lettuce and tomato resting on open plain cream paper, golden fries standing in a plain teal paper carton, and a plain cream paper cup with a teal lid. Light steam rises from the burger. Gentle slow push-in, warm counter light, shallow depth of field. Only teal and cream packaging. Every surface is completely blank: no writing, letters, numbers, stickers, labels, barcodes, logos, symbols, signage, prices, phone UI, mascots, slogans or real trade dress. No people, hands or faces. No soundtrack.",
+  "prompt_history": [
+    {
+      "version": 1,
+      "prompt_key": "prompt",
+      "clip": "account-tailspin-draft"
+    },
+    {
+      "version": 2,
+      "prompt_key": "simplified_prompt",
+      "clip": "account-tailspin-draft-s1",
+      "reason": "Simplified one-shot product scene with gentle camera movement, fewer objects and no hands, handoffs or text-bearing store environments. v1 produced two wrapped teal boxes and no recognizable food; QA failed product fidelity and prompt adherence."
+    }
+  ]
+}

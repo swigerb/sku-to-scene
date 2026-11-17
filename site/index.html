@@ -3,23 +3,19 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>SKU to Scene: AI-directed retail video demo</title>
-  <meta name="description" content="Replay of an agent-orchestrated retail video supply chain using fal video models on Microsoft Foundry. Recorded renders only; no live generation in the browser.">
+  <title>SKU to Scene: from product image to retail video concept</title>
+  <meta name="description" content="A guided replay of recorded retail video concepts made from approved product images with fal video models on Microsoft Foundry. No live generation; human review required.">
   <script>
     (() => {
       const param = new URLSearchParams(window.location.search).get("scoutTheme");
-      const theme =
-        param || (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
-      document.documentElement.setAttribute("data-theme", theme);
-    })();
-  </script>
-  <script>
-    (() => {
-      if (new URLSearchParams(window.location.search).get("scoutTheme")) return;
+      let stored;
       try {
-        const stored = localStorage.getItem("s2s-theme");
-        if (stored) document.documentElement.setAttribute("data-theme", stored);
+        stored = localStorage.getItem("s2s-theme");
       } catch (_) { /* storage unavailable */ }
+      const valid = (value) => value === "light" || value === "dark";
+      const theme = valid(param) ? param : valid(stored) ? stored
+        : window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+      document.documentElement.setAttribute("data-theme", theme);
     })();
   </script>
   <link rel="icon" type="image/png" href="brand/favicon-light-48.png" media="(prefers-color-scheme: light)">
@@ -29,153 +25,253 @@
 </head>
 <body>
   <a class="skip" href="#main">Skip to content</a>
-  <header class="topbar">
+  <header class="topbar" id="topbar">
     <a class="brand" href="#top" aria-label="SKU to Scene home">
       <img class="logo logo-light" src="brand/logo-horizontal-light.png" alt="SKU to Scene" width="840" height="176">
       <img class="logo logo-dark" src="brand/logo-horizontal-dark.png" alt="SKU to Scene" width="840" height="176">
     </a>
-    <nav aria-label="Sections">
-      <a href="#lto">LTO walkthrough</a>
-      <a href="#scenarios">Scenarios</a>
-      <a href="#routing">Routing &amp; cost</a>
-      <a href="#qa">QA evidence</a>
-      <a href="#evals">AI evaluations</a>
+    <button class="ghost menu-toggle" id="menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav">Menu</button>
+    <nav id="site-nav" aria-label="Sections">
+      <a href="#guide" data-view="guide">Guided demo</a>
+      <a href="#scenarios" data-view="scenarios">Scenario gallery</a>
+      <a href="#evidence" data-view="evidence">Technical evidence</a>
     </nav>
-    <button class="ghost" id="theme-toggle" type="button" aria-label="Toggle light or dark theme">Theme</button>
+    <div class="theme-toggle" id="theme-toggle" role="radiogroup" aria-label="Color theme">
+      <button id="theme-light" type="button" role="radio" aria-checked="true" tabindex="0" aria-label="Light theme" title="Light theme">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true" focusable="false">
+          <circle cx="12" cy="12" r="4"></circle>
+          <path d="M12 2v2m0 16v2M2 12h2m16 0h2M4.93 4.93l1.42 1.42m11.3 11.3 1.42 1.42M4.93 19.07l1.42-1.42m11.3-11.3 1.42-1.42"></path>
+        </svg>
+      </button>
+      <button id="theme-dark" type="button" role="radio" aria-checked="false" tabindex="-1" aria-label="Dark theme" title="Dark theme">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true" focusable="false">
+          <path d="M20.9 13A9 9 0 0 1 11 3.1 9 9 0 1 0 20.9 13Z"></path>
+        </svg>
+      </button>
+    </div>
   </header>
 
   <main id="main">
-    <section class="hero" id="top">
-      <div>
-        <p class="eyebrow">Microsoft Foundry · fal video models · GitHub Copilot agents</p>
-        <h1>AI-directed retail video at enterprise scale</h1>
-        <p class="lede">Turn approved PIM imagery and merchandising briefs into channel-ready video. Three Copilot agents
-          route each brief to <strong>Kling v3 Pro</strong>, <strong>LTX-2.5 Fast/Pro</strong> or
-          <strong>MiniMax H3 Max/Turbo</strong> by latency, budget, audio need and source asset.</p>
-        <div class="agents">
-          <div class="agent"><span class="tag">@retail-merchandiser</span><span>SKU + channel → scene brief, camera and audio cues</span></div>
-          <div class="agent"><span class="tag">@foundry-router</span><span>Guardrails → model choice, cost estimate, dispatch</span></div>
-          <div class="agent"><span class="tag">@brand-qa</span><span>Frames vs. approved reference → fail-closed verdict, bounded re-roll</span></div>
+    <div id="review-alert" hidden></div>
+    <p class="global-disclosure">Fictional examples · Recorded replay · Human review required
+      <a href="#about-demo">About this demo</a></p>
+
+    <div class="view" id="view-home" data-view="home">
+    <section class="hero" id="top" aria-labelledby="hero-title">
+      <div class="hero-copy">
+        <p class="eyebrow">Microsoft Foundry · Retail and consumer goods</p>
+        <h1 id="hero-title" tabindex="-1">From product image to retail video concept.</h1>
+        <p class="lede">Explore how specialist agents turn approved imagery and merchandising briefs into creative
+          concepts for retail and consumer goods.</p>
+        <div class="cta">
+          <button type="button" id="watch-overview">▶ Watch original overview v1 · 2:54</button>
+          <a class="button ghost" href="#guide">Start guided demo</a>
+          <a class="quiet-link" href="#scenarios">Explore scenarios</a>
         </div>
       </div>
-      <img class="hero-mark logo-light" src="brand/logo-light-512.png" alt="" width="512" height="512">
-      <img class="hero-mark logo-dark" src="brand/logo-dark-512.png" alt="" width="512" height="512">
+      <div class="compare" id="hero-compare" aria-label="Product image and recorded video"></div>
     </section>
 
-    <aside class="notice" role="note">
-      <strong>Replay, not live generation.</strong> Every video here is an authentic Foundry render recorded earlier
-      (request IDs and timings in the evidence panels). This page makes <em>no</em> cloud calls and renders nothing new.
-      fal models on Foundry are a <strong>preview</strong> processed outside Microsoft facilities under fal's terms.
-      Automated QA is screening only: <strong>human sign-off is required</strong> before publishing anything.
-    </aside>
-
-    <section id="lto" class="panel">
-      <div class="section-head">
-        <div>
-          <p class="eyebrow">Primary demo path · QSR limited-time offer</p>
-          <h2>Draft fast, pick a concept, render the hero</h2>
-        </div>
-        <div class="controls" role="group" aria-label="Replay controls">
-          <button type="button" id="replay-play">▶ Replay walkthrough</button>
-          <button type="button" class="ghost" id="replay-reset">↺ Reset</button>
-          <label class="inline"><input type="checkbox" id="sound"> Sound</label>
-        </div>
-      </div>
-
-      <ol class="steps" aria-label="Walkthrough steps">
-        <li data-step="1" class="active">1 · Brief</li>
-        <li data-step="2">2 · Three drafts</li>
-        <li data-step="3">3 · Presenter picks</li>
-        <li data-step="4">4 · Hero render</li>
-      </ol>
-
-      <div class="lto-grid">
-        <div class="card brief" id="brief-card"></div>
-        <div class="card log-card">
-          <h3>Agent narration</h3>
-          <p class="hint">Scripted replay of the recorded flow. Timings shown are the recorded measurements.</p>
-          <ol class="log" id="log" aria-live="polite"></ol>
-        </div>
-      </div>
-
-      <h3 class="sub">Fast-tier drafts <span class="hint">· choose a concept to continue</span></h3>
-      <div class="drafts" id="drafts"></div>
-
-      <div class="hero-out" id="hero-out" hidden></div>
+    <section class="entry" aria-labelledby="entry-title">
+      <h2 id="entry-title">Explore retail examples</h2>
+      <div class="entry-grid" id="entry-grid"></div>
     </section>
+    </div>
 
-    <section id="scenarios" class="panel">
-      <p class="eyebrow">Four RCG workflows</p>
-      <h2>Approved PIM image in, routed render out</h2>
-      <div class="tabs" role="tablist" aria-label="Retail scenarios" id="scenario-tabs"></div>
-      <div id="scenario-body" role="tabpanel"></div>
-    </section>
-
-    <section id="routing" class="panel">
-      <p class="eyebrow">@foundry-router</p>
-      <h2>Model routing and cost guardrails</h2>
-      <div class="routing-grid">
-        <div class="card">
-          <h3>Routing rules</h3>
-          <ul class="rules">
-            <li><b>Drafting / A-B testing</b> → LTX-2.5 Fast or MiniMax H3 Max Turbo (Turbo for volume)</li>
-            <li><b>Approved hero image + native audio</b> → Kling v3 Pro image-to-video</li>
-            <li><b>Strict multi-object layout</b> → MiniMax H3 Max</li>
-            <li><b>Text brief + synchronized audio, final quality</b> → LTX-2.5 Pro</li>
-            <li><b>Budget caps</b> reserve the worst-case duration; unsupported settings are rejected or rerouted, never sent (LTX has no 1:1, so square PDP uses a documented crop policy).</li>
-          </ul>
-        </div>
-        <div class="card">
-          <h3>Per-clip estimate</h3>
-          <form id="calc" class="calc">
-            <label>Model <select id="calc-model"></select></label>
-            <label>Tier <select id="calc-tier"></select></label>
-            <label>Seconds <input id="calc-sec" type="number" min="1" max="20" step="1" value="6"></label>
-            <label>Clips <input id="calc-n" type="number" min="1" max="10000" step="1" value="1"></label>
-          </form>
-          <p class="big" id="calc-out" aria-live="polite"></p>
-          <p class="hint">Preview list price × requested seconds. An estimate, not a bill. MiniMax output can run ~0.7 s longer than requested.</p>
-        </div>
+    <dialog class="overview" id="overview" aria-labelledby="overview-title">
+      <div class="overview-head">
+        <h2 id="overview-title">Original recorded overview v1 · 2:54</h2>
+        <form method="dialog"><button type="submit" class="ghost" id="overview-close">Close</button></form>
       </div>
-      <div class="table-wrap">
-        <table class="models" id="models-table">
-          <caption>The five fal variants on Microsoft Foundry (preview list prices, USD per generated second)</caption>
-        </table>
+      <video id="overview-video" data-own-audio="true" controls playsinline preload="none"
+        poster="sizzle/sku-to-scene-sizzle-poster.png"
+        aria-label="SKU to Scene overview video with narration and captions">
+        <source id="overview-source" src="sizzle/sku-to-scene-sizzle-720p.mp4" type="video/mp4">
+      </video>
+      <p class="issue" id="overview-status" role="alert" hidden></p>
+      <p class="overview-error" id="overview-error" hidden>The overview video could not be loaded. Watch the
+        <a href="https://github.com/swigerb/sku-to-scene/releases/tag/media-v1">original on GitHub</a> instead.</p>
+      <p><b>Captions embedded</b> in this rendition.
+        <a href="sizzle/sku-to-scene-sizzle.vtt" download>Download English captions</a> ·
+        <a href="https://github.com/swigerb/sku-to-scene/releases/tag/media-v1">Read the transcript</a></p>
+      <p class="hint">Narrated by the Microsoft Ava AI voice. Fictional brands; cached footage, not live
+        generation; original clip audio muted. 720p web copy of the
+        <a href="https://github.com/swigerb/sku-to-scene/releases/tag/media-v1">1080p original and transcript</a>.</p>
+    </dialog>
+
+    <section id="guide" class="panel view" data-view="guide" aria-labelledby="guide-heading">
+      <div class="guide" id="guide-wrap">
+        <div class="guide-bar">
+          <label class="example-control" for="guide-example">Change example
+            <select id="guide-example" aria-label="Industry and fictional example"></select>
+          </label>
+          <span class="fullscreen-example" id="guide-full-example"></span>
+          <h2 id="guide-heading" tabindex="-1">Brief</h2>
+          <div class="guide-nav" role="group" aria-label="Guided demo controls">
+            <button type="button" class="ghost" id="guide-prev" aria-label="Previous step">← Back</button>
+            <div class="next-action">
+              <button type="button" id="guide-next" aria-describedby="guide-next-hint">Next →</button>
+              <span id="guide-next-hint" hidden></span>
+            </div>
+            <details class="guide-options" id="guide-options">
+              <summary id="guide-options-toggle">Options</summary>
+              <!-- Anchored panel: opening it overlays the stage instead of growing the guide bar. -->
+              <div class="options-panel" id="guide-options-panel">
+                <button type="button" class="ghost" id="guide-restart">Restart example</button>
+                <button type="button" class="ghost" id="guide-full">Fullscreen</button>
+                <a class="button ghost" href="#scenarios" id="guide-gallery">Scenario gallery</a>
+              </div>
+            </details>
+          </div>
+        </div>
+        <p class="fullscreen-disclosure">Fictional examples · Recorded replay · Human review required</p>
+        <p class="visually-hidden" id="guide-status" aria-live="polite"></p>
+        <p class="issue" id="guide-alert" role="alert" hidden></p>
+        <div id="guide-readiness"></div>
+        <div class="guide-stage" id="guide-stage"></div>
+        <div class="guide-playback" id="guide-playback" role="group" aria-label="Recording playback" hidden>
+          <button type="button" class="ghost" id="guide-play">Play</button>
+          <label class="inline"><input type="checkbox" id="sound"> <span id="sound-label">Sound</span></label>
+          <span class="hint guide-clip" id="guide-clip"></span>
+        </div>
+        <p class="guide-processing">fal preview · Processed outside Microsoft facilities · No live generation</p>
       </div>
     </section>
 
-    <section id="qa" class="panel">
-      <p class="eyebrow">@brand-qa</p>
-      <h2>Recorded QA evidence</h2>
-      <p class="lede small">Azure OpenAI vision scored sampled frames against the approved catalog reference and brand rules;
-        Azure AI Content Safety analysed the same frames. Any score below its threshold fails. Results are AI screening,
-        not ground truth, and never publication approval.</p>
-      <div class="qa-summary" id="qa-summary"></div>
-      <div class="table-wrap">
-        <table class="qa-table" id="qa-table">
-          <caption>All eight cached clips: measured scores vs. brand thresholds</caption>
-        </table>
+    <section id="scenarios" class="panel view" data-view="scenarios" aria-labelledby="scenarios-heading">
+      <p class="eyebrow">Scenario gallery</p>
+      <h2 id="scenarios-heading" tabindex="-1">Find your retail story</h2>
+      <p class="hint" id="scenario-coverage"></p>
+      <div class="tabs-row">
+        <div class="tabs" role="tablist" aria-label="Retail scenarios" id="scenario-tabs"></div>
+        <label class="category-select" for="scenario-category">Retail category
+          <select id="scenario-category"></select>
+        </label>
       </div>
-      <div class="card neg" id="neg-control"></div>
-      <p class="hint">Why so many fails? See <a href="#evals">AI evaluations</a> for a per-clip explanation and stage-aware re-evaluation.</p>
+      <div id="scenario-panel" role="tabpanel" tabindex="0"></div>
     </section>
 
-    <section id="evals" class="panel">
-      <p class="eyebrow">Microsoft Foundry Evaluations</p>
-      <h2>AI evaluations of the cached renders</h2>
-      <p class="lede small">Recorded results from real Foundry Evals runs over the eight cached clips, a negative control and the
-        router's decisions. They are shown next to, not instead of, the original QA verdicts above. This page replays
-        the results; it runs no evaluations.</p>
-      <div id="evals-body"></div>
+    <dialog class="preview-dialog" id="scenario-preview" aria-labelledby="preview-title">
+      <div class="overview-head">
+        <h2 id="preview-title" tabindex="-1">Recorded example</h2>
+        <button type="button" class="ghost" id="preview-close">Close</button>
+      </div>
+      <p class="issue" id="preview-status" role="alert" hidden></p>
+      <div id="preview-body"></div>
+    </dialog>
+
+    <section id="evidence" class="panel view" data-view="evidence" aria-labelledby="evidence-heading">
+      <p class="eyebrow">Technical evidence</p>
+      <h2 id="evidence-heading" tabindex="-1">Readiness and evidence</h2>
+      <p class="lede small">Recorded findings, not approval. Select an example to explore its route, screening and evaluations.</p>
+      <h3>Across the demo</h3>
+      <div id="readiness-summary"></div>
+      <h3>Selected example / recording</h3>
+      <div class="evidence-selector">
+        <label for="evidence-scope">Example or recording</label>
+        <select id="evidence-scope" aria-describedby="evidence-current"></select>
+        <p id="evidence-current" class="hint" aria-live="polite"></p>
+      </div>
+
+      <details class="evidence" id="routing">
+        <summary>Model routing and cost estimates</summary>
+        <p class="hint" id="routing-context"></p>
+        <div class="routing-grid">
+          <div class="card">
+            <div id="selected-route" class="selected-route"></div>
+            <details class="inspect">
+            <summary>How @foundry-router chooses a model</summary>
+            <ul class="rules">
+              <li><b>Drafting or A/B testing</b> → LTX-2.5 Fast or MiniMax H3 Max Turbo (Turbo for volume)</li>
+              <li><b>Approved hero image + native audio</b> → Kling v3 Pro image-to-video</li>
+              <li><b>Strict multi-object layout</b> → MiniMax H3 Max</li>
+              <li><b>Text brief + synchronized audio, final quality</b> → LTX-2.5 Pro</li>
+              <li><b>Budget caps</b> reserve the worst-case duration; unsupported settings are rejected or rerouted,
+                never sent (LTX has no 1:1, so square product-page video uses a documented crop policy).</li>
+            </ul>
+            </details>
+          </div>
+          <div class="card">
+            <h3>What-if estimate</h3>
+            <p class="hint">Editable calculator only. Changes do not revise the recording's retained estimate or evidence.</p>
+            <form id="calc" class="calc" novalidate>
+              <label>Model <select id="calc-model"></select></label>
+              <label>Price tier <select id="calc-tier"></select></label>
+              <label id="calc-sec-choice-wrap">Seconds per clip
+                <select id="calc-sec-choice" aria-describedby="calc-sec-help"></select></label>
+              <label id="calc-sec-wrap" hidden>Seconds per clip
+                <input id="calc-sec" type="number" inputmode="decimal" step="0.01" aria-describedby="calc-sec-help calc-error"></label>
+              <label>Number of clips
+                <input id="calc-n" type="number" inputmode="numeric" min="1" step="1" value="1" aria-describedby="calc-error"></label>
+            </form>
+            <details class="inspect"><summary>Supported durations for this model</summary><p class="hint" id="calc-sec-help"></p></details>
+            <p class="big" id="calc-out" aria-live="polite"></p>
+            <p class="calc-error" id="calc-error" aria-live="polite"></p>
+            <button type="button" class="ghost" id="calc-reset">Reset to recording settings</button>
+            <p class="hint">Preview list price × requested seconds × clips. An estimate, not a bill. MiniMax output can run
+              ~0.7 s longer than requested.</p>
+          </div>
+        </div>
+        <details class="inspect model-matrix"><summary>Full model capabilities and preview pricing</summary><div class="table-wrap">
+          <table class="models" id="models-table">
+            <caption>The five fal variants on Microsoft Foundry (preview list prices, USD per generated second)</caption>
+          </table>
+        </div></details>
+      </details>
+
+      <details class="evidence" id="qa">
+        <summary>Recorded brand QA screening (@brand-qa)</summary>
+        <p class="hint" id="qa-context"></p>
+        <p class="lede small">Any score below its per-brand threshold fails. Screening is not publication approval.</p>
+        <div id="qa-recordings"></div>
+        <details class="inspect"><summary>Screening totals and Content Safety scope</summary>
+          <div class="qa-summary" id="qa-summary"></div>
+          <div id="qa-summary-note"></div>
+        </details>
+        <details class="inspect"><summary>Screening method and negative control</summary>
+          <p>Azure OpenAI vision scored sampled frames against the approved catalog image and brand rules.
+            Azure AI Content Safety analysed the same frames. These are AI observations, not ground truth.</p>
+          <div class="card neg" id="neg-control"></div>
+        </details>
+      </details>
+
+      <details class="evidence" id="evals">
+        <summary>AI evaluations (Microsoft Foundry Evaluations)</summary>
+        <p class="hint" id="evals-context"></p>
+        <p class="lede small">Recorded Foundry Evaluations results supplement, never replace, the original screening verdicts. No evaluations run here.</p>
+        <div id="evals-body"></div>
+      </details>
     </section>
+
   </main>
 
   <footer>
-    <img class="foot-icon logo-light" src="brand/icon-light-192.png" alt="" width="40" height="40">
-    <img class="foot-icon logo-dark" src="brand/icon-dark-192.png" alt="" width="40" height="40">
-    <p>All brands and products are fictional (Northwind Coffee, Contoso Pro, Fabrikam, Woodgrove Wellness); product images are AI-generated.
-      Prices are preview list prices. Source, setup and governance:
-      <a href="https://github.com/swigerb/sku-to-scene">github.com/swigerb/sku-to-scene</a>. MIT licensed.</p>
+      <p class="next-steps">
+        <a href="https://github.com/swigerb/sku-to-scene">Explore the source</a> ·
+        <a href="https://github.com/swigerb/sku-to-scene/blob/main/docs/demo-script.md">Read the presenter guide</a> ·
+        <a href="https://github.com/swigerb/sku-to-scene/blob/main/docs/foundry-setup.md">Plan a scoped pilot</a>
+        (with the <a href="https://github.com/swigerb/sku-to-scene/blob/main/docs/governance.md">governance caveats</a>)
+      </p>
+      <details id="about-demo" class="inspect">
+      <summary>About this demo</summary>
+      <p><a href="evaluations/curated-release-v1.json">Curated reference-preview scope v1</a>: eight featured
+        fictional-demo presentations and six learning cases that still need future remediation. Curation is not
+        full remediation and not customer-campaign approval.</p>
+      <p><a href="evaluations/demo-dispositions-v1.json">Versioned demo dispositions and asset hashes</a>.
+        These owner-delegated assistant decisions concern this fictional demo, not approval for customer campaigns.</p>
+      <p><a href="evaluations/selected-assets-v1.json">Final selected-asset manifest and unselected outcomes</a> ·
+        <a href="evaluations/targeted-evals-v2.json">Bounded direct re-evaluations (not Foundry Evals service runs)</a>.</p>
+      <p>Every product clip is an authentic Microsoft Foundry render recorded earlier; silent presentations are identified
+        derivatives with native originals retained. The original v1 narrated overview is an
+        edited compilation; its statements about the original eight clips are historical. This is recorded replay, with no live generation or evaluations.
+        fal models on Foundry are a <strong>preview</strong>, processed outside Microsoft facilities under fal's terms.
+        Automated screening is an aid: <strong>a person must sign off</strong> before anything is published.</p>
+      <p id="fictional-brands"></p>
+      <p>Fictional brands and products. Real company names identify representative retail segments and cite public
+        sources only; no affiliation, endorsement, trademarks, or customer data. Product images are AI-generated.
+        Prices are preview list prices. MIT licensed.</p>
+      <details class="inspect"><summary>Public sources for the fictional examples</summary><div id="public-sources"></div></details>
+      </details>
   </footer>
   <script src="app.js"></script>
 </body>

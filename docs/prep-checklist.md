@@ -23,7 +23,8 @@
 
 ## Day of (T-1 hour)
 
-- [ ] Open the browser demo, <https://swigerb.github.io/sku-to-scene/>, and press **▶ Replay walkthrough**. It is the zero-risk
+- [ ] Open the browser demo, <https://swigerb.github.io/sku-to-scene/>, and press **Start guided demo**. Step with **Next/Previous**; each step's media stays beside its explanation and
+      nothing auto-advances. Rehearse **Watch overview** with captions too. It is the zero-risk
       fallback: static cached media, no cloud calls.
 - [ ] Run `pip install -e ".[dev]"` into `.venv`, then `pytest -q`.
 - [ ] Confirm rehearsal is no-spend: the `sku-to-scene` MCP server runs with `SKU2SCENE_MODE=mock` and

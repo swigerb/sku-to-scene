@@ -1,5 +1,7 @@
+import json
 import math
 import threading
+from pathlib import Path
 
 import pytest
 
@@ -9,6 +11,11 @@ from sku_to_scene.pipeline import get_job, save_job
 
 TH = {"logo_integrity": 0.8, "label_legibility": 0.7, "product_fidelity": 0.8, "prompt_adherence": 0.7}
 GOOD = {"logo_integrity": 0.9, "label_legibility": 0.9, "product_fidelity": 0.9, "prompt_adherence": 0.9}
+EVIDENCE = {c: {"expected": "The specified product", "observed": "Visible product matches",
+                "frame_indices": [1]} for c in qa.CHECKS}
+ITEM = "The specified product"
+ITEMS = [{"item": ITEM, "present": True, "correct_identity": True, "fully_in_frame": True,
+          "observed": "Visible product matches", "frame_indices": [1]}]
 
 
 @pytest.mark.parametrize("scores", [
@@ -95,19 +102,21 @@ def test_vision_failure_is_error(vision, monkeypatch):
 def test_real_qa_uses_persisted_prompt_and_requires_human_signoff(vision, settings, monkeypatch):
     seen = []
 
-    def scorer(frames, brand, prompt, sku, checks):
+    def scorer(frames, brand, prompt, sku, checks, **_):
         seen.append(prompt)
-        return {"scores": GOOD, "findings": ["screening only"]}
+        return {"scores": GOOD, "findings": ["screening only"], "hallucinated_objects": [],
+                "check_evidence": EVIDENCE, "required_items": ITEMS}
 
     monkeypatch.setattr(qa, "_vision_scores", scorer)
     save_job(settings, {"job_id": "real-qa", "output": str(vision), "prompt": "The original creative prompt",
                         "label": "Not the creative prompt"})
-    result = qa.evaluate(job_id="real-qa", sku="NWC-LTO-PCB-16", settings=settings)
+    result = qa.evaluate(job_id="real-qa", sku="NWC-LTO-PCB-16", settings=settings, required_items=[ITEM])
     assert seen == ["The original creative prompt"]
     assert result["verdict"] == "pass" and result["automated_checks_passed"]
     assert result["human_signoff_required"] and not result["publish_approved"]
     stored = get_job("real-qa", settings)["qa"]
     assert stored["scores"] == GOOD and stored["findings"] == ["screening only"]
+    assert stored["check_evidence"] == EVIDENCE and stored["evaluator_version"] == "brand-qa-vision-v3"
     assert "video" not in stored and "reference_image" not in stored
 
 
@@ -127,10 +136,94 @@ def test_rehearsal_switch_blocks_cloud_evaluators(vision, monkeypatch):
 def test_malformed_content_safety_is_error_not_approval(vision, monkeypatch):
     monkeypatch.setenv("CONTENT_SAFETY_ENDPOINT", "https://safety.example.com")
     monkeypatch.setenv("CONTENT_SAFETY_KEY", "test")
-    monkeypatch.setattr(qa, "_vision_scores", lambda *_: {"scores": GOOD})
+    monkeypatch.setattr(qa, "_vision_scores", lambda *_: {
+        "scores": GOOD, "check_evidence": EVIDENCE, "findings": [], "hallucinated_objects": []})
     monkeypatch.setattr(qa.httpx, "post", lambda *_a, **_k: type(
         "Response", (), {"raise_for_status": lambda _: None, "json": lambda _: {"categoriesAnalysis": []}})())
     result = qa.evaluate(video_path=str(vision), sku="NWC-LTO-PCB-16")
+    assert result["verdict"] == "error" and not result["publish_approved"]
+
+
+def test_text_qa_request_contains_full_requirements_and_group_comparison(vision, monkeypatch):
+    captured = {}
+    prompt = "Four groups, six product props and three packaging boxes, including a mug and cloth."
+
+    def post(url, **kwargs):
+        captured.update(kwargs["json"])
+        body = json.dumps({"scores": GOOD, "check_evidence": EVIDENCE, "findings": [], "hallucinated_objects": [],
+                           "required_items": ITEMS})
+        return type("Response", (), {"raise_for_status": lambda _: None,
+                    "json": lambda _: {"choices": [{"message": {"content": body}}]}})()
+
+    monkeypatch.setattr(qa.httpx, "post", post)
+    result = qa.evaluate(video_path=str(vision), sku="PWS-KIT-01", prompt=prompt, required_items=[ITEM])
+    content = captured["messages"][0]["content"]
+    text = content[0]["text"]
+    for required in ("#44416F", "Plain indigo and white boxes without text",
+                     "coffee kit, cleaning supplies, ergonomic chair, printer paper", prompt,
+                     "Distinguish product groups", "specific mismatch", "frame_indices"):
+        assert required in text
+    assert len(content) == 2  # no invented PIM reference for a text-only SKU
+    assert result["verdict"] == "pass" and not result["publish_approved"]
+
+
+@pytest.mark.parametrize("evidence", [
+    None, {c: EVIDENCE[c] for c in qa.CHECKS if c != "product_fidelity"},
+    EVIDENCE | {"findings": ["The mug is cropped"], "hallucinated_objects": []},
+    EVIDENCE | {"product_fidelity": {"expected": "", "observed": "match", "frame_indices": [1]}},
+    EVIDENCE | {"product_fidelity": {"expected": "product", "observed": "match", "frame_indices": [2]}},
+    EVIDENCE | {"product_fidelity": {"expected": "product", "observed": "match", "frame_indices": [True]}},
+])
+def test_untraceable_grounded_scores_cannot_approve(vision, monkeypatch, evidence):
+    monkeypatch.setattr(qa, "_vision_scores", lambda *_, **kw: {
+        "scores": GOOD, "check_evidence": evidence, "findings": [], "hallucinated_objects": [], "required_items": ITEMS})
+    result = qa.evaluate(video_path=str(vision), sku="PWS-KIT-01", required_items=[ITEM])
+    assert result["verdict"] == "error" and not result["publish_approved"]
+    assert qa.evidence_summary(result)["evaluation_error"] is True
+
+
+@pytest.mark.parametrize("findings", [None, "cropped mug", [None], [""]])
+def test_grounded_findings_cannot_silently_disappear(vision, monkeypatch, findings):
+    monkeypatch.setattr(qa, "_vision_scores", lambda *_, **kw: {
+        "scores": GOOD, "check_evidence": EVIDENCE, "findings": findings, "hallucinated_objects": [],
+        "required_items": ITEMS})
+    result = qa.evaluate(video_path=str(vision), sku="PWS-KIT-01", required_items=[ITEM])
+    assert result["verdict"] == "error" and not result["publish_approved"]
+
+
+def test_recorded_diagnostic_rejects_misnested_findings_without_rescoring(vision, monkeypatch):
+    evidence = json.loads((Path(__file__).resolve().parents[1] / "demo-cache" / "qa" /
+                           "proseware-s5-v2.json").read_text())
+    recorded = evidence["recorded_diagnostic_result"]
+    monkeypatch.setattr(qa, "_vision_scores", lambda *_, **kw: recorded)
+    result = qa.evaluate(video_path=str(vision), sku="PWS-KIT-01", required_items=[ITEM])
+    assert result["verdict"] == "error"
+    assert "exactly the four checks" in result["evaluator_error"]
+    assert not result["automated_checks_passed"] and not result["publish_approved"]
+    assert evidence["original_qa"]["verdict"] == "fail"
+
+
+@pytest.mark.parametrize("defect", ["present", "correct_identity", "fully_in_frame"])
+def test_required_item_defects_fail_even_when_judge_scores_are_high(vision, monkeypatch, defect):
+    item = {**ITEMS[0], defect: False, "observed": "Wrong object, absent or cropped"}
+    monkeypatch.setattr(qa, "_vision_scores", lambda *_, **kw: {
+        "scores": GOOD, "check_evidence": EVIDENCE, "findings": [], "hallucinated_objects": [],
+        "required_items": [item]})
+    result = qa.evaluate(video_path=str(vision), sku="PWS-KIT-01", required_items=[ITEM])
+    assert result["raw_scores"] == GOOD
+    assert result["thresholds"] == TH
+    assert result["scores"]["product_fidelity"] == 0.79
+    assert result["verdict"] == "fail" and not result["publish_approved"]
+    assert result["identity_guard"]["blocked_items"] == [ITEM]
+
+
+@pytest.mark.parametrize("items", [[], ITEMS * 2, [{**ITEMS[0], "item": "Not requested"}],
+                                     [{**ITEMS[0], "correct_identity": "false"}]])
+def test_incomplete_or_malformed_item_inventory_is_not_approval(vision, monkeypatch, items):
+    monkeypatch.setattr(qa, "_vision_scores", lambda *_, **kw: {
+        "scores": GOOD, "check_evidence": EVIDENCE, "findings": [], "hallucinated_objects": [],
+        "required_items": items})
+    result = qa.evaluate(video_path=str(vision), sku="PWS-KIT-01", required_items=[ITEM])
     assert result["verdict"] == "error" and not result["publish_approved"]
 
 
