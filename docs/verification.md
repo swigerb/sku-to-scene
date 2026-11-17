@@ -76,7 +76,7 @@ These are different populations, not a total. `curated_reference_preview_ready` 
 keeps its full-remediation meaning. The builder refuses a scope file that promotes a learning case, omits or
 duplicates an account, selects a rejected attempt or claims campaign approval.
 
-Curated local validation (offline; no generation, evaluation or billable calls):
+Curated local validation at `76fee24` (offline; no generation, evaluation or billable calls):
 
 - **pytest:** 222 passed. Source mutations turn the browser assertions red when featured defaults, learning-case
   labels, selector groups or once-only defect text regress, and a builder test refuses a scope that promotes a
@@ -84,12 +84,17 @@ Curated local validation (offline; no generation, evaluation or billable calls):
 - **Chromium acceptance:** 366/366 checks at 1366×768 and 390×844, 0 page errors, covering Home, gallery
   featured/learning split, learning disclosure, guide selector groups, learning-case brief/preview/review notices,
   original deep links and evidence.
-- **Release gates:** 99/99. A clean source build (98 files) is byte-identical to the served preview; no private
+- **Release gates (CRLF worktree preview):** 99/99. A clean build of that Windows worktree (98 files)
+  is byte-identical to the served preview; no private
   paths, session identifiers or secrets; published media equals referenced media; the 16 withheld clips
   (10 original, 6 rejected replacement attempts) carry no media; selected-asset and curated clip hashes match;
   tracked recordings and evaluation files are unchanged. Over HTTP, 26 withheld or rejected media URLs returned
   404 and the 14 selected media URLs returned 200.
-- **Native Edge 200% (bounded):** browser-menu zoom on the changed gallery, learning disclosure, example selector,
+- **Committed-LF build (`76fee24`):** acceptance 366/366 and release gates 97/97. A blob-for-blob
+  archive comparison covers the two omitted Git-only gates. Compared with the CRLF preview, 95/98 output files
+  are byte-identical; `app.css` and `app.js` differ only in line endings, and `index.html` only in derived
+  cache-bust fingerprints.
+- **Native Edge 200% (bounded; CRLF preview):** browser-menu zoom on the changed gallery, learning disclosure, example selector,
   learning-case brief and Home surfaces passed. Unchanged flows keep the earlier integrated native audit. Physical
   screen pixels only; no CSS viewport claim.
 
