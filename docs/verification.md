@@ -100,6 +100,32 @@ Curated local validation at `76fee24` (offline; no generation, evaluation or bil
 
 The branch is pushed for review only: no merge or Pages deployment. Safari remains unqualified.
 
+## Focused UX regression checks
+
+The hero columns are top-aligned so the source-history disclosure cannot recenter the copy.
+Home and About are routed destinations; `#top` and `#about-demo` remain aliases.
+Informational anchors do not dispatch a new guide route. Selected-recording evaluations and
+additional notes are separate from the historical comparisons and run provenance.
+
+Run the offline Python suite with `SKU2SCENE_MODE=mock` and `SKU2SCENE_QA_EVALUATORS=off`.
+For actual layout/history acceptance, build an unchanged dev baseline and the candidate into separate
+directories and serve them on separate local ports. With an existing Playwright/Chromium installation:
+
+```powershell
+$env:PLAYWRIGHT_MODULE = 'C:\path\to\node_modules\playwright'
+$env:BASELINE_SHA = '<actual dev baseline SHA>'
+node tests\ux-regressions.cjs http://127.0.0.1:8771/ http://127.0.0.1:8772/ C:\path\to\artifacts
+```
+
+The harness blocks non-preview origins, waits for fonts, measures document-space headline,
+description and CTA coordinates before expansion, after expansion and after collapse, and
+enforces a 2px maximum at 1366x768, 1440x900 and 390x844 in both themes. It writes paired
+full-page screenshots and `ux-evidence.json`, including actual Back/Forward guide snapshots,
+keyboard Home navigation and populated, empty, targeted, derivative and unavailable review states.
+It also guards against literal null placeholders and excessively nested evaluation disclosures.
+Inspect the expanded screenshots, including interpretation and historical tables, before review.
+This is not a CLS-only test or a claim of campaign approval.
+
 ## Recorded QA outcomes
 
 The original eight cached clips are authentic Foundry renders. Scores are AI screening judgments, not ground truth.

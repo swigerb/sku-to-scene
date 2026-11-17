@@ -292,12 +292,12 @@
     const el = id && typeof document.getElementById === "function" ? document.getElementById(id) : null;
     if (el && el.tagName === "DETAILS") el.open = true;
   }
-  // Hash-routed views: the landing page, guided demo, scenario gallery and technical evidence are shown one at a
+  // Hash-routed views: Home, guided demo, scenario gallery, technical evidence and About are shown one at a
   // time. Evidence deep links (#routing, #qa, #evals) open the evidence view with that section expanded. Players in
   // a view that is being hidden are paused (one player at a time), so no invisible audio keeps going.
-  const VIEWS = { home: "#view-home", guide: "#guide", scenarios: "#scenarios", evidence: "#evidence" };
-  const VIEW_HEADINGS = { home: "#hero-title", guide: "#guide-heading", scenarios: "#scenarios-heading", evidence: "#evidence-heading" };
-  const VIEW_ALIASES = { "": "home", top: "home", routing: "evidence", qa: "evidence", evals: "evidence" };
+  const VIEWS = { home: "#view-home", guide: "#guide", scenarios: "#scenarios", evidence: "#evidence", about: "#about" };
+  const VIEW_HEADINGS = { home: "#hero-title", guide: "#guide-heading", scenarios: "#scenarios-heading", evidence: "#evidence-heading", about: "#about-heading" };
+  const VIEW_ALIASES = { "": "home", top: "home", "about-demo": "about", routing: "evidence", qa: "evidence", evals: "evidence" };
   let currentView = null;
   let routeGuide = () => {};
   let routeGallery = () => {};
@@ -307,7 +307,7 @@
   function viewFor(id) {
     if (id.startsWith("guide/")) return "guide";
     if (id.startsWith("scenarios/")) return "scenarios";
-    if (id === "main" || id === "about-demo") return currentView || "home";
+    if (id === "main") return currentView || "home";
     if (VIEWS[id]) return id;
     if (id in VIEW_ALIASES) return VIEW_ALIASES[id];
     const el = typeof document.getElementById === "function" ? document.getElementById(id) : null;
@@ -328,13 +328,13 @@
       if (a.dataset.view === name) a.setAttribute("aria-current", "page"); else a.removeAttribute("aria-current");
     });
     currentView = name;
-    if (name === "guide" && id !== "main") routeGuide(id.split("/")[1] || "qsr", id.split("/")[2], startGuide);
+    if (id === "guide" || id.startsWith("guide/")) routeGuide(id.split("/")[1] || "qsr", id.split("/")[2], startGuide);
     if (name === "scenarios") routeGallery(id.split("/")[1]);
     openDetails(id);
     const target = id && typeof document.getElementById === "function" ? document.getElementById(id) : null;
     if (target && target.tagName === "DETAILS") {
       if (typeof target.scrollIntoView === "function") target.scrollIntoView();
-    } else if (changed && focus) {
+    } else if (focus && (changed || name === "home")) {
       if (name === "scenarios" && galleryReturn) {
         galleryReturn.focus?.focus({ preventScroll: true });
         window.scrollTo({ top: galleryReturn.y, behavior: "instant" });
@@ -1372,11 +1372,9 @@
     const byReason = new Map();
     na.forEach(([key, label]) => byReason.set(m.checks[key].na_reason, [...(byReason.get(m.checks[key].na_reason) || []), label]));
     const o = m.observation;
-    return h("details", { class: "clip-card", "data-clip": id },
-      h("summary", {},
+    return h("section", { class: "clip-card", "data-clip": id },
+      h("h4", {},
         h("span", { class: "clip-title" }, name),
-        // display:grid removes the native disclosure marker, so draw a visible one (state comes from <details>).
-        h("span", { class: "clip-toggle", "aria-hidden": "true" }),
         h("span", { class: "clip-meta" }, `${m.stage} · ${id}`),
         h("span", { class: "clip-pills" }, MEDIA_CHECKS.map(([key, label]) =>
           evalPill(m.checks[key], label, id === "negative-control" && key === "product_identity" && m.checks[key]?.label === "mismatch")))),
@@ -1399,9 +1397,10 @@
         h("b", {}, "Human-review evidence unavailable."),
         " Human feedback and evaluator/agent findings could not be loaded; their absence here is not a clean result.");
     }
-    return h("div", {},
-      h("h3", { class: "sub" }, "Human feedback and evaluator/agent findings"),
-      h("div", { class: "findings" }, HR.findings.filter((f) => !scope || f.clip === scope).map((f) => h("article", { class: `card finding ${isBlocker(f) ? "blocking" : ""}` },
+    const findings = HR.findings.filter((f) => !scope || f.clip === scope);
+    if (!findings.length) return h("p", { class: "review-empty" },
+      "No additional review notes are recorded for this recording. This does not imply campaign approval.");
+    return h("div", { class: "findings" }, findings.map((f) => h("article", { class: `card finding ${isBlocker(f) ? "blocking" : ""}` },
         h("p", { class: "eyebrow" }, `Historical source record · ${f.severity} · original status: ${f.status}`),
         h("h4", {}, f.clip || f.case),
         h("p", {}, f.observation),
@@ -1409,7 +1408,7 @@
         f.handling || f.mitigation_in_demo ? h("p", { class: "hint" }, f.handling || f.mitigation_in_demo) : null,
         h("p", { class: "hint" }, `Source: ${f.source}`),
         (DISPOSITIONS?.adjudications || []).filter(a => a.id === f.id).map(a =>
-          h("p", {}, h("b", {}, "Current versioned adjudication: "), a.decision, " ", a.scope))))));
+          h("p", {}, h("b", {}, "Current versioned adjudication: "), a.decision, " ", a.scope)))));
   }
 
   function initEvals(data, clips, products, scope = null) {
@@ -1418,7 +1417,7 @@
       root.replaceChildren(
         h("div", { class: "readiness unavailable", role: "note" }, h("b", {}, "AI evaluation evidence unavailable."),
           " The recorded evaluation results could not be loaded."),
-        humanFindings(scope));
+        h("h3", {}, "Additional review notes"), humanFindings(scope));
       return;
     }
     const nameOf = (id) => {
@@ -1446,11 +1445,12 @@
         h("div", { class: "stat" }, h("b", {}, neg.expected_behavior_met ? "rejected" : "MISSED"), `negative control (${neg.agreement})`),
         h("div", { class: "stat" }, h("b", {}, usd(EV.cost.estimated_usd_this_run)), `estimated spend (cap ${usd(EV.cost.cap_usd)})`));
     root.replaceChildren(
-      h("section", { class: "targeted-evaluations" },
-        h("h3", {}, "Targeted release re-evaluation v2"),
+      h("h3", {}, "Evaluation status/results for this recording"),
+      ...(targeted.length ? [h("section", { class: "targeted-evaluations" },
+        h("h4", {}, "Targeted direct Azure OpenAI review"),
         h("p", { class: "hint" }, "Direct Azure OpenAI calls with explicit token bounds, not Foundry Evals service runs. " +
           "Original results below remain unchanged; one attempt per check is not a reliability study or approval."),
-        targeted.length ? targeted.map(r =>
+        targeted.map(r =>
           h("article", { class: "card check-card", "data-check": r.id }, h("h4", {}, targetedNames[r.id]), labelPill(r.result.label, r.result.label),
             h("ul", {}, (r.result.observations || []).concat(r.result.reasons || []).map(t => h("li", {}, t))),
             r.expected ? h("p", {}, `Calibration control expected ${r.expected}; observed ${r.result.label}.`) : null,
@@ -1458,15 +1458,14 @@
             (r.result.limitations || []).map(t => h("p", { class: "hint" }, t)),
             inspect("Request, exact scope and bound", h("p", {}, r.request_id), h("p", {}, r.sha256 || r.rationale_version),
               h("p", {}, `Maximum output ${r.max_output_tokens} tokens; conservative call reserve ${usd(r.reserved_usd)}.`))))
-          : h("p", {}, "No targeted v2 re-evaluation applies to this recording.")),
+          )] : []),
       h("div", { class: "findings-by-clip" },
-        h("h3", {}, scope ? "This recording's AI evaluations" : "All evaluated clips, including the negative control"),
         entries.length ? entries.map(([id, m]) => clipCard(id, m, nameOf(id)))
-          : h("p", { class: "notice" }, "Not yet evaluated in Foundry Evaluations. Direct frame screening and Content Safety are separate; no v2 run is claimed.")),
-      inspect("Human feedback and evaluator/agent findings for this scope", humanFindings(scope)),
+          : h("p", { class: "notice" }, "No Foundry Evaluations run is recorded for this example. Recorded brand screening and Content Safety results are available under Brand QA.")),
+      h("section", { class: "additional-review" }, h("h3", {}, "Additional review notes"), humanFindings(scope)),
 
       h("details", { class: "card legend" },
-        h("summary", {}, "How to read these results"),
+        h("summary", {}, "How to interpret the results"),
         h("ul", {},
           legend(labelPill("pass", "pass / match / consistent"), "the grader found what the rubric asks for."),
           legend(labelPill("partial", "partial / split"), "partly met, or repeated runs disagree; split results need human review."),
@@ -1474,17 +1473,16 @@
           legend(h("span", { class: "pill" }, "N/A"), "the check does not apply to this clip; the reason is listed with it."),
           legend(h("b", {}, "Service label"), "is the Foundry Evals pass/fail record. It reports any non-passing grader label, including partial, as fail (score 0)."),
           legend(h("b", {}, "3/3, 2/3"), "how many of the repeated runs gave that label.")),
-        h("p", { class: "hint" }, "These are AI screening results. None of them is publication approval, and none changes a recorded verdict.")),
-
-      h("details", { class: "card method" },
-        h("summary", {}, "Methodology: how these evaluations work"),
+        h("p", { class: "hint" }, "These are AI screening results. None of them is publication approval, and none changes a recorded verdict."),
+        h("h4", {}, "Methodology"),
         h("ol", {},
           h("li", {}, h("b", {}, "Stage A, vision observation: "), `the brand-qa-vision deployment describes ${EV.frames_per_clip} sampled frames per clip, with an approved PIM reference only where supplied. It writes neutral observations, not scores.`),
           h("li", {}, h("b", {}, "Stage B, Foundry Evals: "), "text graders in Microsoft Foundry score those observations against stage-aware rubrics, three repeats each. Routing decisions are evaluated separately, and a Python grader checks audio signal measurements."),
           h("li", {}, h("b", {}, "Why two stages: "), `${EV.image_input_spikes.length} native image-input grader spikes were rejected by the service ("${EV.image_input_spikes[0].error}"). Visual checks therefore depend on Stage A's text observations and can miss details a direct visual judge would catch.`)),
         h("p", { class: "hint" }, "Scope: visual checks judge frames, not motion or full clips. The audio check measures stream, loudness and true peak only; " +
-          "it cannot tell whether sounds match the picture. None of this replaces human review, and none of it changes the original QA verdicts.")),
-
+          "it cannot tell whether sounds match the picture. None of this replaces human review, and none of it changes the original QA verdicts.")));
+    if ($("#historical-evals").children.length) return;
+    $("#historical-evals").replaceChildren(
       h("details", { class: "card why" },
         h("summary", {}, "Original-eight baseline: why the QA shows so many fails"),
         h("p", {}, "The original @brand-qa screen applies per-brand final-brand thresholds. Six of eight recorded clips fail measured criteria, for different reasons; text-only drafts are not required to fail:"),
@@ -1494,7 +1492,7 @@
 
       h("details", { class: "table-wrap inspect" }, h("summary", {}, "Supporting comparison of all original-eight evaluations"),
         h("table", { class: "evals-table" },
-          h("caption", {}, "At a glance: grader label per check (agreement across repeats). Each clip's reasons are under Findings by clip."),
+          h("caption", {}, "At a glance: grader label per check (agreement across repeats). Select a source recording above for its reasons."),
           h("thead", {}, h("tr", {}, h("th", { scope: "col" }, "Clip"), h("th", { scope: "col" }, "Stage"),
             MEDIA_CHECKS.map(([, name, scope]) => h("th", { scope: "col" }, name, h("div", { class: "hint" }, scope))))),
           h("tbody", {}, Object.entries(EV.media).map(([id, m]) => h("tr", {},

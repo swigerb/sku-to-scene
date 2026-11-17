@@ -175,7 +175,7 @@ setImmediate(() => {
   assert.ok(requests.every((r) => r.options?.cache === "no-cache"), "all mutable JSON must revalidate");
 
   const heroRoot = () => $("#hero-compare");
-  const VIEW_IDS = { home: "#view-home", guide: "#guide", scenarios: "#scenarios", evidence: "#evidence" };
+  const VIEW_IDS = { home: "#view-home", guide: "#guide", scenarios: "#scenarios", evidence: "#evidence", about: "#about" };
   const shown = () => Object.entries(VIEW_IDS).filter(([, sel]) => !$(sel).hidden).map(([k]) => k);
   const navigate = (hash) => {
     context.window.location.hash = hash;
@@ -209,6 +209,7 @@ setImmediate(() => {
   // Native replaceChildren stringifies an unspread array; the double does the same, so this catches "[object …]".
   for (const sel of ["#readiness-summary", "#qa-summary", "#evals-body", "#scenario-panel"]) {
     assert.doesNotMatch(text($(sel)), /\[object /, `${sel} renders nodes, not stringified objects`);
+    assert.doesNotMatch(text($(sel)), /\b(?:null|undefined)\b/, `${sel} does not render conditional placeholders`);
   }
   if (mode === "learning-first") {
     const featured = input.data.accounts.filter((a) => a.curation === "featured");
@@ -296,14 +297,11 @@ setImmediate(() => {
   assert.match(text($("#qa-summary")), /No campaign approval/);
   assert.match(text($("#qa-summary")), /including historical and withheld attempts/, "aggregate safety scope is explicit");
   if (mode === "ok") {
-    const ev = input.ev, evText = text($("#evals-body"));
-    const clipCards = $("#evals-body").querySelectorAll("details.clip-card");
+    const ev = input.ev, evText = text($("#evals-body")) + text($("#historical-evals"));
+    const clipCards = $("#evals-body").querySelectorAll("section.clip-card");
     assert.deepEqual(clipCards.map((c) => c.attrs["data-clip"]), Object.keys(ev.media), "one readable findings card per evaluated clip");
     for (const [id, m] of Object.entries(ev.media)) {
       const card = clipCards.find((c) => c.attrs["data-clip"] === id);
-      const toggle = card.querySelectorAll("span.clip-toggle");
-      assert.equal(toggle.length, 1, `${id} summary draws a visible expand/collapse affordance`);
-      assert.equal(toggle[0].attrs["aria-hidden"], "true", `${id} toggle is decorative; <details> carries the state`);
       const applicable = Object.entries(m.checks).filter(([, c]) => c.applicable).map(([k]) => k);
       assert.deepEqual(card.querySelectorAll("article.check-card").map((c) => c.attrs["data-check"]).sort(), applicable.sort(), `${id} check cards`);
       for (const [key, chk] of Object.entries(m.checks)) {
@@ -326,7 +324,7 @@ setImmediate(() => {
       }
     }
     for (const r of Object.values(ev.runs).flatMap((x) => x.runs)) assert.ok(evText.includes(r.run_id), `run table keeps ${r.run_id}`);
-    assert.match(evText, /How to read these results/);
+    assert.match(evText, /How to interpret the results/);
     for (const r of input.data.targeted_evaluations.checks) {
       assert.ok(evText.includes(r.request_id), "bounded direct evaluation retains its request ID");
       for (const reason of r.result.reasons) assert.ok(evText.includes(reason), "new evaluation reasons are unchanged");
@@ -341,14 +339,16 @@ setImmediate(() => {
     assert.match(text($("#qa-recordings")), /background shipping-label/);
     assert.doesNotMatch(text($("#qa-recordings")), /Current fictional-demo disposition/);
     setScope("account-proseware-draft-s7");
-    assert.equal($("#evals-body").querySelectorAll("details.clip-card").length, 0, "unevaluated clip never borrows another recording's result");
-    assert.match(text($("#evals-body")), /Not yet evaluated/);
+    assert.equal($("#evals-body").querySelectorAll("section.clip-card").length, 0, "unevaluated clip never borrows another recording's result");
+    assert.match(text($("#evals-body")), /No Foundry Evaluations run is recorded/);
     assert.ok(text($("#selected-route")).includes(input.data.clips.find((c) => c.id === "account-proseware-draft-s7").model_name),
       "route explanation follows the actual selected recording, not an earlier plan");
     setScope(input.data.lto.hero_clip);
-    assert.deepEqual($("#evals-body").querySelectorAll("details.clip-card").map((c) => c.dataset.clip), [],
+    assert.deepEqual($("#evals-body").querySelectorAll("section.clip-card").map((c) => c.dataset.clip), [],
       "silent derivative does not inherit native audio evaluation as its own");
-    assert.match(text($("#evals-body")), /Not yet evaluated/);
+    assert.match(text($("#evals-body")), /No Foundry Evaluations run is recorded/);
+    assert.match(text($("#evals-body")), /No additional review notes are recorded/);
+    assert.doesNotMatch(text($("#evals-body")), /frothing sound/, "silent derivative cannot inherit native-audio notes");
   }
   if (mode === "ev-404") {
     navigate("#guide");
@@ -408,6 +408,13 @@ setImmediate(() => {
   assert.equal(selectButtons()[0].getAttribute("aria-pressed"), "true");
   assert.match(status(), new RegExp(`Concept #${lto.hero_variant} selected`));
   assert.ok(!next.disabled, "selection unlocks the hero step");
+  navigate("#guide/qsr/northwind");
+  activateLink("#about-demo");
+  assert.deepEqual(shown(), ["about"], "legacy About link opens the dedicated view");
+  navigate("#guide/qsr/northwind");
+  assert.equal(selectButtons()[0].getAttribute("aria-pressed"), "true", "About preserves explicit concept selection");
+  assert.ok(!next.disabled, "About preserves the unlocked result");
+  navigate("#home");
   const playingDraft = vid();
   next.click();
   assert.ok(playingDraft.paused, "step changes pause the old recording");
