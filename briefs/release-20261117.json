@@ -1,0 +1,50 @@
+{
+  "version": "targeted-replacements-20261117-v1",
+  "scope": "Six single-attempt candidates for the fictional demo. Generation is not acceptance. Historical briefs remain unchanged.",
+  "budget": {
+    "cap_usd": 4.0,
+    "authorization": "Separate envelope explicitly approved through ask_user on 2026-11-17; not a reset of earlier caps.",
+    "max_attempts_per_account": 1,
+    "qa_reserve_per_candidate_usd": 0.1,
+    "additional_evaluation_reserve_usd": 0.3,
+    "automatic_retries": false
+  },
+  "candidates": [
+    {
+      "account": "alpine", "model": "kling-v3-pro", "resolution": null, "duration": 6,
+      "mode": "image-to-video", "aspect_ratio": "16:9", "audio": false,
+      "reference": "assets/products/contoso-pro-20v-drill.png",
+      "reference_preparation": "Pad the complete original to 16:9 without cropping, recolouring or altering product pixels. Derived staging input, not a new approved PIM asset.",
+      "brand_rule_version": "contoso-pro-v2",
+      "change_from_original": "Drill a hole with the visible twist bit; do not drive a screw. Fixed camera replaces the handheld tracking request.",
+      "prompt": "Six-second photographic product-in-context demonstration. Preserve the exact black and teal Contoso Pro cordless drill from the supplied image, including its intact CONTOSO PRO wordmark, 20V battery, housing, chuck and long spiral twist drill bit. At a sunlit construction workbench, a worker wearing clear safety glasses holds the tool securely and drills one small straight hole into a pine board firmly clamped to the bench. The twist bit rotates on its own axis and enters the wood straight; it does not turn a screw. Both the worker's safety glasses and the whole drill, wordmark and battery remain visible. Show a convincing unfinished timber job site behind the bench, natural daylight and a small realistic amount of sawdust. Fixed side viewpoint, wide framing, no orbit, no close-up, no cropping of the tool. No floating tool, extra tool parts, bent bit, extra fingers, logos other than the supplied Contoso Pro marks, subtitles or soundtrack."
+    },
+    {
+      "account": "woodgrove", "model": "minimax-h3-max-turbo", "resolution": "768P", "duration": 6,
+      "mode": "image-to-video", "aspect_ratio": "16:9", "audio": false,
+      "reference": "assets/products/woodgrove-wellness-bundle.png",
+      "reference_preparation": "Pad the complete original to 16:9 without cropping or altering labels. All six products and the basket remain in the staging input.",
+      "prompt": "Six-second photographic product display. Preserve the entire Woodgrove Wellness bundle exactly as shown in the supplied reference: vitamin C bottle, tissue box, honey-lemon herbal tea box, throat-lozenge packet, digital thermometer and honey jar. Keep all SIX products, all package edges, the thermometer and the entire honey jar visible from the first frame to the last. Retain the existing labels and leaf wordmarks without changing their text. The bundle sits on a broad white pharmacy-endcap shelf at the end of a well-lit pharmacy aisle, with clean shelving behind it and a simple blank top header. Wide front-facing fixed camera, generous margin on every side of the complete bundle; no push-in, orbit, zoom, cuts or product motion. The camera must not crop any product at any time. No additional product, efficacy claim, cure claim, dosage text, medication consumption, people or soundtrack. Do not invent readable signage or additional text."
+    },
+    {
+      "account": "southridge", "model": "ltx-2.5-pro", "resolution": "720p", "duration": 6,
+      "mode": "text-to-video", "aspect_ratio": "16:9", "audio": false, "reference": null,
+      "prompt": "A single stationary six-second photographic home-office tableau, fixed straight-on camera. Exactly three separate products sit on a natural wood desk in one horizontal row with clear gaps. From the viewer's LEFT to RIGHT: an open plain silver laptop on the LEFT, a pair of graphite over-ear headphones resting naturally on their earcups in the CENTRE, and a conventional small wireless mouse lying FLAT on its broad underside on the RIGHT. The laptop screen shows only an abstract teal gradient. The mouse is low, horizontal and ergonomically curved, with its bottom touching the desk; never upright, balanced on an edge, floating or deformed. All three products are already in position at the start and stay completely visible, unchanged and stationary for the entire clip. Wide framing, realistic proportions, soft daylight, plain pale-grey wall. No orbit, pan, zoom, cuts, arriving objects, lid-opening action, extra props, logos, wordmarks, labels, writing, numbers, UI, hands, people or soundtrack."
+    },
+    {
+      "account": "tailwind", "model": "ltx-2.5-fast", "resolution": "720p", "duration": 6,
+      "mode": "text-to-video", "aspect_ratio": "16:9", "audio": false, "reference": null,
+      "prompt": "Silent six-second photographic home-decor display. Two simple ceramic table lamps, three textured pillows and one woven basket are arranged on a plain low retail display plinth, in a muted sage-and-sand palette. The entire background is a perfectly clean, smooth, unmarked warm-neutral wall. Soft natural daylight and realistic fabric and ceramic detail. Static wide front-facing camera; all objects stay stationary and fully visible throughout. Every visible wall, lamp, pillow, basket and plinth surface is blank: no writing-like marks, strokes, letters, numbers, labels, stickers, signs, logos, artwork, seams that resemble writing, price cards or decorative symbols. No additional props, people, hands, cuts, camera movement or soundtrack."
+    },
+    {
+      "account": "wide-world", "model": "minimax-h3-max-turbo", "resolution": "768P", "duration": 6,
+      "mode": "text-to-video", "aspect_ratio": "16:9", "audio": false, "reference": null,
+      "prompt": "Silent six-second photographic wholesale-essentials scene. A stationary plain flatbed cart holds a bulk pack of white paper-towel rolls in a solid blank slate wrapper and six clear sparkling-water bottles in a solid blank mustard cardboard tray. The bottles have plain caps and absolutely no labels, printing or markings. The background is a small warehouse aisle with plain steel racks and a few completely blank uniform brown cartons. Every foreground and background surface is unmarked: no carton printing, shipping labels, shelf labels, barcodes, signs, letters, numbers, writing, logos, prices or symbols anywhere in the entire frame. Fixed front camera, generous wide framing of all cart contents, soft natural light, no cuts, movement, people, hands or soundtrack."
+    },
+    {
+      "account": "best-for-you", "model": "minimax-h3-max-turbo", "resolution": "768P", "duration": 6,
+      "mode": "text-to-video", "aspect_ratio": "16:9", "audio": false, "reference": null,
+      "prompt": "Silent six-second photographic vegetarian meal-kit tableau. On a clean cream kitchen counter are ONLY an open completely blank terracotta-and-olive meal-kit box and one plain ceramic plate holding whole cooked carrots, roasted potatoes, green peas and a bread roll. Warm natural light, benign inviting prepared food. Everything is already arranged and remains stationary. Plain neutral background with no other visible props. Fixed wide camera; the whole plate and box remain in frame. Absolutely no forks, knives, spoons, cutlery, utensils, chopping boards, pans, cookware, mugs, raw meat, cutting, flames, hands, people or animals anywhere in foreground or background. No writing, labels, letters, numbers, logos, signage, medical or health claims. No moving ingredients, transformations, cuts, zoom or soundtrack."
+    }
+  ]
+}

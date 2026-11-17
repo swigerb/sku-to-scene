@@ -1,7 +1,7 @@
 """Build the static browser demo into a curated directory (default: _site/) for GitHub Pages.
 
-Only an explicit allowlist is published: the site shell (site/), brand marks (assets/brand), approved product
-images (assets/products), the cached authentic Foundry renders (demo-cache/*.mp4), sanitized evaluation results
+Only an explicit allowlist is published: the site shell (site/), brand marks (assets/brand), product references
+and labelled derived staging images (assets/products), selected/non-withheld authentic Foundry renders, sanitized evaluation results
 (demo-cache/evaluations/), the 720p overview video and WebVTT captions (assets/sizzle/) with its poster, and a
 data.json derived from
 public repo data (demo-cache/manifest.json, catalog/, briefs/, model registry). The repo root, .env, .sku2scene/
@@ -25,9 +25,10 @@ sys.path.insert(0, str(REPO / "src"))
 from sku_to_scene import models, payloads  # noqa: E402
 from sku_to_scene.lto import CONCEPTS  # noqa: E402
 
-ALLOWED_SUFFIXES = {".html", ".css", ".js", ".json", ".png", ".mp4", ".vtt", ".nojekyll"}
+ALLOWED_SUFFIXES = {".html", ".css", ".js", ".json", ".png", ".jpg", ".mp4", ".vtt", ".nojekyll"}
 # Sanitized Foundry Evals results and human-review findings (written by scripts/run_foundry_evals.py / by hand).
-EVAL_FILES = ("foundry-evals-v1.json", "human-review.json")
+EVAL_FILES = ("foundry-evals-v1.json", "human-review.json", "demo-dispositions-v1.json", "targeted-evals-v2.json",
+              "selected-assets-v1.json", "curated-release-v1.json")
 # Same-origin 720p web copy of the release media-v1 overview video plus WebVTT captions (see assets/sizzle/SOURCE.md).
 SIZZLE_FILES = ("sku-to-scene-sizzle-720p.mp4", "sku-to-scene-sizzle.vtt")
 # Ordered for the guided story; "label"/"story" are plain-language, "title"/"use_case"/"why" keep the technical framing.
@@ -109,8 +110,113 @@ def _duration_constraints(m: models.ModelSpec) -> dict:
             "supports_auto": "auto" in m.durations}
 
 
+def _apply_dispositions(clips: list[dict], accounts: list[dict]) -> dict:
+    """Asset-bound demo decisions are separate from immutable automated screening and campaign approval."""
+    doc = json.loads((REPO / "demo-cache" / "evaluations" / "demo-dispositions-v1.json").read_text())
+    if doc.get("customer_campaign_approved") is not False or doc.get("historical_scores_modified") is not False:
+        raise SystemExit("demo dispositions cannot grant campaign approval or rewrite historical scores")
+    ids = {c["id"]: c for c in clips}
+
+    def verify(file, expected):
+        if not file or Path(file).name != file or not re.fullmatch(r"[a-f0-9]{64}", expected or ""):
+            raise SystemExit("invalid disposition asset path or hash")
+        path = REPO / "demo-cache" / file
+        if not path.is_file() or hashlib.sha256(path.read_bytes()).hexdigest() != expected:
+            raise SystemExit(f"disposition asset hash mismatch: {file}")
+
+    for v in doc["variants"]:
+        parent = ids.get(v["parent_clip"])
+        if not parent or parent["withheld_reason"] or v["id"] in ids or v["audio_streams"] != 0:
+            raise SystemExit(f"invalid presentation parent or silent variant: {v['id']}")
+        verify(Path(parent["file"]).name, v["source_sha256"])
+        verify(v["file"], v["sha256"])
+        variant = {**parent, "id": v["id"], "record_kind": "presentation", "baseline_original": False,
+                   "parent_clip": parent["id"], "source_qa_clip": parent["id"], "presentation": v,
+                   "file": f"media/{v['file']}", "original_file": parent["file"], "has_audio": False,
+                   "media_duration_s": v["duration_s"], "presentation_audio_removed": True}
+        ids[v["id"]] = variant
+        clips.append(variant)
+    if sorted(s["account"] for s in doc["selections"]) != sorted(a["id"] for a in accounts):
+        raise SystemExit("demo dispositions must cover each example exactly once")
+    for s in doc["selections"]:
+        c = ids.get(s["clip"])
+        if not c or c["withheld_reason"]:
+            raise SystemExit(f"cannot select missing/withheld media: {s['clip']}")
+        verify(Path(c["file"]).name, s["sha256"])
+        if s["status"] not in {"silent_presentation", "retained_illustration", "demo_variance",
+                               "replacement_required", "replacement_selected"}:
+            raise SystemExit("unknown demo disposition")
+        if s["status"] == "replacement_selected" and (c["qa"]["verdict"] != "pass" or not s.get("review")):
+            raise SystemExit("replacement selection requires passing screening and direct review")
+        a = next(a for a in accounts if a["id"] == s["account"])
+        if a["sku"] != c["sku"]:
+            raise SystemExit("selected presentation does not match the example SKU")
+        previous = ids.get(a.get("recorded_clip"))
+        if previous:
+            previous["account"] = a["id"]
+        if c.get("parent_clip"):
+            ids[c["parent_clip"]]["account"] = a["id"]
+        c["demo_disposition"] = s
+        c["account"] = a["id"]
+        a["recorded_clip"] = c["id"]
+        if a["hero_clip"]:
+            if not c["source_image"]:
+                raise SystemExit("selected image-to-video hero needs its exact source reference")
+            a["hero_clip"] = c["id"]
+        else:
+            a["draft_clips"] = [c["id"]]
+        a.update(brief=c["prompt"], model=c["model"], model_name=c["model_name"], tier=c["price_key"],
+                 duration=c["requested_duration_s"], aspect_ratio=c["aspect_ratio"], estimate_usd=c["estimate_usd"])
+        a["review_note"] = s["guidance"]
+    return doc
+
+
+def _apply_curation(dispositions: dict, clips: list[dict], accounts: list[dict]) -> dict:
+    """Curated reference-preview scope: a presentation choice, never remediation or campaign approval."""
+    doc = json.loads((REPO / "demo-cache" / "evaluations" / "curated-release-v1.json").read_text())
+    if (doc.get("customer_campaign_approved") is not False or doc.get("full_remediation_complete") is not False
+            or doc.get("withheld_media_published") is not False or doc.get("thresholds_changed") is not False
+            or doc.get("rejections_reversed") is not False or dispositions.get("release_ready") is not False):
+        raise SystemExit("curated scope cannot approve campaigns, complete remediation or reverse rejections")
+    if doc.get("based_on") != dispositions.get("version"):
+        raise SystemExit("curated scope must name the dispositions it curates")
+    selections = {s["account"]: s for s in dispositions["selections"]}
+    featured, learning = doc["featured"], doc["learning_cases"]
+    names = [e["account"] for e in featured + learning]
+    if len(names) != len(set(names)) or set(names) != {a["id"] for a in accounts}:
+        raise SystemExit("curated scope must place every example exactly once as featured or learning")
+    for role, entries in (("featured", featured), ("learning", learning)):
+        for e in entries:
+            s = selections[e["account"]]
+            if (e["clip"], e["sha256"], e["status"]) != (s["clip"], s["sha256"], s["status"]):
+                raise SystemExit(f"curated entry does not match its disposition: {e['account']}")
+            if (s["status"] == "replacement_required") != (role == "learning"):
+                raise SystemExit(f"{e['account']}: only replacement-required examples are learning cases")
+            if role == "learning" and not e.get("unresolved_defect"):
+                raise SystemExit(f"{e['account']}: a learning case must state its unresolved defect")
+    if doc.get("unresolved_full_remediation") != len(learning):
+        raise SystemExit("unresolved remediation count must equal the learning cases")
+    ids = {c["id"]: c for c in clips}
+    rejected = doc["rejected_replacement_attempts"]
+    chosen = {s["clip"] for s in dispositions["selections"]}
+    if (rejected.get("selected") != 0 or rejected.get("count") != len(rejected["clips"])
+            or any(c not in ids or ids[c]["file"] or c in chosen for c in rejected["clips"])):
+        raise SystemExit("rejected replacement attempts must stay withheld and unselected")
+    for a in accounts:
+        e = next((x for x in learning if x["account"] == a["id"]), None)
+        a["curation"] = "learning" if e else "featured"
+        a["learning_defect"] = e["unresolved_defect"] if e else None
+    order = [e["account"] for e in featured + learning]
+    accounts.sort(key=lambda a: (next(i for i, s in enumerate(SCENARIOS) if s["guide"] == a["area"]),
+                                 a["curation"] != "featured", order.index(a["id"])))
+    return doc
+
+
 def build_data() -> dict:
     manifest = json.loads((REPO / "demo-cache" / "manifest.json").read_text(encoding="utf-8"))
+    additions = REPO / "demo-cache" / "release-20261117.json"
+    if additions.exists():
+        manifest["clips"] += json.loads(additions.read_text())["clips"]
     catalog = json.loads((REPO / "catalog" / "products.json").read_text(encoding="utf-8"))["products"]
     brands = json.loads((REPO / "catalog" / "brands.json").read_text(encoding="utf-8"))["brands"]
     brief = json.loads((REPO / "briefs" / "qsr-lto-pumpkin-cold-brew.json").read_text(encoding="utf-8"))
@@ -145,6 +251,15 @@ def build_data() -> dict:
             "concept": title, "variant": _variant(title), "qa": _qa(c["qa"]),
             "qa_evaluated_at": c.get("qa_evaluated_at"),
             "account": c.get("account"), "stage": c.get("stage"),
+            "record_kind": "generation", "baseline_original": not c.get("account"),
+            "brief_version": c.get("brief_version"), "brand_rule_version": c.get("brand_rule_version"),
+            "source_preparation": c.get("source_preparation"),
+            "withheld_reason": c.get("withheld_reason"),
+            "independent_review": c.get("independent_review"),
+            "sha256": c.get("sha256"), "source_sha256": c.get("source_sha256"),
+            "reference_sha256": c.get("reference_sha256"),
+            "presentation_transform": c.get("presentation_transform"),
+            "media_dimensions": [(c.get("media") or {}).get("width"), (c.get("media") or {}).get("height")],
             "presentation_audio_removed": c.get("presentation_audio_removed", False),
             "presentation_trimmed_to_s": c.get("presentation_trimmed_to_s"),
             "qa_sampled_from": c.get("qa_sampled_from"),
@@ -163,7 +278,7 @@ def build_data() -> dict:
         for e in a.get("learning_clips", [])
     }
     for c in clips:
-        c["withheld_reason"] = exclusions.get(c["id"])
+        c["withheld_reason"] = exclusions.get(c["id"]) or c["withheld_reason"]
         c["learning_note"] = learning.get(c["id"])
         if c["withheld_reason"]:
             # Withheld attempts stay as screening evidence only; their media is never published.
@@ -210,9 +325,12 @@ def build_data() -> dict:
         if a["hero_clip"] and not ids[a["hero_clip"]]["source_image"]:
             raise SystemExit(f"{a['id']} cannot claim an approved-PIM hero without a reference image")
 
+    dispositions = _apply_dispositions(clips, accounts)
+    curation = _apply_curation(dispositions, clips, accounts)
+    hero = next(c for c in clips if c["id"] == next(a for a in accounts if a["id"] == "northwind")["recorded_clip"])
     neg = (manifest.get("validation") or {}).get("negative_control")
     return {
-        "note": "Derived from demo-cache/manifest.json. Recorded authentic Foundry renders; replay only.",
+        "note": "Original manifest plus additive release records and asset-bound presentation dispositions. Recorded authentic Foundry renders; replay only.",
         "products": products,
         "accounts": accounts,
         "models": [{
@@ -222,6 +340,9 @@ def build_data() -> dict:
             "speed_tier": m.speed_tier, "strengths": list(m.strengths), **_duration_constraints(m),
         } for m in models.REGISTRY.values()],
         "clips": clips,
+        "demo_dispositions": dispositions,
+        "curated_release": curation,
+        "targeted_evaluations": json.loads((REPO / "demo-cache" / "evaluations" / "targeted-evals-v2.json").read_text()),
         "lto": {
             "sku": brief["sku_id"], "channel": brief["channel"], "presenter_prompt": brief["presenter_prompt"],
             "hero_prompt": brief["prompt"],
@@ -244,6 +365,7 @@ def build(out: Path) -> Path:
     (out / "brand" / "original").mkdir(parents=True)
     (out / "products").mkdir()
     (out / "media").mkdir()
+    shutil.copytree(REPO / "site" / "posters", out / "posters")
     for name in ("index.html", "app.css", "app.js"):
         shutil.copy2(REPO / "site" / name, out / name)
     index = (out / "index.html").read_text(encoding="utf-8")

@@ -1,0 +1,172 @@
+{
+  "version": "targeted-evals-20261117-v2",
+  "method": "direct Azure OpenAI vision/text with explicit output-token cap",
+  "not_foundry_evals_service": true,
+  "historical_results_unchanged": true,
+  "campaign_approval": false,
+  "scope": "One attempt per check, no majority vote. Sampled-frame grading plus separate full visual inspection.",
+  "checks": [
+    {
+      "id": "zava-concept-v2",
+      "clip": "zava-silent-presentation-v1",
+      "sha256": "2d16522b0c8da31042e630e28b081840f70bbe72107aec8f68b66c71108aa41f",
+      "expected_identity": "generic concept",
+      "product_identity": "not_applicable: no approved PIM likeness required",
+      "brand_marks": "not_applicable: unbranded concept",
+      "audio": "silent derivative; not new native silence",
+      "request_id": "7103390b-cb0e-4719-9d64-95a3b8f256cf",
+      "http_status": 200,
+      "input_bound_tokens": 50033,
+      "max_output_tokens": 3000,
+      "reserved_usd": 0.1,
+      "prompt_sha256": "6a2e81b54b4cd4dc5755187ea39add4a5e6fc68f884dbf1e0ee3217787f2b0be",
+      "usage": {
+        "completion_tokens": 198,
+        "completion_tokens_details": {
+          "accepted_prediction_tokens": 0,
+          "audio_tokens": 0,
+          "reasoning_tokens": 0,
+          "rejected_prediction_tokens": 0
+        },
+        "latency_checkpoint": {
+          "engine_tbt_ms": 6,
+          "engine_ttft_ms": 487,
+          "engine_ttlt_ms": 1700,
+          "pre_inference_ms": 2319,
+          "service_tbt_ms": 6,
+          "service_ttft_ms": 2963,
+          "service_ttlt_ms": 4155,
+          "user_visible_ttft_ms": 644
+        },
+        "prompt_tokens": 13584,
+        "prompt_tokens_details": {
+          "audio_tokens": 0,
+          "cached_tokens": 0
+        },
+        "total_tokens": 13782
+      },
+      "result": {
+        "label": "partial",
+        "observations": [
+          "A stone patio at dusk is visible under overhead string lights.",
+          "Exactly one teak dining table is present and centered in the scene.",
+          "Exactly four matching teak chairs are visible, with two on each long side of the table.",
+          "No people are visible.",
+          "The clip appears to show a gradual crane-down / lowering viewpoint across the sampled frames."
+        ],
+        "reasons": [
+          "The core layout matches the brief, but the table is not fully centered in every sampled frame and the scene includes a tabletop centerpiece (vase, candles, tray) that may count as extra decor beyond the requested furniture-only setup.",
+          "Because only sampled still frames were provided, the full-clip motion and whether the crane-down is exactly as requested cannot be fully verified."
+        ],
+        "limitations": [
+          "Assessment is based only on the supplied chronological still frames, not the full video.",
+          "No audio was evaluated.",
+          "Motion, timing, and any transient objects outside the sampled frames cannot be confirmed."
+        ]
+      },
+      "grader_model": "gpt-5.4-mini-2026-03-17"
+    },
+    {
+      "id": "grocery-rationale-v2",
+      "expected": "grounded",
+      "rationale": "The brief calls for high-volume weekly seasonal promotions and supplies an approved product image, so use MiniMax H3 Max Turbo image-to-video. At 768P the preview list price is $0.04 per second versus $0.08 for H3 Max. No native audio is requested. This is a cost/mode decision, not a guarantee of exact products or readable labels; the resulting recording still needs evidence-based review.",
+      "rationale_version": "grocery-routing-rationale-v2",
+      "mode": "image-to-video",
+      "request_id": "a96919be-5631-4a9b-88bd-d4f964eff953",
+      "http_status": 200,
+      "input_bound_tokens": 1202,
+      "max_output_tokens": 3000,
+      "reserved_usd": 0.1,
+      "prompt_sha256": "787900d1b6deb807437b5351a2d49b584e235790ebb3946ae2acc4ea78f27ac3",
+      "usage": {
+        "completion_tokens": 132,
+        "completion_tokens_details": {
+          "accepted_prediction_tokens": 0,
+          "audio_tokens": 0,
+          "reasoning_tokens": 0,
+          "rejected_prediction_tokens": 0
+        },
+        "latency_checkpoint": {
+          "engine_tbt_ms": 5,
+          "engine_ttft_ms": 40,
+          "engine_ttlt_ms": 733,
+          "pre_inference_ms": 167,
+          "service_tbt_ms": 5,
+          "service_ttft_ms": 360,
+          "service_ttlt_ms": 1031,
+          "user_visible_ttft_ms": 192
+        },
+        "prompt_tokens": 258,
+        "prompt_tokens_details": {
+          "audio_tokens": 0,
+          "cached_tokens": 0
+        },
+        "total_tokens": 390
+      },
+      "result": {
+        "label": "grounded",
+        "reasons": [
+          "The rationale matches the supported facts that the brief requests high-volume weekly seasonal grocery/pharmacy promotions and that an approved source image is supplied, so the recorded mode is image-to-video.",
+          "It correctly cites the preview list-price registry values for 768P: Turbo at $0.04/second and H3 Max at $0.08/second.",
+          "It correctly notes that no native audio is requested.",
+          "It appropriately frames the choice as a cost/mode decision and does not claim product fidelity, label accuracy, campaign readiness, or other unsupported capabilities."
+        ]
+      },
+      "grader_model": "gpt-5.4-mini-2026-03-17",
+      "route_model": "minimax-h3-max-turbo",
+      "route_mode": "image-to-video"
+    },
+    {
+      "id": "grocery-rationale-unsupported-control",
+      "expected": "ungrounded",
+      "rationale": "The brief calls for high-volume weekly seasonal promotions and supplies an approved product image, so use MiniMax H3 Max Turbo image-to-video. At 768P the preview list price is $0.04 per second versus $0.08 for H3 Max. No native audio is requested. This is a cost/mode decision, not a guarantee of exact products or readable labels; the resulting recording still needs evidence-based review. This route guarantees perfect label text and flawless product identity in every frame.",
+      "rationale_version": "grocery-routing-rationale-v2",
+      "mode": "image-to-video",
+      "request_id": "f5ba5f41-2cc0-43b5-a094-e6a63e4d68ed",
+      "http_status": 200,
+      "input_bound_tokens": 1289,
+      "max_output_tokens": 3000,
+      "reserved_usd": 0.1,
+      "prompt_sha256": "0fce08fb6bf5173424a8bf9ec727a99d3089edbc4768cac1e021d5302817890f",
+      "usage": {
+        "completion_tokens": 180,
+        "completion_tokens_details": {
+          "accepted_prediction_tokens": 0,
+          "audio_tokens": 0,
+          "reasoning_tokens": 0,
+          "rejected_prediction_tokens": 0
+        },
+        "latency_checkpoint": {
+          "engine_tbt_ms": 5,
+          "engine_ttft_ms": 50,
+          "engine_ttlt_ms": 943,
+          "pre_inference_ms": 140,
+          "service_tbt_ms": 5,
+          "service_ttft_ms": 327,
+          "service_ttlt_ms": 1164,
+          "user_visible_ttft_ms": 187
+        },
+        "prompt_tokens": 272,
+        "prompt_tokens_details": {
+          "audio_tokens": 0,
+          "cached_tokens": 0
+        },
+        "total_tokens": 452
+      },
+      "result": {
+        "label": "ungrounded",
+        "reasons": [
+          "Grounded: the brief requests high-volume weekly seasonal grocery/pharmacy promotions, an approved source image is supplied, so image-to-video is the recorded mode, and no native audio is requested.",
+          "Grounded: the rationale cites the preview list-price registry values for 768P, stating Turbo at $0.04/second and H3 Max at $0.08/second, which matches the supported facts.",
+          "Grounded: it correctly frames the choice as a cost/mode decision and notes that it is not a guarantee of exact products or readable labels; pricing and route choice do not establish product fidelity, label accuracy, or campaign readiness.",
+          "Ungrounded: the claim that the route 'guarantees perfect label text and flawless product identity in every frame' invents guarantees that are explicitly not supported by the facts."
+        ]
+      },
+      "grader_model": "gpt-5.4-mini-2026-03-17",
+      "route_model": "minimax-h3-max-turbo",
+      "route_mode": "image-to-video"
+    }
+  ],
+  "rationale_calibration_matched_expected": true,
+  "metadata_note": "Grader model and routed model are separate fields; labels, observations, usage and request IDs are unchanged."
+}

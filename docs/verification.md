@@ -12,6 +12,89 @@ Default to the **cheapest surface that answers the question**:
 `SKU2SCENE_MODE=mock` alone is not no-spend: if `.env` configures vision or Content Safety, QA still calls them.
 Set `SKU2SCENE_QA_EVALUATORS=off` too (the repository MCP configs already do).
 
+## Local release pass (2026-11-17)
+
+The [asset-bound demo dispositions](../demo-cache/evaluations/demo-dispositions-v1.json) distinguish
+fictional-demo use, historical screening and customer-campaign approval. Northwind and Zava use separately
+identified silent derivatives with native originals retained. Removing audio is not evidence that native audio
+became acceptable. Concept #2's silence is expected.
+
+[Contoso rule v2](../catalog/contoso-pro-v2.json) makes the approved black/teal PIM authoritative for new work;
+the original 0.72/0.75 prompt failure and split evaluation are unchanged. Woodgrove's thermometer and honey
+are visible early; later cropping and weak pharmacy context remain. Proseware's window/wall background is an
+explicit fictional-demo variance, not exact compliance with the original no-window brief.
+
+The separate, explicitly approved $4 planned-spend envelope covers one attempt each for six
+[versioned replacement briefs](../briefs/release-20261117.json), six bounded v1 QA callsets, and three bounded
+direct Azure OpenAI evaluations. No generation or evaluator retries are permitted. Failed/uncertain reservations
+are not refunded into the cap. `scripts/render_release.py` maintains the separate private
+`.sku2scene/release-20261117-reservations.json`; the exhausted account-draft journal is untouched.
+`scripts/evaluate_release.py` uses a hard completion-token bound, not an unbounded Foundry Evals label-model run.
+The [grocery rationale v2](../briefs/grocery-routing-rationale-v2.json) retains the route and removes unsupported
+quality guarantees. Original Foundry Evals records remain separate.
+
+All six generation attempts and their QA completed. None is selected; native source and presentation candidates
+are retained in the private review package, while public media paths remain unavailable.
+
+| Candidate | Measured QA | Final demo disposition |
+|---|---|---|
+| Alpine | Fail | Rejected: distorted wordmark and mirrored battery text. |
+| Woodgrove | Fail | Rejected: fine-label degradation, invented signage and push-in. Lemon/basket objections are grader errors, not permission to override the fail. |
+| Southridge | Fail | Rejected: fixed viewpoint and full-object framing fail. The mouse is flat; the contrary grader claim is retained as calibration evidence. |
+| Tailwind | Pass | Unselected: wall fixed, but push-in half-crops both lamps and changes the palette. Automated pass is not acceptance. |
+| Wide World | Pass | Unselected: full-frame review finds background label/barcode-like marks and signage. Automated screening missed them. |
+| Best For You | Fail | Unselected: no utensils, but unchanged gate fails. Plural carrots and blank box interior were requested; those grader objections are false negatives. |
+
+[Targeted evaluations](../demo-cache/evaluations/targeted-evals-v2.json): Zava concept **partial**, supported grocery
+rationale **grounded**, deliberately unsupported guarantee **ungrounded**. This narrow calibration is not a
+reliability study. Zava's centering/decor caveat and sampled-frame limitation remain visible; branding/PIM checks
+are not applicable. Total conservative consumed reservations are **$3.7032** ($2.8032 generation, $0.60 QA,
+$0.30 targeted evaluation), with **$0 outstanding reservations**. These are retained planning bounds, not an invoice.
+No further paid calls or retries were made.
+
+Pre-curation local validation: 203 pytest tests and 218 real Chromium checks passed. The independent HTTP/provenance
+audit passed 19 checks. A separate native Edge browser-menu 200% integration smoke passed, including the
+corrected recorded-result playback accessible name after Refresh; this is bounded coverage, not all 14 examples
+at 200%, and no native screenshot export is claimed. Earlier pre-integration zoom evidence remains separate.
+Safari is unqualified; browser-engine automation does not substitute for it.
+
+## Curated technical reference preview (v1)
+
+[Curated scope v1](../demo-cache/evaluations/curated-release-v1.json) (`curated-reference-preview-20261117-v1`,
+based on the demo dispositions above) defines a finite reference preview. It does not change any disposition,
+threshold, score, rejection or withheld status, and it is not customer-campaign approval.
+
+- **Featured presentations (8):** Northwind (silent derivative), Tailspin, Coho, Fabrikam, VanArsdel, Zava
+  (silent generic-layout derivative; targeted evaluation partial), Proseware (background variance) and Munson.
+- **Learning cases and known limitations (6), unresolved:** Alpine (original prompt failure needs replacement),
+  Woodgrove (later cropping, weak pharmacy context), Southridge (laptop/accessory order), Tailwind (writing-like
+  wall marks), Wide World (carton and shelf/bottle markings) and Best For You (excluded utensils remain).
+- **Rejected replacement attempts (6):** none selected; their media stays private and 404 on the site.
+
+These are different populations, not a total. `curated_reference_preview_ready` is true;
+`full_remediation_complete` and `customer_campaign_approved` stay false, and `release_ready` in the dispositions
+keeps its full-remediation meaning. The builder refuses a scope file that promotes a learning case, omits or
+duplicates an account, selects a rejected attempt or claims campaign approval.
+
+Curated local validation (offline; no generation, evaluation or billable calls):
+
+- **pytest:** 222 passed. Source mutations turn the browser assertions red when featured defaults, learning-case
+  labels, selector groups or once-only defect text regress, and a builder test refuses a scope that promotes a
+  learning case or mismatches the dispositions.
+- **Chromium acceptance:** 366/366 checks at 1366×768 and 390×844, 0 page errors, covering Home, gallery
+  featured/learning split, learning disclosure, guide selector groups, learning-case brief/preview/review notices,
+  original deep links and evidence.
+- **Release gates:** 99/99. A clean source build (98 files) is byte-identical to the served preview; no private
+  paths, session identifiers or secrets; published media equals referenced media; the 16 withheld clips
+  (10 original, 6 rejected replacement attempts) carry no media; selected-asset and curated clip hashes match;
+  tracked recordings and evaluation files are unchanged. Over HTTP, 26 withheld or rejected media URLs returned
+  404 and the 14 selected media URLs returned 200.
+- **Native Edge 200% (bounded):** browser-menu zoom on the changed gallery, learning disclosure, example selector,
+  learning-case brief and Home surfaces passed. Unchanged flows keep the earlier integrated native audit. Physical
+  screen pixels only; no CSS viewport claim.
+
+The branch is pushed for review only: no merge or Pages deployment. Safari remains unqualified.
+
 ## Recorded QA outcomes
 
 The original eight cached clips are authentic Foundry renders. Scores are AI screening judgments, not ground truth.
@@ -36,7 +119,7 @@ versioned with the repository. For a cached clip's recorded verdict, use that cl
 | `hero-apparel-kling` | Kling v3 Pro (I2V) | **pass** | none | Label legibility at angled views; orbit is partial, not a full 360° |
 | `hero-home-kling` | Kling v3 Pro (I2V) | fail | prompt adherence (0.72) | Job site and handheld tracking not clearly shown; safety glasses unverifiable |
 | `hero-patio-h3max` | MiniMax H3 Max (T2V) | fail | logo, label (0.00) | Text-only brief; no visible label or logo exists to score (see applicability note) |
-| `hero-grocery-turbo` | MiniMax H3 Max Turbo (I2V) | fail | product, prompt | Omits thermometer and honey from the bundle; not a pharmacy endcap |
+| `hero-grocery-turbo` | MiniMax H3 Max Turbo (I2V) | fail | product, prompt | Original QA reported thermometer/honey omissions; frame adjudication contradicts that blanket claim. Later cropping and weak pharmacy-endcap context remain. |
 
 Applicability: the patio product has no PIM image and no visible logo, so logo/label checks score 0. The
 current rubric treats that as a fail (fail-closed). Do not lower thresholds or rewrite the manifest to change
@@ -46,8 +129,9 @@ it; the Foundry Evals v1 rubric marks such checks N/A with a reason, without cha
 ## Area-guide and account-preview checks
 
 - Open `#guide/qsr`, `#guide/apparel`, `#guide/home` and `#guide/grocery`, including in a narrow iframe.
-  Home cards should open those guides; `#guide` must still open coffee. Every area lists all of its fictional
-  accounts and their public citations. No real company name belongs in a fictional brand/product field.
+  Each opens that area's first featured presentation; `#guide` and unknown examples fall back to a featured
+  example (Northwind first). Home cards open the matching gallery category. Every area keeps all of its
+  fictional accounts and their public citations. No real company name belongs in a fictional brand/product field.
 - Step deliberately. Playing a preview must not select it. Only Northwind concept #2 and the existing
   approved-PIM heroes are selectable. Text-only patio, all new account drafts and QA learning examples are preview-only.
   Switching area, step or view and restarting must pause replaced or hidden media.
@@ -56,9 +140,13 @@ it; the Foundry Evals v1 rubric marks such checks N/A with a reason, without cha
 - New clips display **Awaiting human review — not approved** if the valid review record has no finding for
   that clip. A failed/malformed review-file load instead displays **Human-review evidence unavailable**.
   The original coffee-audio publication blocker, concept #2 silence and 2/8 screening baseline remain unchanged.
-- Every account plays one recorded example. New drafts use no approved PIM reference, stay preview-only, and
+- Every account plays one recorded example; playable is not repaired. New drafts use no approved PIM reference, stay preview-only, and
   show **Not yet evaluated** until a separate Foundry Evaluations run covers them. Learning examples carry
   **QA learning example — failed screening; not approved**; withheld attempts have no player anywhere.
+- Curated scope: each gallery category shows its featured presentations first; **Learning cases and known
+  limitations** is collapsed and its cards say **Inspect learning case**. **Change example** groups featured
+  and learning cases separately. A learning deep link states its role and unresolved defect before playback.
+  Review separates historical source screening, current fictional-demo disposition and customer-campaign approval.
 
 ## Account drafts
 

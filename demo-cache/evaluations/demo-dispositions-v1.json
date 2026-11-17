@@ -1,0 +1,442 @@
+{
+  "version": "demo-dispositions-20261117-v1",
+  "scope": "Owner-delegated dispositions for this fictional demo only. Not customer-campaign publication approval.",
+  "reviewer": "Copilot assistant; no claim that the owner personally watched or listened",
+  "historical_scores_modified": false,
+  "customer_campaign_approved": false,
+  "overview": "Original recorded overview v1; footage, narration and original-eight findings are unchanged.",
+  "variants": [
+    {
+      "id": "northwind-silent-presentation-v1",
+      "parent_clip": "lto-hero-kling",
+      "file": "northwind-silent-presentation-v1.mp4",
+      "source_sha256": "732934a679dd0c61623f0ddf9e3d48e069082d20221436e16a94cdaa2aae2416",
+      "sha256": "b26506844ee747809079b79359def96778e995a1668364dc30df40beacad4067",
+      "video_packet_sha256": "c06a24fe58e74d2b272ce9a89904663d062464579c91c2d7635dec71556e7ff7",
+      "duration_s": 8.041667,
+      "audio_streams": 0,
+      "transformation": "Native audio removed; H.264 video stream copied without re-encoding, trimming or cropping.",
+      "review": "All 193 decoded frames inspected in chronological contact sheets, source/candidate packet hashes identical, complete decode clean, zero audio streams. This is assistant visual review, not human listening or campaign approval.",
+      "audio_disclosure": "Silent presentation variant. Requested native audio was removed because of the recorded loudness and audio/picture mismatch. The native original and its unresolved finding remain in history. This does not demonstrate acceptable native audio."
+    },
+    {
+      "id": "zava-silent-presentation-v1",
+      "parent_clip": "hero-patio-h3max",
+      "file": "zava-silent-presentation-v1.mp4",
+      "source_sha256": "4b84b1b6b4e925a83fd0aab684c5a4e39096ad0e959f06ff67c74e22b8fcdecb",
+      "sha256": "2d16522b0c8da31042e630e28b081840f70bbe72107aec8f68b66c71108aa41f",
+      "video_packet_sha256": "a5d831077bccea61d43b5447f57c3c6c50a9f50ea5783afbf4c6a5c833e1d57e",
+      "duration_s": 6.583333,
+      "audio_streams": 0,
+      "transformation": "Unrequested audio removed; H.264 video stream copied without re-encoding, trimming or cropping.",
+      "review": "All 158 decoded frames inspected in chronological contact sheets: one table, four chairs, two on each long side, no people. Source/candidate packet hashes identical, complete decode clean, zero audio streams. No human listening or campaign approval.",
+      "audio_disclosure": "Silent presentation derivative, not newly generated silent output. Unrequested model audio was removed; the native original remains in history."
+    }
+  ],
+  "adjudications": [
+    {
+      "id": "drill-reference-vs-brand-rule",
+      "clip": "hero-home-kling",
+      "decision": "The approved black/teal PIM reference is authoritative for this fictional demo. catalog/contoso-pro-v2.json corrects the yellow-housing rule for new work. The original split evaluation and separate 0.72/0.75 prompt-adherence failure remain unchanged.",
+      "scope": "Policy question resolved; this does not repair the original recording."
+    },
+    {
+      "id": "grocery-qa-vs-eval-disagreement",
+      "clip": "hero-grocery-turbo",
+      "decision": "The thermometer and honey are visible early, including around 0.15, 1.41 and 2.67 seconds. Later camera movement crops products, and the scene does not convincingly establish a pharmacy endcap. The blanket omission claim is not supported by these frames. Original QA fail and later identity-match evaluation are both preserved.",
+      "scope": "Assistant source-frame adjudication; replacement still required."
+    },
+    {
+      "id": "draft-2-no-audio",
+      "clip": "lto-draft-2",
+      "decision": "No audio was requested and no audio stream is present. This is expected, not a defect or a reason to regenerate.",
+      "scope": "Audio applicability only; original visual failures remain unchanged."
+    },
+    {
+      "id": "zava-brand-mark-applicability",
+      "clip": "hero-patio-h3max",
+      "decision": "Generic unbranded text-to-video patio-layout concept. The brief did not require a FABRIKAM label or approved PIM likeness. The v1 branding failure is preserved, not reclassified as a pass.",
+      "scope": "Concept-stage rubric for new evaluation; exact branded-product identity is not claimed."
+    }
+  ],
+  "selections": [
+    {
+      "account": "northwind",
+      "clip": "northwind-silent-presentation-v1",
+      "sha256": "b26506844ee747809079b79359def96778e995a1668364dc30df40beacad4067",
+      "status": "silent_presentation",
+      "summary": "Silent seasonal product presentation; native audio removed.",
+      "guidance": "Use the silent variant for this demo. The original audio mismatch remains attached to the native source; do not claim native-audio quality.",
+      "limitation": "Original moving leaves and transient overlaps remain; audio removal is not new visual screening."
+    },
+    {
+      "account": "tailspin",
+      "clip": "account-tailspin-draft-s1",
+      "sha256": "a7124fd969f7182c7121af2c905498092198b96502be060de9d23a0c5107e511",
+      "status": "retained_illustration",
+      "summary": "Retained for the illustrative value-meal concept.",
+      "guidance": "Retain the recorded illustrative demo scope; customer-campaign review is separate."
+    },
+    {
+      "account": "coho",
+      "clip": "account-coho-draft-s3",
+      "sha256": "3d46139bb61f16b42ca92acadf5a0362c07f0e2d6dc2fc715a4cfd3e16015064",
+      "status": "retained_illustration",
+      "summary": "Retained silent sandwich presentation; original-audio provenance preserved.",
+      "guidance": "Keep the presentation-edit disclosure; no native-audio-quality claim."
+    },
+    {
+      "account": "fabrikam",
+      "clip": "hero-apparel-kling",
+      "sha256": "a60403fba86116255e0bc6cd593a95c6520e13f383803c3fbd422ac858afbc4d",
+      "status": "retained_illustration",
+      "summary": "Retained rotating jacket lookbook.",
+      "guidance": "Retain for the fictional product-page illustration; no customer-campaign approval is recorded."
+    },
+    {
+      "account": "vanarsdel",
+      "clip": "account-vanarsdel-draft",
+      "sha256": "9c193ea9488b8047a747c4315c22484a14fd6666f6b80472ff074223243a5f24",
+      "status": "retained_illustration",
+      "summary": "Generic accessory discovery, not proof of exact branded-product identity.",
+      "guidance": "Describe this as a text-led discovery concept, not an approved-PIM likeness demonstration."
+    },
+    {
+      "account": "tailwind",
+      "clip": "account-tailwind-draft",
+      "sha256": "ec45831fde57e11f7426c1dd191fede7c18f3a5f36d04e14f9ccf64a6cb1f03d",
+      "status": "replacement_required",
+      "summary": "Writing-like wall marks remain; replacement required.",
+      "guidance": "Inspect the whole frame for wall markings before selecting a replacement. Original screening pass is unchanged."
+    },
+    {
+      "account": "wide-world",
+      "clip": "account-wide-world-draft",
+      "sha256": "be2a77e5a2bf8575036e6704456b86608b44d8cca374012240218523d7cb1641",
+      "status": "replacement_required",
+      "summary": "Carton and shelf/bottle markings remain; replacement required.",
+      "guidance": "Reject writing, labels or barcodes anywhere in foreground or background, regardless of original automated pass."
+    },
+    {
+      "account": "alpine",
+      "clip": "hero-home-kling",
+      "sha256": "e1f4e846839c23ab8fbcd5b5f15a1cf6474e816188cdd2f6b5c6a4f523976931",
+      "status": "replacement_required",
+      "summary": "Black/teal reference policy resolved; original prompt failure still needs replacement.",
+      "guidance": "Check coherent drilling with the visible twist bit and a convincing job-site setting under the versioned brief."
+    },
+    {
+      "account": "zava",
+      "clip": "zava-silent-presentation-v1",
+      "sha256": "2d16522b0c8da31042e630e28b081840f70bbe72107aec8f68b66c71108aa41f",
+      "status": "silent_presentation",
+      "summary": "Generic patio-layout concept; unrequested audio removed.",
+      "guidance": "Present as an unbranded layout concept only. No approved-PIM likeness, FABRIKAM-label or native-audio-quality claim.",
+      "limitation": "New concept-stage evaluation is partial: centering/decor caveat and sampled-frame motion limitation. Brand marks and approved-PIM likeness do not apply; no new pass is inferred."
+    },
+    {
+      "account": "southridge",
+      "clip": "account-southridge-draft",
+      "sha256": "46c2465b1f484385822a0f46bc0b81b0278b5f9a964e6cb7a0dd983d3e691202",
+      "status": "replacement_required",
+      "summary": "Laptop/accessory order is wrong; replacement required.",
+      "guidance": "Require laptop left, headphones centre and a normally flat mouse right throughout; reject malformed, floating or upright mice."
+    },
+    {
+      "account": "proseware",
+      "clip": "account-proseware-draft-s7",
+      "sha256": "0c624a416786e7779657a173565c8f5c6f4519486217074bdf78ed3388cf60b2",
+      "status": "demo_variance",
+      "summary": "Retained four-group office kit with an explicit background variance.",
+      "guidance": "Window/wall texture is accepted only as a demo-specific variance. Do not claim exact compliance with the original no-window brief."
+    },
+    {
+      "account": "woodgrove",
+      "clip": "hero-grocery-turbo",
+      "sha256": "5a42dbca6714483fd6a62876be3d7290baaa27a836e24ca023a46252b0bde239",
+      "status": "replacement_required",
+      "summary": "All products appear early; later cropping and weak pharmacy context require replacement.",
+      "guidance": "Keep all six reference products visible throughout, with readable labels and a believable pharmacy endcap. Do not repeat the blanket thermometer/honey omission claim."
+    },
+    {
+      "account": "best-for-you",
+      "clip": "account-best-for-you-draft-r1",
+      "sha256": "9ca5c2b94ef8a936401056ccd3fadf43d90d3f374018105cf113ce1af161ba8e",
+      "status": "replacement_required",
+      "summary": "Expressly excluded utensils remain; replacement required.",
+      "guidance": "Check foreground and background for forks, knives and other prohibited props; retain benign vegetarian food."
+    },
+    {
+      "account": "munson",
+      "clip": "account-munson-draft-s1",
+      "sha256": "8efd86e909e897197ebae424c0f23fa909942bf47435d707dc8af9445effc08b",
+      "status": "retained_illustration",
+      "summary": "Retained bread, pasta and oil basket illustration.",
+      "guidance": "Keep the fictional illustrative-demo scope; customer-campaign approval remains separate."
+    }
+  ],
+  "retained_review_method": "Six timestamped frames per existing selection and supplied references inspected by assistants. Silent derivatives additionally received complete decoded-frame inspection and hash/audio-stream verification.",
+  "replacement_status": "Six single attempts and complete independent reviews finished. All six candidates remain unselected; original examples remain explicitly action-needed. No retries.",
+  "release_ready": false,
+  "replacement_attempts": [
+    {
+      "account": "alpine",
+      "clip": "release-alpine-20261117-v1",
+      "request_id": "021dbedb-48e2-4116-b65b-015f2fc7155b",
+      "sha256": "8f59160ce6e0ac871b324a5cf8d19aeee716d1b6cd8fb55210351759d53fae94",
+      "source_sha256": "ea7b12ad7c7236d029066ba0f1466956947985f9049b157549205130818c40b1",
+      "reference_sha256": "3f0aa44e44dda08c9210924089bea5b58eae1519858ed83d8775d1d881aa7723",
+      "qa": "fail",
+      "disposition": "Rejected: altered wordmark and mirrored battery text; original remains action-needed.",
+      "review": {
+        "request_id": "021dbedb-48e2-4116-b65b-015f2fc7155b",
+        "source_sha256": "ea7b12ad7c7236d029066ba0f1466956947985f9049b157549205130818c40b1",
+        "presentation_sha256": "8f59160ce6e0ac871b324a5cf8d19aeee716d1b6cd8fb55210351759d53fae94",
+        "reference_sha256": "3f0aa44e44dda08c9210924089bea5b58eae1519858ed83d8775d1d881aa7723",
+        "reference_exact_embed_of_pim": true,
+        "frames": 145,
+        "duration_s": 6.041667,
+        "audio_streams": 0,
+        "decode_errors": 0,
+        "independent_disposition": "reject (concurs with automated fail)",
+        "findings": [
+          "~0.9 s static padded studio reference, then hard cut to job site",
+          "drill partly outside right frame edge immediately after the cut",
+          "wordmark renders as garbled 'CONOGO RQO'-like text and battery '20V' mirrors throughout the job-site portion",
+          "drilling action and timber job-site context are coherent; safety glasses visible only late and partially"
+        ],
+        "criterion_failed": "identity/wordmark"
+      }
+    },
+    {
+      "account": "woodgrove",
+      "clip": "release-woodgrove-20261117-v1",
+      "request_id": "fa3a9475-103c-4f81-88b3-57af47ee1c1d",
+      "sha256": "8259f8959186f82cfcbdf85d4a78e97bef419c9fc80c92c145780046697b2e30",
+      "source_sha256": "74d86169d96c2a10a07ad5d01a6049b2126f7e6306947ec2cf711eab5ccdb5b3",
+      "reference_sha256": "51b40739d39d8420e4c8d165a6ee298362ac6e4d19b8af4493acfee9e7120af8",
+      "qa": "fail",
+      "disposition": "Rejected: label degradation, invented signage and camera/framing deviations. Lemon/basket are in the PIM, so that part of QA's rationale is wrong; measured failure remains.",
+      "review": {
+        "request_id": "fa3a9475-103c-4f81-88b3-57af47ee1c1d",
+        "source_sha256": "74d86169d96c2a10a07ad5d01a6049b2126f7e6306947ec2cf711eab5ccdb5b3",
+        "presentation_sha256": "8259f8959186f82cfcbdf85d4a78e97bef419c9fc80c92c145780046697b2e30",
+        "reference_sha256": "51b40739d39d8420e4c8d165a6ee298362ac6e4d19b8af4493acfee9e7120af8",
+        "reference_exact_embed_of_pim": true,
+        "frames": 158,
+        "duration_s": 6.583333,
+        "source_audio_streams": 1,
+        "presentation_audio_streams": 0,
+        "presentation_size": "1280x732 (source 1344x768, ratio 1.75, not exact 16:9; no crop)",
+        "decode_errors": 0,
+        "independent_disposition": "not selectable: measured automated fail with corroborated prompt-adherence deviations; Woodgrove stays on its retained original/evaluations",
+        "findings": [
+          "all six products plus the reference lemon visible and uncropped in every frame",
+          "labels largely legible in full-resolution frames, BUT small print is degraded relative to the PIM: PIM reads 'IMMUNE SUPPORT*' and 'FOR EVERYDAY CARE'; generation renders 'INMMNE SUPPORT' and 'FOR BEWDAY CARE' (correction: an earlier draft wrongly attributed these artifacts to the reference)",
+          "pharmacy-aisle display context is believable; bundle sits on a white counter at the aisle end",
+          "deviation: gradual push-in despite 'no push-in/zoom'",
+          "deviation: invented readable 'WOODGROVE' aisle header/side signage despite 'simple blank top header' and 'no invented readable signage'",
+          "raw output contains unrequested audio; presentation correctly silent"
+        ],
+        "automated_qa": {
+          "verdict": "fail",
+          "scores": {
+            "logo_integrity": 0.92,
+            "label_legibility": 0.88,
+            "product_fidelity": 0.18,
+            "prompt_adherence": 0.12
+          },
+          "failed_checks": [
+            "product_fidelity",
+            "prompt_adherence"
+          ],
+          "brand_rule_version": "catalog-v1",
+          "content_safety_max_severity": 0
+        },
+        "qa_assessment": "prompt_adherence fail independently corroborated (aisle background instead of blank-header endcap, invented readable signage, push-in). product_fidelity rationale partly erroneous: lemon and wicker basket ARE present in the PIM image; grader appears to compare against a six-product text list rather than the image. Score validity therefore uncertain, but the measured fail stands; do not select, re-score or lower thresholds."
+      }
+    },
+    {
+      "account": "southridge",
+      "clip": "release-southridge-20261117-v1",
+      "request_id": "8e205cf5-f80b-43a4-8a42-0b14e613d4b8",
+      "sha256": "8bf593b5c4015005cc2efa3ebee19a4ceb7da8b0c195ccd709842cccf34e5ca7",
+      "source_sha256": "4db0748c2943257c31d2a61ec79bbed51bddf75b2464be088e222df89b07f192",
+      "reference_sha256": null,
+      "qa": "fail",
+      "disposition": "Rejected: push-in and cropped laptop violate fixed full-object framing. Mouse is flat, contrary to part of QA's rationale; measured failure remains.",
+      "review": {
+        "request_id": "8e205cf5-f80b-43a4-8a42-0b14e613d4b8",
+        "job_id": "ltx-2.5-pro-4ef270b1",
+        "source_sha256": "4db0748c2943257c31d2a61ec79bbed51bddf75b2464be088e222df89b07f192",
+        "presentation_sha256": "8bf593b5c4015005cc2efa3ebee19a4ceb7da8b0c195ccd709842cccf34e5ca7",
+        "frames": 150,
+        "fps": 25,
+        "duration_s": 6.0,
+        "size": "1280x720",
+        "audio_streams": 0,
+        "decode_errors": 0,
+        "frames_examined": "all 150 via five contiguous 5x6 sheets (southridge-full-01..05.jpg) plus full-resolution frames 0 and 149",
+        "criteria": {
+          "order_laptop_left_headphones_centre_mouse_right_throughout": "pass",
+          "mouse_flat_conventional_not_floating_or_upright": "pass",
+          "fixed_view": "FAIL: continuous push-in ~1.24x over the clip (headphone width ~250px -> ~310px; mouse right edge x~1100 -> ~1245)"
+        },
+        "other_deviations": [
+          "laptop cropped by left frame edge from frame 0 ('stay completely visible' not met)",
+          "headphones sit inside a ring-shaped cradle/lower band rather than resting on their earcups",
+          "small taskbar-like UI marks on laptop screen despite 'no UI'"
+        ],
+        "independent_disposition": "reject (fixed-view criterion fails; measured automated fail)",
+        "automated_qa": {
+          "verdict": "fail",
+          "scores": {
+            "logo_integrity": 0.95,
+            "label_legibility": 0.98,
+            "product_fidelity": 0.12,
+            "prompt_adherence": 0.18
+          },
+          "failed_checks": [
+            "product_fidelity",
+            "prompt_adherence"
+          ]
+        },
+        "qa_assessment": "Agree on fail. Disagree with QA claim that the mouse is upright on its side: in all 150 frames it lies flat on its underside. QA's headphone stand/base and laptop-crop findings agree with this review; QA did not mention the push-in."
+      }
+    },
+    {
+      "account": "tailwind",
+      "clip": "release-tailwind-20261117-v1",
+      "request_id": "d8fd4e22-718f-40a2-a042-4f06959add8e",
+      "sha256": "2fb4fdfdf2ec197645d56b858d483d45131e9156ff6fc5b0e8ee9cf8e8c51f04",
+      "source_sha256": "2c80582cc51a47adc565bd5ffb2cb0b98f81239829f8003744097264d9c94f0b",
+      "reference_sha256": null,
+      "qa": "pass",
+      "disposition": "Rejected despite automated pass: push-in materially crops both required lamps. Wall defect corrected, but no new variance or human approval is inferred.",
+      "review": {
+        "request_id": "d8fd4e22-718f-40a2-a042-4f06959add8e",
+        "model": "ltx-2.5-fast",
+        "source_sha256": "2c80582cc51a47adc565bd5ffb2cb0b98f81239829f8003744097264d9c94f0b",
+        "presentation_sha256": "2fb4fdfdf2ec197645d56b858d483d45131e9156ff6fc5b0e8ee9cf8e8c51f04",
+        "frames": 150,
+        "fps": 25,
+        "duration_s": 6.0,
+        "size": "1280x720",
+        "audio_streams": 0,
+        "decode_errors": 0,
+        "frames_examined": "all 150 via five contiguous 5x6 sheets (tailwind-full-01..05.jpg) plus full-resolution frames 0, 75, 149; compared with retained original contact sheet",
+        "criteria": {
+          "no_writing_like_wall_marks": "pass: wall is clean in every frame (original's paper/notice-like wall marks gone)",
+          "keep_lamps_pillows_basket": "partial: two lamps, three pillows (two sage, one sand) and one woven basket present throughout, but both lamps are pushed partly out of frame from ~frame 60 (2.4 s) and are roughly half cropped by frame 149",
+          "keep_palette": "broadly kept (sage pillows, sand/natural basket and shades); lamp bases are terracotta/tan rather than the original sage/stone ceramics and the wall is warm tan rather than white"
+        },
+        "other_deviations": [
+          "continuous push-in ~1.29x (pillow-group width ~653px -> ~845px) despite 'static wide front-facing camera; all objects stay fully visible'"
+        ],
+        "independent_disposition": "not selectable: targeted wall defect corrected, but the versioned framing requirement fails (continuous ~1.29x push-in half-crops both lamps by the end; warmer lamp bases/wall). Automated QA pass is a grader miss and does not override the framing failure.",
+        "automated_qa": {
+          "verdict": "pass",
+          "scores": {
+            "logo_integrity": 1,
+            "label_legibility": 1,
+            "product_fidelity": 1,
+            "prompt_adherence": 1
+          },
+          "failed_checks": []
+        },
+        "qa_assessment": "Agree the wall is clean and all objects are present. Disagree with QA finding 'objects remain static and fully visible across frames': a continuous ~1.29x push-in partly crops both lamps from ~2.4 s to the end. Record as grader calibration evidence.",
+        "final_adjudication": "UNSELECTED (child adjudication, concurred): lamp cropping and push-in violate the versioned framing requirement ('static wide front-facing camera; all objects stay fully visible') despite v1 QA 1.0 scores; not treated as an authorized variance."
+      }
+    },
+    {
+      "account": "wide-world",
+      "clip": "release-wide-world-20261117-v1",
+      "request_id": "84888bf7-4b29-4c55-9ed8-b7dc4c803314",
+      "sha256": "ecd793bd9bcd086e10f0235090ee2f0afc1f8b292eef8d0ee5d79562a160cc65",
+      "source_sha256": "9671cbe4180775e0fc4bcec710d8e761da9eeb887673a843c7248b6a4f17a51a",
+      "reference_sha256": null,
+      "qa": "pass",
+      "disposition": "Rejected despite automated pass: background shipping-label/barcode-like marks and signage violate the entire-frame no-writing requirement.",
+      "review": {
+        "request_id": "84888bf7-4b29-4c55-9ed8-b7dc4c803314",
+        "job_id": "minimax-h3-max-turbo-5914b822",
+        "model": "minimax-h3-max-turbo",
+        "source_sha256": "9671cbe4180775e0fc4bcec710d8e761da9eeb887673a843c7248b6a4f17a51a",
+        "presentation_sha256": "ecd793bd9bcd086e10f0235090ee2f0afc1f8b292eef8d0ee5d79562a160cc65",
+        "hashes_match_generation_json": true,
+        "source": "1344x768 24fps 158 frames 6.58 s, h264 + unrequested AAC audio stream",
+        "presentation": "1280x732 24fps 158 frames 6.58 s, video only",
+        "decode_errors": 0,
+        "frames_examined": "all 158 via six contiguous 5x6 sheets (wide-world-full-01..06.jpg) plus full-resolution frames 0, 40, 80, 120, 157 and 2-4x crops of right background cartons, top-centre wall and top-left racking (frames 0, 80, 157)",
+        "criteria": {
+          "foreground_blank": "pass: six unlabeled bottles with plain caps, blank mustard tray, paper-towel pack with a blank unmarked white panel",
+          "entire_frame_no_writing": "FAIL: at least three background cartons on the right racking (and one at far left) carry white shipping-label patches with grey glyph/barcode-like marks, present in every frame; a red wall sign with a white symbol sits in the far background; out-of-focus packaged goods on the top racking. Marks are illegible but are exactly the carton markings/shipping labels the spec and prompt exclude."
+        },
+        "other_deviations": [
+          "visible push-in over roughly frames 0-40 that crops the cart deck edges, despite 'fixed front camera' (zoom factor not measured); static afterwards; cart contents remain in frame"
+        ],
+        "automated_qa": {
+          "verdict": "pass",
+          "scores": {
+            "logo_integrity": 0.95,
+            "label_legibility": 1.0,
+            "product_fidelity": 0.92,
+            "prompt_adherence": 0.88
+          },
+          "failed_checks": []
+        },
+        "qa_assessment": "Disagree: QA reports 'no visible logos, signage, prices or on-screen text' but missed the background shipping labels and red sign. Spec explicitly requires checking the entire frame, not just foreground packaging; an automated pass is not sufficient here.",
+        "independent_disposition": "not selectable: the spec's whole-frame no-markings criterion fails. Foreground is materially improved (bottle labels gone), but residual background carton labels and sign remain. Keep out of primary media; retain as outcome evidence."
+      }
+    },
+    {
+      "account": "best-for-you",
+      "clip": "release-best-for-you-20261117-v1",
+      "request_id": "69ec8b11-52c7-499e-b4dc-5c88cd060c92",
+      "sha256": "09d5c88ac5344fe0c5bc36cdab3c9e8231320c72b6b167788e4fd556c83affaf",
+      "source_sha256": "6dd2c3ea456ccd1f73fe2045d57b78662d77a491d814d52957af02e9a2dbe5c8",
+      "reference_sha256": null,
+      "qa": "fail",
+      "disposition": "Unselected under the unchanged failed gate. No utensils appear; plural carrots and blank box interior are requested, not hallucinations. Record this grader false negative without overriding its score.",
+      "review": {
+        "request_id": "69ec8b11-52c7-499e-b4dc-5c88cd060c92",
+        "job_id": "minimax-h3-max-turbo-4eca17bd",
+        "model": "minimax-h3-max-turbo",
+        "source_sha256": "6dd2c3ea456ccd1f73fe2045d57b78662d77a491d814d52957af02e9a2dbe5c8",
+        "presentation_sha256": "09d5c88ac5344fe0c5bc36cdab3c9e8231320c72b6b167788e4fd556c83affaf",
+        "hashes_match_generation_json": true,
+        "source": "1344x768 24fps 158 frames 6.58 s, h264 + unrequested AAC audio stream",
+        "presentation": "1280x732 24fps 158 frames 6.58 s, video only",
+        "decode_errors": 0,
+        "frames_examined": "all 158 via six contiguous 5x6 sheets (best-for-you-full-01..06.jpg) plus full-resolution frames 0, 40, 80, 120, 157",
+        "criteria": {
+          "no_prohibited_props": "pass: no forks, knives, spoons, utensils, boards, cookware, mugs, hands, people or animals in any frame",
+          "vegetarian_concept_retained": "pass: open blank terracotta/olive meal-kit box and one plate of whole cooked carrots, roasted potatoes, peas and a bread roll; benign presentation",
+          "no_writing": "pass: box and scene unmarked"
+        },
+        "other_deviations": [
+          "open box lid is clipped by the top-left frame edge throughout (prompt asked for the whole box in frame)",
+          "near-static; only minor pea/surface shimmer"
+        ],
+        "automated_qa": {
+          "verdict": "fail",
+          "scores": {
+            "logo_integrity": 1,
+            "label_legibility": 1,
+            "product_fidelity": 0.72,
+            "prompt_adherence": 0.78
+          },
+          "failed_checks": [
+            "product_fidelity"
+          ],
+          "hallucinated_objects": [
+            "extra carrots",
+            "blank box interior"
+          ]
+        },
+        "qa_assessment": "Disagree with the product-fidelity basis: the prompt specifies 'whole cooked carrots' (plural) and an open blank box, so 'extra carrots' and 'blank box interior' are not hallucinations. Record as grader false-negative calibration evidence.",
+        "independent_disposition": "meets spec Best For You criteria, but the measured automated gate failed; under the no-threshold-change rule it remains UNSELECTED. Any future use would require a documented human override, not a reinterpretation of this verdict."
+      }
+    }
+  ]
+}
