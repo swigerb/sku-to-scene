@@ -38,17 +38,19 @@ the result before a person reviews it.
 
 <div align="center">
 
-https://github.com/user-attachments/assets/54a3f1b5-cd44-4fe4-9893-df6bf100e777
+https://github.com/user-attachments/assets/11dc2974-3699-410b-a52c-361e454d6669
 
 </div>
 
 <div align="center">
-  <sub><strong>2 min 54 s</strong> &nbsp;·&nbsp; Microsoft Ava AI narration &nbsp;·&nbsp; Original clip audio muted &nbsp;·&nbsp; <a href="https://github.com/swigerb/sku-to-scene/releases/download/media-v1/sku-to-scene-sizzle.mp4">1080p60 original</a> &nbsp;·&nbsp; <a href="https://github.com/swigerb/sku-to-scene/releases/download/media-v1/sku-to-scene-sizzle.srt">Captions</a></sub>
+  <sub><strong>2 min 6 s</strong> &nbsp;·&nbsp; Microsoft Ava AI narration &nbsp;·&nbsp; Music: <em>Blueprints for Tomorrow</em><br />
+  <a href="https://github.com/swigerb/sku-to-scene/releases/download/media-v2/sku-to-scene-sizzle-v2.mp4">Captioned 1080p</a> &nbsp;·&nbsp; <a href="https://github.com/swigerb/sku-to-scene/releases/download/media-v2/sku-to-scene-sizzle-v2-clean.mp4">Clean 1080p master</a> &nbsp;·&nbsp; <a href="https://github.com/swigerb/sku-to-scene/releases/download/media-v2/sku-to-scene-sizzle-v2.srt">Captions</a></sub>
 </div>
 
-This is the **original recorded overview v1**, the same video as **Watch original overview v1 · 2:54** in the
-browser demo. It was recorded before curation, so its statements about the original eight clips are historical.
-[Curated scope v1](demo-cache/evaluations/curated-release-v1.json) defines what the demo features today.
+Explore the guided workflow, retail and consumer-goods examples, model routing, cost estimates and quality
+evidence. Recorded footage; human review required.
+
+[Previous overview](https://github.com/swigerb/sku-to-scene/releases/tag/media-v1)
 
 ## What you're looking at
 
