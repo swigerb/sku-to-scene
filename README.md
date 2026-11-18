@@ -100,15 +100,7 @@ those replacements, not additional examples. Source: [curated scope v1](demo-cac
 
 ## The agents
 
-```mermaid
-flowchart LR
-    brief["SKU + brief"] --> merch["@retail-merchandiser<br/>scene prompt"]
-    merch --> router["@foundry-router<br/>model + cost"]
-    router --> fal["fal model in<br/>Microsoft Foundry"]
-    fal --> qa["@brand-qa<br/>fail-closed screening"]
-    qa -->|"fail: one re-roll"| fal
-    qa --> human["Human review"]
-```
+![Agent workflow from SKU brief through merchandising, model routing, brand QA, and human review](docs/images/sku-to-scene-agent-flow.png)
 
 | Agent | Input | Output |
 | --- | --- | --- |
